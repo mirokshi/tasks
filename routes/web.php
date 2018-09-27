@@ -17,6 +17,13 @@ Route::get('/', function () {
 
 //TDD -> TEST DRIVEN DEVELOPMENT
 
+Route::get('tasks','TasksControllers@index');
+
+
+Route::get('/tasks',function (){
+    return view('tasks');
+});
+
 
 Route::get('/about', function (){
    return view('vista');

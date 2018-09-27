@@ -8,13 +8,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TasksTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    /** @test */
+    public function todo()
     {
-        $this->assertTrue(true);
+        $this->withoutExceptionHandling();
+        $response = $this -> get('/tasks');
+//        dd($responde -> getContent());
+
+        $response->assertSuccessful();
+        $response->assertSee('Tareas');
     }
 }
