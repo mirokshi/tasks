@@ -17,7 +17,9 @@ Route::get('/', function () {
 
 //TDD -> TEST DRIVEN DEVELOPMENT
 
-Route::get('tasks','TasksController@index');
+Route::get('/tasks','TasksController@index');
+Route::get('/tasks','TasksController@store');
+Route::get('/tasks/{id}','TasksController@destroy');
 
 
 //Route::get('/tasks',function (){

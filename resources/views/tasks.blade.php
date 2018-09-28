@@ -8,6 +8,17 @@
     <title>Tasks</title>
 </head>
 <body>
-<h1>tasks</h1>
+<h1>Tasks</h1>
+<ul>
+@foreach($tasks as $task)
+    <li>{{$task->name}} <button>Completed</button> <button>Modificar</button><button>Borrar</button></li>
+
+    @endforeach
+</ul>
+<form action="/tasks" method="POST">
+    @csrf
+    <input name="name" type="text" placeholder="new task">
+    <button>Add</button>
+</form>
 </body>
 </html>
