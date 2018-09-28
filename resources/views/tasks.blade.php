@@ -8,6 +8,6 @@
     <title>Tasks</title>
 </head>
 <body>
-<h1>TASKS</h1>
+<h1>tasks</h1>
 </body>
 </html>
