@@ -16,27 +16,31 @@ class TasksController extends Controller
 
     public function store(Request $request)
     {
+    Task::create([
+        'name'=> $request->name ,
+        'completed' => false
+    ]);
+    //Regresar a /tasks
+    return redirect('/tasks');
 
-//        dd(Request::input);
-        //Request
-        //
-        Task::create([
-            'name'=> $request->name ,
-            'completed' => false
-        ]);
+}
 
-        return redirect('/tasks');
-        //Regresar a /tasks
-    }
-
-    public function destroy()
+    public function destroy(Request $request)
     {
 //        dd($request->id);
-
        $task= Task::findOrFail($request->id);
         $task->delete();
-
-        return redirect()->back();
 //        return redirect('/tasks');
+        return redirect()->back();
     }
+
+    public function update($completed, Request $request)
+    {
+    $task = Task::findOrFail($completed);
+
+
+    $task->save();
+    return redirect()->back();
+    }
+
 }

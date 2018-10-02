@@ -18,8 +18,9 @@ Route::get('/', function () {
 //TDD -> TEST DRIVEN DEVELOPMENT
 
 Route::get('/tasks','TasksController@index');
-Route::get('/tasks','TasksController@store');
-Route::get('/tasks/{id}','TasksController@destroy');
+Route::post('/tasks','TasksController@store');
+Route::delete('/tasks/{id}','TasksController@destroy');
+Route::patch('/tasks/{id}','TasksController@update');
 
 
 //Route::get('/tasks',function (){
@@ -28,12 +29,13 @@ Route::get('/tasks/{id}','TasksController@destroy');
 
 
 Route::get('/about', function (){
-   return view('vista');
+   return view('Welcome');
 });
 
-Route::get('/prueba','PruebaController@show');
+//Route::get('/prueba','PruebaController@show');
 Route::get('/prueba', function (){
-   dd('Hola');
+    $prueba = 'asasas';
+   dd($prueba);
 });
 
-Route::redirect('hola','prova');
+Route::redirect('/hola','/prueba');

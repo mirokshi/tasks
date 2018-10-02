@@ -9,16 +9,29 @@
 </head>
 <body>
 <h1>Tasks</h1>
+{{--LARAVEL BLADE--}}
 <ul>
-@foreach($tasks as $task)
-    <li>{{$task->name}} <button>Completed</button> <button>Modificar</button><button>Borrar</button></li>
-
+    @foreach ($tasks as $task)
+        <li>{{ $task->name }}  <button>Modificar</button>
+            <form action="/tasks/{{ $task->id }}" method="POST">
+                @csrf
+                {{ method_field('DELETE') }}
+                <button>Eliminar</button>
+            </form>
+            <form action="/tasks/{{$task->id}}" method="POST">
+                @csrf
+                @method('PATCH')
+                <strike>{{ $task->name}} </strike>
+                <button>Completar</button>
+            </form>
+        </li>
     @endforeach
 </ul>
 <form action="/tasks" method="POST">
+    {{--label--}}
     @csrf
-    <input name="name" type="text" placeholder="new task">
-    <button>Add</button>
+    <input name="name" type="text" placeholder="Nova tasca">
+    <button>Agregar</button>
 </form>
 </body>
 </html>
