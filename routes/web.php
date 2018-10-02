@@ -18,14 +18,13 @@ Route::get('/', function () {
 //TDD -> TEST DRIVEN DEVELOPMENT
 
 Route::get('/tasks','TasksController@index');
-Route::post('/tasks','TasksController@store');
-Route::delete('/tasks/{id}','TasksController@destroy');
-Route::patch('/tasks/{id}','TasksController@update');
+Route::post('/tasks','TasksController@store'); //agrega
+Route::delete('/tasks/{id}','TasksController@destroy'); //borra
+//Route::patch('/tasks/{id}','TasksController@update'); //modifica
+Route::put('/tasks/{id}','TasksController@update'); //modifica
 
+//Route::resource() como alternativa
 
-//Route::get('/tasks',function (){
-//    return view('tasks');
-//});
 
 
 Route::get('/about', function (){
@@ -39,3 +38,8 @@ Route::get('/prueba', function (){
 });
 
 Route::redirect('/hola','/prueba');
+
+//Complete
+Route::post('/completed_task','CompletedTaskConttoller@store');
+//Uncompleted
+Route::delete('/uncompleted_task','CompletedTaskConttoller@destroy');

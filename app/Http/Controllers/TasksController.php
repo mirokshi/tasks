@@ -25,7 +25,7 @@ class TasksController extends Controller
 
 }
 
-    public function destroy(Request $request)
+    public function destroy(Request $request) //borra
     {
 //        dd($request->id);
        $task= Task::findOrFail($request->id);
@@ -34,13 +34,21 @@ class TasksController extends Controller
         return redirect()->back();
     }
 
-    public function update($completed, Request $request)
+    public function update(Request $request) //modifica
     {
-    $task = Task::findOrFail($completed);
+//        dd($request->id);
+        //Modelos->Eloquent ->ORM (HIBERNATE de Java) Object Relational Model
+//        Task::find($request->id);
+//        if (!Task::find($request->id)) return response(404,'No encontrado');
 
+        $task= Task::findOrFail($request->id);
+        $task->name=$request->name;
+        $task->completed=true;
 
-    $task->save();
-    return redirect()->back();
+        $task->save();
+        return $task;
+
     }
+
 
 }

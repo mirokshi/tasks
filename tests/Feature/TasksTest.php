@@ -54,9 +54,9 @@ class TasksTest extends TestCase
     /**
      * @test
      */
-    public function can_store_tasks()
+    public function can_store_task()
     {
-        $this->withoutExceptionHandling();
+      //  $this->withoutExceptionHandling();
 
 
     $response = $this -> post('/tasks',[
@@ -64,11 +64,30 @@ class TasksTest extends TestCase
     ]);
 
     $response->assertStatus(302);
-    $response->assertSuccessful();
+    //$response->assertSuccessful();
 
     $this->assertDatabaseHas('tasks', ['name' => 'Comprar leche']);
 
     }
+    /**
+     * @test
+     */
+    public function user_whitout_permissions_can_not_delete_tasks()
+    {
+        $response = $this->delete('/tasks/1');
+        $response->assertStatus(404);
+
+    }
+
+    /**
+     * @test
+     */
+//    public function user_without_permissions_cannnot_delete_tasks()
+//    {
+//        $response = $this->delete('/tasks/1');
+//        $response->assertStatus(403);
+//    }
+
 
     /**
      * @test
@@ -81,20 +100,55 @@ class TasksTest extends TestCase
             'name' => 'Comprar leche'
         ]);
 
-        $response = $this->delete('/tasks/1');
+        $response = $this->delete('/tasks/',$task->id);
 
         $response->assertStatus(302);
         $this->assertDatabaseMissing('tasks',['name'=>'Comprar leche']);
-
     }
 
     /**
      * @test
      */
-//    public function user_whitout_permissions_can_not_delete_taks()
-//    {
-//        $response = $this->delete('/tasks/1');
-//        $response->assertStatus(404);
-//
-//    }
+    public function can_edit_a_task()
+    {
+    //1
+        Task::create([
+           'name'=>'Comprar leche',
+           'completed'=>false
+        ]);
+        //2
+        $response = $this->put('/tasks/'.$task->id,$newTask=[
+            'name'=>'Comprar pan',
+            'completed'=>true
+        ]);
+        $response->assertSuccessful();
+
+        //2options
+
+//        $this->assertDatabaseHas('tasks',$newTask);
+//        $this->assertDatabaseMissing('tasks', $task);
+
+        $task=$task->fresh();
+        $this->assertEquals($task->name,'Comprar pan');
+        $this->assertEquals($task->completed,true);
+    }
+
+
+    /**
+     * @test
+     */
+    public function cannot_edit_an_existing_tasks()
+    {
+        $this->withoutExceptionHandling();
+        //TDD -> Test Driven Development
+        //1
+        //2 execute HTTP request , HTTP response
+        $response=$this->put('/tasks/1',[]);
+//        dd($response->getContent());
+        $response->$this->assertStatus(404);
+
+    }
+
+
+
 }
