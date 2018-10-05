@@ -13,6 +13,7 @@
                 </button>
             </div>
             <!--SINTAX SUGAR-->
+
             <!--<input :value="newTask" @input="newTask = $event.target.value)">-->
             <ul class="list-reset">
 
@@ -21,9 +22,10 @@
                 <!--<li v-else>{{tasks.completed}}</li>-->
                 <li v-for="task in filteredTasks" :key="task.id" class="text-grey-darker m-2 pl-5">
                 <span :class="{strike: task.completed}">
-                <editable-text>
-                    {{task.name}}
-                </editable-text>
+                <editable-text :text="task.name"
+                @edited="editName(task,$event)"
+
+                ></editable-text>
                 </span>
                     <span @click="remove(task)"> &#x274c;</span></li>
 
@@ -109,6 +111,12 @@
             }
         },
         methods: {
+            editName(task, text){
+                console.log('TASK:', task.name);
+                console.log('TEXT:', text);
+                console.log(text);
+                task.name= text
+            },
             setFilter(newFilter) {
                 this.filter = newFilter
             },
