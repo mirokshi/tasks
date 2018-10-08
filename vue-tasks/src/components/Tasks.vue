@@ -22,25 +22,27 @@
                 <!--<li v-else>{{tasks.completed}}</li>-->
                 <li v-for="task in filteredTasks" :key="task.id" class="text-grey-darker m-2 pl-5">
                 <span :class="{strike: task.completed}">
-                <editable-text :text="task.name"
-                @edited="editName(task,$event)"
-
+                <editable-text
+                        :text="task.name"
+                        @edited="editName(task,$event)"
                 ></editable-text>
                 </span>
                     <span @click="remove(task)"> &#x274c;</span></li>
 
             </ul>
             <h3>FILTROS</h3>
-            Active Filter :::: {{filter}}
-            <ul class="list-reset">
+            <br>
+            <p>Active Filter :::: {{filter}}</p>
+            <br>
+            <ul class="list-reset inline-flex ">
                 <li>
-                    <button @click="setFilter('All')">Todos</button>
+                    <button class="mr-5 bg-blue hover:bg-blue-dark border border-blue-darker " @click="setFilter('all')">Todos</button>
                 </li>
                 <li>
-                    <button @click="setFilter('Completed')">Completados</button>
+                    <button class="mr-5 bg-blue hover:bg-blue-dark border border-blue-darker" @click="setFilter('completed')">Completados</button>
                 </li>
                 <li>
-                    <button @click="setFilter('Active')">Pendientes</button>
+                    <button class="bg-blue hover:bg-blue-dark border border-blue-darker " @click="setFilter('active')">Pendientes</button>
                 </li>
             </ul>
         </div>
@@ -53,18 +55,18 @@
     import EditableText from './EditableText.vue'
 
     var filters = {
-        all: function (tasks) {
-            return tasks
+        all: function (datatasks) {
+            return datatasks
         },
-        completed: function (tasks) {
-            return tasks.filter(function (task) {
+        completed: function (datatasks) {
+            return datatasks.filter(function (task) {
                 return task.completed
                 // if (task.completed) return true
                 // else return false
             })
         },
-        active: function (tasks) {
-            return tasks.filter(function (task) {
+        active: function (datatasks) {
+            return datatasks.filter(function (task) {
                 return !task.completed
                 // if (task.completed) return false
                 // else return true
@@ -79,42 +81,33 @@
             return {
                 filter: 'all', //ALL COMPLETED ACTIVE
                 newTask: '',
-                tasks: [
-                    {
-                        id: 1,
-                        name: 'Comprar pan',
-                        completed: false
-                    },
-                    {
-                        id: 2,
-                        name: 'Comprar leche',
-                        completed: false
-                    }
-                    ,
-                    {
-                        id: 3,
-                        name: 'Estudiar PHP',
-                        completed: true
-                    }
-                ]
+                datatasks: this.tasks
             }
+        },
+        props:{
+          'tasks':{
+              type: Array,
+                default:function () {
+                     []
+                }
+          }
         },
         computed: {
             total() {
-                return this.tasks.length
+                return this.datatasks.length
             },
             filteredTasks() {
                 //Segun el filtro activo
                 //Alternativa switch/case -> array asociativo
-                return filters[this.filter](this.tasks)
+                return filters[this.filter](this.datatasks)
 
             }
         },
         methods: {
             editName(task, text){
-                console.log('TASK:', task.name);
-                console.log('TEXT:', text);
-                console.log(text);
+                // console.log('TASK:', task.name);
+                // console.log('TEXT:', text);
+                // console.log(text);
                 task.name= text
             },
             setFilter(newFilter) {
@@ -123,12 +116,15 @@
 
             add() {
 
-                this.tasks.splice(0, 0, {name: this.newTask, completed: false})
+                this.datatasks.splice(0, 0, {name: this.newTask, completed: false})
                 this.newTask = ''
             },
             remove(task) {
                 window.console.log(task)
-                this.tasks.splice(this.tasks.indexOf(task), 1)
+                this.datatasks.splice(this.datatasks.indexOf(task), 1)
+            },
+            created(){
+                console.log('Componente Tasks estar creador');
             }
         }
     }

@@ -7,7 +7,7 @@
 
       <span v-if="editing" @keyup.esc="editing=false" @keyup.enter="edit">  <!--TERMMINA DE EDITAR -->
           <svg @click="edit" class="h-5 w-4.5  fill-current text-green" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg> <!-- Check -->
-          <svg @click="edit" class="h-5 w-4.5  fill-current text-red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>&nbsp; <!--Cancel -->
+          <svg @click="editing=false" class="h-5 w-4.5  fill-current text-red" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 8.586L2.929 1.515 1.515 2.929 8.586 10l-7.071 7.071 1.414 1.414L10 11.414l7.071 7.071 1.414-1.414L11.414 10l7.071-7.071-1.414-1.414L10 8.586z"/></svg>&nbsp; <!--Cancel -->
 
           <input type="text" v-model="currentText">
           <!--//SINTAX SUGAR -->
@@ -15,6 +15,7 @@
       </span>
   </span>
 </template>
+
 <script>
     export default {
         name: 'EditableText',
@@ -37,6 +38,9 @@
                 // INFORMAR AL PADRE
                 this.$emit('edited', this.currentText)
             }
+        },
+        created(){
+            console.log('Componente Editable estar creador');
         }
     }
 </script>
