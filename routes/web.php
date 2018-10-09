@@ -28,7 +28,7 @@ Route::put('/tasks/{id}','TasksController@update'); //modifica
 
 
 Route::get('/about', function (){
-   return view('Welcome');
+   return view('about');
 });
 
 //Route::get('/prueba','PruebaController@show');
@@ -43,3 +43,11 @@ Route::redirect('/hola','/prueba');
 Route::post('/completed_task','CompletedTaskConttoller@store');
 //Uncompleted
 Route::delete('/uncompleted_task','CompletedTaskConttoller@destroy');
+
+
+Route::get('/tasks_vue','TaskVueController@index');
+
+//index -> LIST
+//store -> CREATE
+//delete -> DESTROY
+//edit -> PUT
