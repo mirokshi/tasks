@@ -20,9 +20,18 @@
 
         >
             <v-list dense>
-                <v-list-tile href="/tasks">
+                <v-list-tile href="welcome">
                     <v-list-tile-action>
                         <v-icon>home</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>Welcome</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+
+                <v-list-tile href="tasks">
+                    <v-list-tile-action>
+                        <v-icon>work</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
                         <v-list-tile-title>Tasks con PHP</v-list-tile-title>
@@ -31,10 +40,18 @@
 
                 <v-list-tile href="tasks_vue">
                     <v-list-tile-action>
-                        <v-icon>contact_mail</v-icon>
+                        <v-icon>work</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
                         <v-list-tile-title>Tasks con Vue</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile href="about">
+                    <v-list-tile-action>
+                        <v-icon>account_box</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>Contact</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
             </v-list>
@@ -50,8 +67,17 @@
 
                 >
                     <v-flex text-xs-center>
-                        @yield('content')
 
+                        {{--<nav>--}}
+                            {{--<ul><a href="welcome">Welcome</a></ul>--}}
+                            {{--<ul><li><a href="tasks">Tareas con PHP</a> </li></ul>--}}
+                            {{--<ul><li><a href="tasks_vue">Tareas con Vue</a></li></ul>--}}
+                            {{--<ul><li><a href="about">Contact</a></li></ul>--}}
+
+                        {{--</nav>--}}
+                        <div id="app">
+                            @yield('content')
+                        </div>
                     </v-flex>
                 </v-layout>
             </v-container>

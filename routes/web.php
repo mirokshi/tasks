@@ -31,6 +31,10 @@ Route::get('/about', function (){
    return view('about');
 });
 
+Route::get('/welcome', function (){
+    return view('welcome');
+});
+
 Route::get('/prueba','PruebaController@show');
 Route::get('/prueba', function (){
     $prueba = 'asasas';

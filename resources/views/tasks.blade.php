@@ -23,3 +23,5 @@
     <input name="name" type="text" placeholder="New task">
     <button>Agregar</button>
 </form>
+
+@endsection

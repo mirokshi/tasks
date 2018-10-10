@@ -30,14 +30,12 @@ Vue.use(require('vuetify')); //instalacion de vuetify
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('tasks', require('./components/Tasks.vue'));
 
-console.log('XIVATO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-sssssssssdaasdas
-// const app = new Vue({
-//     el: '#app',
-//     data:() => ({
-//         drawer:null
-//     }),
-//     props: {
-//         source:String
-//     }
-// });
+const app = new Vue({
+    el: '#app',
+    data:() => ({
+        drawer:null
+    }),
+    props: {
+        source:String
+    }
+});

@@ -1,4 +1,5 @@
-<!doctype html>
+
+    <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
@@ -64,6 +65,10 @@
         </style>
     </head>
     <body>
+    @extends ('layout.app')
+
+    @section('content')
+
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -91,5 +96,6 @@
                 </div>
             </div>
         </div>
+        @endsection
     </body>
 </html>
