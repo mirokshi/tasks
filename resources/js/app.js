@@ -7,7 +7,19 @@
 
 require('./bootstrap');
 
+//ES6/VUE/BABEL -> import
+
+
 window.Vue = require('vue');
+Vue.use(require('vuetify')); //instalacion de vuetify
+
+//Wndow OCO en browser Object global
+
+
+//Browser js
+//npm
+
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -18,7 +30,14 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('tasks', require('./components/Tasks.vue'));
 
-
-const app = new Vue({
-    el: '#app'
-});
+console.log('XIVATO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+sssssssssdaasdas
+// const app = new Vue({
+//     el: '#app',
+//     data:() => ({
+//         drawer:null
+//     }),
+//     props: {
+//         source:String
+//     }
+// });
