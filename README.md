@@ -1,6 +1,6 @@
 PHP-learning 
 
-composer.jsn y los helpers
+
 
 npm run hot
 php artisan serve

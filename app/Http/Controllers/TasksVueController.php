@@ -9,11 +9,10 @@ class TasksVueController extends Controller
 {
     public function index()
     {
-        //MVC
+        // MVC
         $tasks = Task::all();
-//        $tasks = null;
+
         return view('tasks_vue',
             compact('tasks'));
-
     }
 }

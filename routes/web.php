@@ -31,7 +31,7 @@ Route::get('/about', function (){
    return view('about');
 });
 
-//Route::get('/prueba','PruebaController@show');
+Route::get('/prueba','PruebaController@show');
 Route::get('/prueba', function (){
     $prueba = 'asasas';
    dd($prueba);
@@ -45,7 +45,7 @@ Route::post('/completed_task','CompletedTaskConttoller@store');
 Route::delete('/uncompleted_task','CompletedTaskConttoller@destroy');
 
 
-Route::get('/tasks_vue','TaskVueController@index');
+Route::get('/tasks_vue','TasksVueController@index');
 
 //index -> LIST
 //store -> CREATE
