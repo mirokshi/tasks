@@ -69687,62 +69687,55 @@ var render = function() {
       _vm._v(" "),
       _c("br"),
       _vm._v(" "),
-      _c(
-        "ul",
-        {
-          staticClass: "list-reset inline-flex",
-          attrs: { "list-style-type": "none" }
-        },
-        [
-          _c("li", [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "mr-5 bg-blue hover:bg-blue-dark border border-blue-darker ",
-                on: {
-                  click: function($event) {
-                    _vm.setFilter("all")
-                  }
+      _c("ul", { staticClass: "list-reset inline-flex" }, [
+        _c("li", [
+          _c(
+            "button",
+            {
+              staticClass:
+                "mr-5 bg-blue hover:bg-blue-dark border border-blue-darker ",
+              on: {
+                click: function($event) {
+                  _vm.setFilter("all")
                 }
-              },
-              [_vm._v("Todos")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "mr-5 bg-blue hover:bg-blue-dark border border-blue-darker",
-                on: {
-                  click: function($event) {
-                    _vm.setFilter("completed")
-                  }
+              }
+            },
+            [_vm._v("Todos")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c(
+            "button",
+            {
+              staticClass:
+                "mr-5 bg-blue hover:bg-blue-dark border border-blue-darker",
+              on: {
+                click: function($event) {
+                  _vm.setFilter("completed")
                 }
-              },
-              [_vm._v("Completados")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c(
-              "button",
-              {
-                staticClass:
-                  "bg-blue hover:bg-blue-dark border border-blue-darker ",
-                on: {
-                  click: function($event) {
-                    _vm.setFilter("active")
-                  }
+              }
+            },
+            [_vm._v("Completados")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c(
+            "button",
+            {
+              staticClass:
+                "bg-blue hover:bg-blue-dark border border-blue-darker ",
+              on: {
+                click: function($event) {
+                  _vm.setFilter("active")
                 }
-              },
-              [_vm._v("Pendientes")]
-            )
-          ])
-        ]
-      )
+              }
+            },
+            [_vm._v("Pendientes")]
+          )
+        ])
+      ])
     ])
   ])
 }

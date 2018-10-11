@@ -1,4 +1,5 @@
 <template>
+
   <div id="app">
     <!--API
         JSON APIS/ REST APIS

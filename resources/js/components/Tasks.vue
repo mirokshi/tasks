@@ -35,7 +35,7 @@
             <br>
             <p>Active Filter :::: {{filter}}</p>
             <br>
-            <ul class="list-reset inline-flex" list-style-type="none">
+            <ul class="list-reset inline-flex">
                 <li>
                     <button class="mr-5 bg-blue hover:bg-blue-dark border border-blue-darker " @click="setFilter('all')">Todos</button>
                 </li>

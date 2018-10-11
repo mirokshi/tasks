@@ -8,7 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <title>Tasks</title>
     {{--link vuetify--}}
 </head>
 <body>
@@ -58,26 +59,18 @@
         </v-navigation-drawer>
         <v-toolbar color="indigo" dark fixed app>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-            <v-toolbar-title>PHP Learning</v-toolbar-title>
+            <v-toolbar-title>Tasks</v-toolbar-title>
         </v-toolbar>
         <v-content>
             <v-container fluid fill-height >
                 <v-layout
                         justify-center
-
                 >
                     <v-flex text-xs-center>
-
-                        {{--<nav>--}}
-                            {{--<ul><a href="welcome">Welcome</a></ul>--}}
-                            {{--<ul><li><a href="tasks">Tareas con PHP</a> </li></ul>--}}
-                            {{--<ul><li><a href="tasks_vue">Tareas con Vue</a></li></ul>--}}
-                            {{--<ul><li><a href="about">Contact</a></li></ul>--}}
-
-                        {{--</nav>--}}
                         <div id="app">
                             @yield('content')
                         </div>
+
                     </v-flex>
                 </v-layout>
             </v-container>
