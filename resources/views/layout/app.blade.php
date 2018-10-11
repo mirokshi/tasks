@@ -61,7 +61,7 @@
             <v-toolbar-title>PHP Learning</v-toolbar-title>
         </v-toolbar>
         <v-content>
-            <v-container fluid fill-height>
+            <v-container fluid fill-height >
                 <v-layout
                         justify-center
 

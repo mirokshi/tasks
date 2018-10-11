@@ -29,6 +29,7 @@ Vue.use(require('vuetify')); //instalacion de vuetify
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('tasks', require('./components/Tasks.vue'));
+Vue.component('editable-text', require('./components/EditableText.vue'));
 
 const app = new Vue({
     el: '#app',
