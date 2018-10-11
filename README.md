@@ -1,15 +1,9 @@
-#PHP-learning 
-header->div 
+##Comandos utiles 
+npm run dev
+npm run watch 
+npm run hot 
 
 
-
-npm run hot
-php artisan serve
-
-
-#Poner stilos 
-Modificación del php
-Aplicar Vuetify
-  
-  
-  
+##Cosas por hacer
+Uncompleted-Completed
+align-center -> Vue Layout
