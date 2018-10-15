@@ -1,10 +1,10 @@
 <template>
-    <div class="container flex justify-center">
+    <div id="tasks" class="tasks container flex justify-center">
         <div class="flex flex-col">
             <h1 class="text-center text-red-lighter pt-5">TASKS ({{total}})</h1>
             <div class="flex-row">
                 <input type="text"
-                       v-model="newTask" @keyup.enter="add"
+                       v-model="newTask" @keyup.enter="add" name="name"
                        class="m-3 mt-5 p-1 pl-5 shadow border rounded focus:shadow-outine text-grey-darker"
                        placeholder="New task">
                 <button @click="add">  <!--agregar-->
@@ -14,13 +14,7 @@
                 </button>
             </div>
             <!--SINTAX SUGAR-->
-
-            <!--<input :value="newTask" @input="newTask = $event.target.value)">-->
             <ul class="list-reset">
-
-                <!--<li v-for="task in tasks"-->
-                <!--v-if="tasks.completed"><strike>{{task.name}}</strike></li>-->
-                <!--<li v-else>{{tasks.completed}}</li>-->
                 <li v-for="task in filteredTasks" :key="task.id" class="text-grey-darker m-2 pl-5">
                 <span :class="{strike: task.completed}">
                 <editable-text
@@ -28,12 +22,12 @@
                         @edited="editName(task,$event)"
                 ></editable-text>
                 </span>
-                    <span @click="remove(task)"> &#x274c;</span></li>
+                    <span @click="remove(task)">&#x274c;</span></li>
 
             </ul>
             <h3>FILTROS</h3>
             <br>
-            <p>Active Filter :::: {{filter}}</p>
+            <span>Filter :::: {{filter}}</span>
             <br>
             <ul class="list-reset inline-flex">
                 <li>
@@ -111,9 +105,6 @@
         },
         methods: {
             editName(task, text){
-                // console.log('TASK:', task.name);
-                // console.log('TEXT:', text);
-                // console.log(text);
                 task.name= text
             },
             setFilter(newFilter) {
@@ -121,16 +112,35 @@
             },
 
             add() {
-
-                this.datatasks.splice(0, 0, {name: this.newTask, completed: false})
-                this.newTask = ''
+                axios.post('/api/v1/tasks', {
+                    name: this.newTask
+                }).then((response) => {
+                        this.datatasks.splice(0, 0, {id: response.data.id, name: this.newTask, completed: false})
+                    }).catch((error) => {
+                        console.log(response);
+                    })
+                this.newTask = '';
             },
             remove(task) {
-                window.console.log(task)
-                this.datatasks.splice(this.datatasks.indexOf(task), 1)
+                axios.delete('/api/v1/tasks/',{
+                    name:this.datatasks
+                }).then((response) =>{
+                    this.task.splice(this.datatasks.indexOf(task), 1)
+                }).catch((error) =>{
+                    console.log(response);
+                })
+
             },
             created(){
-                console.log('Componente Tasks estar creador');
+                //si tengo propedad taks no hacer nada
+                //si no hacer peticioon a la API para obtener las tareas
+                if (this.tasks.length === 0){
+                    axios.get('/api/v1/tasks').then((response) => {
+                        this.datatasks =  response.data
+                    }).catch((error) => {
+                        console.log(error);
+                    })
+                }
             }
         }
     }

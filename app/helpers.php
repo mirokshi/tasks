@@ -5,18 +5,18 @@ use App\Task;
 if (!function_exists('create_example_tasks')) {
     function create_example_tasks() {
         Task::create([
-            'name' => 'comprar pa',
+            'name' => 'Comprar pan',
             'completed' => false
         ]);
 
         Task::create([
-            'name' => 'comprar llet',
+            'name' => 'Comprar leche',
             'completed' => false
         ]);
 
         Task::create([
             'name' => 'Estudiar PHP',
-            'completed' => false
+            'completed' => true
         ]);
     }
 }

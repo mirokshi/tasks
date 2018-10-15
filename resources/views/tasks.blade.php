@@ -4,36 +4,35 @@
 {{--LARAVEL BLADE--}}
 {{--//CARD--}}
 
+
         <v-card>
             <v-toolbar color="cyan" dark>
-
                 <v-toolbar-title>Tasks con PHP</v-toolbar-title>
-
             </v-toolbar>
-
+            <v-spacer></v-spacer>
             <v-list>
-
                         <v-list-tile-content>
                             {{--CONTENIDO--}}
-                            <form action="/tasks" method="POST">
+                            <form action="/tasks" method="POST" class="p-5 pl-5">
                                 {{--label--}}
                                 @csrf
                                 <input name="name" type="text" placeholder="New task">
                                 <button><v-btn color="info">Agregar</v-btn></button>
                             </form>
-                            
                             @foreach ($tasks as $task)
-                                <div>{{ $task->name }}
+
+                                <v-layout>{{ $task->name }}
 
                                     <form action="/tasks/{{ $task->id }}" method="POST">
                                         @csrf
                                         {{ method_field('DELETE') }}
-                                        <button><v-btn color="error" >Eliminar</v-btn></button>
+
+                                        <button><v-btn color="error">Eliminar</v-btn></button>
                                     </form>
                                     <button><v-btn color="success"> Completar </v-btn></button>
                                     <button><v-btn color="warning">Modificar</v-btn></button>
+                                </v-layout>
 
-                                </div>
                             @endforeach
 
                         </v-list-tile-content>

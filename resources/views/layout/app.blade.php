@@ -20,7 +20,7 @@
                 app
 
         >
-            <v-list dense>
+            <v-list>
                 <v-list-tile href="welcome">
                     <v-list-tile-action>
                         <v-icon>home</v-icon>
@@ -63,22 +63,20 @@
         </v-toolbar>
         <v-content>
             <v-container fluid fill-height >
-                <v-layout
-                        justify-center
-                >
-                    <v-flex text-xs-center>
+                <v-layout>
+                    <v-flex justify-center  >
                         <div id="app">
                             @yield('content')
                         </div>
-
                     </v-flex>
                 </v-layout>
             </v-container>
         </v-content>
         <v-footer color="indigo" app>
-            <span class="white--text"> Created by Mirokshi Rojas. &copy;2018 All rights reserved</span>
+            <span class="white--text pl-3"> Created by Mirokshi Rojas. &copy;2018 All rights reserved</span>
         </v-footer>
     </v-app>
-<script src="/js/app.js"></script>
+    {{--//mix -> npm run hot--}}
+<script src="{{mix('/js/app.js')}}"></script>
 </body>
 </html>

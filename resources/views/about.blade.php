@@ -1,5 +1,5 @@
 @extends ('layout.app')
 
 @section('content')
-    Somos la polla en la empresa
+   <h1> Somos la polla en la empresa</h1>
     @endsection

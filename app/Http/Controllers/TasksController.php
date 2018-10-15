@@ -9,8 +9,7 @@ class TasksController extends Controller
 {
     public function index()
     {
-        $tasks = Task::all();
-
+        $tasks = Task::orderBy('created_at','desc') -> get();
         return view('tasks', ['tasks' => $tasks]);
     }
 
@@ -49,6 +48,7 @@ class TasksController extends Controller
         return $task;
 
     }
+
 
 
 }
