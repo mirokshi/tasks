@@ -19,40 +19,58 @@ class CompletedTaskControllerTest extends TestCase
     /**
      * @test
      */
-    public function can_completed_a_task()
+    public function can_complete_a_task()
     {
         //1
-        $task=Task::create([
-
+        $task= Task::create([
+            'name' => 'comprar pan',
+            'completed' => false
         ]);
-
-
-
+        //2
+        $response = $this->json('POST','/completed_task/' . $task->id);
+        //3 Dos opcions: 1) Comprovar base de dades directament
+        // 2) comprovar canvis al objecte $task
+        $task = $task->fresh();
+        $this->assertEquals($task->completed, true);
     }
 
     /**
      * @test
      */
-    public function cannot_completed_a_unexisting_task()
+    public function cannot_complete_a_unexisting_task()
     {
-
+        $response = $this->json('POST','/completed_task/1');
+        //3 Assert
+        $response->assertStatus(404);
     }
 
     /**
      * @test
      */
-    public function can_uncompleted_a_task()
+    public function can_uncomplete_a_task()
     {
-
+        //1
+        $task= Task::create([
+            'name' => 'comprar pan',
+            'completed' => true
+        ]);
+        //2
+        $response = $this->json('DELETE','/completed_task/' . $task->id);
+        //3 Dos opcions: 1) Comprovar base de dades directament
+        // 2) comprovar canvis al objecte $task
+        $task = $task->fresh();
+        $this->assertEquals($task->completed, false);
     }
 
     /**
      * @test
      */
-    public function cannot_uncompleted_a_unexisting_tasks()
+    public function cannot_uncomplete_a_unexisting_task()
     {
-
+        // 1 -> no cal fer res
+        // 2 Execute
+        $response= $this->delete('/completed_task/1');
+        //3 Assert
+        $response->assertStatus(404);
     }
-
-
 }

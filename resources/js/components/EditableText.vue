@@ -17,30 +17,30 @@
 </template>
 
 <script>
-    export default {
-        name: 'EditableText',
-        data() {
-            return {
-                editing: false,
-                currentText: this.text
-            }
-        },
-         // props :['text'],
-        props: {
-            'text': {
-                type: String,
-                required : true
-            }
-        },
-        methods: {
-            edit() {
-             this.editing=false,
-                // INFORMAR AL PADRE
-                this.$emit('edited', this.currentText)
-            }
-        },
-        created(){
-            console.log('Componente Editable estar creado');
-        }
+export default {
+  name: 'EditableText',
+  data () {
+    return {
+      editing: false,
+      currentText: this.text
     }
+  },
+  // props :['text'],
+  props: {
+    'text': {
+      type: String,
+      required: true
+    }
+  },
+  methods: {
+    edit () {
+      this.editing = false,
+      // INFORMAR AL PADRE
+      this.$emit('edited', this.currentText)
+    }
+  },
+  created () {
+    // console.log('Componente Editable estar creado')
+  }
+}
 </script>
