@@ -110,10 +110,11 @@ export default {
         name: this.newTask
       }).then((response) => {
         this.datatasks.splice(0, 0, { id: response.data.id, name: this.newTask, completed: false })
+        this.newTask = ''
       }).catch((error) => {
         console.log(response)
       })
-      this.newTask = ''
+      
     },
     remove (datatask) {
       axios.delete('/api/v1/tasks/' + datatask.id, {
