@@ -23,3 +23,7 @@ CRUD -> CRU -> CREATE RETRIEVE UPDATE DELETE
 BREAD -> PA -> BROWSER READ EDIT ADD DELETE
 HTTP -> GET || POST || PUT || PATCH ||DELETE
     Laravel Controller
+    
+    
+    #arreglar todos los test 
+    --en vue 

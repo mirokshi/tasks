@@ -5,21 +5,17 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+require('./bootstrap')
 
-//ES6/VUE/BABEL -> import
+// ES6/VUE/BABEL -> import
 
+window.Vue = require('vue')
+Vue.use(require('vuetify')) // instalacion de vuetify
 
-window.Vue = require('vue');
-Vue.use(require('vuetify')); //instalacion de vuetify
+// Wndow OCO en browser Object global
 
-//Wndow OCO en browser Object global
-
-
-//Browser js
-//npm
-
-
+// Browser js
+// npm
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -27,16 +23,16 @@ Vue.use(require('vuetify')); //instalacion de vuetify
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('tasks', require('./components/Tasks.vue'));
-Vue.component('editable-text', require('./components/EditableText.vue'));
+window.Vue.component('example-component', require('./components/ExampleComponent.vue'))
+window.Vue.component('tasks', require('./components/Tasks.vue'))
+window.Vue.component('editable-text', require('./components/EditableText.vue'))
 
 const app = new Vue({
-    el: '#app',
-    data:() => ({
-        drawer:null
-    }),
-    props: {
-        source:String
-    }
-});
+  el: '#app',
+  data: () => ({
+    drawer: null
+  }),
+  props: {
+    source: String
+  }
+})

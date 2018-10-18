@@ -41,14 +41,18 @@ class TasksController extends Controller
 //        if (!Task::find($request->id)) return response(404,'No encontrado');
 
         $task= Task::findOrFail($request->id);
+
         $task->name=$request->name;
         $task->completed=true;
 
         $task->save();
-        return $task;
+        return redirect('/task');
 
     }
-
-
-
+    public function edit(Request $request)
+    {
+        $task = Task::findOrFail($request->id);
+        return view('task_edit',[ 'task' => $task]);
+//        return view('task_edit',compact('task'));
+    }
 }

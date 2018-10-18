@@ -1,2 +1,2 @@
-global.aixos = require('aixos') //Node glbal
-window.aixos = require('aixos') //Browser
+global.axios = require('axios') // Node global
+window.axios = require('axios') // Browser

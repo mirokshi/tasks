@@ -3,32 +3,35 @@
         <div class="flex flex-col">
             <h1 class="text-center text-red-lighter pt-5">TASKS ({{total}})</h1>
             <div class="flex-row">
-                <input type="text"
-                       v-model="newTask" @keyup.enter="add" name="name"
-                       class="m-3 mt-5 p-1 pl-5 shadow border rounded focus:shadow-outine text-grey-darker"
-                       placeholder="New task">
-                <button @click="add">  <!--agregar-->
+                <input  type="text" v-model="newTask" @keyup.enter="add" name="name" class="m-3 mt-5 p-1 pl-5 shadow border rounded focus:shadow-outine text-grey-darker" placeholder="New task">
+                <div v-if="errorMessage">
+                    ERROR : {{errorMessage}}
+                </div>
+                <!--agregar-->
+                <button id="button_add_task" @click="add">
                     <svg class="h-6 w-4 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M11 9h4v2h-4v4H9v-4H5V9h4V5h2v4zm-1 11a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/>
                     </svg>
                 </button>
             </div>
+
             <!--SINTAX SUGAR-->
             <ul class="list-reset">
                 <li v-for="task in filteredTasks" :key="task.id" class="text-grey-darker m-2 pl-5">
-                <span :class="{strike: task.completed}">
+                <span :id="'task'+ task.id" :class="{strike: task.completed}">
                 <editable-text
                         :text="task.name"
                         @edited="editName(task,$event)"
                 ></editable-text>
                 </span>
-                    <span @click="remove(task)">&#x274c;</span></li>
+                    <span :id="'delete_task'+task.id" @click="remove(task)">&#x274c;</span></li>
 
             </ul>
 
             <span id="filters" v-show="total > 0">
-            <h3>FILTROS</h3>
-                Active Filter :::: {{filter}}
+            <h3>Filtros:</h3>
+                Active : {{filter}}
+                <br>
             <ul class="list-reset inline-flex">
                 <li><button class="mr-5 bg-blue hover:bg-blue-dark border border-blue-darker " @click="setFilter('all')">Todos</button></li>
                 <li><button class="mr-5 bg-blue hover:bg-blue-dark border border-blue-darker" @click="setFilter('completed')">Completados</button></li>
@@ -64,6 +67,7 @@ var filters = {
   }
 }
 export default {
+  name: 'Tasks',
   components: {
     'editable-text': EditableText
   },
@@ -71,14 +75,16 @@ export default {
     return {
       filter: 'all', // ALL COMPLETED ACTIVE
       newTask: '',
-      datatasks: this.tasks
+      datatasks: this.tasks,
+      errorMessage: ''
+
     }
   },
   props: {
     'tasks': {
       type: Array,
       default: function () {
-        []
+        return []
       }
     }
   },
@@ -106,7 +112,7 @@ export default {
     },
 
     add () {
-      axios.post('/api/v1/tasks', {
+      window.axios.post('/api/v1/tasks', {
         name: this.newTask
       }).then((response) => {
         this.datatasks.splice(0, 0, { id: response.data.id, name: this.newTask, completed: false })
@@ -114,32 +120,25 @@ export default {
       }).catch((error) => {
         console.log(response)
       })
-      
     },
-    remove (datatask) {
-      axios.delete('/api/v1/tasks/' + datatask.id, {
-      }).then((response) => {
+    remove (task) {
+      axios.delete('/api/v1/tasks/' + task.id, {}).then((response) => {
         this.datatasks.splice(this.datatasks.indexOf(task), 1)
       }).catch((error) => {
         console.log(response)
       })
-    },
-    created () {
-      // si tengo propedad taks no hacer nada
-      // si no hacer peticioon a la API para obtener las tareas
-      if (this.tasks.length === 0) {
-        console.log('if')
-        axios.get('/api/v1/tasks').then((response) => {
-          console.log('CREATE IS EXECUTED')
-          this.datatasks = response.data
-        }).catch((error) => {
-          console.log(error)
-        })
-      }
+    }
+  },
+  created () {
+    if (this.tasks.length === 0) {
+      window.axios.get('/api/v1/tasks').then((response) => {
+        this.datatasks = response.data
+      }).catch((error) => {
+        this.errorMessage = error.response.data
+      })
     }
   }
 }
-
 </script>
 
 <style>
