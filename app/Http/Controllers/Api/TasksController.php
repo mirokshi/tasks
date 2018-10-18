@@ -32,6 +32,11 @@ class TasksController extends Controller
     public function store(Request $request)
     {
 //        Task::create();
+        //no if`s -.-
+        $request->validate([
+            'name'=> 'required',
+
+        ]);
         $task = new Task();
         $task->name = $request->name;
         $task->completed = false;

@@ -169,7 +169,7 @@ describe('Tasks.vue', () => {
 
   it('delete_a_task', (done) => {
     //1
-    
+
     //2
 
     //3
