@@ -5,7 +5,7 @@
             <div class="flex-row">
                 <input  type="text" v-model="newTask" @keyup.enter="add" name="name" class="m-3 mt-5 p-1 pl-5 shadow border rounded focus:shadow-outine text-grey-darker" placeholder="New task">
                 <div v-if="errorMessage">
-                    ERROR : {{errorMessage}}
+                    Ha succeit un error: {{ errorMessage }}
                 </div>
                 <!--agregar-->
                 <button id="button_add_task" @click="add">
@@ -24,7 +24,7 @@
                         @edited="editName(task,$event)"
                 ></editable-text>
                 </span>
-                    <span :id="'delete_task'+task.id" @click="remove(task)">&#x274c;</span></li>
+                    <span :id="'delete_task_' + task.id" @click="remove(task)">&#x274c;</span></li>
 
             </ul>
 

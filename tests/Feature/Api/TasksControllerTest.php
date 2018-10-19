@@ -73,7 +73,7 @@ class TasksControllerTest extends TestCase
     public function cannot_create_tasks_whitout_name()
     {
         $this->withoutExceptionHandling();
-        $response = $this->post('/api/v1/tasks/',[
+        $response = $this->json('post','/api/v1/tasks/',[
             'name' => ''
         ]);
 
@@ -89,7 +89,7 @@ class TasksControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->post('/api/v1/tasks/',[
+        $response = $this->json('post','/api/v1/tasks/',[
             'name' => 'Comprar pan'
         ]);
 
