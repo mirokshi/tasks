@@ -44,7 +44,7 @@ describe('Tasks.vue', () => {
     // wrapper.vm.errorMessage = 'Ui que mal!'
     // Assertion
     moxios.wait(() => {
-      expect(wrapper.text()).contains('Ha succeit un error: Error Caca de vaca')
+      expect(wrapper.text()).contains('Ha sucedido un error: Error Caca de vaca')
       done()
     })
   })
@@ -154,9 +154,10 @@ describe('Tasks.vue', () => {
         tasks: exampleTasks
       }
     })
-    let inputNameEnter = wrapper.find("input[@keyup.enter='add']")
+    // let inputNameEnter = wrapper.find(keyup.enter)
+
+    inputNameEnter.trigger("input[@keyup.enter='add']")
     inputNameEnter.element.value = 'Morir'
-    inputNameEnter.trigger('keyup.enter')
     // 3
     moxios.wait(() => {
       expect(wrapper.text()).contains('Morir')

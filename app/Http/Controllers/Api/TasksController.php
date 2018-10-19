@@ -4,6 +4,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateTask;
+use App\Http\Requests\StoreTask;
 use App\Task;
 use Illuminate\Http\Request;
 
@@ -29,14 +31,14 @@ class TasksController extends Controller
 
     //CREATE
 
-    public function store(Request $request)
+    public function store(StoreTask $request)
     {
 //        Task::create();
         //no if`s -.-
-        $request->validate([
-            'name'=> 'required',
-
-        ]);
+//        $request->validate([
+//            'name'=> 'required',
+//
+//        ]);
         $task = new Task();
         $task->name = $request->name;
         $task->completed = false;
@@ -44,7 +46,7 @@ class TasksController extends Controller
         return $task;
     }
 
-    public function edit(Request $request, Task $task)
+    public function update(UpdateTask $request, Task $task)
     {
         $task->name = $request->name;
         $task->save();

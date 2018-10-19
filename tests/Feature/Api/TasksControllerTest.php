@@ -33,7 +33,7 @@ class TasksControllerTest extends TestCase
         $task = factory(Task::class)->create();
 
         //2
-        $response = $this->get('/api/v1/tasks/'.$task->id);
+        $response = $this->json('GET','/api/v1/tasks/'.$task->id);
 
         //3
         $result = json_decode($response->getContent());
@@ -54,7 +54,7 @@ class TasksControllerTest extends TestCase
         $task = factory(Task::class)->create();
 
         //2
-        $response = $this->delete('/api/v1/tasks/'.$task->id);
+        $response = $this->json('DELETE','/api/v1/tasks/'.$task->id);
 
         //3
         $result = json_decode($response->getContent());
@@ -72,8 +72,13 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_create_tasks_whitout_name()
     {
-        $this->withoutExceptionHandling();
-        $response = $this->json('post','/api/v1/tasks/',[
+//        $this->withoutExceptionHandling();
+        //Peticiones HTTP es normal, no es XHR -> ajax
+//        $response = $this->post('/api/v1/tasks/',[
+//            'name' => ''
+//        ]);
+        //XHR -> JSON
+        $response = $this->json('POST','/api/v1/tasks/',[
             'name' => ''
         ]);
 
@@ -89,7 +94,7 @@ class TasksControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $response = $this->json('post','/api/v1/tasks/',[
+        $response = $this->json('POST','/api/v1/tasks/',[
             'name' => 'Comprar pan'
         ]);
 
@@ -110,7 +115,7 @@ class TasksControllerTest extends TestCase
         //1
         create_example_tasks();
 
-        $response = $this->get('/api/v1/tasks');
+        $response = $this->json('GET','/api/v1/tasks');
         $response->assertSuccessful();
 
         $result = json_decode($response->getContent());
@@ -140,7 +145,7 @@ class TasksControllerTest extends TestCase
         ]);
 
         // 2
-        $response = $this->put('/api/v1/tasks/' . $oldTask->id, [
+        $response = $this->json('PUT','/api/v1/tasks/' . $oldTask->id, [
             'name' => 'Comprar pan'
         ]);
 
@@ -155,6 +160,24 @@ class TasksControllerTest extends TestCase
         $this->assertNotNull($newTask);
         $this->assertEquals('Comprar pan',$result->name);
         $this->assertFalse((boolean) $newTask->completed);
+    }
+
+    /**
+     * @test
+     */
+    public function can_not_edit_a_tasks()
+    {
+        $this->withoutExceptionHandling();
+        //1
+        $oldTask = factory(Task::class)->create();
+        //2
+        $response = $this->json('PUT','/api/v1/tasks/' . $oldTask->id, [
+            'name' => ''
+        ]);
+        //3
+        $result = json_decode($response->getContent());
+        $response->assertStatus(204);
+
     }
 
 }
