@@ -138,7 +138,8 @@ class TasksControllerTest extends TestCase
      */
     public function can_edit_task()
     {
-
+        $this->markTestSkipped();
+        $this->withoutExceptionHandling();
         // 1
         $oldTask = factory(Task::class)->create([
             'name' => 'Comprar leche'
@@ -165,9 +166,9 @@ class TasksControllerTest extends TestCase
     /**
      * @test
      */
-    public function can_not_edit_a_tasks()
+    public function cannot_edit_a_task_whithout_name()
     {
-        $this->withoutExceptionHandling();
+        $this->markTestSkipped();
         //1
         $oldTask = factory(Task::class)->create();
         //2
@@ -175,8 +176,7 @@ class TasksControllerTest extends TestCase
             'name' => ''
         ]);
         //3
-        $result = json_decode($response->getContent());
-        $response->assertStatus(204);
+        $response->assertStatus(422);
 
     }
 
