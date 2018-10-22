@@ -22,6 +22,10 @@
                             @foreach ($tasks as $task)
 
                                 <v-layout>{{ $task->name }}
+                                    <button><v-btn color="success"> Completar </v-btn></button>
+                                    <a href="/task_edit/{{$task->id}}">
+                                    <button><v-btn color="warning">Modificar</v-btn></button>
+                                    </a>
 
                                     <form action="/tasks/{{ $task->id }}" method="POST">
                                         @csrf
@@ -29,8 +33,8 @@
 
                                         <button><v-btn color="error">Eliminar</v-btn></button>
                                     </form>
-                                    <button><v-btn color="success"> Completar </v-btn></button>
-                                    <button><v-btn color="warning">Modificar</v-btn></button>
+
+
                                 </v-layout>
 
                             @endforeach

@@ -4,6 +4,7 @@ namespace Tests\Unit;
 use App\File;
 use App\Tag;
 use App\Task;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 
@@ -18,31 +19,75 @@ use RefreshDatabase;
     /**
      * @test
      */
-    public function a_task_can_have_tags()
+    public function can_assign_user_to_task ()
     {
-        $this->markTestSkipped();
+        //1
+        $task = Task::create([
+            'name' => 'Comprar pan'
+        ]);
+
+        $userOriginal = factory(User::class)->create();
+
+        //2
+
+        $task->assignUser($userOriginal);
+
+        $user = $task-> user;
+        //3
+
+        $this->assertTrue($user->is($userOriginal));
+
+    }
+
+
+    /**
+     * @test
+     */
+    public function can_asign_tag_to_rask()
+    {
         //1 Prepare
         $task = Task::create([
-            'name' => 'Comprar pan',
-            'completed' => false
+            'name' => 'Comprar pan'
+        ]);
+        $tag = Tag::create ([
+            'name' => 'home'
+        ]);
+
+        //2
+        $task->addTag($tag);
+        //3
+        $tags = $task->tags;
+
+        $this->assertTrue($tags[0]->is($tag));
+
+    }
+
+    /**
+     * @test
+     */
+    public function a_task_can_have_tags()
+    {
+        //1 Prepare
+        $task = Task::create([
+            'name' => 'Comprar pan'
         ]);
         $tag1 = Tag::create ([
            'name' => 'home'
         ]);
         $tag2 = Tag::create ([
-            'name' => 'home'
+            'name' => 'work'
         ]);
         $tag3 = Tag::create ([
-            'name' => 'home'
+            'name' => 'studies'
         ]);
 
         $tags = [$tag1,$tag2, $tag3];
 
         //2
-        $task->assignTags($tags);
+        $task->addTags($tags);
 
         //3
-        $tags = $task->tags();
+        $tags = $task->tags;
 
         $this->assertTrue($tags[0]->is($tag1));
         $this->assertTrue($tags[1]->is($tag2));
@@ -60,12 +105,10 @@ use RefreshDatabase;
     {
         //1 Prepare
         $task = Task::create([
-            'name' => 'Comprar pan',
-            'completed' => false
+            'name' => 'Comprar pan'
         ]);
 
         $fileOriginal = File::create([
-
             'path' => 'archivo1.pdf'
         ]);
 //        add_file_a_task($file,$task);
@@ -89,16 +132,17 @@ use RefreshDatabase;
      */
     public function a_task_file_returns_null_when_no_file_is_assigned()
     {
-        $this->markTestSkipped();
         // 1 Prepare
         $task = Task::create([
-            'name' => 'Comprar pa'
+            'name' => 'Comprar pan'
         ]);
         // 2 Execute -> Wishful programming
-        $file = $task->file();
+        $file = $task->file;
 
         // 3 Assert
         $this->assertNull($file);
 
     }
+
+
 }

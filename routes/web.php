@@ -20,10 +20,11 @@ Route::get('/', function () {
 Route::get('/tasks','TasksController@index');
 Route::post('/tasks','TasksController@store'); //agrega
 Route::delete('/tasks/{id}','TasksController@destroy'); //borra
-//Route::patch('/tasks/{id}','TasksController@update'); //modifica
 Route::put('/tasks/{id}','TasksController@update'); //modifica
 
 //Route::resource() como alternativa
+
+Route::get('/task_edit/{id}','TasksController@edit');
 
 
 

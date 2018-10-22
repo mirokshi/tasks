@@ -52,7 +52,7 @@ class TasksController extends Controller
     public function edit(Request $request)
     {
         $task = Task::findOrFail($request->id);
-        return view('task_edit',[ 'task' => $task]);
+        return view('task_edit',[ 'tasks' => $task]);
 //        return view('task_edit',compact('task'));
     }
 }

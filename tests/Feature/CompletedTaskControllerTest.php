@@ -40,7 +40,6 @@ class CompletedTaskControllerTest extends TestCase
      */
     public function cannot_complete_a_unexisting_task()
     {
-//        $this->markTestSkipped();
 
         $response = $this->json('POST','/completed_task/1');
         //3 Assert
@@ -72,7 +71,6 @@ class CompletedTaskControllerTest extends TestCase
      */
     public function cannot_uncomplete_a_unexisting_task()
     {
-//        $this->markTestSkipped();
 
         // 1 -> no cal fer res
         // 2 Execute
