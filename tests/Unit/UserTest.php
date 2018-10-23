@@ -1,5 +1,6 @@
 <?php
 
+use App\Task;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -25,8 +26,8 @@ class UserTest extends TestCase{
         $tasks = $user->tasks;
         //3
         $this->assertTrue($tasks[0]->is($task1));
-        $this->assertTrue($tasks[0]->is($task2));
-        $this->assertTrue($tasks[0]->is($task3));
+        $this->assertTrue($tasks[1]->is($task2));
+        $this->assertTrue($tasks[2]->is($task3));
     }
     /**
      * @test
