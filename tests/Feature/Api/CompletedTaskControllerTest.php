@@ -30,6 +30,7 @@ class CompletedTaskControllerTest extends TestCase
         $response = $this->json('POST','/completed_task/' . $task->id);
         //3 Dos opcions: 1) Comprovar base de dades directament
         // 2) comprovar canvis al objecte $task
+        $response->assertSuccessful();
         $task = $task->fresh();
         $this->assertEquals($task->completed, true);
     }

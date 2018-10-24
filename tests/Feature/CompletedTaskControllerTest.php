@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mirokshi
- * Date: 2/10/18
- * Time: 20:40
- */
 
 namespace Tests\Feature;
 
@@ -21,16 +15,18 @@ class CompletedTaskControllerTest extends TestCase
      */
     public function can_complete_a_task()
     {
-        //1
+        $this->withoutExceptionHandling();
         $task= Task::create([
             'name' => 'comprar pan',
             'completed' => false
         ]);
         //2
-        $response = $this->json('POST','/completed_task/' . $task->id);
-        //3 Dos opcions: 1) Comprovar base de dades directament
-        // 2) comprovar canvis al objecte $task
+        $response = $this->post('/completed_task/' . $task->id);
+
+
         $task = $task->fresh();
+        $response->assertRedirect('/tasks');
+        $response->assertStatus(302);
         $this->assertEquals($task->completed, true);
     }
 
