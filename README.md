@@ -27,3 +27,7 @@ HTTP -> GET || POST || PUT || PATCH ||DELETE
     
     #arreglar todos los test 
     --en vue 
+    
+    #API/Completed
+    #FEATURE/Completed
+    

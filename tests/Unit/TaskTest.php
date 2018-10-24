@@ -143,6 +143,51 @@ use RefreshDatabase;
         $this->assertNull($file);
 
     }
+    /**
+     * @test
+     */
+    public function can_toggle_completed()
+    {
+        $task->factory(Task::class)->create([
+            'completed' => false
+        ]);
+        $task->toggleCompleted();
+        $this->assertTrue($task->completed);
+
+        $task->factory(Task::class)->create([
+            'completed' => true
+        ]);
+        $task->toggleCompleted();
+        $this->assertFalse($task->completed);
+    }
+
+    /**
+     *@test
+     */
+    public function map()
+    {
+        //1
+
+        $user = factory(User::class)->create();
+        $task = factory(Task::class)->create();
+        $user-> addTask($task);
+
+
+        //2
+        $tasks = $user->tasks;
+        //3
+        $this->assertTrue($tasks[0]->is($task));
+
+
+        //2
+
+        $this->map();
+        //3
+
+//        $this->assertEquals($task->map());
+
+
+    }
 
 
 }

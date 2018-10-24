@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet"> {{--tailwinds--}}
     <title>@yield('title','Put your title here')</title>
 
@@ -82,7 +83,9 @@
             <v-toolbar-title>Application</v-toolbar-title>
         </v-toolbar>
         <v-content>
+            <v-flex justify-center grid-list-md text-xs-center>
             @yield('content')
+            </v-flex>
         </v-content>
         <v-footer color="indigo" app>
             <span class="white--text pl-3">&copy; 2017 Rojas Diaz Mirokshi</span>

@@ -41,11 +41,11 @@ Route::get('/welcome', function (){
 });
 
 
-//Complete
-Route::post('/completed_task','CompletedTaskConttoller@store');
-//Uncompleted
-Route::delete('/uncompleted_task','CompletedTaskConttoller@destroy');
+//Uncompleted -> ESTADOS
+Route::delete('completed_task/{task}','CompletedTaskConttoller@destroy');
 
+//Complete -> ESTADOS
+Route::post('/completed_task/{task}','CompletedTaskConttoller@store');
 
 Route::get('/tasks_vue','TasksVueController@index');
 

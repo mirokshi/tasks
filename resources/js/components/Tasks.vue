@@ -1,23 +1,23 @@
 <template>
-    <div id="tasks" class="tasks container flex justify-center">
+    <v-container grid-list-md text-xs-center id="tasks" class="tasks">
         <div class="flex flex-col">
             <h1 class="text-center text-red-lighter pt-5">TASKS ({{total}})</h1>
             <div class="flex-row">
                 <form>
-                <input type="text"
-                       v-model="newTask"
-                       @keyup.enter="add"
-                       name="name"
-                       class="m-3 mt-5 p-1 pl-5 shadow border rounded focus:shadow-outine text-grey-darker"
-                       placeholder="New task"
-                       required
-                >
-                <!--agregar-->
-                <button id="button_add_task" @click="add">
-                    <svg class="h-6 w-4 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M11 9h4v2h-4v4H9v-4H5V9h4V5h2v4zm-1 11a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/>
-                    </svg>
-                </button>
+                    <input type="text"
+                           v-model="newTask"
+                           @keyup.enter="add"
+                           name="name"
+                           class="m-3 mt-5 p-1 pl-5 shadow border rounded focus:shadow-outine text-grey-darker"
+                           placeholder="New task"
+                           required
+                    >
+                    <!--agregar-->
+                    <button id="button_add_task" @click="add">
+                        <svg class="h-6 w-4 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M11 9h4v2h-4v4H9v-4H5V9h4V5h2v4zm-1 11a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/>
+                        </svg>
+                    </button>
                 </form>
                 <div v-if="errorMessage">
                     Ha sucedido un error: {{ errorMessage }}
@@ -48,8 +48,10 @@
             </ul>
                 </span>
         </div>
+    </v-container>
+    <!--<div id="tasks" class="tasks container flex justify-center">-->
 
-    </div>
+    <!--</div>-->
 
 </template>
 

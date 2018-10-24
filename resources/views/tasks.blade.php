@@ -3,9 +3,7 @@
 @section('content')
 {{--LARAVEL BLADE--}}
 {{--//CARD--}}
-
-
-        <v-card>
+        <v-card >
             <v-toolbar color="cyan" dark>
                 <v-toolbar-title>Tasks con PHP</v-toolbar-title>
             </v-toolbar>
@@ -42,6 +40,7 @@
                         </v-list-tile-content>
             </v-list>
         </v-card>
+
 
 
 @endsection
