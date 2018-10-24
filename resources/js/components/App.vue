@@ -2,24 +2,26 @@
 export default {
   el: '#app',
   name: 'App',
-  data: ()({
-
-    drawer: null,
-    items: [
-      {icon: 'contacts', text: 'Contacts'},
-      {icon: 'history', text: 'Frequently contacted'},
-      {
-        icon: 'keyboard_arrow_up',
-        'icon-alt': 'keyboard_arrow_down',
-        text: 'Labels',
-        model: true,
-        children: [
-          {icon: 'add', text: 'Create label'}
-        ]
-      }
-    ]
-
-}),
+  data () {
+    return {
+      drawer: null,
+      items: [
+        { icon: 'home', text: 'Welcome', url: '/' },
+        {
+          icon: 'keyboard_arrow_up',
+          'icon-alt': 'keyboard_arrow_down',
+          text: 'Tasks',
+          model: true,
+          children: [
+            { icon: 'build', text: 'Tasks  PHP', url: '/tasks' },
+            { icon: 'build', text: 'Tasks ', url: '/tasks_vue' }
+          ]
+        },
+        { icon: 'help', text: 'Contact', url: '/contact' },
+        { icon: 'public', text: 'About', url: '/about' }
+      ]
+    }
+  },
 
   props:
   {

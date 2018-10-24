@@ -44,15 +44,14 @@ class TasksController extends Controller
 
         $task->name=$request->name;
         $task->completed=true;
-
         $task->save();
-        return redirect('/task');
+        return redirect('/tasks');
 
     }
     public function edit(Request $request)
     {
         $task = Task::findOrFail($request->id);
-        return view('task_edit',[ 'tasks' => $task]);
+        return view('task_edit',[ 'task' => $task]);
 //        return view('task_edit',compact('task'));
     }
 }

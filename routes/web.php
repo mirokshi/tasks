@@ -22,27 +22,24 @@ Route::post('/tasks','TasksController@store'); //agrega
 Route::delete('/tasks/{id}','TasksController@destroy'); //borra
 Route::put('/tasks/{id}','TasksController@update'); //modifica
 
-//Route::resource() como alternativa
-
+//MODFICAR
 Route::get('/task_edit/{id}','TasksController@edit');
 
+//CONTACT
+Route::get('/contact', function (){
+    return view('contact');
+});
 
-
+//ABOUT
 Route::get('/about', function (){
    return view('about');
 });
 
+//WELCOME
 Route::get('/welcome', function (){
     return view('welcome');
 });
 
-Route::get('/prueba','PruebaController@show');
-Route::get('/prueba', function (){
-    $prueba = 'asasas';
-   dd($prueba);
-});
-
-Route::redirect('/hola','/prueba');
 
 //Complete
 Route::post('/completed_task','CompletedTaskConttoller@store');

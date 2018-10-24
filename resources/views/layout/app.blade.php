@@ -17,9 +17,8 @@
                 v-model="drawer"
                 fixed
                 app
-
         >
-            <v-list dense>
+            <v-list>
                 <template v-for="item in items">
                     <v-layout
                             v-if="item.heading"
@@ -29,7 +28,7 @@
                     >
                         <v-flex xs6>
                             <v-subheader v-if="item.heading">
-                               @{{ item.heading }}
+                                @{{ item.heading }}
                             </v-subheader>
                         </v-flex>
                         <v-flex xs6 class="text-xs-center">
@@ -43,64 +42,59 @@
                             :prepend-icon="item.model ? item.icon : item['icon-alt']"
                             append-icon=""
                     >
-                {{--<v-list-tile href="welcome">--}}
-                    {{--<v-list-tile-action>--}}
-                        {{--<v-icon>home</v-icon>--}}
-                    {{--</v-list-tile-action>--}}
-                    {{--<v-list-tile-content>--}}
-                        {{--<v-list-tile-title>Welcome</v-list-tile-title>--}}
-                    {{--</v-list-tile-content>--}}
-                {{--</v-list-tile>--}}
-
-                {{--<v-list-tile href="tasks">--}}
-                    {{--<v-list-tile-action>--}}
-                        {{--<v-icon>work</v-icon>--}}
-                    {{--</v-list-tile-action>--}}
-                    {{--<v-list-tile-content>--}}
-                        {{--<v-list-tile-title>Tasks con PHP</v-list-tile-title>--}}
-                    {{--</v-list-tile-content>--}}
-                {{--</v-list-tile>--}}
-
-                {{--<v-list-tile href="tasks_vue">--}}
-                    {{--<v-list-tile-action>--}}
-                        {{--<v-icon>work</v-icon>--}}
-                    {{--</v-list-tile-action>--}}
-                    {{--<v-list-tile-content>--}}
-                        {{--<v-list-tile-title>Tasks con Vue</v-list-tile-title>--}}
-                    {{--</v-list-tile-content>--}}
-                {{--</v-list-tile>--}}
-                {{--<v-list-tile href="about">--}}
-                    {{--<v-list-tile-action>--}}
-                        {{--<v-icon>account_box</v-icon>--}}
-                    {{--</v-list-tile-action>--}}
-                    {{--<v-list-tile-content>--}}
-                        {{--<v-list-tile-title>Contact</v-list-tile-title>--}}
-                    {{--</v-list-tile-content>--}}
-                {{--</v-list-tile>--}}
+                        <v-list-tile slot="activator" :href="item.url">
+                            <v-list-tile-content>
+                                <v-list-tile-title>
+                                    @{{ item.text }}
+                                </v-list-tile-title>
+                            </v-list-tile-content>
+                        </v-list-tile>
+                        <v-list-tile
+                                v-for="(child, i) in item.children"
+                                :key="i"
+                                :href="child.url"
+                        >
+                            <v-list-tile-action v-if="child.icon">
+                                <v-icon>@{{ child.icon }}</v-icon>
+                            </v-list-tile-action>
+                            <v-list-tile-content>
+                                <v-list-tile-title>
+                                    @{{ child.text }}
+                                </v-list-tile-title>
+                            </v-list-tile-content>
+                        </v-list-tile>
                     </v-list-group>
+                    <v-list-tile v-else :key="item.text" :href="item.url">
+                        <v-list-tile-action>
+                            <v-icon>@{{ item.icon }}</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title>
+                                @{{ item.text }}
+                            </v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
                 </template>
             </v-list>
         </v-navigation-drawer>
         <v-toolbar color="indigo" dark fixed app>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-            <v-toolbar-title>Tasks</v-toolbar-title>
+            <v-toolbar-title>Application</v-toolbar-title>
         </v-toolbar>
         <v-content>
-            <v-container fluid fill-height >
-                <v-layout>
-                    <v-flex justify-center  >
-                        <div id="app">
-                            @yield('content')
-                        </div>
-                    </v-flex>
-                </v-layout>
-            </v-container>
+            @yield('content')
         </v-content>
         <v-footer color="indigo" app>
-            <span class="white--text"> Created by Mirokshi Rojas. &copy;2018 All rights reserved</span>
+            <span class="white--text pl-3">&copy; 2017 Rojas Diaz Mirokshi</span>
         </v-footer>
     </v-app>
 </div>
     <script src="{{mix('/js/app.js')}}"></script>
 </body>
 </html>
+<script>
+  import VList from "vuetify/lib/components/VList/VList"
+  export default {
+    components: {VList}
+  }
+</script>

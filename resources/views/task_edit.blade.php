@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Edit one task</h1>
-    <form action="/tasks/{{$ttask->id}}" method="POST">
+    <form action="/tasks/{{$task->id}}" method="POST">
         @csrf
         {{ method_field('PUT') }}
         Name: <input name="name" type="text" value="{{$task->name}}">
