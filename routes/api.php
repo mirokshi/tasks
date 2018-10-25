@@ -26,7 +26,6 @@ Route::put('/v1/tasks/{task}','Api\TasksController@update');         // EDIT
 
 
 //Uncompleted -> ESTADOS
-Route::delete('/v1/uncompleted_task/{task}','Api\CompletedTaskConttoller@destroy');
-
+Route::delete('/v1/completed_task/{task}','Api\CompletedTasksController@destroy');
 //Complete -> ESTADOS
-Route::post('/v1/completed_task/{task}','Api\CompletedTaskConttoller@store');
+Route::post('/v1/completed_task/{task}','Api\CompletedTasksController@store');

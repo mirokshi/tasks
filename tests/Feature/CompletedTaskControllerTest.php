@@ -46,18 +46,20 @@ class CompletedTaskControllerTest extends TestCase
      */
     public function can_uncomplete_a_task()
     {
-$this->withoutExceptionHandling();
+
         //1
         $task= Task::create([
             'name' => 'comprar pan',
             'completed' => true
         ]);
         //2
-        $response = $this->json('DELETE','/api/v1/completed_task/' . $task->id);
-        $response->assertSuccessful();
+        $response = $this->delete('/completed_task/' . $task->id);
 
         $task = $task->fresh();
+
         $this->assertEquals((boolean)$task->completed, false);
+
+
     }
 
     /**
@@ -65,11 +67,10 @@ $this->withoutExceptionHandling();
      */
     public function cannot_uncomplete_a_unexisting_task()
     {
-
-        // 1 -> no cal fer res
-        // 2 Execute
+        //1
+        //2
         $response= $this->delete('/completed_task/1');
-        //3 Assert
+        //3
         $response->assertStatus(404);
     }
 }

@@ -42,10 +42,10 @@ Route::get('/welcome', function (){
 
 
 //Uncompleted -> ESTADOS
-Route::delete('completed_task/{task}','CompletedTaskConttoller@destroy');
+Route::delete('completed_task/{task}','CompletedTasksController@destroy');
 
 //Complete -> ESTADOS
-Route::post('/completed_task/{task}','CompletedTaskConttoller@store');
+Route::post('/completed_task/{task}','CompletedTasksController@store');
 
 Route::get('/tasks_vue','TasksVueController@index');
 
