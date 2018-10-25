@@ -17,23 +17,22 @@ class LoggedUserTasksControllerTest extends TestCase
      */
     public function can_list_logged_user_tasks()
     {
-        //1
+        // 1
         $user = factory(User::class)->create();
-        $this->actingAs($user, 'api');
+        $this->actingAs($user,'api');
 
-        $task1= factory(Task::class)->create();
-        $task2= factory(Task::class)->create();
-        $task3= factory(Task::class)->create();
+        $task1 = factory(Task::class)->create();
+        $task2 = factory(Task::class)->create();
+        $task3 = factory(Task::class)->create();
 
         $tasks = [$task1,$task2,$task3];
         $user->addTask($tasks);
 
-        //2
-         $response  =$this->json('GET', '/user/tasks');
-         $response->assertSuccessful();
+        // 2 execute
+        $response = $this->json('GET','/user/tasks');
 
+        $response->assertSuccessful();
 
-         //3
         $result = json_decode($response->getContent());
 
         $this->assertEquals($result[0]->is($task1));
@@ -47,7 +46,7 @@ class LoggedUserTasksControllerTest extends TestCase
     {
         //2
         $response = $this->json('GET','/user/tasks');
-        $response -> assertStatus(401);
+        $response -> assertStatus(404);
 
  }
 }
