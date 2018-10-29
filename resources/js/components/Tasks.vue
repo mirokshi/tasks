@@ -34,13 +34,13 @@
                 <!--&gt;</editable-text>-->
                 <!--</span>-->
                     <!--</li>-->
-
             <!--</ul>-->
-            <v-list dense>
+
+            <v-list text-xs-center>
                 <v-list-tile v-for="task in filteredTasks" :key="task.id">
                     <v-list-tile-content>
                         <v-list-tile-title>
-                                        <span :id="'task' + task.id" :class="{ strike: task.completed }"></span>
+                            <span :id="'task' + task.id" :class="{ strike: task.completed }"></span>
                             <span :id="'delete_task_' + task.id" @click="remove(task)">&#x274c;</span>
                             <editable-text
                                     :text="task.name"
