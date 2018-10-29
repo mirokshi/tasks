@@ -1,5 +1,5 @@
 @extends ('layout.app')
 
 @section('content')
-    <h1> GAYS</h1>
+    <h1> GAYS </h1>
 @endsection

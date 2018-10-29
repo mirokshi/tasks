@@ -15,7 +15,7 @@ class CompletedTaskControllerTest extends TestCase
      */
     public function can_complete_a_task()
     {
-        $this->withoutExceptionHandling();
+
         $task= Task::create([
             'name' => 'comprar pan',
             'completed' => false

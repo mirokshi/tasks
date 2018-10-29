@@ -9,6 +9,11 @@ class Task extends Model
     protected $guarded = [];
 //    protected $fillable = ['name', 'completed'];
 
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
 protected $hidden = [
     'created_at'
     ];
@@ -16,7 +21,6 @@ protected $hidden = [
     public function file()
     {
         return $this->hasOne(File::class);
-//        return $this->hasOne('App\Class');
 
     }
 

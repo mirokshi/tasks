@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return Task::orderBy('created_at')->get();
 

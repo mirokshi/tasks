@@ -48,7 +48,7 @@ class TasksControllerTest extends TestCase
      */
     public function can_delete_task()
     {
-            $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
         //1
         //Tasks:create()
         $task = factory(Task::class)->create();
@@ -92,7 +92,7 @@ class TasksControllerTest extends TestCase
      */
     public function can_create_task()
     {
-        $this->withoutExceptionHandling();
+        //$this->withoutExceptionHandling();
 
         $response = $this->json('POST','/api/v1/tasks/',[
             'name' => 'Comprar pan'
@@ -138,14 +138,14 @@ class TasksControllerTest extends TestCase
      */
     public function can_edit_task()
     {
-        $this->markTestSkipped();
-        $this->withoutExceptionHandling();
+
         // 1
         $oldTask = factory(Task::class)->create([
             'name' => 'Comprar leche'
         ]);
 
         // 2
+
         $response = $this->json('PUT','/api/v1/tasks/' . $oldTask->id, [
             'name' => 'Comprar pan'
         ]);
@@ -168,7 +168,7 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_edit_a_task_whithout_name()
     {
-        $this->markTestSkipped();
+
         //1
         $oldTask = factory(Task::class)->create();
         //2

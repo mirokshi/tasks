@@ -8,7 +8,7 @@
                            v-model="newTask"
                            @keyup.enter="add"
                            name="name"
-                           class="m-3 mt-5 p-1 pl-5 shadow border rounded focus:shadow-outine text-grey-darker"
+                           class="m-3 mt-5 p-1 pl-2 shadow border rounded focus:shadow-outine text-grey-darker"
                            placeholder="New task"
                            required
                     >
@@ -25,17 +25,31 @@
             </div>
 
             <!--SINTAX SUGAR-->
-            <ul class="list-reset">
-                <li v-for="task in filteredTasks" :key="task.id" class="text-grey-darker m-2 pl-5">
-                <span :id="'task'+ task.id" :class="{strike: task.completed}">
-                <editable-text
-                        :text="task.name"
-                        @edited="editName(task,$event)"
-                ></editable-text>
-                </span>
-                    <span :id="'delete_task_' + task.id" @click="remove(task)">&#x274c;</span></li>
+            <!--<ul class="list-reset">-->
+                <!--<li v-for="task in filteredTasks" :key="task.id" class="text-grey-darker m-2 pl-5">-->
+                <!--<span :id="'task'+ task.id" :class="{strike: task.completed}">-->
+                <!--<editable-text-->
+                        <!--:text="task.name"-->
+                        <!--@edited="editName(task,$event)"-->
+                <!--&gt;</editable-text>-->
+                <!--</span>-->
+                    <!--</li>-->
 
-            </ul>
+            <!--</ul>-->
+            <v-list dense>
+                <v-list-tile v-for="task in filteredTasks" :key="task.id">
+                    <v-list-tile-content>
+                        <v-list-tile-title>
+                                        <span :id="'task' + task.id" :class="{ strike: task.completed }"></span>
+                            <span :id="'delete_task_' + task.id" @click="remove(task)">&#x274c;</span>
+                            <editable-text
+                                    :text="task.name"
+                                    @edited="editName(task, $event)"
+                            ></editable-text>
+                        </v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
 
             <span id="filters" v-show="total > 0">
             <h3>Filtros:</h3>

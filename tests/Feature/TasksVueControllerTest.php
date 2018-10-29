@@ -12,7 +12,7 @@ class TasksVueControllerTest extends TestCase{
      */
     public function can_show_vue_tasks()
     {
-        $this->withoutExceptionHandling();
+
         // 1 PREPARE
         create_example_tasks();
 

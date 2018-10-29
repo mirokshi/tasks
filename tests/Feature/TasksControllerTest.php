@@ -56,8 +56,6 @@ class TasksControllerTest extends TestCase
      */
     public function can_store_task()
     {
-      //  $this->withoutExceptionHandling();
-
 
     $response = $this -> post('/tasks',[
         'name'=> 'Comprar leche'
@@ -79,10 +77,10 @@ class TasksControllerTest extends TestCase
 
     }
 
-    /**
-     * @test
-     */
-//    public function user_without_permissions_cannnot_delete_tasks()
+//    /**
+//     * @test
+//     */
+///   public function user_without_permissions_cannnot_delete_tasks()
 //    {
 //        $response = $this->delete('/tasks/1');
 //        $response->assertStatus(403);
@@ -94,14 +92,14 @@ class TasksControllerTest extends TestCase
      */
     public function can_delete_taks()
     {
-        $this->markTestSkipped();
+//        $this->markTestSkipped();
         $this->withoutExceptionHandling();
 
         $task = Task::create([
             'name' => 'Comprar leche'
         ]);
 
-        $response = $this->delete('/tasks/',$task->id);
+        $response = $this->delete('/tasks/'.$task->id);
 
         $response->assertStatus(302);
         $this->assertDatabaseMissing('tasks',['name'=>'Comprar leche']);
@@ -140,13 +138,13 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_edit_an_unexisting_tasks()
     {
-$this->markTestSkipped();
+
 //        $this->withoutExceptionHandling();
         //TDD -> Test Driven Development
         //1
         //2 execute HTTP request , HTTP response
         $response=$this->put('/tasks/1',[]);
-        $response->$this->assertStatus(404);
+        $response->assertStatus(404);
 
     }
 
@@ -155,7 +153,7 @@ $this->markTestSkipped();
      */
     public function cannot_show_edit_form_unexisting_task()
     {
-//        $this->withoutExceptionHandling();
+
         $response = $this->get('/task_edit/1');
         $response->assertStatus(404);
     }

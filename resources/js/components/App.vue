@@ -14,7 +14,7 @@ export default {
           model: true,
           children: [
             { icon: 'build', text: 'Tasks  PHP', url: '/tasks' },
-            { icon: 'build', text: 'Tasks ', url: '/tasks_vue' }
+            { icon: 'build', text: 'Tasks VUE ', url: '/tasks_vue' }
           ]
         },
         { icon: 'help', text: 'Contact', url: '/contact' },

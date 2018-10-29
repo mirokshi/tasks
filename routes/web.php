@@ -11,6 +11,11 @@
 |
 */
 
+Auth::routes();
+
+//TODO
+Route::post('login_alt', 'Auth\LoginAltController@login');
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -48,6 +53,8 @@ Route::delete('completed_task/{task}','CompletedTasksController@destroy');
 Route::post('/completed_task/{task}','CompletedTasksController@store');
 
 Route::get('/tasks_vue','TasksVueController@index');
+
+
 
 //index -> LIST
 //store -> CREATE

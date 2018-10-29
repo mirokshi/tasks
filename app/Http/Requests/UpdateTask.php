@@ -24,8 +24,8 @@ class UpdateTask extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'comppleted' => false
+            'name' => 'required'
+
         ];
     }
 }
