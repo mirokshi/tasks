@@ -16,8 +16,10 @@ Auth::routes();
 //TODO
 Route::post('login_alt', 'Auth\LoginAltController@login');
 
+
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 
 //TDD -> TEST DRIVEN DEVELOPMENT
@@ -45,6 +47,11 @@ Route::get('/welcome', function (){
     return view('welcome');
 });
 
+//Route::get('/landing', function (){
+//    return view('landing');
+//});
+
+
 
 //Uncompleted -> ESTADOS
 Route::delete('completed_task/{task}','CompletedTasksController@destroy');
@@ -55,7 +62,8 @@ Route::post('/completed_task/{task}','CompletedTasksController@store');
 Route::get('/tasks_vue','TasksVueController@index');
 Route::get('/home','TasksVueController@index');
 
-//Auth::logout();
+
+Auth::logout();
 
 
 

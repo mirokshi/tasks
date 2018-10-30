@@ -82,11 +82,11 @@
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Application</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-avatar title="{{ Auth::user()->name }} ( {{ Auth::user()-> email }} )">
-                <img src="https://www.gravatar.com/avatar/{{md5(Auth::user()-> email)}}" alt="avatar">
-            </v-avatar>
+            {{--<v-avatar title="{{ Auth::user()->name }} ( {{ Auth::user()-> email }} )">--}}
+                {{--<img src="https://www.gravatar.com/avatar/{{md5(Auth::user()-> email)}}" alt="avatar">--}}
+            {{--</v-avatar>--}}
+
             <v-form action="/logout" method="POST">
-                @csrf
                 <v-btn color="primary" type="submit">LOGOUT</v-btn>
             </v-form>
         </v-toolbar>
@@ -103,15 +103,3 @@
     <script src="{{mix('/js/app.js')}}"></script>
 </body>
 </html>
-<script>
-  import VList from "vuetify/lib/components/VList/VList"
-  export default {
-    components: {VList}
-  }
-</script>
-<script>
-  import VForm from "vuetify/src/components/VForm/VForm"
-  export default {
-    components: {VForm}
-  }
-</script>
