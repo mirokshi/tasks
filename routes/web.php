@@ -15,7 +15,7 @@ Auth::routes();
 
 //TODO
 Route::post('login_alt', 'Auth\LoginAltController@login');
-
+Route::post('register_alt','Auth\RegisterAltController@register');
 
 
 Route::get('/', function () {
@@ -63,7 +63,7 @@ Route::get('/tasks_vue','TasksVueController@index');
 Route::get('/home','TasksVueController@index');
 
 
-Auth::logout();
+//Auth::logout();
 
 
 
