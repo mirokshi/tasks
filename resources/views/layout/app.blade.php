@@ -87,6 +87,7 @@
             {{--</v-avatar>--}}
 
             <v-form action="/logout" method="POST">
+            @csrf
                 <v-btn color="primary" type="submit">LOGOUT</v-btn>
             </v-form>
         </v-toolbar>
