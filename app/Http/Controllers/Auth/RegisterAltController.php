@@ -11,8 +11,8 @@ class RegisterAltController
 public function register(Request $request)
 {
 
-    Auth::login($user);
-    return redirect('/home');
+//    Auth::login($user);
+//    return redirect('/home');
 
 }
 

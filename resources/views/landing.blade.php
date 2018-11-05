@@ -7,10 +7,10 @@
     <v-app light>
 <v-toolbar class="white">
     <!--<v-toolbar-title v-text="title"></v-toolbar-title>-->
-    <v-toolbar-title> MI TITULO </v-toolbar-title>
+    <v-toolbar-title> MY APP </v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn href="login"> LOGIN</v-btn>
-    <v-btn> REGISTRER</v-btn>
+    <v-btn href="login" color="primary"> LOGIN</v-btn>
+    <v-btn color="primary"> REGISTRER</v-btn>
 </v-toolbar>
 <v-content>
     <section>

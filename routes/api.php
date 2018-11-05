@@ -17,15 +17,15 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('/v1/tasks','Api\TasksController@index');                // BROWSE
-Route::get('/v1/tasks/{task}','Api\TasksController@show');          // READ
-Route::delete('/v1/tasks/{task}','Api\TasksController@destroy');    // DELETE
-Route::post('/v1/tasks','Api\TasksController@store');               // CREATE
-Route::put('/v1/tasks/{task}','Api\TasksController@update');         // EDIT
-
+Route::middleware(['auth:api'])->group(function() {
+    Route::get('/v1/tasks', 'Api\TasksController@index');                // BROWSE
+    Route::get('/v1/tasks/{task}', 'Api\TasksController@show');          // READ
+    Route::delete('/v1/tasks/{task}', 'Api\TasksController@destroy');    // DELETE
+    Route::post('/v1/tasks', 'Api\TasksController@store');               // CREATE
+    Route::put('/v1/tasks/{task}', 'Api\TasksController@update');         // EDIT
 
 //Uncompleted -> ESTADOS
-Route::delete('/v1/completed_task/{task}','Api\CompletedTasksController@destroy');
+    Route::delete('/v1/completed_task/{task}', 'Api\CompletedTasksController@destroy');
 //Complete -> ESTADOS
-Route::post('/v1/completed_task/{task}','Api\CompletedTasksController@store');
+    Route::post('/v1/completed_task/{task}', 'Api\CompletedTasksController@store');
+});

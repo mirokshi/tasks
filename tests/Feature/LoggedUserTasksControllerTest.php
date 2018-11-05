@@ -18,7 +18,7 @@ class LoggedUserTasksControllerTest extends TestCase
     public function can_list_logged_user_tasks()
     {
         $this->markTestSkipped();
-        $this->withoutExceptionHandling();
+//        $this->withoutExceptionHandling();
         // 1
         $user = factory(User::class)->create();
         $this->actingAs($user,'api');

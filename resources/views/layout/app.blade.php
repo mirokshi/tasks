@@ -83,9 +83,9 @@
             <v-toolbar-title>Application</v-toolbar-title>
             <v-spacer></v-spacer>
 
-            {{--<v-avatar title="{{ Auth::user()->name }} ( {{ Auth::user()-> email }} )">--}}
-                {{--<img src="https://www.gravatar.com/avatar/{{md5(Auth::user()-> email)}}" alt="avatar">--}}
-            {{--</v-avatar>--}}
+            <v-avatar title="{{ Auth::user()->name }} ( {{ Auth::user()->email }} )">
+                <img src="https://www.gravatar.com/avatar/{{md5(Auth::user()-> email)}}" alt="avatar">
+            </v-avatar>
 
             <v-form action="/logout" method="POST">
             @csrf

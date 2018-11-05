@@ -4,6 +4,7 @@
 namespace Tests\Feature;
 
 use App\Task;
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -33,6 +34,7 @@ class TasksControllerTest extends TestCase
             'completed' => true
         ]);
 
+        $this->login();
 
         //2 execute
         $response = $this -> get('/tasks');
@@ -56,14 +58,18 @@ class TasksControllerTest extends TestCase
      */
     public function can_store_task()
     {
-
+        $this->login();
+    //1
     $response = $this -> post('/tasks',[
         'name'=> 'Comprar leche'
     ]);
 
-    $response->assertStatus(302);
-    //$response->assertSuccessful();
 
+
+    //2
+    $response->assertStatus(302);
+
+    //3
     $this->assertDatabaseHas('tasks', ['name' => 'Comprar leche']);
 
     }
@@ -72,6 +78,7 @@ class TasksControllerTest extends TestCase
      */
     public function user_whitout_permissions_can_not_delete_tasks()
     {
+        $this->login();
         $response = $this->delete('/tasks/1');
         $response->assertStatus(404);
 
@@ -92,8 +99,7 @@ class TasksControllerTest extends TestCase
      */
     public function can_delete_taks()
     {
-//        $this->markTestSkipped();
-        $this->withoutExceptionHandling();
+        $this->login();
 
         $task = Task::create([
             'name' => 'Comprar leche'
@@ -111,6 +117,8 @@ class TasksControllerTest extends TestCase
     public function can_edit_a_task()
     {
     //1
+        $this->login();
+
         $task = Task::create([
            'name'=>'Comprar leche',
            'completed'=>false
@@ -138,8 +146,8 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_edit_an_unexisting_tasks()
     {
+        $this->login();
 
-//        $this->withoutExceptionHandling();
         //TDD -> Test Driven Development
         //1
         //2 execute HTTP request , HTTP response
@@ -153,9 +161,16 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_show_edit_form_unexisting_task()
     {
-
+        $this->login();
         $response = $this->get('/task_edit/1');
         $response->assertStatus(404);
+    }
+
+    public function login(): void
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user); //web
+        //        $this->actingAs($user, 'api'); //api
     }
 
 

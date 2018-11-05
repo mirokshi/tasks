@@ -24,43 +24,48 @@ Route::get('/', function () {
 
 //TDD -> TEST DRIVEN DEVELOPMENT
 
+//MIDDLEWARE
+//GRUPS_ DE URLS  PARA USUARIOS AUTENTICADOS
+
+Route::middleware(['auth'])->group(function() {
+
 Route::get('/tasks','TasksController@index');
 Route::post('/tasks','TasksController@store'); //agrega
 Route::delete('/tasks/{id}','TasksController@destroy'); //borra
 Route::put('/tasks/{id}','TasksController@update'); //modifica
 
 //MODFICAR
-Route::get('/task_edit/{id}','TasksController@edit');
+    Route::get('/task_edit/{id}','TasksController@edit');
 
 //CONTACT
-Route::get('/contact', function (){
-    return view('contact');
-});
+    Route::get('/contact', function (){
+        return view('contact');
+    });
 
 //ABOUT
-Route::get('/about', function (){
-   return view('about');
+    Route::get('/about', function (){
+        return view('about');
+    });
+
+    //Uncompleted -> ESTADOS
+    Route::delete('completed_task/{task}','CompletedTasksController@destroy');
+
+    //Complete -> ESTADOS
+    Route::post('/completed_task/{task}','CompletedTasksController@store');
+
+    //Vue
+    Route::get('/tasks_vue','TasksVueController@index');
+
+    //Home
+    Route::get('/home','TasksVueController@index');
+
+
 });
 
 //WELCOME
 Route::get('/welcome', function (){
     return view('welcome');
 });
-
-//Route::get('/landing', function (){
-//    return view('landing');
-//});
-
-
-
-//Uncompleted -> ESTADOS
-Route::delete('completed_task/{task}','CompletedTasksController@destroy');
-
-//Complete -> ESTADOS
-Route::post('/completed_task/{task}','CompletedTasksController@store');
-
-Route::get('/tasks_vue','TasksVueController@index');
-Route::get('/home','TasksVueController@index');
 
 
 //Auth::logout();

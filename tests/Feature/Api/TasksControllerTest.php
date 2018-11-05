@@ -5,12 +5,14 @@ namespace Tests\Feature\Api;
 
 
 use App\Task;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
 class TasksControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase,CanLogin;
 
     //CRUD -> CRU -> CREATE RETRIEVE UPDATE DELETE
     //BREAD -> PA -> BROWSER READ EDIT ADD DELETE
@@ -22,7 +24,8 @@ class TasksControllerTest extends TestCase
      */
     public function can_show_a_task ()
     {
-//        $this->withoutExceptionHandling();
+        $user = factory(User::class)->create();
+        $this->actingAs($user, 'api');
 
         // routes/api.php
         //http://tasks.test/api/v1/tasks
@@ -48,7 +51,7 @@ class TasksControllerTest extends TestCase
      */
     public function can_delete_task()
     {
-        //$this->withoutExceptionHandling();
+        $this->login('api');
         //1
         //Tasks:create()
         $task = factory(Task::class)->create();
@@ -72,7 +75,7 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_create_tasks_whitout_name()
     {
-//        $this->withoutExceptionHandling();
+        $this->login('api');
         //Peticiones HTTP es normal, no es XHR -> ajax
 //        $response = $this->post('/api/v1/tasks/',[
 //            'name' => ''
@@ -92,11 +95,13 @@ class TasksControllerTest extends TestCase
      */
     public function can_create_task()
     {
-        //$this->withoutExceptionHandling();
-
+        $this->login('api');
         $response = $this->json('POST','/api/v1/tasks/',[
             'name' => 'Comprar pan'
         ]);
+
+
+
 
         $result = json_decode($response->getContent());
         $response->assertSuccessful();
@@ -113,6 +118,7 @@ class TasksControllerTest extends TestCase
     public function can_list_task()
     {
         //1
+        $this->login('api');
         create_example_tasks();
 
         $response = $this->json('GET','/api/v1/tasks');
@@ -140,6 +146,7 @@ class TasksControllerTest extends TestCase
     {
 
         // 1
+        $this->login('api');
         $oldTask = factory(Task::class)->create([
             'name' => 'Comprar leche'
         ]);
@@ -170,6 +177,7 @@ class TasksControllerTest extends TestCase
     {
 
         //1
+        $this->login('api');
         $oldTask = factory(Task::class)->create();
         //2
         $response = $this->json('PUT','/api/v1/tasks/' . $oldTask->id, [
@@ -179,5 +187,6 @@ class TasksControllerTest extends TestCase
         $response->assertStatus(422);
 
     }
+
 
 }
