@@ -2,18 +2,28 @@
 namespace App\Http\Controllers\Auth;
 
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRegister;
 use App\User;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
-class RegisterAltController
+class RegisterAltController extends Controller
 {
-public function register(Request $request)
+ function register(StoreRegister $request)
 {
 
-//    Auth::login($user);
-//    return redirect('/home');
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
+    Auth::loginUsingId($user->id);
+    return redirect('/');
+    }
 
-}
+
 
 }

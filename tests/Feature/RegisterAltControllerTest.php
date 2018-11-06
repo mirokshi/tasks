@@ -18,8 +18,8 @@ class RegisterAltControllerTest extends TestCase
      */
     public function can_resgister_a_user()
     {
-        $this->markTestSkipped();
-        $this->withoutExceptionHandling();
+
+       $this->withoutExceptionHandling();
         //1
         $this->assertNull(Auth::user());
 
@@ -27,14 +27,15 @@ class RegisterAltControllerTest extends TestCase
         $response = $this->post( '/register_alt', $user = [
             'name' => 'Jose',
             'email' => 'jose@gmail.com',
-            'password' => 'secret',
-            'password_confirmation' => 'secret'
+            'password' => '123456',
+            'password_confirmation' => '1234556'
         ]);
 
         //3
 
         $response->assertStatus(302);
-        $response->assertRedirect('/home');
+        $response->assertRedirect('/');
+
         $this->assertNotNull(Auth::user());
 
         //comprovar que se ha creado
