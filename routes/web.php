@@ -28,7 +28,6 @@ Route::get('/', function () {
 
 //MIDDLEWARE
 //GRUPS_ DE URLS  PARA USUARIOS AUTENTICADOS
-
 Route::middleware(['auth'])->group(function() {
 
 Route::get('/tasks','TasksController@index');
@@ -58,7 +57,9 @@ Route::put('/tasks/{id}','TasksController@update'); //modifica
     //Vue
     Route::get('/tasks_vue','TasksVueController@index');
 
-    //Home
+    Route::get('/tasques','TasquesController@index');
+
+    //Home Vue
     Route::get('/home','TasksVueController@index');
 
 

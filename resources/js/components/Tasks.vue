@@ -25,31 +25,31 @@
             </div>
 
             <!--SINTAX SUGAR-->
-            <!--<ul class="list-reset">-->
-                <!--<li v-for="task in filteredTasks" :key="task.id" class="text-grey-darker m-2 pl-5">-->
-                <!--<span :id="'task'+ task.id" :class="{strike: task.completed}">-->
-                <!--<editable-text-->
-                        <!--:text="task.name"-->
-                        <!--@edited="editName(task,$event)"-->
-                <!--&gt;</editable-text>-->
-                <!--</span>-->
-                    <!--</li>-->
-            <!--</ul>-->
+            <ul class="list-reset">
+                <li v-for="task in filteredTasks" :key="task.id" class="text-grey-darker m-2 pl-5">
+                <span :id="'task'+ task.id" :class="{strike: task.completed}">
+                <editable-text
+                        :text="task.name"
+                        @edited="editName(task,$event)"
+                ></editable-text>
+                </span>
+                    </li>
+            </ul>
 
-            <v-list text-xs-center>
-                <v-list-tile v-for="task in filteredTasks" :key="task.id">
-                    <v-list-tile-content>
-                        <v-list-tile-title>
-                            <span :id="'task' + task.id" :class="{ strike: task.completed }"></span>
-                            <span :id="'delete_task_' + task.id" @click="remove(task)">&#x274c;</span>
-                            <editable-text
-                                    :text="task.name"
-                                    @edited="editName(task, $event)"
-                            ></editable-text>
-                        </v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
-            </v-list>
+            <!--<v-list text-xs-center>-->
+                <!--<v-list-tile v-for="task in filteredTasks" :key="task.id">-->
+                    <!--<v-list-tile-content>-->
+                        <!--<v-list-tile-title>-->
+                            <!--<span :id="'task' + task.id" :class="{ strike: task.completed }"></span>-->
+                            <!--<span :id="'delete_task_' + task.id" @click="remove(task)">&#x274c;</span>-->
+                            <!--<editable-text-->
+                                    <!--:text="task.name"-->
+                                    <!--@edited="editName(task, $event)"-->
+                            <!--&gt;</editable-text>-->
+                        <!--</v-list-tile-title>-->
+                    <!--</v-list-tile-content>-->
+                <!--</v-list-tile>-->
+            <!--</v-list>-->
 
             <span id="filters" v-show="total > 0">
             <h3>Filtros:</h3>
