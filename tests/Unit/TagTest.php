@@ -3,34 +3,35 @@
 namespace Tests\Unit;
 use App\File;
 use App\Tag;
-use App\Task;
 use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 
 
-class TaskTest extends TestCase
+class TagTest extends TestCase
 {
 use RefreshDatabase;
 
     /**
      * @test
      */
-    public function can_assign_user_to_task ()
+    public function can_assign_user_to_tag ()
     {
         //1
-        $task = Task::create([
-            'name' => 'Comprar pan'
+        $tag = Tag::create([
+            'name' => 'Compras',
+            'description' => 'bla bla bla',
+            'color' => '#E0F8E0'
         ]);
 
         $userOriginal = factory(User::class)->create();
 
         //2
 
-        $task->assignUser($userOriginal);
+        $tag->assignUser($userOriginal);
 
-        $user = $task-> user;
+        $user = $tag-> user;
         //3
 
         $this->assertTrue($user->is($userOriginal));
@@ -41,10 +42,10 @@ use RefreshDatabase;
     /**
      * @test
      */
-    public function can_asign_tag_to_task()
+    public function can_asign_tag_to_Tag()
     {
         //1 Prepare
-        $task = Task::create([
+        $Tag = Tag::create([
             'name' => 'Comprar pan'
         ]);
         $tag = Tag::create ([
@@ -52,9 +53,9 @@ use RefreshDatabase;
         ]);
 
         //2
-        $task->addTag($tag);
+        $Tag->addTag($tag);
         //3
-        $tags = $task->tags;
+        $tags = $Tag->tags;
 
         $this->assertTrue($tags[0]->is($tag));
 
@@ -63,10 +64,10 @@ use RefreshDatabase;
     /**
      * @test
      */
-    public function a_task_can_have_tags()
+    public function a_Tag_can_have_tags()
     {
         //1 Prepare
-        $task = Task::create([
+        $Tag = Tag::create([
             'name' => 'Comprar pan'
         ]);
         $tag1 = Tag::create ([
@@ -82,10 +83,10 @@ use RefreshDatabase;
         $tags = [$tag1,$tag2, $tag3];
 
         //2
-        $task->addTags($tags);
+        $Tag->addTags($tags);
 
         //3
-        $tags = $task->tags;
+        $tags = $Tag->tags;
 
         $this->assertTrue($tags[0]->is($tag1));
         $this->assertTrue($tags[1]->is($tag2));
@@ -99,26 +100,26 @@ use RefreshDatabase;
     /**
      * @test
      */
-    public function a_task_can_have_one_file()
+    public function a_Tag_can_have_one_file()
     {
         //1 Prepare
-        $task = Task::create([
+        $Tag = Tag::create([
             'name' => 'Comprar pan'
         ]);
 
         $fileOriginal = File::create([
             'path' => 'archivo1.pdf'
         ]);
-//        add_file_a_task($file,$task);
-        $task->assignFile($fileOriginal);
+//        add_file_a_Tag($file,$Tag);
+        $Tag->assignFile($fileOriginal);
 
         //2 Execute -> wishful programing
 
         //IMPORTANTE - 2 meneras
         //a Regresa toda la relacion
-//        $file->$task->files()->where('path','');
+//        $file->$Tag->files()->where('path','');
         //b regresa el objeto
-        $file = $task->file;
+        $file = $Tag->file;
 
         //3 Assertion
         $this->assertTrue($file->is($fileOriginal));
@@ -128,14 +129,14 @@ use RefreshDatabase;
     /**
      * @test
      */
-    public function a_task_file_returns_null_when_no_file_is_assigned()
+    public function a_Tag_file_returns_null_when_no_file_is_assigned()
     {
         // 1 Prepare
-        $task = Task::create([
+        $Tag = Tag::create([
             'name' => 'Comprar pan'
         ]);
         // 2 Execute -> Wishful programming
-        $file = $task->file;
+        $file = $Tag->file;
 
         // 3 Assert
         $this->assertNull($file);
@@ -146,17 +147,17 @@ use RefreshDatabase;
      */
     public function can_toggle_completed()
     {
-        $task = factory(Task::class)->create([
+        $Tag = factory(Tag::class)->create([
             'completed' => false
         ]);
-        $task->toggleCompleted();
-        $this->assertTrue($task->completed);
+        $Tag->toggleCompleted();
+        $this->assertTrue($Tag->completed);
 
-        $task = factory(Task::class)->create([
+        $Tag = factory(Tag::class)->create([
             'completed' => true
         ]);
-        $task->toggleCompleted();
-        $this->assertFalse($task->completed);
+        $Tag->toggleCompleted();
+        $this->assertFalse($Tag->completed);
     }
 
     /**
@@ -165,20 +166,20 @@ use RefreshDatabase;
     public function map()
     {
         $user = factory(User::class)->create();
-        $task = factory(Task::class)->create([
+        $Tag = factory(Tag::class)->create([
            'name' => 'Comprar pan',
             'completed' => false,
             'user_id' => $user->id
         ]);
-        $mappedTask = $task->map();
+        $mappedTag = $Tag->map();
 
-        $this->assertEquals($mappedTask['id'],1);
-        $this->assertEquals($mappedTask['name'],'Comprar pan');
-        $this->assertEquals($mappedTask['completed'],false);
-        $this->assertEquals($mappedTask['user_id'],$user->id);
-        $this->assertEquals($mappedTask['user_name'],$user->name);
-        $this->assertEquals($mappedTask['user_email'],$user->email);
-        $this->assertTrue($user->is($mappedTask['user']));
+        $this->assertEquals($mappedTag['id'],1);
+        $this->assertEquals($mappedTag['name'],'Comprar pan');
+        $this->assertEquals($mappedTag['completed'],false);
+        $this->assertEquals($mappedTag['user_id'],$user->id);
+        $this->assertEquals($mappedTag['user_name'],$user->name);
+        $this->assertEquals($mappedTag['user_email'],$user->email);
+        $this->assertTrue($user->is($mappedTag['user']));
 
 
 

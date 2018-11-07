@@ -19,11 +19,14 @@
           <v-btn slot="activator" flat >
           <v-icon>more_vert</v-icon>
           </v-btn>
-          <!--<v-list>-->
-              <!--<v-list-tile>-->
-                  <!--<v-list-tile-title>Opcion 1</v-list-tile-title>-->
-              <!--</v-list-tile>-->
-          <!--</v-list>-->
+         <v-list>
+                    <v-list-tile @click="opcion1">
+                        <v-list-tile-title>Opción 1</v-list-tile-title>
+                    </v-list-tile>
+                    <v-list-tile href="http://google.com">
+                        <v-list-tile-title>Google</v-list-tile-title>
+                    </v-list-tile>
+                </v-list>
       </v-menu>
       <v-toolbar-title class="white--text">Tasques</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -178,7 +181,7 @@ export default {
       // TODO -> AXIOS
       console.log('TODO REFRESH')
     },
-    opcion () {
+    opcion1 () {
       console.log('TODO REFRESH')
     },
     showDestroy (task) {

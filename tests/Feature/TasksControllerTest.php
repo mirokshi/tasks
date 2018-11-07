@@ -84,14 +84,6 @@ class TasksControllerTest extends TestCase
 
     }
 
-//    /**
-//     * @test
-//     */
-///   public function user_without_permissions_cannnot_delete_tasks()
-//    {
-//        $response = $this->delete('/tasks/1');
-//        $response->assertStatus(403);
-//    }
 
 
     /**

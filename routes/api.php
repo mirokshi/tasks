@@ -29,3 +29,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Complete -> ESTADOS
     Route::post('/v1/completed_task/{task}', 'Api\CompletedTasksController@store');
 //});
+
+Route::get('/v1/tag', 'Api\TagController@index');                // BROWSE
+Route::get('/v1/tag/{tag}', 'Api\TagController@show');          // READ
+Route::delete('/v1/tag/{tag}', 'Api\TagController@destroy');    // DELETE
+Route::post('/v1/tag', 'Api\TagController@store');               // CREATE
+Route::put('/v1/tag/{tag}', 'Api\TagController@update');         // EDIT
