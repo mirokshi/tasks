@@ -179,11 +179,6 @@ use RefreshDatabase;
         $this->assertEquals($mappedTag['user_id'],$user->id);
         $this->assertEquals($mappedTag['user_name'],$user->name);
         $this->assertEquals($mappedTag['user_email'],$user->email);
-        $this->assertTrue($user->is($mappedTag['user']));
-
-
-
-
 
 
     }
