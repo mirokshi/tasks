@@ -104,9 +104,11 @@ if (!function_exists('grant_mysql_privileges')) {
 if (!function_exists('create_database')) {
     function create_database()
     {
-
+        dump('gay1');
         create_mysql_database(env('DB_DATABASE'));
+        dump('gay2');
         create_mysql_user(env('DB_USERNAME'),env('DB_PASSWORD'));
+        dump('gay3');
         grant_mysql_privileges(env('DB_USERNAME'),env('DB_DATABASE'));
     }
 }
