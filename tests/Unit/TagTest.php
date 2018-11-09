@@ -18,6 +18,7 @@ use RefreshDatabase;
      */
     public function can_assign_user_to_tag ()
     {
+        $this->withoutExceptionHandling();
         //1
         $tag = Tag::create([
             'name' => 'Compras',
