@@ -63,6 +63,9 @@ Route::put('/tasks/{id}','TasksController@update'); //modifica
     Route::get('/home','TasksVueController@index');
 
 
+    //LoggedUserTasksController
+    Route::get('/user/tasks','LoggedUserTasksController@index');
+
 });
 
 //WELCOME

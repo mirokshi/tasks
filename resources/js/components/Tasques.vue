@@ -145,24 +145,7 @@ export default {
         rowsPerPage: 25
       },
       loading: false,
-      dataTasks: [
-        {
-          id: 1,
-          name: 'comprar pan',
-          completed: false,
-          user_id: 1,
-          created_at: 'hace 1 siglo',
-          updated_at: 'hace 5 siglo'
-        },
-        {
-          id: 2,
-          name: 'comprar leche',
-          completed: false,
-          user_id: 2,
-          created_at: 'hace 1 siglo',
-          updated_at: 'hace 5 siglo'
-        }
-      ],
+      dataTasks: this.tasks,
       headers: [
         { text: 'ID', value: 'id' },
         { text: 'NAME', value: 'name' },
@@ -174,15 +157,28 @@ export default {
       ]
     }
   },
+  props: {
+    tasks: {
+      type: [],
+      required: true
+    }
+  },
   methods: {
     refresh () {
       this.loading = true
-      setTimeout(() => { this.loading = false }, 5000)
-      // TODO -> AXIOS
-      console.log('TODO REFRESH')
+      // setTimeout(() => { this.loading = false }, 5000)
+      // ¡!¡! CAMBIA SEGUN EL CASO
+      window.axios.get('/api/v1/user/tasks').then(response => {
+        //SHOW SNACKBAR MENSAJE DE OK
+        this.dataTasks = response.data
+      }).catch(eror => {
+        //SOW SNACKNBAR ERRO TODO
+        console.log(error)
+      })
+      // window.axios.get('/api/v1/user/tasks').then().catch()
     },
     opcion1 () {
-      console.log('TODO REFRESH')
+      console.log('TODO OPCION1')
     },
     showDestroy (task) {
       this.deleteDialog = true
