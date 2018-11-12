@@ -5,8 +5,7 @@
 
 @section('content')
     <v-app light>
-<v-toolbar class="whit">
-    <!--<v-toolbar-title v-text="title"></v-toolbar-title>-->
+<v-toolbar class="white">
     <v-toolbar-title> Homepage Tasks</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn href="login" color="primary"> LOGIN</v-btn>

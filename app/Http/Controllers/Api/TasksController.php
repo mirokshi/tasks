@@ -33,12 +33,8 @@ class TasksController extends Controller
 
     public function store(StoreTask $request)
     {
-//        Task::create();
-        //no if`s -.-
-//        $request->validate([
-//            'name'=> 'required',
-//
-//        ]);
+
+
         $task = new Task();
         $task->name = $request->name;
         $task->completed = false;

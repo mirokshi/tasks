@@ -9,7 +9,6 @@ class LoggedUserTasksController extends Controller
 {
     public function index()
     {
-
         $tasks = optional(Auth::user())->tasks;
         return view('tasks.user.index', compact('tasks'));
     }
