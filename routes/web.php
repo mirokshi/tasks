@@ -57,6 +57,7 @@ Route::put('/tasks/{id}','TasksController@update'); //modifica
     //Vue
     Route::get('/tasks_vue','TasksVueController@index');
 
+    //Tasques
     Route::get('/tasques','TasquesController@index');
 
     //Home Vue

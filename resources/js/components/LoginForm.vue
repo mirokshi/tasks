@@ -43,7 +43,7 @@ export default {
   name: 'LoginForm',
   mixins: [validationMixin],
   validations: {
-    dataEmail: {  email, required },
+    dataEmail: { email, required },
     password: { required, minLength: minLength(6) }
   },
   data () {
@@ -58,8 +58,7 @@ export default {
       const errors = []
       if (!this.$v.dataEmail.$dirty) {
         return errors
-      }else
-      !this.$v.dataEmail.email && errors.push('E-mail invalido')
+      } else { !this.$v.dataEmail.email && errors.push('E-mail invalido') }
       !this.$v.dataEmail.required && errors.push('E-mail es obligatorio')
       return errors
     },

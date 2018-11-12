@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-    {{--<link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet"> --}}{{--tailwinds--}}
     <title>@yield('title','Put your title here')</title>
 
 </head>
@@ -82,23 +81,19 @@
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Application</v-toolbar-title>
             <v-spacer></v-spacer>
-
             <v-avatar title="{{ Auth::user()->name }} ( {{ Auth::user()->email }} )">
                 <img src="https://www.gravatar.com/avatar/{{md5(Auth::user()-> email)}}" alt="avatar">
             </v-avatar>
-
             <v-form action="/logout" method="POST">
             @csrf
                 <v-btn color="primary" type="submit">LOGOUT</v-btn>
             </v-form>
         </v-toolbar>
         <v-content>
-            <v-flex justify-center grid-list-md text-xs-center>
             @yield('content')
-            </v-flex>
         </v-content>
         <v-footer color="indigo" app>
-            <span class="white--text pl-3">&copy; 2017 Rojas Diaz Mirokshi</span>
+            <span class="white--text pl-3">&copy; 2018 Rojas Diaz Mirokshi</span>
         </v-footer>
     </v-app>
 </div>
