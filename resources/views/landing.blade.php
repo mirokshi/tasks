@@ -1,6 +1,6 @@
 @extends('layout.landing')
 @section('title')
-    Tasks
+    Homepage Tasks
 @endsection
 
 @section('content')

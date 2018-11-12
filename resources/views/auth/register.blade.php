@@ -23,7 +23,7 @@
                     <v-layout align-center justify-center>
                         <v-flex xs12 sm8 md4>
                             <v-card class="elevation-12">
-                                <register-form email="{{old('email')}} " csrf-token="{{csrf_token()}}"> </register-form>
+                                <register-form></register-form>
                             </v-card>
                         </v-flex>
                     </v-layout>

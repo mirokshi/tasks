@@ -12,7 +12,7 @@ import EditableText from './components/EditableText.vue'
 import LoginForm from './components/LoginForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
 
-// instaacion vuetify
+// instalacion vuetify
 window.Vue = Vue
 window.Vue.use(Vuetify)
 

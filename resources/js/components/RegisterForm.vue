@@ -2,13 +2,13 @@
         <form action="/register" method="POST">
             <v-toolbar dark color="primary">
                 <v-toolbar-title>Register Form</v-toolbar-title>
-                <spacer></spacer>
+                <v-spacer></v-spacer>
             </v-toolbar>
               <v-card-text>
                   <input type="hidden" name="_token" :value="csrfToken">
             <v-text-field
                     v-model="name"
-                    prepend-icon="perm_identity"
+                    prepend-icon="person"
                     :error-messages="nameErrors"
                     :counter="10"
                     label="Name"
@@ -38,19 +38,11 @@
                     @input="$v.password.$touch()"
                     @blur="$v.password.$touch()"
             ></v-text-field>
-            <v-checkbox
-                    v-model="checkbox"
-                    :error-messages="checkboxErrors"
-                    label="Do you agree?"
-                    required
-                    @change="$v.checkbox.$touch()"
-                    @blur="$v.checkbox.$touch()"
-            ></v-checkbox>
               </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-            <v-btn color="primary" @click="submit">submit</v-btn>
-            <v-btn color="primary" @click="clear">clear</v-btn>
+            <v-btn color="primary" type="submit">Register</v-btn>
+            <v-btn color="primary" @click="clear">Clear</v-btn>
                </v-card-actions>
         </form>
 </template>
@@ -65,25 +57,17 @@ export default {
   validations: {
     name: { required, maxLength: maxLength(10) },
     dataEmail: { required, email },
-    password: { required, minLength:minLength(6) },
-    checkbox: { required }
+    password: { required, minLength: minLength(6) },
   },
   data () {
     return {
       name: '',
       dataEmail: this.email,
-      password: '',
-      checkbox: false
+      password: ''
     }
   },
   props: ['email', 'csrfToken'],
   computed: {
-    checkboxErrors () {
-      const errors = []
-      if (!this.$v.checkbox.$dirty) return errors
-      !this.$v.checkbox.required && errors.push('You must agree to continue!')
-      return errors
-    },
     nameErrors () {
       const errors = []
       if (!this.$v.name.$dirty) return errors
@@ -95,7 +79,7 @@ export default {
       const errors = []
       if (!this.$v.password.$dirty) return errors
       !this.$v.password.required && errors.push('Password es obligatorio')
-      // !this.$v.password.minLength && errors.push('Password debe mayor de 6')
+      !this.$v.password.minLength && errors.push('Password debe mayor de 6')
       return errors
     },
     emailErrors () {
@@ -107,9 +91,6 @@ export default {
     }
   },
   methods: {
-    submit () {
-      this.$v.$touch()
-    },
     clear () {
       this.$v.$reset()
       this.name = ''
@@ -118,5 +99,4 @@ export default {
     }
   }
 }
-
 </script>
