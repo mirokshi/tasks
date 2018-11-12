@@ -90,8 +90,13 @@ class UserTest extends TestCase{
      */
     public function haveTask()
     {
+        //1
+        $user = factory(User::class)->create();
+        $task = factory(Task::class)->create();
         //2
         $user->haveTask();
+
+        //3
     }
 
     /**

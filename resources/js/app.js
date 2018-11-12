@@ -10,6 +10,7 @@ import Tasks from './components/Tasks.vue'
 import Tasques from './components/Tasques.vue'
 import EditableText from './components/EditableText.vue'
 import LoginForm from './components/LoginForm.vue'
+import RegisterForm from './components/RegisterForm.vue'
 
 // instaacion vuetify
 window.Vue = Vue
@@ -21,6 +22,7 @@ window.Vue.component('tasks', Tasks)
 window.Vue.component('tasques', Tasques)
 window.Vue.component('editable-text', EditableText)
 window.Vue.component('login-form', LoginForm)
+window.Vue.component('register-form', RegisterForm)
 
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)

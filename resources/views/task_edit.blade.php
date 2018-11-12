@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    <h1>Edit one task</h1>
+    <h1>Edit  task</h1>
     <form action="/tasks/{{$task->id}}" method="POST">
         @csrf
         {{ method_field('PUT') }}
