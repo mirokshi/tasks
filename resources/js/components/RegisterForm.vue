@@ -8,6 +8,7 @@
                   <input type="hidden" name="_token" :value="csrfToken">
             <v-text-field
                     v-model="name"
+                    prepend-icon="perm_identity"
                     :error-messages="nameErrors"
                     :counter="10"
                     label="Name"
@@ -16,11 +17,11 @@
                     @blur="$v.name.$touch()"
             ></v-text-field>
             <v-text-field
-                    prepend-icon="person"
+                    v-model="dataEmail"
+                    prepend-icon="email"
                     name="email"
                     label="Register"
                     type="text"
-                    v-model="dataEmail"
                     :error-messages="emailErrors"
                     @input="$v.dataEmail.$touch()"
                     @blur="$v.dataEmail.$touch()"
@@ -56,7 +57,7 @@
 
 <script>
 import { validationMixin } from 'vuelidate'
-import { required, maxLength, email } from 'vuelidate/lib/validators'
+import { required, maxLength, minLength, email } from 'vuelidate/lib/validators'
 
 export default {
   name: 'RegisterForm',
@@ -64,7 +65,7 @@ export default {
   validations: {
     name: { required, maxLength: maxLength(10) },
     dataEmail: { required, email },
-    password: { required },
+    password: { required, minLength:minLength(6) },
     checkbox: { required }
   },
   data () {
@@ -94,7 +95,7 @@ export default {
       const errors = []
       if (!this.$v.password.$dirty) return errors
       !this.$v.password.required && errors.push('Password es obligatorio')
-      !this.$v.password.minLength && errors.push('Password debe mayor de 6')
+      // !this.$v.password.minLength && errors.push('Password debe mayor de 6')
       return errors
     },
     emailErrors () {
