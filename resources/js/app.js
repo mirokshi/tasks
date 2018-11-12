@@ -22,7 +22,7 @@ window.Vue.component('tasks', Tasks)
 window.Vue.component('tasques', Tasques)
 window.Vue.component('editable-text', EditableText)
 window.Vue.component('login-form', LoginForm)
-// window.Vue.component('register-form', RegisterForm)
+window.Vue.component('register-form', RegisterForm)
 
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)
