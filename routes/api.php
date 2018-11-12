@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::middleware('auth:api')->group(function() {
     Route::get('/v1/tasks', 'Api\TasksController@index');                // BROWSE
     Route::get('/v1/tasks/{task}', 'Api\TasksController@show');          // READ
@@ -35,7 +36,6 @@ Route::get('/v1/tag/{tag}', 'Api\TagController@show');          // READ
 Route::delete('/v1/tag/{tag}', 'Api\TagController@destroy');    // DELETE
 Route::post('/v1/tag', 'Api\TagController@store');               // CREATE
 Route::put('/v1/tag/{tag}', 'Api\TagController@update');         // EDIT
-
 
 //Logged
 Route::get('/v1/user/tasks', 'Api\LoggedUserTasksController@index');
