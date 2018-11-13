@@ -63,7 +63,6 @@ Route::put('/tasks/{id}','TasksController@update'); //modifica
     //Home Vue
     Route::get('/home','TasksVueController@index');
 
-
     //LoggedUserTasksController
     Route::get('/user/tasks','LoggedUserTasksController@index');
 
