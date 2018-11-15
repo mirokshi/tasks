@@ -19,8 +19,6 @@ class TasksVueControllerTest extends TestCase{
 
         $this->login();
 
-
-
         // 2 EXECUTE
         $response = $this->get('/tasks_vue');
 
