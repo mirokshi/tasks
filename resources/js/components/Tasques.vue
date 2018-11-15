@@ -38,7 +38,7 @@
                     <v-text-field v-model="name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
                     <v-switch v-model="completed" :label="completed ? 'Completada':'Pendiente'"></v-switch>
                     <v-textarea v-model="description" label="Descripcion" hint="Descripcion"></v-textarea>
-                     <v-btn @click="editDialog=false"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
+                     <v-btn @click="createDialog=false"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
                     <v-btn><v-icon class="mr-1">save</v-icon></v-btn>
                 </v-form>
             </v-card-text>
@@ -64,8 +64,23 @@
         </v-card>
 
       </v-dialog>
-      <v-dialog v-model="showDialog">
-      TODO
+      <v-dialog v-model="showDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+         <v-toolbar color="blue darken-3" class="white--text">TASKS
+              <v-btn @click="showDialog=false" flat class="white--text"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
+          <v-btn flat class="white--text"><v-icon class="mr-1">save</v-icon></v-btn>
+         </v-toolbar>
+          <v-card>
+              <v-card-text>
+                <v-form>
+                    <v-text-field v-model="name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
+                    <v-switch v-model="completed" :label="completed ? 'Completada':'Pendiente'"></v-switch>
+                    <v-textarea v-model="description" label="Descripcion" hint="Descripcion"></v-textarea>
+                    <v-autocomplete :items="dataUsers" label="Usuario" item-text="name"></v-autocomplete>
+                     <v-btn @click="showDialog=false"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
+                    <v-btn><v-icon class="mr-1">save</v-icon></v-btn>
+                </v-form>
+            </v-card-text>
+          </v-card>
       </v-dialog>
       <v-snackbar :timeout="3000" color="warning" v-model="snackbar" >
           Esto es una SNACKBAR
@@ -147,7 +162,7 @@
                         <td>
 
                             <v-btn icon color="primary" flat title="Muestra una tarea"
-                                   @click="show(task)">
+                                   @click="showTasks(task)">
                                 <v-icon>visibility</v-icon>
                             </v-btn>
                             <v-btn icon color="success" flat title="Edita una tarea"
@@ -167,7 +182,7 @@
                   class="hidden-lg-and-up"
                   :items="dataTasks"
                   :search="search"
-                  no-results-text="No se ha encontrado ningun regustro"
+                  no-results-text="No se ha encontrado ningun registro"
                   no-data-text="No hay datos disponibles"
                   rows-per-page-text="Tareas por pagina"
                   :rows-per-page-items="[5,10,25,50,100,200,{'text':'Todos', 'value' : -1}]"
@@ -212,7 +227,7 @@ export default {
   name: 'Tasques',
   data () {
     return {
-      dataUsers:this.users,
+      dataUsers: this.users,
       name: '',
       completed: false,
       description: '',
@@ -286,17 +301,20 @@ export default {
     showCreate () {
       this.createDialog = true
     },
+    showTasks () {
+      this.showDialog = true
+    },
     destroy (task) {
-      console.log('TODO DELETE TASK' + task.id)
+      this.deleteDialog = false
     },
     update () {
-      console.log('TODO UPDATE TASK')
+      this.editDialog = false
     },
     create () {
-      console.log('TODO CREATE TASK')
+      this.createDialog = false
     },
     show () {
-      console.log('TODO SHOW TASK')
+      this.showDialog = false
     }
 
   }
