@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 if (!function_exists('create_primary_user')){
     function create_primary_user() {
-        $user = User::where('email', 'mirokshirojas@iesebre.com')->first();
+        $user = User::where('email','mirokshirojas@iesebre.com')->first();
         if (!$user) {
 
          User::firstOrCreate ([
@@ -23,17 +23,23 @@ if (!function_exists('create_example_tasks')) {
     function create_example_tasks() {
         Task::create([
             'name' => 'Comprar pan',
-            'completed' => false
+            'completed' => false,
+            'description' => 'fui a comprar a la esquina',
+            'user_id' => 1
         ]);
 
         Task::create([
             'name' => 'Comprar leche',
-            'completed' => false
+            'completed' => false,
+            'description' => 'Compre leche en el mercadona',
+            'user_id' => 1
         ]);
 
         Task::create([
             'name' => 'Estudiar PHP',
-            'completed' => true
+            'completed' => true,
+            'description' => 'Debo comprobar todos los tests',
+            'user_id' => 1
         ]);
     }
 }
@@ -104,11 +110,8 @@ if (!function_exists('grant_mysql_privileges')) {
 if (!function_exists('create_database')) {
     function create_database()
     {
-        dump('gay1');
         create_mysql_database(env('DB_DATABASE'));
-        dump('gay2');
         create_mysql_user(env('DB_USERNAME'),env('DB_PASSWORD'));
-        dump('gay3');
         grant_mysql_privileges(env('DB_USERNAME'),env('DB_DATABASE'));
     }
 }

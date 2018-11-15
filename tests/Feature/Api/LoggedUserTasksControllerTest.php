@@ -53,4 +53,92 @@ class LoggedUserTasksControllerTest extends TestCase
         $response = $this->json('GET','/api/v1/user/tasks');
         $response -> assertStatus(404);
  }
+
+    /**
+     * @test
+     */
+    public function cannot_edit_a_task_not_associate_to_user()
+    {
+        $this->login('api');
+        $oldTask = factory(Task::class)->create([
+            'name' => 'Comprar leche'
+        ]);
+
+        // 2
+
+        $response = $this->json('PUT','/api/v1/user/tasks/' . $oldTask->id, [
+            'name' => 'Comprar pan'
+        ]);
+
+        $response->assertStatus(404);
+    }
+
+    /**
+     *@test
+     */
+    public function can_edit_tasks()
+    {
+        // 1
+        $user =$this->login('api');
+        $oldTask = factory(Task::class)->create([
+            'name' => 'Comprar leche',
+            'description' => 'blablabla'
+        ]);
+        $user ->addTask($oldTask);
+
+        // 2
+
+        $response = $this->json('PUT','/api/v1/user/tasks/' . $oldTask->id, [
+            'name' => 'Comprar pan',
+            'description' => 'jojojojo'
+        ]);
+
+        // 3
+        $result = json_decode($response->getContent());
+        $response->assertSuccessful();
+
+        $newTask = $oldTask->refresh();
+        $this->assertNotNull($newTask);
+        $this->assertEquals('Comprar pan',$result->name);
+        $this->assertEquals('jojojojo',$result->description);
+        $this->assertFalse((boolean) $newTask->completed);
+    }
+
+    /**
+     * @test
+     */
+    public function cannot_delete_not_owned_tasks()
+    {
+        $user =$this->login('api');
+
+        //1
+        $task = factory(Task::class)->create([
+            'name' => 'Comprar leche',
+            'description' => 'blablabla'
+        ]);
+
+        $response = $this->json('DELETE','/api/v1/user/tasks/' . $task->id);
+
+    }
+
+    /**
+     * @test
+     */
+    public function can_delete_tasks()
+    {
+        $user =$this->login('api');
+
+        //1
+        $task = factory(Task::class)->create([
+            'name' => 'Comprar leche',
+            'description' => 'blablabla'
+        ]);
+        $user->addTask($task);
+        $response = $this->json('DELETE','/api/v1/user/tasks/' . $task->id);
+        $response->assertSuccessful();
+        $this->assertCount(0,$user->tasks);
+        $task = $task->fresh();
+
+    }
+
 }

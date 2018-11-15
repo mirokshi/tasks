@@ -39,4 +39,10 @@ Route::put('/v1/tag/{tag}', 'Api\TagController@update');         // EDIT
 
 //Logged
 Route::get('/v1/user/tasks', 'Api\LoggedUserTasksController@index');
+Route::post('/v1/user/tasks/{task}', 'Api\LoggedUserTasksController@show');
+Route::post('/v1/user/tasks', 'Api\LoggedUserTasksController@store');
+Route::delete('/v1/user/tasks/{task}', 'Api\LoggedUserTasksController@destroy');
+Route::put('/v1/user/tasks/{task}', 'Api\LoggedUserTasksController@update');
+
+
 });

@@ -17,8 +17,10 @@
                       </v-btn>
                       <v-btn
                               color="error darken-1"
-                              flat="flat"
+                              flat
                               @click="destroy"
+                              :loading="removing"
+                              :disabled="removing"
                       >
                         Confirmar
                       </v-btn>
@@ -28,8 +30,8 @@
       <v-dialog v-model="createDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
          <v-toolbar color="blue darken-3" class="white--text">
             ADD A TASK
-          <v-btn flat class="white--text"><v-icon>exit</v-icon></v-btn>
-          <v-btn flat class="white--text"><v-icon>save</v-icon></v-btn>
+          <v-btn icon flat  @click="createDialog=false" class="white--text"><v-icon>exit_to_app</v-icon></v-btn>
+          <v-btn icon flat class="white--text"><v-icon>save</v-icon></v-btn>
             </v-toolbar>
           <v-card>
               <v-card-text>
@@ -38,7 +40,7 @@
                     <v-text-field v-model="name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
                     <v-switch v-model="completed" :label="completed ? 'Completada':'Pendiente'"></v-switch>
                     <v-textarea v-model="description" label="Descripcion" hint="Descripcion"></v-textarea>
-                     <v-btn @click="createDialog=false"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
+                     <v-btn @click="createDialog=false" ><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
                     <v-btn><v-icon class="mr-1">save</v-icon></v-btn>
                 </v-form>
             </v-card-text>
@@ -253,6 +255,9 @@ export default {
         rowsPerPage: 25
       },
       loading: false,
+      taskBeginRemoved: null,
+      removing: false,
+      editing: false,
       dataTasks: this.tasks,
       headers: [
         { text: 'ID', value: 'id' },
@@ -283,7 +288,9 @@ export default {
       window.axios.get('/api/v1/user/tasks').then(response => {
         // SHOW SNACKBAR MENSAJE DE OK
         this.dataTasks = response.data
+        this.loading = false
       }).catch(eror => {
+        this.loading = false
         // SOW SNACKNBAR ERRO TODO
         console.log(error)
       })
@@ -294,6 +301,26 @@ export default {
     },
     showDestroy (task) {
       this.deleteDialog = true
+      this.taskBeginRemoved = task
+    },
+    removeTask (task) {
+      this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
+    },
+    destroy () {
+      this.removing = true
+      window.axios.delete('/api/v1/user/tasks/' + this.taskBeginRemoved.id).then(() => {
+        // this.refresh() //Problema -> rendimiento
+        // this.dataTasks.splice(this.dataTasks.indexOf(this.taskBeginRemoved), 1)
+        this.removeTask(this.taskBeginRemoved)
+        this.deleteDialog = false
+        this.removing =false
+        // TODO showSnackBar
+        this.removing = false
+      }).catch(error => {
+        // TODO showSnackBar
+        console.log(error)
+        this.removing = false
+      })
     },
     showUpdate () {
       this.editDialog = true
@@ -303,9 +330,6 @@ export default {
     },
     showTasks () {
       this.showDialog = true
-    },
-    destroy (task) {
-      this.deleteDialog = false
     },
     update () {
       this.editDialog = false
