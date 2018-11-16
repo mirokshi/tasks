@@ -252,7 +252,7 @@ if (!function_exists('sample_users')){
 
        }
 
-       
+
         try {
             $bartsimpson->assignRole('Tasks');
         }catch (Exception $e){

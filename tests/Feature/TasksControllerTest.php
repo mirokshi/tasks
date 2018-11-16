@@ -22,8 +22,9 @@ class TasksControllerTest extends TestCase
 
         //1 Prepare
        create_example_tasks();
-        $this->login();
-
+        $user = $this->login();
+        initialize_roles();
+        $user ->assignRole('Tasks');
 
         //2 execute
         $response = $this -> get('/tasks');
@@ -47,7 +48,9 @@ class TasksControllerTest extends TestCase
      */
     public function can_store_task()
     {
-        $this->login();
+        $user = $this->login();
+        initialize_roles();
+        $user ->assignRole('Tasks');
     //1
     $response = $this -> post('/tasks',[
         'name'=> 'Comprar leche'
@@ -65,7 +68,9 @@ class TasksControllerTest extends TestCase
      */
     public function user_whitout_permissions_can_not_delete_tasks()
     {
-        $this->login();
+        $user = $this->login();
+        initialize_roles();
+        $user ->assignRole('Tasks');
         $response = $this->delete('/tasks/1');
         $response->assertStatus(404);
 
@@ -77,7 +82,7 @@ class TasksControllerTest extends TestCase
     public function can_delete_task()
     {
 
-        $this->withoutExceptionHandling();
+
 
         $user = $this->login();
         initialize_roles();
@@ -99,8 +104,11 @@ class TasksControllerTest extends TestCase
      */
     public function can_edit_a_task()
     {
+
     //1
-        $this->login();
+        $user = $this->login();
+        initialize_roles();
+        $user ->assignRole('Tasks');
 
         $task = Task::create([
            'name'=>'Comprar leche',
@@ -121,6 +129,8 @@ class TasksControllerTest extends TestCase
         $task=$task->fresh();
         $this->assertEquals($task->name,'Comprar pan');
         $this->assertEquals($task->completed,true);
+        $this->assertTrue($user->hasRole('Tasks'));
+
     }
 
 
@@ -129,8 +139,11 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_edit_an_unexisting_tasks()
     {
-        $this->login();
+        $this->withoutExceptionHandling();
 
+        $user = $this->login();
+        initialize_roles();
+        $user ->assignRole('Tasks');
         //TDD -> Test Driven Development
         //1
         //2 execute HTTP request , HTTP response
@@ -144,7 +157,10 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_show_edit_form_unexisting_task()
     {
-        $this->login();
+        $this->withoutExceptionHandling();
+        $user = $this->login();
+        initialize_roles();
+        $user ->assignRole('Tasks');
         $response = $this->get('/task_edit/1');
         $response->assertStatus(404);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DestroyTask;
+use App\Http\Requests\UpdateTask;
 use App\Task;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,7 @@ class TasksController extends Controller
         return redirect()->back();
     }
 
-    public function update(Request $request) //modifica
+    public function update(UpdateTask $request) //modifica
     {
 
         $task= Task::findOrFail($request->id);
@@ -43,7 +44,7 @@ class TasksController extends Controller
         return redirect('/tasks');
 
     }
-    public function edit(Request $request)
+    public function edit(UpdateTask $request)
     {
         $task = Task::findOrFail($request->id);
         return view('task_edit',[ 'task' => $task]);
