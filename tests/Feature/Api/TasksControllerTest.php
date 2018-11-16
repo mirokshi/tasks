@@ -8,6 +8,8 @@ use App\Task;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
@@ -25,8 +27,12 @@ class TasksControllerTest extends TestCase
      */
     public function can_show_a_task ()
     {
-        $user = factory(User::class)->create();
-        $this->actingAs($user, 'api');
+//        $user = factory(User::class)->create();
+//        $this->actingAs($user, 'api');
+
+        $user = $this->login('api');
+        initialize_roles();
+        $user->assignRole('TasksManager');
 
         // routes/api.php
         //http://tasks.test/api/v1/tasks
@@ -44,6 +50,7 @@ class TasksControllerTest extends TestCase
         $response->assertSuccessful();
         $this->assertEquals($task->name,$result->name);
         $this->assertEquals($task->completed,(boolean) $result->completed);
+        $this->assertTrue(Auth::user()->hasRole('TasksManager'));
 
     }
 
@@ -52,7 +59,17 @@ class TasksControllerTest extends TestCase
      */
     public function can_delete_task()
     {
-        $this->login('api');
+        $this->withoutExceptionHandling();
+//        $tasksApi = Role::create([
+//            'name' => 'TasksApi',
+//        ]);
+//        Permission::create([
+//            'name' => 'user.tasks.destroy'
+//        ]);
+//        $tasksApi->givePermissionTo('user.tasks.destroy');
+        initialize_roles();
+        $user = $this->login('api');
+        $user->assignRole('Tasks');
         //1
         //Tasks:create()
         $task = factory(Task::class)->create();
@@ -64,10 +81,10 @@ class TasksControllerTest extends TestCase
         $result = json_decode($response->getContent());
         $response->assertSuccessful();
         $this->assertEquals('',$result);
-
-    $this->assertDatabaseMissing('tasks', array($task) );
-
+        $this->assertDatabaseMissing('tasks', array($task) );
         $this->assertNull(Task::find($task->id));
+        $this->assertTrue($user->hasRole('Tasks'));
+
 
     }
 
@@ -110,8 +127,6 @@ class TasksControllerTest extends TestCase
         $response = $this->json('POST','/api/v1/tasks/',[
             'name' => 'Comprar pan'
         ]);
-
-
 
 
         $result = json_decode($response->getContent());

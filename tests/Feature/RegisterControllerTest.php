@@ -18,8 +18,8 @@ class RegisterControllerTest extends TestCase
      */
     public function can_resgister_a_user()
     {
-        $this->withoutExceptionHandling();
-        //1
+         //1
+        initialize_roles();
         $this->assertNull(Auth::user());
 
         //2
@@ -43,6 +43,7 @@ class RegisterControllerTest extends TestCase
 //        $this->assertEquals(bcrypt($user['password']),Auth::user()->password);
         $this->assertTrue(Hash::check($user['password'],Auth::user()->password));
 
+        $this->assertTrue(Auth::user()->hasRole('Tasks'));
 
     }
 

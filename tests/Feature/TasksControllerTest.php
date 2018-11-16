@@ -5,13 +5,15 @@ namespace Tests\Feature;
 
 use App\Task;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TasksControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase,CanLogin;
 
     /** @test */
     public function can_show_tasks()
@@ -19,22 +21,9 @@ class TasksControllerTest extends TestCase
 //        $this->withoutExceptionHandling();
 
         //1 Prepare
-       Task::create([
-           'name' => 'comprar pan',
-           'completed' => false
-       ]);
-
-        Task::create([
-            'name' => 'comprar leche',
-            'completed' => true
-        ]);
-
-        Task::create([
-            'name' => 'estudiar PHP',
-            'completed' => true
-        ]);
-
+       create_example_tasks();
         $this->login();
+
 
         //2 execute
         $response = $this -> get('/tasks');
@@ -44,9 +33,9 @@ class TasksControllerTest extends TestCase
         $response->assertSuccessful();
         $response->assertSee('tasks');
 
-        $response->assertSee('comprar pan');
-        $response->assertSee('comprar leche');
-        $response->assertSee('estudiar PHP');
+        $response->assertSee('Comprar pan');
+        $response->assertSee('Comprar leche');
+        $response->assertSee('Estudiar PHP');
 
         //comprovar que se vean las tareas que hay en la BD
         //Base de datos
@@ -63,8 +52,6 @@ class TasksControllerTest extends TestCase
     $response = $this -> post('/tasks',[
         'name'=> 'Comprar leche'
     ]);
-
-
 
     //2
     $response->assertStatus(302);
@@ -84,23 +71,27 @@ class TasksControllerTest extends TestCase
 
     }
 
-
-
     /**
      * @test
      */
-    public function can_delete_taks()
+    public function can_delete_task()
     {
-        $this->login();
+
+        $this->withoutExceptionHandling();
+
+        $user = $this->login();
+        initialize_roles();
+        $user ->assignRole('Tasks');
+
+
 
         $task = Task::create([
             'name' => 'Comprar leche'
         ]);
-
-        $response = $this->delete('/tasks/'.$task->id);
-
+        $response = $this->delete('/tasks/' . $task->id);
         $response->assertStatus(302);
-        $this->assertDatabaseMissing('tasks',['name'=>'Comprar leche']);
+        $this->assertDatabaseMissing('tasks',['name' => 'Comprar leche']);
+        $this->assertTrue($user->hasRole('Tasks'));
     }
 
     /**
@@ -158,12 +149,7 @@ class TasksControllerTest extends TestCase
         $response->assertStatus(404);
     }
 
-    public function login(): void
-    {
-        $user = factory(User::class)->create();
-        $this->actingAs($user); //web
-        //        $this->actingAs($user, 'api'); //api
-    }
+
 
 
 }

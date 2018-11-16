@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DestroyTask;
 use App\Http\Requests\UpdateTask;
 use App\Http\Requests\StoreTask;
 use App\Task;
@@ -18,13 +19,12 @@ class TasksController extends Controller
 
     }
 
-    public function show(Request $request, Task $task) //Route Model Binding
+    public function show(Request $request, StoreTask $task) //Route Model Binding
     {
         return $task->map();
-//        return Task::findOrFail($request -> task);
     }
 
-    public function destroy(Request $request, Task $task)
+    public function destroy(DestroyTask $request, Task $task)
     {
         $task->delete();
     }
@@ -33,7 +33,6 @@ class TasksController extends Controller
 
     public function store(StoreTask $request)
     {
-
 
         $task = new Task();
         $task->name = $request->name;
