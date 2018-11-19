@@ -27,12 +27,10 @@ class TasksControllerTest extends TestCase
      */
     public function can_show_a_task ()
     {
-//        $user = factory(User::class)->create();
-//        $this->actingAs($user, 'api');
-
-        $user = $this->login('api');
+        $this->withoutExceptionHandling();
         initialize_roles();
-        $user->assignRole('TasksManager');
+        $user = $this->login('api');
+        $user->assignRole('Tasks');
 
         // routes/api.php
         //http://tasks.test/api/v1/tasks
@@ -50,7 +48,7 @@ class TasksControllerTest extends TestCase
         $response->assertSuccessful();
         $this->assertEquals($task->name,$result->name);
         $this->assertEquals($task->completed,(boolean) $result->completed);
-        $this->assertTrue(Auth::user()->hasRole('TasksManager'));
+        $this->assertTrue($user->hasRole('Tasks'));
 
     }
 

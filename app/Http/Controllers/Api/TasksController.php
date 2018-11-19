@@ -19,7 +19,7 @@ class TasksController extends Controller
 
     }
 
-    public function show(Request $request, StoreTask $task) //Route Model Binding
+    public function show(StoreTask $request, Task $task) //Route Model Binding
     {
         return $task->map();
     }

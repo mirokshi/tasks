@@ -5,10 +5,8 @@ namespace Tests\Feature;
 
 use App\Task;
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TasksControllerTest extends TestCase
@@ -81,9 +79,6 @@ class TasksControllerTest extends TestCase
      */
     public function can_delete_task()
     {
-
-
-
         $user = $this->login();
         initialize_roles();
         $user ->assignRole('Tasks');
@@ -139,7 +134,6 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_edit_an_unexisting_tasks()
     {
-        $this->withoutExceptionHandling();
 
         $user = $this->login();
         initialize_roles();
@@ -147,8 +141,9 @@ class TasksControllerTest extends TestCase
         //TDD -> Test Driven Development
         //1
         //2 execute HTTP request , HTTP response
-        $response=$this->put('/tasks/1',[]);
+        $response=$this->put('user/tasks/1',[]);
         $response->assertStatus(404);
+        $this->assertTrue($user->hasRole('Tasks'));
 
     }
 
@@ -157,12 +152,13 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_show_edit_form_unexisting_task()
     {
-        $this->withoutExceptionHandling();
+
         $user = $this->login();
         initialize_roles();
         $user ->assignRole('Tasks');
-        $response = $this->get('/task_edit/1');
+        $response = $this->get('user/task_edit/1');
         $response->assertStatus(404);
+        $this->assertTrue($user->hasRole('Tasks'));
     }
 
 
