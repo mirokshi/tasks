@@ -12,6 +12,7 @@ import EditableText from './components/EditableText.vue'
 import LoginForm from './components/LoginForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
 import UserList from './components/UserList.vue'
+import UserSelect from './components/UserSelect.vue'
 
 // instalacion vuetify
 window.Vue = Vue
@@ -27,5 +28,6 @@ window.Vue.component('editable-text', EditableText)
 window.Vue.component('login-form', LoginForm)
 window.Vue.component('register-form', RegisterForm)
 window.Vue.component('user-list', UserList)
+window.Vue.component('user-select', UserSelect)
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)

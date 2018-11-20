@@ -88,11 +88,12 @@
                 ADMINISTRADOR
 
                 Lista de todos los usuarios
-                <user-list></user-list>
+                {{--<user-list></user-list>--}}
+                <user-select></user-select>
 
             </v-card>
         </v-navigation-drawer>
-        <v-toolbar color="indigo" fixed dark app>
+        <v-toolbar color="grey darken-4" flat dark app>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Application</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -101,13 +102,13 @@
             </v-avatar>
             <v-form action="/logout" method="POST">
             @csrf
-                <v-btn color="primary" type="submit">LOGOUT</v-btn>
+                <v-btn color="transparent" type="submit">LOGOUT</v-btn>
             </v-form>
         </v-toolbar>
         <v-content>
             @yield('content')
         </v-content>
-        <v-footer color="indigo" app>
+        <v-footer color="grey darken-4" app>
             <span class="white--text pl-3">&copy; 2018 Rojas Diaz Mirokshi</span>
         </v-footer>
     </v-app>
