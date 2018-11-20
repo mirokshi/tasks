@@ -265,7 +265,7 @@ if (!function_exists('sample_users')){
 
         try {
             $homersimpson = factory(User::class)->create([
-                'name' => 'Bart Simpson',
+                'name' => 'Homer Simpson',
                 'email' => 'homer@hotmail.com'
             ]);
         }catch (Exception $e){
@@ -304,3 +304,11 @@ if (!function_exists('profe')){
 }
 //TODO:  Crear multiples usuarios con diferentes roles
 // TODO: Como gestionar el superAdmin
+
+if (!function_exists('map_collection')){
+  function  map_collection($collection){
+      return $collection -> map(function ($item){
+          return $item->map();
+      });
+  }
+}

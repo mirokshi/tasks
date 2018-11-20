@@ -11,10 +11,13 @@ import Tasques from './components/Tasques.vue'
 import EditableText from './components/EditableText.vue'
 import LoginForm from './components/LoginForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
+import UserList from './components/UserList.vue'
 
 // instalacion vuetify
 window.Vue = Vue
 window.Vue.use(Vuetify)
+
+// window.Vue.user($snackbar)
 
 // componentes
 window.Vue.component('example_component', ExampleComponent)
@@ -23,6 +26,6 @@ window.Vue.component('tasques', Tasques)
 window.Vue.component('editable-text', EditableText)
 window.Vue.component('login-form', LoginForm)
 window.Vue.component('register-form', RegisterForm)
-
+window.Vue.component('user-list', UserList)
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)

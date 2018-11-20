@@ -84,8 +84,8 @@
             </v-card-text>
           </v-card>
       </v-dialog>
-      <v-snackbar :timeout="3000" color="warning" v-model="snackbar" >
-          Esto es una SNACKBAR
+      <v-snackbar :timeout="snackbarTimeout" :color="snackbarColor" v-model="snackbar" >
+          {{ snackbarMessage }}
           <v-btn dark flat @click="snackbar=false" >X</v-btn>
       </v-snackbar>
       <v-toolbar color="grey darken-4">
@@ -238,8 +238,11 @@ export default {
       createDialog: false,
       showDialog: false,
       snackbar: true,
+      snackbarMessage : '',
+      snackbarTimeout: 3000,
+      snackbarColor: 'success',
       user: '',
-      users: [
+      usersold: [
         'Jose',
         'Manuel',
         'Emilio'
@@ -286,13 +289,12 @@ export default {
       // setTimeout(() => { this.loading = false }, 5000)
       // ¡!¡! CAMBIA SEGUN EL CASO
       window.axios.get('/api/v1/user/tasks').then(response => {
-        // SHOW SNACKBAR MENSAJE DE OK
+        this.showMessage('Se ha actualizado correctamente')
         this.dataTasks = response.data
         this.loading = false
-      }).catch(eror => {
+      }).catch(error => {
         this.loading = false
-        // SOW SNACKNBAR ERRO TODO
-        console.log(error)
+        this.showError(error)
       })
       // window.axios.get('/api/v1/user/tasks').then().catch()
     },
@@ -314,14 +316,25 @@ export default {
         this.removeTask(this.taskBeginRemoved)
         this.deleteDialog = false
         this.removing =false
-        // TODO showSnackBar
+        this.showMessage('Se ha borrado correctamente')
         this.removing = false
       }).catch(error => {
-        // TODO showSnackBar
-        console.log(error)
+        this.showError(error)
         this.removing = false
       })
     },
+    //SNACKNBAR
+    showMessage(message){
+      this.snackbarMessage = message
+      this.snackbarColor = 'success'
+      this.snackbar =  true
+    },
+    showError(error){
+      this.snackbarMessage = error.message
+      this.snackbarColor = 'error'
+      this.snackbar = true
+    },
+    //SNACKBAR END
     showUpdate () {
       this.editDialog = true
     },
