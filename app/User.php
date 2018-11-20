@@ -36,6 +36,7 @@ class User extends Authenticatable
      */
     public function canImpersonate()
     {
+        dd($this->isSuperAdmin());
         return $this->isSuperAdmin();
     }
 
