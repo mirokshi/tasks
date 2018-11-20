@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DestroyTask;
+use App\Http\Requests\IndexTask;
+use App\Http\Requests\ShowTask;
 use App\Http\Requests\UpdateTask;
 use App\Http\Requests\StoreTask;
 use App\Task;
@@ -13,13 +15,13 @@ use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
-    public function index(Request $request)
+    public function index(IndexTask $request)
     {
         return Task::orderBy('created_at')->get();
 
     }
 
-    public function show(StoreTask $request, Task $task) //Route Model Binding
+    public function show(ShowTask $request, Task $task) //Route Model Binding
     {
         return $task->map();
     }

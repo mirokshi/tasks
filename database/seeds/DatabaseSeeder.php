@@ -12,9 +12,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        initialize_roles();
         create_primary_user();
         create_example_tasks();
-        initialize_roles();
 
 
         // Crear usuarios de prueba

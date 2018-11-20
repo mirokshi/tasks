@@ -66,6 +66,8 @@ Route::put('/tasks/{id}','TasksController@update'); //modifica
     //LoggedUserTasksController
     Route::get('/user/tasks','LoggedUserTasksController@index');
 
+    Route::impersonate();
+
 });
 
 //WELCOME

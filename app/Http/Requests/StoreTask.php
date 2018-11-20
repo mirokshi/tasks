@@ -15,7 +15,7 @@ class StoreTask extends FormRequest
     public function authorize()
     {
 //        return true;
-        return Auth::user()->can('user.tasks.store');
+        return Auth::user()->can('tasks.store');
     }
 
     /**

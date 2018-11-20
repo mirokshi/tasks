@@ -15,11 +15,15 @@ if (!function_exists('create_primary_user')){
         $user = User::where('email','mirokshirojas@iesebre.com')->first();
         if (!$user) {
 
-         User::firstOrCreate ([
+         $user =User::firstOrCreate ([
             'name' => 'Mirokshi Rojas',
             'email' => 'mirokshirojas@iesebre.com',
             'password' => bcrypt(env('PRIMARY_USER_PASSWORD', '123456'))
         ]);
+         $user->assignRole('TasksManager');
+         $user->assignRole('Tasks');
+         $user->admin=true;
+         $user->save();
     }
     }
 }
@@ -159,10 +163,10 @@ if (!function_exists('initialize_roles')){
                'name' => 'tasks.update'
            ]);
            Permission::create([
-               'name' => 'tasks.complete'
+               'name' => 'tasks.completed'
            ]);
            Permission::create([
-               'name' => 'tasks.uncomplete'
+               'name' => 'tasks.uncompleted'
            ]);
 
            Permission::create([
@@ -178,8 +182,8 @@ if (!function_exists('initialize_roles')){
             $taskManager->givePermissionTo('tasks.show');
             $taskManager->givePermissionTo('tasks.store');
             $taskManager->givePermissionTo('tasks.update');
-            $taskManager->givePermissionTo('tasks.complete');
-            $taskManager->givePermissionTo('tasks.uncomplete');
+            $taskManager->givePermissionTo('tasks.completed');
+            $taskManager->givePermissionTo('tasks.uncompleted');
             $taskManager->givePermissionTo('tasks.destroy');
         }catch (Exception $e){
 
@@ -201,10 +205,10 @@ if (!function_exists('initialize_roles')){
                 'name' => 'user.tasks.update'
             ]);
             Permission::create([
-                'name' => 'user.tasks.complete'
+                'name' => 'user.tasks.completed'
             ]);
             Permission::create([
-                'name' => 'user.tasks.uncomplete'
+                'name' => 'user.tasks.uncompleted'
             ]);
             Permission::create([
                 'name' => 'user.tasks.destroy'
@@ -218,8 +222,8 @@ if (!function_exists('initialize_roles')){
             $tasks->givePermissionTo('user.tasks.show');
             $tasks->givePermissionTo('user.tasks.store');
             $tasks->givePermissionTo('user.tasks.update');
-            $tasks->givePermissionTo('user.tasks.complete');
-            $tasks->givePermissionTo('user.tasks.uncomplete');
+            $tasks->givePermissionTo('user.tasks.completed');
+            $tasks->givePermissionTo('user.tasks.uncompleted');
             $tasks->givePermissionTo('user.tasks.destroy');
         }catch (Exception $e){
 
@@ -292,6 +296,7 @@ if (!function_exists('profe')){
         }
         try {
             $profe->assignRole('TasksManager');
+            $profe->assignRole('Tasks');
         }catch (Exception $e) {
 
         }
