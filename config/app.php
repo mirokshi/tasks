@@ -121,7 +121,7 @@ return [
     */
 
     'providers' => [
-        Lab404\Impersonate\ImpersonateServiceProvider::class,
+
 
 
         /*
@@ -163,6 +163,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Lab404\Impersonate\ImpersonateServiceProvider::class,
     ],
 
     /*
