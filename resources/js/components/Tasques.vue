@@ -27,11 +27,22 @@
         </v-card-actions>
         </v-card>
         </v-dialog>
-      <v-dialog v-model="createDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-         <v-toolbar color="blue darken-3" class="white--text">
-            ADD A TASK
-          <v-btn icon flat  @click="createDialog=false" class="white--text"><v-icon>exit_to_app</v-icon></v-btn>
-          <v-btn icon flat class="white--text"><v-icon>save</v-icon></v-btn>
+      <v-dialog v-model="createDialog" fullscreen hide-overlay transition="dialog-bottom-transition"
+                @keydown.esc="createDialog=false">
+          <v-toolbar color="grey darken-3" class="white--text">
+              <v-btn flat icon class="white--text" @click="createDialog=false">
+              <v-icon class="mr-1">close</v-icon>
+              </v-btn>
+            <v-toolbar-title class="white--text">Create Task</v-toolbar-title>
+               <v-spacer></v-spacer>
+            <v-btn flat  class="white--text" @click="createDialog=false">
+                <v-icon class="mr-1">exit_to_app</v-icon>
+                EXIT
+            </v-btn>
+          <v-btn flat class="white--text">
+              <v-icon class="mr-1">save</v-icon>
+              SAVE
+          </v-btn>
             </v-toolbar>
           <v-card>
               <v-card-text>
@@ -47,10 +58,22 @@
               </v-card-text>
           </v-card>
       </v-dialog>
-      <v-dialog v-model="editDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-        <v-toolbar color="blue darken-3" class="white--text">EDIT A TASK
-          <v-btn @click="editDialog=false" flat class="white--text"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
-          <v-btn flat class="white--text"><v-icon class="mr-1">save</v-icon></v-btn>
+      <v-dialog v-model="editDialog" fullscreen hide-overlay transition="dialog-bottom-transition"
+      @keydown.esc="editDialog=false">
+        <v-toolbar color="grey darken-3" class="white--text">
+          <v-btn flat icon class="white--text" @click="editDialog=false">
+              <v-icon class="mr-1">close</v-icon>
+          </v-btn>
+            <v-toolbar-title class="white--text">Editar Tasks</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn flat  class="white--text" @click="editDialog=false">
+                <v-icon class="mr-1">exit_to_app</v-icon>
+                EXIT
+            </v-btn>
+          <v-btn flat class="white--text">
+              <v-icon class="mr-1">save</v-icon>
+              SAVE
+          </v-btn>
 </v-toolbar>
           <v-card>
             <v-card-text>
@@ -66,10 +89,22 @@
         </v-card>
 
       </v-dialog>
-      <v-dialog v-model="showDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-         <v-toolbar color="blue darken-3" class="white--text">TASKS
-              <v-btn @click="showDialog=false" flat class="white--text"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
-          <v-btn flat class="white--text"><v-icon class="mr-1">save</v-icon></v-btn>
+      <v-dialog v-model="showDialog" fullscreen hide-overlay transition="dialog-bottom-transition"
+                @keydown.esc="showDialog=false">
+         <v-toolbar  color="grey darken-3" class="white--text">
+             <v-btn flat icon class="white--text" @click="showDialog=false">
+              <v-icon class="mr-1">close</v-icon>
+          </v-btn>
+             <v-toolbar-title>Tasks</v-toolbar-title>
+             <v-spacer></v-spacer>
+              <v-btn flat class="white--text" @click="showDialog=false">
+                  <v-icon class="mr-1">exit_to_app</v-icon>
+                  CLOSE
+              </v-btn>
+          <v-btn flat class="white--text">
+              <v-icon class="mr-1">save</v-icon>
+                SAVE
+          </v-btn>
          </v-toolbar>
           <v-card>
               <v-card-text>
@@ -126,7 +161,8 @@
                               label="User"
                               :items="dataUsers"
                               v-model="users"
-                              cleanable
+                              item-text="name"
+                              clearable
                               ></v-select>
                   </v-flex>
                   <v-flex xs5>
@@ -353,7 +389,6 @@ export default {
     show () {
       this.showDialog = false
     }
-
   }
 }
 </script>

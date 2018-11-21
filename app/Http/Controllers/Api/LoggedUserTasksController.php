@@ -11,7 +11,6 @@ class LoggedUserTasksController extends Controller
 {
     public function index()
     {
-//        return Task::where('user_id', Auth::user()->id);
         return Auth::user()->tasks;
     }
 

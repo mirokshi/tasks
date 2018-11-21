@@ -79,9 +79,9 @@ class TasksControllerTest extends TestCase
      */
     public function can_delete_task()
     {
-        $user = $this->login();
         initialize_roles();
-        $user ->assignRole('Tasks');
+        $user = $this->login();
+        $user ->assignRole('TasksManager');
 
 
 
@@ -91,7 +91,7 @@ class TasksControllerTest extends TestCase
         $response = $this->delete('/tasks/' . $task->id);
         $response->assertStatus(302);
         $this->assertDatabaseMissing('tasks',['name' => 'Comprar leche']);
-        $this->assertTrue($user->hasRole('Tasks'));
+        $this->assertTrue($user->hasRole('TasksManager'));
     }
 
     /**
@@ -99,11 +99,10 @@ class TasksControllerTest extends TestCase
      */
     public function can_edit_a_task()
     {
-
     //1
-        $user = $this->login();
         initialize_roles();
-        $user ->assignRole('Tasks');
+        $user = $this->login();
+        $user ->assignRole('TasksManager');
 
         $task = Task::create([
            'name'=>'Comprar leche',
@@ -114,18 +113,14 @@ class TasksControllerTest extends TestCase
             'name'=>'Comprar pan',
             'completed'=>true
         ]);
+
         $response->assertStatus(302);
 
         //2options
-
-//        $this->assertDatabaseHas('tasks',$newTask);
-//        $this->assertDatabaseMissing('tasks', $task);
-
         $task=$task->fresh();
         $this->assertEquals($task->name,'Comprar pan');
         $this->assertEquals($task->completed,true);
-        $this->assertTrue($user->hasRole('Tasks'));
-
+        $this->assertTrue($user->hasRole('TasksManager'));
     }
 
 
@@ -134,9 +129,8 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_edit_an_unexisting_tasks()
     {
-
-        $user = $this->login();
         initialize_roles();
+        $user = $this->login();
         $user ->assignRole('Tasks');
         //TDD -> Test Driven Development
         //1

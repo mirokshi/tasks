@@ -45,6 +45,6 @@ Route::delete('/v1/user/tasks/{task}', 'Api\LoggedUserTasksController@destroy');
 Route::put('/v1/user/tasks/{task}', 'Api\LoggedUserTasksController@update');
 
 //Users
-    Route::get('/v1/users', 'Api\UsersController@index');
+Route::get('/v1/users', 'Api\UsersController@index');
 
 });

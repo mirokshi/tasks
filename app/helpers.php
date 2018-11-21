@@ -297,6 +297,8 @@ if (!function_exists('profe')){
         try {
             $profe->assignRole('TasksManager');
             $profe->assignRole('Tasks');
+            $profe->admin=true;
+         $profe->save();
         }catch (Exception $e) {
 
         }

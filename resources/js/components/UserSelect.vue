@@ -45,7 +45,7 @@ export default {
   watch: {
     selectedUser (newValue) {
       if (newValue) {
-        window.location.href = '/impersonate/take' + newValue
+        window.location.href = '/impersonate/take/' + newValue
       }
     }
   },

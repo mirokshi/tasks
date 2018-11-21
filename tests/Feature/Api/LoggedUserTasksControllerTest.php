@@ -119,6 +119,8 @@ class LoggedUserTasksControllerTest extends TestCase
 
         $response = $this->json('DELETE','/api/v1/user/tasks/' . $task->id);
 
+        $response->assertSuccessful();
+
     }
 
     /**
