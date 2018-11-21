@@ -121,6 +121,8 @@ return [
     */
 
     'providers' => [
+        Lab404\Impersonate\ImpersonateServiceProvider::class,
+
 
         /*
          * Laravel Framework Service Providers...
