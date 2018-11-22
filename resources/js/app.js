@@ -29,5 +29,6 @@ window.Vue.component('login-form', LoginForm)
 window.Vue.component('register-form', RegisterForm)
 window.Vue.component('user-list', UserList)
 window.Vue.component('user-select', UserSelect)
+
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)

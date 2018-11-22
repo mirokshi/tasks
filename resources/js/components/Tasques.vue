@@ -51,6 +51,7 @@
                     <v-text-field v-model="name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
                     <v-switch v-model="completed" :label="completed ? 'Completada':'Pendiente'"></v-switch>
                     <v-textarea v-model="description" label="Descripcion" hint="Descripcion"></v-textarea>
+                    <v-autocomplete :items="dataUsers" label="Usuario" item-text="name"></v-autocomplete>
                      <v-btn @click="createDialog=false" ><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
                     <v-btn><v-icon class="mr-1">save</v-icon></v-btn>
                 </v-form>
@@ -238,8 +239,8 @@
                       <v-card-title v-text="task.name"></v-card-title>
                       <v-list dense>
                           <v-list-tile>
-                              <v-list-content>Completed</v-list-content>
-                              <v-list-content class="align-end">task.completed</v-list-content>
+                              <v-list-tile-content>Completed</v-list-tile-content>
+                              <v-list-tile-content class="align-end">task.completed</v-list-tile-content>
                           </v-list-tile>
                       </v-list>
                   </v-card>
@@ -274,7 +275,7 @@ export default {
       createDialog: false,
       showDialog: false,
       snackbar: true,
-      snackbarMessage : '',
+      snackbarMessage: '',
       snackbarTimeout: 3000,
       snackbarColor: 'success',
       user: '',
@@ -351,7 +352,7 @@ export default {
         // this.dataTasks.splice(this.dataTasks.indexOf(this.taskBeginRemoved), 1)
         this.removeTask(this.taskBeginRemoved)
         this.deleteDialog = false
-        this.removing =false
+        this.removing = false
         this.showMessage('Se ha borrado correctamente')
         this.removing = false
       }).catch(error => {
@@ -359,18 +360,18 @@ export default {
         this.removing = false
       })
     },
-    //SNACKNBAR
-    showMessage(message){
+    // SNACKNBAR
+    showMessage (message) {
       this.snackbarMessage = message
       this.snackbarColor = 'success'
-      this.snackbar =  true
+      this.snackbar = true
     },
-    showError(error){
+    showError (error) {
       this.snackbarMessage = error.message
       this.snackbarColor = 'error'
       this.snackbar = true
     },
-    //SNACKBAR END
+    // SNACKBAR END
     showUpdate () {
       this.editDialog = true
     },

@@ -87,7 +87,7 @@
             <v-card>
                 ADMINISTRADOR
                 @canImpersonate
-                <user-select></user-select>
+                <user-select @selected="impersonate" url="/api/v1/regular_users/"></user-select>
                 @endCanImpersonate
 
                 @impersonating

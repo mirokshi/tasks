@@ -24,6 +24,13 @@ export default {
       ]
     }
   },
+  methods: {
+    impersonate($user) {
+      if ($user) {
+        window.location.href = '/impersonate/take/' + $user
+      }
+    }
+  },
 
   props:
   {

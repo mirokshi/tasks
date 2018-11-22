@@ -41,10 +41,10 @@ class User extends Authenticatable
         return $this->isSuperAdmin();
     }
 
-//    public function canBeImpersonated()
-//    {
-//        return !$this->isSuperAdmin();
-//    }
+    public function canBeImpersonated()
+    {
+        return !$this->isSuperAdmin();
+    }
 
     public function impersonatedBy()
     {
@@ -103,5 +103,15 @@ class User extends Authenticatable
     public function getAvatarAttribute()
     {
         return 'https://www.gravatar.com/avatar/'.md5($this->email);
+    }
+
+    public function scopeRegular($query)
+    {
+        return $query ->$this->where('admin', false);
+    }
+
+    public function scopeAdmins($query)
+    {
+        return $query ->$this->where('admin', true);
     }
 }
