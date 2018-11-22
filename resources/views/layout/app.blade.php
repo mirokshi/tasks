@@ -86,14 +86,19 @@
         >
             <v-card>
                 ADMINISTRADOR
-
-                Lista de todos los usuarios
-                {{--<user-list></user-list>--}}
+                @canImpersonate
                 <user-select></user-select>
+                @endCanImpersonate
 
+                @impersonating
+
+                El usuario  {{ Auth::user()->name }} esta suplantando a {{ Auth::user()->impersonatedBy()->name }}
+                <a href="/impersonate/leave">Abandonar la suplantacion</a>
+
+                @endImpersonating
             </v-card>
         </v-navigation-drawer>
-        <v-toolbar color="grey darken-4" flat dark app>
+        <v-toolbar color="grey darken-4" flat dark app >
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Application</v-toolbar-title>
             <v-spacer></v-spacer>
