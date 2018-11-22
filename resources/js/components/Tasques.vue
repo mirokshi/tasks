@@ -192,15 +192,19 @@
               <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
                 <template slot="items" slot-scope="{item: task}">
                     <tr>
-                        <td v-text="task.id"></td>
+                        <td>{{task.id}}</td>
                         <td  v-text="task.name"></td>
-                        <td  v-text="task.dataUsers_id"></td>
-                        <td v-text="task.completed"></td>
                         <td>
-                            <span :title="task.created_at_formatted">{{ task.created_at_human }}</span>
+                             <v-avatar :title="task.user_name">
+                                <img :src="task.user_gravatar" alt="avatar">
+                            </v-avatar>
+                        </td>
+                        <td v-text="task.completed ? 'Completada' : 'Pendent'"></td>
+                        <td>
+                             <span :title="task.created_at_formatted">{{ task.created_at_human}}</span>
                         </td>
                         <td>
-                            <span :title="task.updated_at_formatted">{{ task.updated_at_human }}</span>
+                            <span :title="task.updated_at_formatted">{{task.updated_at_human}}</span>
                         </td>
                         <td>
 
@@ -307,9 +311,9 @@ export default {
         { text: 'ID', value: 'id' },
         { text: 'NAME', value: 'name' },
         { text: 'USER ID', value: 'user_id' },
-        { text: 'COMPLETED', value: 'comleted' },
+        { text: 'COMPLETED', value: 'completed' },
         { text: 'CREACION', value: 'created_at_timestamp' },
-        { text: 'ACTUALIZACION', value: 'updated_at_timesatamp' },
+        { text: 'ACTUALIZACION', value: 'updated_at_timestamp' },
         { text: 'ACCION', sortable: false }
       ]
     }
@@ -356,7 +360,7 @@ export default {
         // this.dataTasks.splice(this.dataTasks.indexOf(this.taskBeginRemoved), 1)
         this.removeTask(this.taskBeginRemoved)
         this.deleteDialog = false
-        this.removing = false
+        this.taskBeginRemoved = null
         this.showMessage('Se ha borrado correctamente')
         this.removing = false
       }).catch(error => {
