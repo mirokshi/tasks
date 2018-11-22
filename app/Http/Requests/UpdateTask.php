@@ -15,7 +15,7 @@ class UpdateTask extends FormRequest
     public function authorize()
     {
 //        return true;
-        return Auth::user()->can('eltasks.update');
+        return Auth::user()->can('tasks.update');
     }
 
     /**

@@ -107,11 +107,11 @@ class User extends Authenticatable
 
     public function scopeRegular($query)
     {
-        return $query ->$this->where('admin', false);
+        return $query ->where('admin', false);
     }
 
     public function scopeAdmins($query)
     {
-        return $query ->$this->where('admin', true);
+        return $query ->where('admin', true);
     }
 }

@@ -178,6 +178,15 @@ use RefreshDatabase;
         $this->assertEquals($mappedTask['user_id'],$user->id);
         $this->assertEquals($mappedTask['user_name'],$user->name);
         $this->assertEquals($mappedTask['user_email'],$user->email);
+        $this->assertNotNull($mappedTask['created_at']);
+        $this->assertNotNull($mappedTask['updated_at']);
+        $this->assertNotNull($mappedTask['created_at_formatted']);
+        $this->assertNotNull($mappedTask['updated_at_formatted']);
+        $this->assertNotNull($mappedTask['created_at_human']);
+        $this->assertNotNull($mappedTask['updated_at_human']);
+        $this->assertNotNull($mappedTask['created_at_timestamp']);
+        $this->assertNotNull($mappedTask['updated_at_timestamp']);
+
         $this->assertTrue($user->is($mappedTask['user']));
 
 

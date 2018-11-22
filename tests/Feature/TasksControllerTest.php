@@ -22,7 +22,7 @@ class TasksControllerTest extends TestCase
        create_example_tasks();
         $user = $this->login();
         initialize_roles();
-        $user ->assignRole('Tasks');
+        $user ->assignRole('TasksManager');
 
         //2 execute
         $response = $this -> get('/tasks');
@@ -68,10 +68,9 @@ class TasksControllerTest extends TestCase
     {
         $user = $this->login();
         initialize_roles();
-        $user ->assignRole('Tasks');
+        $user ->assignRole('TasksManager');
         $response = $this->delete('/tasks/1');
         $response->assertStatus(404);
-
     }
 
     /**
@@ -116,11 +115,9 @@ class TasksControllerTest extends TestCase
 
         $response->assertStatus(302);
 
-        //2options
         $task=$task->fresh();
         $this->assertEquals($task->name,'Comprar pan');
         $this->assertEquals($task->completed,true);
-        $this->assertTrue($user->hasRole('TasksManager'));
     }
 
 

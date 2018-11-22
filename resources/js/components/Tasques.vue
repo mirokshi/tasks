@@ -196,8 +196,12 @@
                         <td  v-text="task.name"></td>
                         <td  v-text="task.dataUsers_id"></td>
                         <td v-text="task.completed"></td>
-                        <td  v-text="task.created_at"></td>
-                        <td v-text="task.updated_at"></td>
+                        <td>
+                            <span :title="task.created_at_formatted">{{ task.created_at_human }}</span>
+                        </td>
+                        <td>
+                            <span :title="task.updated_at_formatted">{{ task.updated_at_human }}</span>
+                        </td>
                         <td>
 
                             <v-btn icon color="primary" flat title="Muestra una tarea"
@@ -304,8 +308,8 @@ export default {
         { text: 'NAME', value: 'name' },
         { text: 'USER ID', value: 'user_id' },
         { text: 'COMPLETED', value: 'comleted' },
-        { text: 'CREACION', value: 'created_at' },
-        { text: 'ACTUALIZACION', value: 'updated_at' },
+        { text: 'CREACION', value: 'created_at_timestamp' },
+        { text: 'ACTUALIZACION', value: 'updated_at_timesatamp' },
         { text: 'ACCION', sortable: false }
       ]
     }
