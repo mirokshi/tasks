@@ -101,5 +101,12 @@ protected $hidden = [
 
         ];
     }
+    public function getFullSearchAttribute()
+    {
+        $state = $this->completed ? 'Completada' : 'Pendent';
+        $username = optional($this->user)->name;
+        $useremail = optional($this->user)->email;
+        return "$this->id $this->name $this->description $state $username $useremail";
+    }
 
 }

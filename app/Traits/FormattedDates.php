@@ -18,7 +18,7 @@ trait FormattedDates
 
     public function getCreatedAtHumanAttribute()
     {
-        Carbon::setLocale(config('app.local'));
+        Carbon::setLocale(config('app.locale'));
         return optional($this->created_at)->diffForHumans(Carbon::now());
     }
 
@@ -32,7 +32,7 @@ trait FormattedDates
     }
     public function getUpdatedAtHumanAttribute()
     {
-        Carbon::setLocale(config('app.local'));
+        Carbon::setLocale(config('app.locale'));
         return optional($this->updated_at)->diffForHumans(Carbon::now());
     }
 

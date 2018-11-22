@@ -314,7 +314,7 @@ export default {
         { text: 'COMPLETED', value: 'completed' },
         { text: 'CREACION', value: 'created_at_timestamp' },
         { text: 'ACTUALIZACION', value: 'updated_at_timestamp' },
-        { text: 'ACCION', sortable: false }
+        { text: 'ACCION', sortable: false, value: 'full_search' }
       ]
     }
   },

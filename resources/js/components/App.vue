@@ -30,11 +30,6 @@ export default {
         window.location.href = '/impersonate/take/' + user
       }
     }
-  },
-
-  props:
-  {
-    source: String
   }
 }
 </script>
