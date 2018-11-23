@@ -19,7 +19,7 @@ if (!function_exists('create_primary_user')){
          $user =User::firstOrCreate ([
             'name' => 'Mirokshi Rojas',
             'email' => 'mirokshirojas@iesebre.com',
-            'password' => bcrypt(env('PRIMARY_USER_PASSWORD', '123456'))
+            'password' => bcrypt(env('PRIMARY_USER_PASSWORD', 'secret'))
         ]);
          $user->assignRole('TasksManager');
          $user->assignRole('Tasks');
@@ -242,7 +242,8 @@ if (!function_exists('sample_users')){
            //Pepe pringao -> No tiene ningun permiso
             factory(User::class)->create([
                'name' => 'Pepe Pringao',
-               'email' => 'pepepringao@hotmail.com'
+               'email' => 'pepepringao@hotmail.com',
+                'password' => bcrypt(env('PRIMARY_USER_PASSWORD', 'secret'))
            ]);
        } catch (Exception $e){
 
@@ -251,7 +252,8 @@ if (!function_exists('sample_users')){
        try {
            $bartsimpson = factory(User::class)->create([
                'name' => 'Bart Simpson',
-               'email' => 'bart@hotmail.com'
+               'email' => 'bart@hotmail.com',
+               'password' => bcrypt(env('PRIMARY_USER_PASSWORD', 'secret'))
            ]);
        }catch (Exception $e){
 
@@ -267,7 +269,8 @@ if (!function_exists('sample_users')){
         try {
             $homersimpson = factory(User::class)->create([
                 'name' => 'Homer Simpson',
-                'email' => 'homer@hotmail.com'
+                'email' => 'homer@hotmail.com',
+                'password' => bcrypt(env('PRIMARY_USER_PASSWORD', 'secret'))
             ]);
         }catch (Exception $e){
 

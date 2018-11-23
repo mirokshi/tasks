@@ -9,7 +9,8 @@ const disappear = (el, modifiers) => {
     el.firstElementChild.disabled = true
     return true
   }
-  el.innerHTML = ''
+  // el.innerHTML = ''
+  el.remove()
 }
 
 const haveRole = (role) => {

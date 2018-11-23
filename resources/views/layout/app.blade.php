@@ -86,7 +86,7 @@
                 app
         >
             <v-card>
-                <v-card-title class="blue darken-3 white--text"><h4>Perfil</h4></v-card-title>
+                <v-card-title class="grey darken-3 white--text"><h4>Perfil</h4></v-card-title>
                 <v-layout row wrap>
                     <v-flex xs12>
                         <ul>
@@ -98,6 +98,8 @@
                 </v-layout>
             </v-card>
             <v-card>
+                <v-card-title class="grey darken-3 white--text"><h4>Opcions administrador</h4></v-card-title>
+
                 <v-layout row wrap>
                     @impersonating
                     <v-flex xs12>

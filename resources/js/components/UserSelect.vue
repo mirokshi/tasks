@@ -44,6 +44,10 @@ export default {
     url: {
       type: String,
       default: '/api/v1/users'
+    },
+    label: {
+      type: String,
+      default: 'Usuaris'
     }
   },
   watch: {

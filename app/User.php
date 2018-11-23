@@ -94,7 +94,7 @@ class User extends Authenticatable
             'email' => $this->email,
             'gravatar' => $this->gravatar,
             'admin' => (boolean)$this->admin,
-            'roles' => $this->roles,
+            'roles' => $this->roles->pluck('name')->unique,
             'permissions' => $this->permissions,
 
         ];

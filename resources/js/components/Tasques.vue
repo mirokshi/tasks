@@ -120,7 +120,7 @@
             </v-card-text>
           </v-card>
       </v-dialog>
-      <!--<v-snackbar :timeout="snackbarTimeout" :color="snackbarColor" v-model="snackbar" >-->
+      <!--<v-snackbar :timeout="snackbarTimeout" :color="snackbarColor" v-model="snackbar">-->
           <!--{{ snackbarMessage }}-->
           <!--<v-btn dark flat @click="snackbar=false" >X</v-btn>-->
       <!--</v-snackbar>-->
@@ -199,7 +199,7 @@
                                 <img :src="task.user_gravatar" alt="avatar">
                             </v-avatar>
                         </td>
-                        <td v-text="task.completed ? 'Completada' : 'Pendent'"></td>
+                        <td v-text="task.completed ? 'Completada' : 'Pendiente'"></td>
                         <td>
                              <span :title="task.created_at_formatted">{{ task.created_at_human}}</span>
                         </td>
@@ -208,11 +208,11 @@
                         </td>
                         <td>
 
-                            <v-btn icon color="primary" flat title="Muestra una tarea"
+                            <v-btn v-can="tasks.create" icon color="primary" flat title="Muestra una tarea"
                                    @click="showTasks(task)">
                                 <v-icon>visibility</v-icon>
                             </v-btn>
-                            <v-btn icon color="success" flat title="Edita una tarea"
+                            <v-btn v-can="tasks.update" icon color="success" flat title="Edita una tarea"
                                    @click="showUpdate(task)">
                                 <v-icon>edit</v-icon>
                             </v-btn>
