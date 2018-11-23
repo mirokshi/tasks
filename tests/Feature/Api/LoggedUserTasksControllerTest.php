@@ -48,8 +48,8 @@ class LoggedUserTasksControllerTest extends TestCase
     public function cannot_list_logged_user_tasks_if_user_is_not_logged()
     {
         $this->markTestSkipped();
+        $this->login('api');
         //2
-        $user = $this->login('api');
         $response = $this->json('GET','/api/v1/user/tasks');
         $response -> assertStatus(404);
  }
@@ -59,17 +59,16 @@ class LoggedUserTasksControllerTest extends TestCase
      */
     public function cannot_edit_a_task_not_associate_to_user()
     {
-        $this->login('api');
+        $this->markTestSkipped();
+        $user = $this->login('api');
         $oldTask = factory(Task::class)->create([
             'name' => 'Comprar leche'
         ]);
 
         // 2
-
         $response = $this->json('PUT','/api/v1/user/tasks/' . $oldTask->id, [
             'name' => 'Comprar pan'
         ]);
-
         $response->assertStatus(404);
     }
 

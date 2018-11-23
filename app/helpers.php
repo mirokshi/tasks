@@ -239,7 +239,7 @@ if (!function_exists('sample_users')){
 
        try {
            //Pepe pringao -> No tiene ningun permiso
-           $pepepringao = factory(User::class)->create([
+            factory(User::class)->create([
                'name' => 'Pepe Pringao',
                'email' => 'pepepringao@hotmail.com'
            ]);

@@ -173,7 +173,6 @@ use RefreshDatabase;
            'name' => 'Comprar pan',
             'description' => 'bla bla bla',
             'completed' => false,
-            'user_id' => $user->id
         ]);
         $task->assignUser($user);
         $mappedTask = $task->map();
@@ -193,8 +192,8 @@ use RefreshDatabase;
         $this->assertNotNull($mappedTask['updated_at_formatted']);
         $this->assertNotNull($mappedTask['updated_at_human']);
         $this->assertNotNull($mappedTask['updated_at_timestamp']);
-        $this->assertEquals($mappedTask['user_gravatar'],'https://www.gravatar.com/avatar/6849ef9c40c2540dc23ad9699a79a2f8');
-        $this->assertEquals($mappedTask['full_search'],'1 Comprar pa Bla bla bla Pendent Pepe Pardo Jeans pepepardo@jeans.com');
+        $this->assertEquals($mappedTask['user_gravatar'],'https://www.gravatar.com/avatar/'.md5('pepepardo@jeans.com'));
+        $this->assertEquals($mappedTask['full_search'],'1 Comprar pan bla bla bla Pendiente Pepe Pardo Jeans pepepardo@jeans.com');
 
         //TODO fullsearch
         $this->assertTrue($user->is($mappedTask['user']));

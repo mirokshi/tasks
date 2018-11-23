@@ -18,6 +18,7 @@ class HelpersTest extends TestCase
     public function create_primary_user()
     {
         //1
+        initialize_roles();
         //2
         create_primary_user();
         //3

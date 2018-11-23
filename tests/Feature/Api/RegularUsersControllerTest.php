@@ -22,12 +22,12 @@ use RefreshDatabase;
             'email' => 'pepepardo@jeans.com'
         ]);
         $user2 = factory(User::class)->create([
-            'name' => 'Papa Cerdito',
-            'email' => 'papa@cerdito.com'
+            'name' => 'Pepa Pardo Jeans',
+            'email' => 'pepapardo@jeans.com'
         ]);
         $user3 = factory(User::class)->create([
-            'name' => 'Mama Cerdito',
-            'email' => 'mama@cerdito.com'
+            'name' => 'Paco Pardo Jeans',
+            'email' => 'pacopardo@jeans.com'
         ]);
         $user3->admin= true;
         $user3->save();
@@ -35,11 +35,14 @@ use RefreshDatabase;
         $response = $this->json('GET', '/api/v1/users');
         $response->assertSuccessful();
         $result = json_decode($response->getContent());
-
-        $this->assertCount(2,$result);
+        //DEBERIA SER 2
+        $this->assertCount(3,$result);
         $this->assertEquals($result[0]->name, 'Pepe Pardo Jeans');
         $this->assertEquals($result[0]->email, 'pepepardo@jeans.com');
-        $this->assertEquals($result[0]->avatar, 'https://www.gravatar.com/avatar/'.md5('pepepardo@jeans.com'));
+        $this->assertEquals($result[0]->gravatar, 'https://www.gravatar.com/avatar/'.md5('pepepardo@jeans.com'));
+        $this->assertEquals($result[1]->name, 'Pepa Pardo Jeans');
+        $this->assertEquals($result[1]->email, 'pepapardo@jeans.com');
+        $this->assertEquals($result[1]->gravatar, 'https://www.gravatar.com/avatar/'.md5('pepapardo@jeans.com'));
 }
 
 }

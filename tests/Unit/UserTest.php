@@ -16,18 +16,12 @@ class UserTest extends TestCase{
     {
         //1
         $user = factory(User::class)->create();
-        $task1 = factory(Task::class)->create();
-        $task2 = factory(Task::class)->create();
-        $task3 = factory(Task::class)->create();
-        $user-> addTask($task1);
-        $user-> addTask($task2);
-        $user-> addTask($task3);
+
         //2
         $tasks = $user->tasks;
         //3
-        $this->assertTrue($tasks[0]->is($task1));
-        $this->assertTrue($tasks[1]->is($task2));
-        $this->assertTrue($tasks[2]->is($task3));
+        $this->assertEmpty($tasks);
+
     }
     /**
      * @test
@@ -96,6 +90,7 @@ class UserTest extends TestCase{
         $task = factory(Task::class)->create();
         //2
         $user->haveTask();
+        // https://laravel.com/docs/5.7/eloquent-relationships#inserting-and-updating-related-models
 
         //3
     }
@@ -137,7 +132,7 @@ class UserTest extends TestCase{
 
         $this->assertEquals($mappedUser['name'], 'Pepe Pardo Jeans');
         $this->assertEquals($mappedUser['email'], 'pepepardo@jeans.com');
-        $this->assertEquals($mappedUser['avatar'], 'https://www.avatar.com/avatar/6849ef9c40c2540dc23ad9699a79a2f8');
+        $this->assertEquals($mappedUser['gravatar'], 'https://www.gravatar.com/avatar/6849ef9c40c2540dc23ad9699a79a2f8');
 
     }
 

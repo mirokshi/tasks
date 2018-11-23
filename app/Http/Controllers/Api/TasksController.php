@@ -35,7 +35,6 @@ class TasksController extends Controller
 
     public function store(StoreTask $request)
     {
-
         $task = new Task();
         $task->name = $request->name;
         $task->completed = false;

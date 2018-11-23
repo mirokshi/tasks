@@ -92,7 +92,7 @@ class User extends Authenticatable
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'avatar' => $this->avatar
+            'gravatar' => $this->gravatar
         ];
     }
 
@@ -100,7 +100,7 @@ class User extends Authenticatable
      * Get the user's full name
      * @return string
      */
-    public function getAvatarAttribute()
+    public function getGravatarAttribute()
     {
         return 'https://www.gravatar.com/avatar/'.md5($this->email);
     }
@@ -110,7 +110,7 @@ class User extends Authenticatable
         return $query ->where('admin', false);
     }
 
-    public function scopeAdmins($query)
+    public function scopeAdmin($query)
     {
         return $query ->where('admin', true);
     }
