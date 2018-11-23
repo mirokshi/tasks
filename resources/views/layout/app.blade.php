@@ -93,6 +93,8 @@
                             <li>Nom : {{ Auth::user()->name }}</li>
                             <li>Email : {{ Auth::user()->email }}</li>
                             <li>Admin : {{ Auth::user()->admin }}</li>
+                            <li>Roles : {{ implode(',',Auth::user()->map()['roles']) }}</li>
+                            <li>Permissions : {{ implode(', ',Auth::user()->map()['permissions']) }}</li>
                         </ul>
                     </v-flex>
                 </v-layout>

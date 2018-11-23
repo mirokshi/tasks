@@ -135,27 +135,20 @@ class UserTest extends TestCase{
         $this->assertEquals($mappedUser['name'], 'Pepe Pardo Jeans');
         $this->assertEquals($mappedUser['email'], 'pepepardo@jeans.com');
         $this->assertEquals($mappedUser['gravatar'], 'https://www.gravatar.com/avatar/6849ef9c40c2540dc23ad9699a79a2f8');
-        $this->assertEquals($mappedUser['admin'], 0);
+        $this->assertEquals($mappedUser['admin'],false);
         $this->assertCount(0,$mappedUser['roles']);
         $this->assertCount(0,$mappedUser['permissions']);
-
-        $user->admin=true;
+        $user->admin = true;
         $user->save();
-        $mappedUser = $user->fresh();
-        $this->assertEquals($mappedUser['admin'], true);
-
         $rol1 = Role::create([
             'name' => 'Rol1'
         ]);
-
         $rol2 = Role::create([
             'name' => 'Rol2'
         ]);
-
         $permission1 = Permission::create([
             'name' => 'Permission1'
         ]);
-
         $permission2 = Permission::create([
             'name' => 'Permission2'
         ]);
@@ -163,7 +156,15 @@ class UserTest extends TestCase{
         $user->givePermissionTo($permission2);
         $user->assignRole($rol1);
         $user->assignRole($rol2);
-
+        $user = $user->fresh();
+        $mappedUser = $user->map();
+        $this->assertEquals($mappedUser['admin'],true);
+        $this->assertCount(2,$mappedUser['roles']);
+        $this->assertCount(2,$mappedUser['permissions']);
+        $this->assertEquals($mappedUser['roles'][0],'Rol1');
+        $this->assertEquals($mappedUser['roles'][1],'Rol2');
+        $this->assertEquals($mappedUser['permissions'][0],'Permission1');
+        $this->assertEquals($mappedUser['permissions'][1],'Permission2');
     }
 
     /**

@@ -1,27 +1,4 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/0.4b965d93fd0ef80c1c72.hot-update.js": "/0.4b965d93fd0ef80c1c72.hot-update.js",
-    "/0.bfb34d61f79e7db6bcf6.hot-update.js": "/0.bfb34d61f79e7db6bcf6.hot-update.js",
-    "/0.41f1b6985192681fe568.hot-update.js": "/0.41f1b6985192681fe568.hot-update.js",
-    "/0.0e62d9d258d00c1da1f0.hot-update.js": "/0.0e62d9d258d00c1da1f0.hot-update.js",
-    "/0.a75a9a33691521849930.hot-update.js": "/0.a75a9a33691521849930.hot-update.js",
-    "/0.19772a84826cc1203ce2.hot-update.js": "/0.19772a84826cc1203ce2.hot-update.js",
-    "/0.cdcbd2557f8c846bf517.hot-update.js": "/0.cdcbd2557f8c846bf517.hot-update.js",
-    "/0.b388cc1d8566c6f8cd5a.hot-update.js": "/0.b388cc1d8566c6f8cd5a.hot-update.js",
-    "/0.5d3c570bb8a7d77ed347.hot-update.js": "/0.5d3c570bb8a7d77ed347.hot-update.js",
-    "/0.e73147d16c640f705b81.hot-update.js": "/0.e73147d16c640f705b81.hot-update.js",
-    "/0.64a6a2da399b84f9d933.hot-update.js": "/0.64a6a2da399b84f9d933.hot-update.js",
-    "/0.188f8058fc6de7e4dcbe.hot-update.js": "/0.188f8058fc6de7e4dcbe.hot-update.js",
-    "/0.564de6b835a8ee2148d1.hot-update.js": "/0.564de6b835a8ee2148d1.hot-update.js",
-    "/0.980695d538ac63735b48.hot-update.js": "/0.980695d538ac63735b48.hot-update.js",
-    "/0.e160c530256c866b1e40.hot-update.js": "/0.e160c530256c866b1e40.hot-update.js",
-    "/0.4480108a4da0086a29a6.hot-update.js": "/0.4480108a4da0086a29a6.hot-update.js",
-    "/0.c2bcd7373f3469f4ac6f.hot-update.js": "/0.c2bcd7373f3469f4ac6f.hot-update.js",
-    "/0.22ace668f5a0477a19eb.hot-update.js": "/0.22ace668f5a0477a19eb.hot-update.js",
-    "/0.087fce4f0d7145b3acf5.hot-update.js": "/0.087fce4f0d7145b3acf5.hot-update.js",
-    "/0.717eb78bc71761dc6df3.hot-update.js": "/0.717eb78bc71761dc6df3.hot-update.js",
-    "/0.bb898fb021151c60e2a7.hot-update.js": "/0.bb898fb021151c60e2a7.hot-update.js",
-    "/0.6be3112b2d96f27cae86.hot-update.js": "/0.6be3112b2d96f27cae86.hot-update.js",
-    "/0.40ac73f533e5120bff48.hot-update.js": "/0.40ac73f533e5120bff48.hot-update.js"
+    "/css/app.css": "/css/app.css"
 }
