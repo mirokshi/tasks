@@ -12,11 +12,12 @@ import LoginForm from './components/LoginForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
 import UserList from './components/UserList.vue'
 import UserSelect from './components/UserSelect.vue'
+import permissions from './plugins/permissions'
 
 // instalacion vuetify
 window.Vue = Vue
 window.Vue.use(Vuetify)
-
+window.Vue.use(permissions)
 // window.Vue.user($snackbar)
 
 // componentes
