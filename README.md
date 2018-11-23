@@ -67,3 +67,16 @@
    
    Despues ejecutar los comandos
   
+  ## Instalaciones
+   
+  **Impersonate**
+  https://github.com/404labfr/laravel-impersonate#configuration
+composer require lab404/laravel-impersonate
+php artisan vendor:publish --tag=impersonate
+
+  **Passport**
+  https://laravel.com/docs/5.7/passport#installation
+composer require laravel/passport
+php artisan migrate
+php artisan passport:install
+
