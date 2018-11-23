@@ -398,6 +398,10 @@ export default {
     show () {
       this.showDialog = false
     }
+  },
+  created(){
+    console.log('USUARIO LAGADO')
+    console.log(window.laravel_user)
   }
 }
 </script>

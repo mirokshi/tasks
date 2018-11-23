@@ -92,7 +92,11 @@ class User extends Authenticatable
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'gravatar' => $this->gravatar
+            'gravatar' => $this->gravatar,
+            'admin' => (boolean)$this->admin,
+            'roles' => $this->roles,
+            'permissions' => $this->permissions,
+
         ];
     }
 

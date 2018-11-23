@@ -80,3 +80,12 @@ composer require laravel/passport
 php artisan migrate
 php artisan passport:install
 
+**Permission**
+    https://github.com/spatie/laravel-permission
+
+
+**
+PHP implode
+http://php.net/manual/es/function.implode.php
+
+
