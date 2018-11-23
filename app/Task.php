@@ -82,6 +82,7 @@ protected $hidden = [
         return [
             'id' => $this->id,
             'name' => $this-> name,
+            'description' => $this->description,
             'completed' => (boolean)$this->completed,
             'user_id' => $this->user_id,
             'user_name' => optional($this->user)->name,
@@ -95,7 +96,8 @@ protected $hidden = [
             'updated_at_human'=>$this->updated_at_human,
             'created_at_timestamp'=>$this->created_at_timestamp,
             'updated_at_timestamp'=>$this->updated_at_timestamp,
-            'user' => $this->user
+            'user' => $this->user,
+            'full_search' => $this->full_search
 //            'tags' => $this->tags,
 //            'file' => $this->file
 
@@ -103,7 +105,7 @@ protected $hidden = [
     }
     public function getFullSearchAttribute()
     {
-        $state = $this->completed ? 'Completada' : 'Pendent';
+        $state = $this->completed ? 'Completada' : 'Pendiente';
         $username = optional($this->user)->name;
         $useremail = optional($this->user)->email;
         return "$this->id $this->name $this->description $state $username $useremail";

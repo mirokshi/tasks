@@ -120,10 +120,10 @@
             </v-card-text>
           </v-card>
       </v-dialog>
-      <v-snackbar :timeout="snackbarTimeout" :color="snackbarColor" v-model="snackbar" >
-          {{ snackbarMessage }}
-          <v-btn dark flat @click="snackbar=false" >X</v-btn>
-      </v-snackbar>
+      <!--<v-snackbar :timeout="snackbarTimeout" :color="snackbarColor" v-model="snackbar" >-->
+          <!--{{ snackbarMessage }}-->
+          <!--<v-btn dark flat @click="snackbar=false" >X</v-btn>-->
+      <!--</v-snackbar>-->
       <v-toolbar color="grey darken-4">
       <v-menu>
           <v-btn slot="activator" flat >
@@ -214,7 +214,7 @@
                             </v-btn>
                             <v-btn icon color="success" flat title="Edita una tarea"
                                    @click="showUpdate(task)">
-                                <v-icon>update</v-icon>
+                                <v-icon>edit</v-icon>
                             </v-btn>
                             <v-btn icon color="error" flat title="Elimina una tarea"
                             @click="showDestroy(task)">
