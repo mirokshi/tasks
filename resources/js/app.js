@@ -18,6 +18,7 @@ import permissions from './plugins/permissions'
 window.Vue = Vue
 window.Vue.use(Vuetify)
 window.Vue.use(permissions)
+
 // window.Vue.user($snackbar)
 
 // componentes

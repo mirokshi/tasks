@@ -216,7 +216,7 @@
                                    @click="showUpdate(task)">
                                 <v-icon>edit</v-icon>
                             </v-btn>
-                            <v-btn icon color="error" flat title="Elimina una tarea"
+                            <v-btn v-can="tasks.destroy" icon color="error" flat title="Elimina una tarea"
                             @click="showDestroy(task)">
                                 <v-icon>delete</v-icon>
                             </v-btn>
@@ -334,10 +334,12 @@ export default {
       // setTimeout(() => { this.loading = false }, 5000)
       // ¡!¡! CAMBIA SEGUN EL CASO
       window.axios.get('/api/v1/user/tasks').then(response => {
+        console.log(response.data)
         this.showMessage('Se ha actualizado correctamente')
         this.dataTasks = response.data
         this.loading = false
       }).catch(error => {
+        console.log(error)
         this.loading = false
         this.showError(error)
       })

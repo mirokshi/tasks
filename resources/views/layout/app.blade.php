@@ -86,20 +86,46 @@
                 app
         >
             <v-card>
-                ADMINISTRADOR
-                @canImpersonate
-                <user-select @selected="impersonate" url="/api/v1/regular_users/"></user-select>
-                @endCanImpersonate
-
-                @impersonating
-
-                El usuario  {{ Auth::user()->name }} esta suplantando a {{ Auth::user()->impersonatedBy()->name }}
-                <a href="/impersonate/leave">Abandonar la suplantacion</a>
-
-                @endImpersonating
+                <v-card-title class="blue darken-3 white--text"><h4>Perfil</h4></v-card-title>
+                <v-layout row wrap>
+                    <v-flex xs12>
+                        <ul>
+                            <li>Nom : {{ Auth::user()->name }}</li>
+                            <li>Email : {{ Auth::user()->email }}</li>
+                            <li>Admin : {{ Auth::user()->admin }}</li>
+                        </ul>
+                    </v-flex>
+                </v-layout>
+            </v-card>
+            <v-card>
+                <v-layout row wrap>
+                    @impersonating
+                    <v-flex xs12>
+                        <v-avatar title="{{ Auth::user()->impersonatedBy()->name }} ( {{ Auth::user()->email }} )">
+                            <img src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->impersonatedBy()->email) }}" alt="avatar">
+                        </v-avatar>
+                    </v-flex>
+                    @endImpersonating
+                    <v-flex xs12>
+                        @canImpersonate
+                        <user-select label="Entrar com..." @selected="impersonate" url="/api/v1/regular_users"></user-select>
+                        @endCanImpersonate
+                        @impersonating
+                        {{ Auth::user()->impersonatedBy()->name }} està suplantant {{ Auth::user()->name }}
+                        <a href="impersonate/leave">Abandonar la suplantació</a>
+                        @endImpersonating
+                    </v-flex>
+                </v-layout>
             </v-card>
         </v-navigation-drawer>
-        <v-toolbar color="grey darken-4" flat dark app >
+        <v-toolbar
+                color="grey darken-4"
+                dark
+                app
+                clipped-left
+                clipped-right
+                fixed
+        >
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Application</v-toolbar-title>
             <v-spacer></v-spacer>
