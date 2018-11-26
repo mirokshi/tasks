@@ -17,7 +17,7 @@ class TasksController extends Controller
 {
     public function index(IndexTask $request)
     {
-        return Task::orderBy('created_at')->get();
+        return map_collection(Task::orderBy('created_at','desc')->get());
 
     }
 
@@ -47,6 +47,13 @@ class TasksController extends Controller
         $task->name = $request->name;
         $task->save();
         return $task->map();
+    }
+
+    public function edit(Request $request)
+    {
+        $task = Task::findOrFail($request->id);
+        return view('task_edit',[ 'task' => $task]);
+
     }
 
 

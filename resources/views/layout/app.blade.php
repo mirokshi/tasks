@@ -17,6 +17,7 @@
         <v-navigation-drawer
                 v-model="drawer"
                 fixed
+                clipped
                 app
         >
             <v-list>
@@ -112,11 +113,11 @@
                     @endImpersonating
                     <v-flex xs12>
                         @canImpersonate
-                        <user-select label="Entrar com..." @selected="impersonate" url="/api/v1/regular_users"></user-select>
+                        <user-select label="Entrar como..." @selected="impersonate" url="/api/v1/regular_users"></user-select>
                         @endCanImpersonate
                         @impersonating
-                        {{ Auth::user()->impersonatedBy()->name }} està suplantant {{ Auth::user()->name }}
-                        <a href="impersonate/leave">Abandonar la suplantació</a>
+                        {{ Auth::user()->impersonatedBy()->name }} esta suplatanto a {{ Auth::user()->name }}
+                        <a href="impersonate/leave">Abandonar la suplantación</a>
                         @endImpersonating
                     </v-flex>
                 </v-layout>

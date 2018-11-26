@@ -28,13 +28,20 @@ Route::get('/', function () {
 //GRUPS_ DE URLS  PARA USUARIOS AUTENTICADOS
 Route::middleware(['auth'])->group(function() {
 
-Route::get('/tasks','TasksController@index');
+Route::get('/tasks','TasksController@index'); //muestra
 Route::post('/tasks','TasksController@store'); //agrega
 Route::delete('/tasks/{id}','TasksController@destroy'); //borra
 Route::put('/tasks/{id}','TasksController@update'); //modifica
+Route::get('/task_edit/{id}','TasksController@edit'); //modifica
 
-//MODFICAR
-    Route::get('/task_edit/{id}','TasksController@edit');
+    //Uncompleted -> ESTADOS
+    Route::delete('completed_task/{task}','CompletedTasksController@destroy');
+
+    //Complete -> ESTADOS
+    Route::post('/completed_task/{task}','CompletedTasksController@store');
+
+//    Route::patch('/tasks/{id}','TasksController@completed');
+
 
 //CONTACT
     Route::get('/contact', function (){
@@ -46,11 +53,6 @@ Route::put('/tasks/{id}','TasksController@update'); //modifica
         return view('about');
     });
 
-    //Uncompleted -> ESTADOS
-    Route::delete('completed_task/{task}','CompletedTasksController@destroy');
-
-    //Complete -> ESTADOS
-    Route::post('/completed_task/{task}','CompletedTasksController@store');
 
     //Vue
     Route::get('/tasks_vue','TasksVueController@index');
