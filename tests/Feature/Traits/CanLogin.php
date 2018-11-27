@@ -17,7 +17,18 @@ trait CanLogin
         $this->actingAs($user, $guard);
         return $user;
     }
-
+    /**
+     * @param null $guard
+     * @return mixed
+     */
+    protected function loginAsUsingRole($guard,$role)
+    {
+        initialize_roles();
+        $user = factory(User::class)->create();
+        $user->assignRole($role);
+        $this->actingAs($user,$guard);
+        return $user;
+    }
 
     /**
      * @param null $guard

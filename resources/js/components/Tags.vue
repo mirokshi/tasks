@@ -1,14 +1,15 @@
 <template>
     <div>
-        <v-btn @click="snackbarMessage"></v-btn>
-        <v-btn @click="snackbarMessage"></v-btn>
+        TODO TAGS
+        <v-btn @click="showMessage">Show snackbar message</v-btn>
+        <v-btn @click="showError">Show snackbar error</v-btn>
     </div>
 
 </template>
 
 <script>
 export default {
-  name: 'tags',
+  name: 'Tags',
   data () {
     return {
 

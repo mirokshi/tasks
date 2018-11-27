@@ -57,19 +57,19 @@ if (!function_exists('create_example_tasks')) {
 if (!function_exists('create_example_tags')) {
     function create_example_tags() {
         Tag::create([
-            'name' => 'Compras',
+            'name' => 'Tag1',
             'description' => 'Aqui van las compras',
             'color' => '#04B404'
         ]);
 
         Tag::create([
-            'name' => 'Estudios',
+            'name' => 'Tag2',
             'description' => 'Aqui van los estudios',
             'color' => '#04B404'
         ]);
 
         Tag::create([
-            'name' => 'Trabajo',
+            'name' => 'Tag3',
             'description' => 'Aqui van los trabajos',
             'color' => '#04B404'
         ]);
@@ -284,7 +284,7 @@ if (!function_exists('profe')){
             $profe->assignRole('TasksManager');
             $profe->assignRole('Tasks');
             $profe->admin=true;
-         $profe->save();
+            $profe->save();
         }catch (Exception $e) {
 
         }

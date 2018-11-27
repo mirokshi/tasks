@@ -14,7 +14,7 @@ class TagsController extends Controller
     {
         $tags =map_collection(Tag::all());
         return view('tags', [
-            'name' => $tags
+            'tags' => $tags
         ]);
     }
 
