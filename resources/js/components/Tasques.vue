@@ -265,7 +265,6 @@
 </template>
 
 <script>
-import EventBus from '../ui/Snackbar'
 export default {
   name: 'Tasques',
   data () {
@@ -360,26 +359,14 @@ export default {
         this.removeTask(this.taskBeginRemoved)
         this.deleteDialog = false
         this.taskBeginRemoved = null
-        this.showMessage('Se ha borrado correctamente')
+        this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
         this.removing = false
       }).catch(error => {
-        this.showError(error)
+        this.$snackbar.showError(error.message)
         this.removing = false
       })
     },
-    // SNACKNBAR
-    showMessage (message) {
-      this.snackbarMessage = message
-      this.snackbarColor = 'success'
-      this.snackbar = true
-    },
-    showError (error) {
-      this.snackbarMessage = error.message
-      this.snackbarColor = 'error'
-      this.snackbar = true
-    },
-    // SNACKBAR END
-    showUpdate () {
+     showUpdate () {
       this.editDialog = true
     },
     showCreate () {
