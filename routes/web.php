@@ -66,8 +66,11 @@ Route::get('/task_edit/{id}','TasksController@edit'); //modifica
     //LoggedUserTasksController
     Route::get('/user/tasks','LoggedUserTasksController@index');
 
+    //impersonate
     Route::impersonate();
 
+    //Tags
+    Route::get('/tags','TagsController@index');
 });
 
 //WELCOME

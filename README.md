@@ -88,4 +88,5 @@ php artisan passport:install
 PHP implode
 http://php.net/manual/es/function.implode.php
 
-
+**flash of unstyled content**
+``v-cloak``

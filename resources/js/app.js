@@ -13,11 +13,14 @@ import RegisterForm from './components/RegisterForm.vue'
 import UserList from './components/UserList.vue'
 import UserSelect from './components/UserSelect.vue'
 import permissions from './plugins/permissions'
+import Tags from './components/Tags.vue'
+import snackbar from './plugins/snackbar'
 
 // instalacion vuetify
 window.Vue = Vue
 window.Vue.use(Vuetify)
 window.Vue.use(permissions)
+window.Vue.use(snackbar)
 
 // window.Vue.user($snackbar)
 
@@ -25,6 +28,7 @@ window.Vue.use(permissions)
 window.Vue.component('example_component', ExampleComponent)
 window.Vue.component('tasks', Tasks)
 window.Vue.component('tasques', Tasques)
+window.Vue.component('tags', Tags)
 window.Vue.component('editable-text', EditableText)
 window.Vue.component('login-form', LoginForm)
 window.Vue.component('register-form', RegisterForm)

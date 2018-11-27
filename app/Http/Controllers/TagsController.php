@@ -2,26 +2,23 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Http\Requests\IndexTag;
 use App\Tag;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class TagsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function index(IndexTag $request)
     {
-        //
+        $tags =map_collection(Tag::all());
+        return view('tags', [
+            'name' => $tags
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //

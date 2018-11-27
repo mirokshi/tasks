@@ -120,11 +120,7 @@
             </v-card-text>
           </v-card>
       </v-dialog>
-      <!--<v-snackbar :timeout="snackbarTimeout" :color="snackbarColor" v-model="snackbar">-->
-          <!--{{ snackbarMessage }}-->
-          <!--<v-btn dark flat @click="snackbar=false" >X</v-btn>-->
-      <!--</v-snackbar>-->
-      <v-toolbar color="grey darken-4">
+       <v-toolbar color="grey darken-4">
       <v-menu>
           <v-btn slot="activator" flat >
           <v-icon>more_vert</v-icon>
@@ -269,7 +265,7 @@
 </template>
 
 <script>
-
+import EventBus from '../ui/Snackbar'
 export default {
   name: 'Tasques',
   data () {
@@ -335,7 +331,8 @@ export default {
       // ¡!¡! CAMBIA SEGUN EL CASO
       window.axios.get('/api/v1/user/tasks').then(response => {
         console.log(response.data)
-        this.showMessage('Se ha actualizado correctamente')
+        // this.showMessage('Se ha actualizado correctamente')
+        EventBus.$emit('showSnackbar')
         this.dataTasks = response.data
         this.loading = false
       }).catch(error => {
