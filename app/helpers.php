@@ -262,6 +262,10 @@ if (!function_exists('sample_users')){
             $homersimpson->assignRole('TasksManager');
         }catch (Exception $e){
 
+        }   try {
+            $homersimpson->assignRole('Tasks');
+        }catch (Exception $e){
+
         }
 
     }

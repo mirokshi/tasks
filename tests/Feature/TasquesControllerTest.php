@@ -45,18 +45,11 @@ class TasquesControllerTest extends TestCase
      */
     public function super_admin_can_index_tasques()
     {
-        $this->withExceptionHandling();
-        $this->loginAsSuperAdmin();
         create_example_tasks();
-        $response= $this->get('tasques');
+        $this->loginAsSuperAdmin();
+        //2
+        $response= $this->get('/tasques');
         $response->assertSuccessful();
-        $response->assertViewIs('tasques');
-        $response->assertViewHas('tasques', function ($tasques) {
-            return $this->count($tasques) === 3 &&
-                $tasques[0]['name'] === 'Compar pan' &&
-                $tasques[1]['name'] === 'Compar leche' &&
-                $tasques[2]['name'] === 'Estudiar PHP' ;
-        });
     }
 
     /**
@@ -64,11 +57,23 @@ class TasquesControllerTest extends TestCase
      */
     public function tasks_manager_can_show_tasques()
     {
+        create_example_tasks();
+        $this->loginAsTaskManager();
 
+        //2
+        $response = $this->get('/tasques');
+        $response->assertSuccessful();
     }
 
+    /**
+     * @test
+     */
     public function rol_task_user_can_index_tasques()
     {
-
+    create_example_tasks();
+    $this->loginAsTasksUser();
+    //2
+        $response = $this->get('/tasques');
+        $response->assertSuccessful();
     }
 }

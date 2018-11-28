@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TasquesIndex;
+
+use App\Http\Requests\UserTasksIndex;
 use App\Task;
 use App\User;
 use Illuminate\Http\Request;

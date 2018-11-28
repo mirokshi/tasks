@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserTasksIndex extends FormRequest
 {
@@ -14,7 +15,7 @@ class UserTasksIndex extends FormRequest
     public function authorize()
     {
         return Auth::user()->can('user.tasks.index');
-
+//return false;
     }
 
     /**
