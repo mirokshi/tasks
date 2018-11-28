@@ -195,7 +195,7 @@
                                 <img :src="task.user_gravatar" alt="avatar">
                             </v-avatar>
                         </td>
-                        <td v-text="task.completed ? 'Completada' : 'Pendiente'"></td>
+                          <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendiente'"></v-switch>
                         <td>
                              <span :title="task.created_at_formatted">{{ task.created_at_human}}</span>
                         </td>

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class UncompletedTask extends FormRequest
+class TaskStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,8 @@ class UncompletedTask extends FormRequest
      */
     public function authorize()
     {
-        return  Auth::user()->can('tasks.uncompleted');
+//        return true;
+        return Auth::user()->can('tasks.store');
     }
 
     /**
@@ -25,7 +26,7 @@ class UncompletedTask extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required'
         ];
     }
 }

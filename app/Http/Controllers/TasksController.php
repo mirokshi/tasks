@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\DestroyTask;
-use App\Http\Requests\ShowTask;
-use App\Http\Requests\UpdateTask;
+
+use App\Http\Requests\TaskDestroy;
+use App\Http\Requests\TaskIndex;
+use App\Http\Requests\TaskShow;
+use App\Http\Requests\TaskUpdate;
 use App\Task;
 use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
-    public function index()
+    public function index(TaskIndex $request)
     {
         $tasks =Task::orderBy('created_at','desc') -> get();
         return view('tasks', ['tasks' => $tasks]);
     }
 
-    public function store(ShowTask $request)
+    public function store(TaskShow $request)
     {
     Task::create([
         'name'=> $request->name ,
@@ -27,7 +29,7 @@ class TasksController extends Controller
 
 }
 
-    public function destroy(DestroyTask $request) //borra
+    public function destroy(TaskDestroy $request) //borra
     {
 
        $task= Task::findOrFail($request->id);
@@ -35,7 +37,7 @@ class TasksController extends Controller
         return redirect()->back();
     }
 
-    public function update(UpdateTask $request) //modifica
+    public function update(TaskUpdate $request) //modifica
     {
 
         $task= Task::findOrFail($request->id);
@@ -45,7 +47,7 @@ class TasksController extends Controller
         return redirect('/tasks');
 
     }
-    public function edit(UpdateTask $request)
+    public function edit(TaskUpdate $request)
     {
         $task = Task::findOrFail($request->id);
         return view('task_edit',[ 'task' => $task]);
