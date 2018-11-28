@@ -14,5 +14,6 @@ class TasquesController extends Controller
         $tasks = map_collection(Task::orderBy('created_at','desc') -> get());
         $users= User::all();
         return view('tasques',compact('tasks', 'users'));
+
     }
 }

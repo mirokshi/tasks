@@ -17,15 +17,15 @@
                     <v-list-tile-avatar>
                         <img src="https://placeimg.com/100/100/any">
                     </v-list-tile-avatar>
-                        <p class="headline font-weight-light">{{ $task->name }}</p>
-                    <form action="/completed_task/{{ $task->id }}" method="POST">
+                        {{ $task['name'] }}
+                    <form action="/completed_task/{{ $task['id'] }}" method="POST">
                         @csrf
                         <button><v-btn color="success">Completar</v-btn></button>
                     </form>
-                    <a href="/task_edit/{{ $task->id }}">
+                    <a href="/task_edit/{{ $task['id'] }}">
                         <button><v-btn color="warning">Modificar</v-btn></button>
                     </a>
-                    <form action="/tasks/{{ $task->id }}" method="POST">
+                    <form action="/tasks/{{ $task['id'] }}" method="POST">
                         @csrf
                         {{ method_field('DELETE') }}
                         <button><v-btn color="error">Eliminar</v-btn></button>

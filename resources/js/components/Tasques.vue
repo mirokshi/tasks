@@ -243,9 +243,13 @@
                       <v-card-title v-text="task.name"></v-card-title>
                       <v-list dense>
                           <v-list-tile>
-                              <v-list-tile-content>Completed</v-list-tile-content>
-                              <v-list-tile-content class="align-end">task.completed</v-list-tile-content>
-                          </v-list-tile>
+                              <v-list-tile-content>Completed:</v-list-tile-content>
+                              <v-list-tile-content class="align-end">{{ task.completed }}</v-list-tile-content>
+                            </v-list-tile>
+                            <v-list-tile>
+                              <v-list-tile-content>User:</v-list-tile-content>
+                              <v-list-tile-content class="align-end">{{ task.user_id }}</v-list-tile-content>
+                            </v-list-tile>
                       </v-list>
                   </v-card>
               </v-flex>

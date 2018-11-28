@@ -3,21 +3,23 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\CompletedTask;
-use App\Http\Requests\UncompletedTask;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\TaskCompleted;
+use App\Http\Requests\TaskUncompleted;
 use App\Task;
 use Illuminate\Http\Request;
 
-class CompletedTasksController
+class CompletedTasksController extends Controller
 {
 
-    public function destroy(UncompletedTask $request, Task $task)
+    public function destroy(TaskUncompleted $request, Task $task)
     {
         $task->completed=false;
         $task->save();
 }
 
-    public function store(CompletedTask $request, Task $task)
+    public function store(TaskCompleted $request, Task $task)
     {
         $task->completed = true;
         $task->save();
