@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 
 
+use App\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
@@ -71,9 +72,21 @@ class TasquesControllerTest extends TestCase
     public function rol_task_user_can_index_tasques()
     {
     create_example_tasks();
-    $this->loginAsTasksUser();
+    $user =$this->loginAsTasksUser();
+
+        Task::create([
+            'name' => 'Task User Logged',
+            'completed' => false,
+            'description' => 'blabla',
+            'user_id' => $user->id
+        ]);
     //2
         $response = $this->get('/tasques');
         $response->assertSuccessful();
+
+        $response->assertViewIs('tasques');
+        $response->assertViewHas('tasks', function ($tasks){
+          return count($tasks) === 1;
+        });
     }
 }
