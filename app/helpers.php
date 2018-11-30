@@ -5,6 +5,7 @@ use App\Task;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Exceptions\PermissionAlreadyExists;
 use Spatie\Permission\Exceptions\RoleAlreadyExists;
 use Spatie\Permission\Exceptions\RoleDoesNotExist;
@@ -215,6 +216,14 @@ if (!function_exists('initialize_roles')) {
                 $role->givePermissionTo($permission);
             }
         }
+    }
+}
+
+if (!function_exists('initialize_gates')){
+    function initialize_gates(){
+        Gate::define('tasks.manage',function (){
+            return 
+        })
     }
 }
 if (!function_exists('sample_users')){

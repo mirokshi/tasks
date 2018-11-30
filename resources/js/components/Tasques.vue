@@ -325,6 +325,10 @@ export default {
     users: {
       type: Array,
       required: true
+    },
+    uri: {
+      type: Array,
+      required: true
     }
   },
   methods: {
@@ -332,7 +336,7 @@ export default {
       this.loading = true
       // setTimeout(() => { this.loading = false }, 5000)
       // ¡!¡! CAMBIA SEGUN EL CASO
-      window.axios.get('/api/v1/user/tasks').then(response => {
+      window.axios.get(this.uri).then(response => {
         console.log(response.data)
         // this.showMessage('Se ha actualizado correctamente')
         EventBus.$emit('showSnackbar')
@@ -357,7 +361,7 @@ export default {
     },
     destroy () {
       this.removing = true
-      window.axios.delete('/api/v1/user/tasks/' + this.taskBeginRemoved.id).then(() => {
+      window.axios.delete(this.uri + this.taskBeginRemoved.id).then(() => {
         // this.refresh() //Problema -> rendimiento
         // this.dataTasks.splice(this.dataTasks.indexOf(this.taskBeginRemoved), 1)
         this.removeTask(this.taskBeginRemoved)
