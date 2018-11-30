@@ -37,9 +37,9 @@ class TasksController extends Controller
     {
         $task = new Task();
         $task->name = $request->name;
-        $task->completed = false;
+        $task->completed = $request->completed;
+        $task->description = $request->description ?? null;
         $task->user_id = $request->user_id;
-        $task->user_gravatar = $request->user_gravatar;
         $task->save();
         return $task->map();
     }
@@ -47,16 +47,19 @@ class TasksController extends Controller
     public function update(TaskUpdate $request, Task $task)
     {
         $task->name = $request->name;
+        $task->completed = $request->completed;
+        $task->description = $request->description ?? $task->description;
+        $task->user_id = $request->user_id;
         $task->save();
         return $task->map();
     }
 
-    public function edit(TaskUpdate $request)
-    {
-        $task = Task::findOrFail($request->id);
-        return view('task_edit',[ 'task' => $task]);
-
-    }
+//    public function edit(TaskUpdate $request)
+//    {
+//        $task = Task::findOrFail($request->id);
+//        return view('task_edit',[ 'task' => $task]);
+//
+//    }
 
 
 }

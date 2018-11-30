@@ -2,7 +2,7 @@
   <span>
       <v-dialog v-model="deleteDialog">
             <v-card>
-                <v-card-title class="headline">Seguro?</v-card-title>
+                <v-card-title class="headline">Seguro? </v-card-title>
                 <v-card-text>
                     Esta opercion no se puede deshacer
                 </v-card-text>
@@ -112,24 +112,18 @@
              <v-spacer></v-spacer>
               <v-btn flat class="white--text" @click="showDialog=false">
                   <v-icon class="mr-1">exit_to_app</v-icon>
-                  CLOSE
               </v-btn>
-          <v-btn flat class="white--text">
-              <v-icon class="mr-1">save</v-icon>
-                SAVE
-          </v-btn>
          </v-toolbar>
           <v-card>
              <v-card-text>
                     <v-form>
-                        <v-text-field v-model="takeTask.name" label="Nom" hint="Nom de la tasca" readonly></v-text-field>
-                        <v-switch v-model="takeTask.completed" :label="takeTask.completed ? 'Completada':'Pendent'" readonly></v-switch>
-                        <v-textarea v-model="takeTask.description" label="Descripció" readonly></v-textarea>
-                        <v-autocomplete :items="dataUsers" label="Usuari" v-model="takeTask.user" item-text="name" return-object readonly></v-autocomplete>
+                        <v-text-field v-model="takeTask.name" label="Nombre" readonly></v-text-field>
+                        <v-switch v-model="takeTask.completed" :label="takeTask.completed ? 'Completada':'Pendiente'" readonly></v-switch>
+                        <v-textarea v-model="takeTask.description" label="Descripción" readonly></v-textarea>
+                        <v-autocomplete :items="dataUsers" label="Usuario" v-model="takeTask.user" item-text="name" return-object readonly></v-autocomplete>
                         <div class="text-xs-center">
                             <v-btn @click="showDialog=false">
                                 <v-icon class="mr-2">exit_to_app</v-icon>
-                                Salir
                             </v-btn>
                         </div>
                     </v-form>
@@ -205,7 +199,7 @@
                 <template slot="items" slot-scope="{item: task}">
                     <tr>
                         <td>{{task.id}}</td>
-                        <td  v-text="task.name"></td>
+                        <td>{{task.name}}</td>
                         <td>
                              <v-avatar :title="task.user_name">
                                 <img :src="task.user_gravatar" alt="avatar">
@@ -232,7 +226,6 @@
                             @click="showDestroy(task)">
                                 <v-icon>delete</v-icon>
                             </v-btn>
-
                         </td>
                     </tr>
                 </template>
@@ -328,7 +321,7 @@ export default {
       headers: [
         { text: 'ID', value: 'id' },
         { text: 'NAME', value: 'name' },
-        { text: 'USER ID', value: 'user_id' },
+        { text: 'USER', value: 'user_id' },
         { text: 'COMPLETED', value: 'completed' },
         { text: 'CREACION', value: 'created_at_timestamp' },
         { text: 'ACTUALIZACION', value: 'updated_at_timestamp' },
@@ -365,9 +358,7 @@ export default {
       }).catch(error => {
         this.$snackbar.showError(error.message)
         this.loading = false
-        // this.showError(error)
       })
-      // window.axios.get('/api/v1/user/tasks').then().catch()
     },
     create () {
       this.creating = true
@@ -389,12 +380,11 @@ export default {
     destroy () {
       this.removing = true
       window.axios.delete(this.uri + this.taskBeginRemoved.id).then(() => {
-        // this.refresh() //Problema -> rendimiento
-        // this.dataTasks.splice(this.dataTasks.indexOf(this.taskBeginRemoved), 1)
+        this.refresh()
         this.removeTask(this.taskBeginRemoved)
         this.deleteDialog = false
         this.taskBeginRemoved = null
-        this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
+        this.$snackbar.showMessage('Se ha borrado correctamente la tarea')
         this.removing = false
       }).catch(error => {
         this.$snackbar.showError(error.message)
@@ -426,7 +416,7 @@ export default {
     }
   },
   created () {
-    console.log('USUARIO LAGADO')
+    console.log('USUARIO LOGADO')
     console.log(window.laravel_user)
   }
 }

@@ -16,10 +16,10 @@ class TasquesController extends Controller
 
         if (Auth::user()->can('tasks.manage')){
             $tasks = map_collection(Task::orderBy('created_at','desc') -> get());
-            $uri = 'api/v1/tasks';
+            $uri = 'api/v1/tasks/';
         }else {
             $tasks = map_collection($request->user()->tasks);
-            $uri = 'api/v1/user/tasks';
+            $uri = 'api/v1/user/tasks/';
         }
         // MVC
         $users= User::all();
