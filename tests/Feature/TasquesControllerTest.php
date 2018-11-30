@@ -69,7 +69,7 @@ class TasquesControllerTest extends TestCase
     /**
      * @test
      */
-    public function rol_task_user_can_index_tasques()
+    public function _task_user_can_index_tasques()
     {
     create_example_tasks();
     $user =$this->loginAsTasksUser();
@@ -86,7 +86,10 @@ class TasquesControllerTest extends TestCase
 
         $response->assertViewIs('tasques');
         $response->assertViewHas('tasks', function ($tasks){
-          return count($tasks) === 1;
+          return count($tasks) === 1 &&
+              $tasks[0]['name']==='Task User Logged';
         });
+        $response->assertViewHas('users');
+        $response->assertViewHas('uri');
     }
 }

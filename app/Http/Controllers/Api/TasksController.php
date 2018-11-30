@@ -38,6 +38,8 @@ class TasksController extends Controller
         $task = new Task();
         $task->name = $request->name;
         $task->completed = false;
+        $task->user_id = $request->user_id;
+        $task->user_gravatar = $request->user_gravatar;
         $task->save();
         return $task->map();
     }

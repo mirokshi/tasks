@@ -221,9 +221,9 @@ if (!function_exists('initialize_roles')) {
 
 if (!function_exists('initialize_gates')){
     function initialize_gates(){
-        Gate::define('tasks.manage',function (){
-            return 
-        })
+        Gate::define('tasks.manage',function ($user){
+            return $user->isSuperAdmin() || $user->hasRole('TaskManager');
+        });
     }
 }
 if (!function_exists('sample_users')){

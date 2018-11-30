@@ -1,6 +1,6 @@
 <template>
     <v-form action="/login" method="POST">
-        <v-toolbar dark color="primary">
+        <v-toolbar dark color="grey darken-4">
             <v-toolbar-title>Login form</v-toolbar-title>
             <v-spacer></v-spacer>
         </v-toolbar>

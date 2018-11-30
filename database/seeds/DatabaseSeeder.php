@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
         //Crea usuario para profesor
         profe();
 
+
+
         //TODO -> Como hacerlo en el register
     }
 }

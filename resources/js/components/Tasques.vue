@@ -27,8 +27,7 @@
         </v-card-actions>
         </v-card>
         </v-dialog>
-      <v-dialog v-model="createDialog" fullscreen hide-overlay transition="dialog-bottom-transition"
-                @keydown.esc="createDialog=false">
+      <v-dialog v-model="createDialog" @keydown.esc="createDialog=false">
           <v-toolbar color="grey darken-3" class="white--text">
               <v-btn flat icon class="white--text" @click="createDialog=false">
               <v-icon class="mr-1">close</v-icon>
@@ -39,7 +38,14 @@
                 <v-icon class="mr-1">exit_to_app</v-icon>
                 EXIT
             </v-btn>
-          <v-btn flat class="white--text">
+          <v-btn
+                  flat
+                  class="white--text"
+                  @click="create"
+                  :loading="creating"
+                  :disabled="creating"
+
+          >
               <v-icon class="mr-1">save</v-icon>
               SAVE
           </v-btn>
@@ -53,14 +59,17 @@
                     <v-textarea v-model="description" label="Descripcion" hint="Descripcion"></v-textarea>
                     <v-autocomplete :items="dataUsers" label="Usuario" item-text="name"></v-autocomplete>
                      <v-btn @click="createDialog=false" ><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
-                    <v-btn><v-icon class="mr-1">save</v-icon></v-btn>
+                    <v-btn
+                            @click="create"
+                            :loading="creating"
+                            :disabled="creating"
+                    ><v-icon class="mr-1">save</v-icon></v-btn>
                 </v-form>
             </v-card-text>
               </v-card-text>
           </v-card>
       </v-dialog>
-      <v-dialog v-model="editDialog" fullscreen hide-overlay transition="dialog-bottom-transition"
-      @keydown.esc="editDialog=false">
+      <v-dialog v-model="editDialog" @keydown.esc="editDialog=false">
         <v-toolbar color="grey darken-3" class="white--text">
           <v-btn flat icon class="white--text" @click="editDialog=false">
               <v-icon class="mr-1">close</v-icon>
@@ -71,7 +80,11 @@
                 <v-icon class="mr-1">exit_to_app</v-icon>
                 EXIT
             </v-btn>
-          <v-btn flat class="white--text">
+          <v-btn
+                  flat
+                 class="white--text"
+
+          >
               <v-icon class="mr-1">save</v-icon>
               SAVE
           </v-btn>
@@ -90,8 +103,7 @@
         </v-card>
 
       </v-dialog>
-      <v-dialog v-model="showDialog" fullscreen hide-overlay transition="dialog-bottom-transition"
-                @keydown.esc="showDialog=false">
+      <v-dialog v-model="showDialog" @keydown.esc="showDialog=false">
          <v-toolbar  color="grey darken-3" class="white--text">
              <v-btn flat icon class="white--text" @click="showDialog=false">
               <v-icon class="mr-1">close</v-icon>
@@ -108,16 +120,20 @@
           </v-btn>
          </v-toolbar>
           <v-card>
-              <v-card-text>
-                <v-form>
-                    <v-text-field v-model="name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
-                    <v-switch v-model="completed" :label="completed ? 'Completada':'Pendiente'"></v-switch>
-                    <v-textarea v-model="description" label="Descripcion" hint="Descripcion"></v-textarea>
-                    <v-autocomplete :items="dataUsers" label="Usuario" item-text="name"></v-autocomplete>
-                     <v-btn @click="showDialog=false"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
-                    <v-btn><v-icon class="mr-1">save</v-icon></v-btn>
-                </v-form>
-            </v-card-text>
+             <v-card-text>
+                    <v-form>
+                        <v-text-field v-model="takeTask.name" label="Nom" hint="Nom de la tasca" readonly></v-text-field>
+                        <v-switch v-model="takeTask.completed" :label="takeTask.completed ? 'Completada':'Pendent'" readonly></v-switch>
+                        <v-textarea v-model="takeTask.description" label="Descripció" readonly></v-textarea>
+                        <v-autocomplete :items="dataUsers" label="Usuari" v-model="takeTask.user" item-text="name" return-object readonly></v-autocomplete>
+                        <div class="text-xs-center">
+                            <v-btn @click="showDialog=false">
+                                <v-icon class="mr-2">exit_to_app</v-icon>
+                                Salir
+                            </v-btn>
+                        </div>
+                    </v-form>
+                </v-card-text>
           </v-card>
       </v-dialog>
        <v-toolbar color="grey darken-4">
@@ -195,7 +211,7 @@
                                 <img :src="task.user_gravatar" alt="avatar">
                             </v-avatar>
                         </td>
-                          <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendiente'"></v-switch>
+                          <v-switch v-model="task.completed" :label="task.completed ? 'Completada' : 'Pendiente'"></v-switch>
                         <td>
                              <span :title="task.created_at_formatted">{{ task.created_at_human}}</span>
                         </td>
@@ -204,7 +220,7 @@
                         </td>
                         <td>
 
-                            <v-btn v-can="tasks.create" icon color="primary" flat title="Muestra una tarea"
+                            <v-btn v-can="tasks.show" icon color="primary" flat title="Muestra una tarea"
                                    @click="showTasks(task)">
                                 <v-icon>visibility</v-icon>
                             </v-btn>
@@ -256,6 +272,7 @@
           </v-data-iterator>
       </v-card>
       <v-btn
+              v-can="tasks.create"
               @click="showCreate"
               fab
               bottom
@@ -273,6 +290,7 @@ export default {
   name: 'Tasques',
   data () {
     return {
+      takeTask: '',
       dataUsers: this.users,
       name: '',
       completed: false,
@@ -303,6 +321,7 @@ export default {
       },
       loading: false,
       taskBeginRemoved: null,
+      creating: false,
       removing: false,
       editing: false,
       dataTasks: this.tasks,
@@ -327,37 +346,45 @@ export default {
       required: true
     },
     uri: {
-      type: Array,
+      type: String,
       required: true
     }
   },
   methods: {
+    opcion1 () {
+      console.log('TODO OPCION1')
+    },
     refresh () {
       this.loading = true
       // setTimeout(() => { this.loading = false }, 5000)
       // ¡!¡! CAMBIA SEGUN EL CASO
       window.axios.get(this.uri).then(response => {
-        console.log(response.data)
-        // this.showMessage('Se ha actualizado correctamente')
-        EventBus.$emit('showSnackbar')
+        this.$snackbar.showMessage('Se ha actualizado correctamente')
         this.dataTasks = response.data
         this.loading = false
       }).catch(error => {
-        console.log(error)
+        this.$snackbar.showError(error.message)
         this.loading = false
-        this.showError(error)
+        // this.showError(error)
       })
       // window.axios.get('/api/v1/user/tasks').then().catch()
     },
-    opcion1 () {
-      console.log('TODO OPCION1')
-    },
-    showDestroy (task) {
-      this.deleteDialog = true
-      this.taskBeginRemoved = task
-    },
-    removeTask (task) {
-      this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
+    create () {
+      this.creating = true
+      window.axios.post(this.uri, {
+        user_id: this.user.id,
+        name: this.name,
+        completed: this.completed,
+        description: this.description
+      }).then(() => {
+        this.refresh()
+        this.createDialog = false
+        this.$snackbar.showMessage('Se ha creado correctamente')
+        this.creating = false
+      }).catch((error) => {
+        this.$snackbar.showError(error.message)
+        this.creating = false
+      })
     },
     destroy () {
       this.removing = true
@@ -374,26 +401,31 @@ export default {
         this.removing = false
       })
     },
-     showUpdate () {
-      this.editDialog = true
+    removeTask (task) {
+      this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
     },
     showCreate () {
       this.createDialog = true
     },
-    showTasks () {
+    showDestroy (task) {
+      this.deleteDialog = true
+      this.taskBeginRemoved = task
+    },
+    showUpdate () {
+      this.editDialog = true
+    },
+    showTasks (task) {
+      this.takeTask = task
       this.showDialog = true
     },
     update () {
       this.editDialog = false
     },
-    create () {
-      this.createDialog = false
-    },
     show () {
       this.showDialog = false
     }
   },
-  created(){
+  created () {
     console.log('USUARIO LAGADO')
     console.log(window.laravel_user)
   }
