@@ -226,58 +226,73 @@ if (!function_exists('initialize_gates')){
         });
     }
 }
-if (!function_exists('sample_users')){
-    function sample_users(){
-        //Superadmin no hace falta -> soy yo
+if (!function_exists('sample_users_and_tasks')) {
+    function sample_users_and_tasks() {
+        // Superadmin no cal -> soc jo mateix
 
-       try {
-           //Pepe pringao -> No tiene ningun permiso
+        // Pepe Pringao -> No té cap permis ni cap rol
+
+        try {
             factory(User::class)->create([
-               'name' => 'Pepe Pringao',
-               'email' => 'pepepringao@hotmail.com',
-                'password' => bcrypt(env('PRIMARY_USER_PASSWORD', 'secret'))
-           ]);
-       } catch (Exception $e){
+                'name' => 'Pepe Pringao',
+                'email' => 'pepepringao@hotmail.com'
+            ]);
+        } catch (Exception $e) {}
 
-       }
+        try {
+            $bartsimpson = factory(User::class)->create([
+                'name' => 'Bart Simpson',
+                'email' => 'bartsimpson@simpson.com'
+            ]);
+        } catch (Exception $e) {}
 
-       try {
-           $bartsimpson = factory(User::class)->create([
-               'name' => 'Bart Simpson',
-               'email' => 'bart@hotmail.com',
-               'password' => bcrypt(env('PRIMARY_USER_PASSWORD', 'secret'))
-           ]);
-       }catch (Exception $e){
+        Task::create([
+            'name' => 'Patinar pels carrers',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $bartsimpson->id
+        ]);
 
-       }
-
+        Task::create([
+            'name' => 'Escriure 100 vegades no...',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $bartsimpson->id
+        ]);
 
         try {
             $bartsimpson->assignRole('Tasks');
-        }catch (Exception $e){
-
-        }
+        } catch (Exception $e) {}
 
         try {
             $homersimpson = factory(User::class)->create([
                 'name' => 'Homer Simpson',
-                'email' => 'homer@hotmail.com',
-                'password' => bcrypt(env('PRIMARY_USER_PASSWORD', 'secret'))
+                'email' => 'homersimpson@simpson.com'
             ]);
-        }catch (Exception $e){
-
-        }
+        } catch (Exception $e) {}
 
         try {
-            $homersimpson->assignRole('TasksManager');
-        }catch (Exception $e){
-
-        }   try {
+            $homersimpson->assignRole('TaskManager');
             $homersimpson->assignRole('Tasks');
-        }catch (Exception $e){
+        } catch (Exception $e) {}
 
-        }
+        try {
+            $homersimpson->assignRole('Tasks');
+        } catch (Exception $e) {}
 
+        Task::create([
+            'name' => 'Anar a treballar a la central nuclear',
+            'completed' => false,
+            'description' => 'quin pal',
+            'user_id' => $homersimpson->id
+        ]);
+
+        Task::create([
+            'name' => 'Gestionar les tasques',
+            'completed' => false,
+            'description' => 'Hey you!',
+            'user_id' => $homersimpson->id
+        ]);
     }
 }
 

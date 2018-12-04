@@ -30,7 +30,7 @@
                     <v-text-field v-model="name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
                     <v-switch v-model="completed" :label="completed ? 'Completada':'Pendiente'"></v-switch>
                     <v-textarea v-model="description" label="Descripcion" hint="Descripcion"></v-textarea>
-                    <v-autocomplete :items="dataUsers" label="Usuario" item-text="name"></v-autocomplete>
+                    <v-autocomplete v-model="user_id" :items="dataUsers" label="Usuario" item-text="name" item-value="id"></v-autocomplete>
                      <v-btn @click="createDialog=false" ><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
                     <v-btn
                             @click="create"
@@ -265,6 +265,7 @@ export default {
   },
   data () {
     return {
+      user_id: '',
       takeTask: '',
       dataUsers: this.users,
       name: '',
@@ -341,7 +342,7 @@ export default {
     create () {
       this.creating = true
       window.axios.post(this.uri, {
-        user_id: this.user.id,
+        user_id: this.user_id,
         name: this.name,
         completed: this.completed,
         description: this.description

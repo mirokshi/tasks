@@ -1,5 +1,5 @@
 <template>
-    <v-switch v-model="dataCompleted" :label="dataCompleted ? 'Completada' : 'Pendiente'"></v-switch>
+    <v-switch :loading="loading" :disabled="loading" v-model="dataCompleted" :label="dataCompleted ? 'Completada' : 'Pendiente'"></v-switch>
 </template>
 
 <script>
@@ -7,7 +7,8 @@ export default {
   name: 'Toggle',
   data () {
     return {
-      dataCompleted: this.completed
+      dataCompleted: this.completed,
+      loading: false
     }
   },
   props: {
@@ -21,7 +22,7 @@ export default {
     }
   },
   watch: {
-    completed(completed){
+    completed (completed) {
       this.dataCompleted = completed
     },
     dataCompleted (dataCompleted, oldDataCompleted) {
@@ -31,10 +32,23 @@ export default {
       console.log('antiguo')
       console.log(oldDataCompleted)
       if (dataCompleted) {
-        // LOADING Y DISABLED
-        window.axios.post('/v1/completed_task/{task}') // TODO ACABAR
+        this.loading = true
+        window.axios.post('/api/v1/completed_task/' + this.id).then(response => {
+          this.$snackbar.showMessage('Se ha actualizado correctamente')
+          this.loading = false
+        }).catch(error => {
+          this.$snackbar.showError(error.message)
+          this.loading = false
+        })
       } else {
-        // window.axios.delete('/v1/completed_task/{task}')
+        this.loading = true
+        window.axios.delete('/api/v1/completed_task/' + this.id).then(response =>{
+          this.$snackbar.showMessage('Se ha actualizado correctamente')
+          this.loading = false
+        }).catch(error => {
+          this.$snackbar.showError(error.message)
+          this.loading = false
+        })
       }
     }
   }

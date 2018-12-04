@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
 
 
         // Crear usuarios de prueba
-        sample_users();
+        sample_users_and_tasks();
 
         //Crea usuario para profesor
         profe();
