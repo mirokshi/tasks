@@ -65,7 +65,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return $user = User::create([
+         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -73,5 +73,6 @@ class RegisterController extends Controller
 
 //        TODO ENVIAR VVELCOME EMAIL
         Mail::to($user)->send(new WelcomeEmail($user));
+        return $user;
     }
 }

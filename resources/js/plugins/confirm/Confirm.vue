@@ -25,7 +25,7 @@ export default {
     },
     buttonFalseText: {
       type: String,
-      default: 'Cancel·lar'
+      default: 'Cancelar'
     },
     buttonTrueColor: {
       type: String,
@@ -45,7 +45,7 @@ export default {
     },
     message: {
       type: String,
-      reqiured: true
+      required: true
     },
     title: {
       type: String

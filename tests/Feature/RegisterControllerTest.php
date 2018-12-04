@@ -35,10 +35,8 @@ class RegisterControllerTest extends TestCase
             'password_confirmation' => 'secret'
         ]);
 
-        dd($this->$user->name);
-
         Mail::assertSent(WelcomeEmail::class, function ($mail){
-           return  $this->user->name == 'Jose';
+           return  Auth::user()->name == 'Jose';
         });
 
         //3

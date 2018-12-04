@@ -14,47 +14,48 @@ use Tests\TestCase;
 class MailTest extends TestCase{
     use RefreshDatabase;
 
-    /**
-     * @test
-     */
-    public function send_email()
-    {
-
-        dump(env('MAIL_DRIVER'));
-        //1
-        $user = factory(User::class)->create();
-        //2
-        Mail::to($user)->send(new TestMail());
-        //3
-        $this->assertTrue(true);
-    }
-
-    /**
-     * @test
-     */
-    public function send_markdown_dinamic_email()
-    {
-
-        dump(env('MAIL_DRIVER'));
-        //1
-        $user = factory(User::class)->create();
-        //2
-        Mail::to($user)->send(new TestDinamicEmail($user));
-        //3
-        $this->assertTrue(true);
-    }
-
-    /**
-     * @test
-     */
-    public function send_welcome_email()
-    {
-        dump(env('MAIL_DRIVER'));
-        //1
-        $user = factory(User::class)->create();
-        //2
-        Mail::to($user)->send(new WelcomeEmail($user));
-        //3
-        $this->assertTrue(true);
-    }
+//    /**
+//     * @test
+//     */
+//    public function send_email()
+//    {
+//
+//        dump(env('MAIL_DRIVER'));
+//        //1
+//        $user = factory(User::class)->create();
+//        //2
+//        Mail::to($user)->send(new TestMail());
+//        //3
+//        $this->assertTrue(true);
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    public function send_markdown_dinamic_email()
+//    {
+//
+//        dump(env('MAIL_DRIVER'));
+//        //1
+//        $user = factory(User::class)->create();
+//        //2
+//        Mail::to($user)->send(new TestDinamicEmail($user));
+//        //3
+//        $this->assertTrue(true);
+//    }
+//
+//    /**
+//     * @test
+//     */
+//    public function send_welcome_email()
+//    {
+//        dump(env('MAIL_DRIVER'));
+//        //1
+//        $user = factory(User::class)->create();
+//        //2
+//        Mail::to($user)->send(new WelcomeEmail($user));
+//        //3
+//        $this->assertTrue(true);
+//
+//    }
 }
