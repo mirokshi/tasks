@@ -4,16 +4,16 @@
 @endsection
 
 @section('content')
-    <v-app light  class="grey darken-4 grey--text">
-<v-toolbar class="grey darken-4 grey--text">
+    <v-app light  class="grey darken-4 white--text">
+<v-toolbar class="grey darken-4 white--text">
     <v-toolbar-title> Homepage Tasks</v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn href="login" class="indigo darken-4 white--text"> LOGIN</v-btn>
+    <v-btn href="login" class="indigo darken-4 white--text"> LOGIN  </v-btn>
     <v-btn href="register" class="indigo darken-4 white--text"> REGISTER</v-btn>
 </v-toolbar>
 <v-content>
     <section>
-        <v-parallax src="img/hero.jpeg" height="600">
+        <v-parallax src="https://placeimg.com/1000/1000/tech" height="600">
             <v-layout
                     column
                     align-center
@@ -103,7 +103,7 @@
     </section>
 
     <section>
-        <v-parallax src="img/nebula.jpg" height="380">
+        <v-parallax src="https://placeimg.com/1000/1000/any" height="380">
             <v-layout column align-center justify-center>
                 <div class="headline white--text mb-3 text-xs-center">Web development has never been easier</div>
                 <em>Kick-start your application today</em>

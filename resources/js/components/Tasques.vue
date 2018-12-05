@@ -55,8 +55,10 @@
             </v-btn>
           <v-btn
                   flat
-                 class="white--text"
-
+                  class="white--text"
+                  @click="update"
+                  :loading="editing"
+                  :disabled="editing"
           >
               <v-icon class="mr-1">save</v-icon>
               SAVE
@@ -65,12 +67,17 @@
           <v-card>
             <v-card-text>
                 <v-form>
-                    <v-text-field v-model="name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
-                    <v-switch v-model="completed" :label="completed ? 'Completada':'Pendiente'"></v-switch>
-                    <v-textarea v-model="description" label="Descripcion" hint="Descripcion"></v-textarea>
-                    <v-autocomplete :items="dataUsers" label="Usuario" item-text="name"></v-autocomplete>
+                    <v-text-field v-model="taskBeingUpdated.name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
+                    <v-switch v-model="taskBeingUpdated.completed" :label="completed ? 'Completada':'Pendiente'"></v-switch>
+                    <v-textarea v-model="taskBeingUpdated.description" label="Descripcion" hint="Descripcion"></v-textarea>
+                    <v-autocomplete :items="dataUsers" v-model="taskBeingUpdated.user_id" label="Usuario" item-text="name"></v-autocomplete>
                      <v-btn @click="editDialog=false"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
-                    <v-btn><v-icon class="mr-1">save</v-icon></v-btn>
+                    <v-btn
+                            @click="update"
+                            :loading="editing"
+                            :disabled="editing"
+                            >
+                        <v-icon class="mr-1">save</v-icon></v-btn>
                 </v-form>
             </v-card-text>
         </v-card>
@@ -265,7 +272,7 @@ export default {
   },
   data () {
     return {
-      user_id: '',
+      user: '',
       takeTask: '',
       dataUsers: this.users,
       name: '',
@@ -278,7 +285,7 @@ export default {
       snackbarMessage: '',
       snackbarTimeout: 3000,
       snackbarColor: 'success',
-      user: '',
+      taskBeingUpdated: '',
       usersold: [
         'Jose',
         'Manuel',
@@ -296,8 +303,8 @@ export default {
       },
       loading: false,
       creating: false,
-      removing: null,
-      editing: false,
+      removing: false,
+      editing: null,
       dataTasks: this.tasks,
       headers: [
         { text: 'ID', value: 'id' },
@@ -386,21 +393,40 @@ export default {
         })
       }
     },
+    update () {
+      this.editing = false
+      window.axios.post(this.uri + this.taskBeingUpdate.id, {
+        user_id: this.taskBeingUpdated.user_id,
+        name: this.taskBeingUpdated.name,
+        completed: this.taskBeingUpdated.completed,
+        description: this.taskBeingUpdated.description
+      }).then(() => {
+        this.refresh()
+        this.editDialog = false
+        this.taskBeingUpdated = null
+        this.$snackbar.showMessage('Se ha modificado correctamente')
+        this.editing = false
+      }).catch((error) => {
+        this.$snackbar.showError(error.message)
+        this.editing = false
+      })
+    },
     removeTask (task) {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
+    },
+    editTask(task){
+
     },
     showCreate () {
       this.createDialog = true
     },
-    showUpdate () {
+    showUpdate (task) {
       this.editDialog = true
+      this.taskBeingUpdated = task
     },
     showTasks (task) {
       this.takeTask = task
       this.showDialog = true
-    },
-    update () {
-      this.editDialog = false
     },
     show () {
       this.showDialog = false
