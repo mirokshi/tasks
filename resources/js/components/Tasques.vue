@@ -195,20 +195,18 @@
                             <span :title="task.updated_at_formatted">{{task.updated_at_human}}</span>
                         </td>
                         <td>
-
-                            <v-btn v-can="tasks.show" icon color="primary" flat title="Muestra una tarea"
+                            <v-btn v-if="$can('tasks.update', task)" color="success" icon flat title="Modificar la tasca"
+                                     @click="showUpdate(task)">
+                            <v-icon>border_color</v-icon>
+                            </v-btn>
+                            <v-btn v-if="$can('tasks.show', task)" color="warning" icon flat title="Modificar la tasca"
                                    @click="showTasks(task)">
-                                <v-icon>visibility</v-icon>
+                            <v-icon>remove_red_eye</v-icon>
                             </v-btn>
-                            <v-btn v-can="tasks.update" icon color="success" flat title="Edita una tarea"
-                                   @click="showUpdate(task)">
-                                <v-icon>edit</v-icon>
-                            </v-btn>
-                            <v-btn v-can="tasks.destroy" icon color="error" flat title="Elimina una tarea"
-                                   :loading="removing === task.id" :disabled="removing === task.id"
-                            @click="destroy(task)">
-                                <v-icon>delete</v-icon>
-                            </v-btn>
+                            <v-btn v-if="$can('tasks.destroy', task)" :loading="removing === task.id" :disabled="removing === task.id" color="error" flat icon title="Eliminar la tasca"
+                                   @click="destroy(task)">
+                            <v-icon>delete</v-icon>
+                        </v-btn>
                         </td>
                     </tr>
                 </template>
@@ -248,13 +246,13 @@
           </v-data-iterator>
       </v-card>
       <v-btn
-              v-can="tasks.create"
-              @click="showCreate"
               fab
               bottom
               right
               fixed
               color ="pink"
+              @click="showCreate"
+              v-if="$can('user.tasks.store')"
       class="white--text">
           <v-icon>add</v-icon>
       </v-btn>
@@ -428,7 +426,7 @@ export default {
       this.takeTask = task
       this.showDialog = true
     },
-    show () {
+    show (task) {
       this.showDialog = false
     }
   },
