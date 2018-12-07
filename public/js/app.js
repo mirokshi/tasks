@@ -73370,6 +73370,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -73381,7 +73386,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   },
   data: function data() {
     return {
-      user_id: '',
+      user: '',
       takeTask: '',
       dataUsers: this.users,
       name: '',
@@ -73394,7 +73399,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       snackbarMessage: '',
       snackbarTimeout: 3000,
       snackbarColor: 'success',
-      user: '',
+      taskBeingUpdated: '',
       usersold: ['Jose', 'Manuel', 'Emilio'],
       filter: 'Todos',
       filters: ['Todos', 'Completados', 'Pendientes'],
@@ -73404,8 +73409,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       },
       loading: false,
       creating: false,
-      removing: null,
-      editing: false,
+      removing: false,
+      editing: null,
       dataTasks: this.tasks,
       headers: [{ text: 'ID', value: 'id' }, { text: 'NAME', value: 'name' }, { text: 'USER', value: 'user_id' }, { text: 'COMPLETED', value: 'completed' }, { text: 'CREACION', value: 'created_at_timestamp' }, { text: 'ACTUALIZACION', value: 'updated_at_timestamp' }, { text: 'ACCION', sortable: false, value: 'full_search' }]
     };
@@ -73517,23 +73522,42 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
       return destroy;
     }(),
+    update: function update() {
+      var _this4 = this;
+
+      this.editing = false;
+      window.axios.post(this.uri + this.taskBeingUpdate.id, {
+        user_id: this.taskBeingUpdated.user_id,
+        name: this.taskBeingUpdated.name,
+        completed: this.taskBeingUpdated.completed,
+        description: this.taskBeingUpdated.description
+      }).then(function () {
+        _this4.refresh();
+        _this4.editDialog = false;
+        _this4.taskBeingUpdated = null;
+        _this4.$snackbar.showMessage('Se ha modificado correctamente');
+        _this4.editing = false;
+      }).catch(function (error) {
+        _this4.$snackbar.showError(error.message);
+        _this4.editing = false;
+      });
+    },
     removeTask: function removeTask(task) {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1);
     },
+    editTask: function editTask(task) {},
     showCreate: function showCreate() {
       this.createDialog = true;
     },
-    showUpdate: function showUpdate() {
+    showUpdate: function showUpdate(task) {
       this.editDialog = true;
+      this.taskBeingUpdated = task;
     },
     showTasks: function showTasks(task) {
       this.takeTask = task;
       this.showDialog = true;
     },
-    update: function update() {
-      this.editDialog = false;
-    },
-    show: function show() {
+    show: function show(task) {
       this.showDialog = false;
     }
   },
@@ -74882,7 +74906,15 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-btn",
-                { staticClass: "white--text", attrs: { flat: "" } },
+                {
+                  staticClass: "white--text",
+                  attrs: {
+                    flat: "",
+                    loading: _vm.editing,
+                    disabled: _vm.editing
+                  },
+                  on: { click: _vm.update }
+                },
                 [
                   _c("v-icon", { staticClass: "mr-1" }, [_vm._v("save")]),
                   _vm._v("\n              SAVE\n          ")
@@ -74908,11 +74940,11 @@ var render = function() {
                           hint: "El nombre de la tarea"
                         },
                         model: {
-                          value: _vm.name,
+                          value: _vm.taskBeingUpdated.name,
                           callback: function($$v) {
-                            _vm.name = $$v
+                            _vm.$set(_vm.taskBeingUpdated, "name", $$v)
                           },
-                          expression: "name"
+                          expression: "taskBeingUpdated.name"
                         }
                       }),
                       _vm._v(" "),
@@ -74921,22 +74953,22 @@ var render = function() {
                           label: _vm.completed ? "Completada" : "Pendiente"
                         },
                         model: {
-                          value: _vm.completed,
+                          value: _vm.taskBeingUpdated.completed,
                           callback: function($$v) {
-                            _vm.completed = $$v
+                            _vm.$set(_vm.taskBeingUpdated, "completed", $$v)
                           },
-                          expression: "completed"
+                          expression: "taskBeingUpdated.completed"
                         }
                       }),
                       _vm._v(" "),
                       _c("v-textarea", {
                         attrs: { label: "Descripcion", hint: "Descripcion" },
                         model: {
-                          value: _vm.description,
+                          value: _vm.taskBeingUpdated.description,
                           callback: function($$v) {
-                            _vm.description = $$v
+                            _vm.$set(_vm.taskBeingUpdated, "description", $$v)
                           },
-                          expression: "description"
+                          expression: "taskBeingUpdated.description"
                         }
                       }),
                       _vm._v(" "),
@@ -74945,6 +74977,13 @@ var render = function() {
                           items: _vm.dataUsers,
                           label: "Usuario",
                           "item-text": "name"
+                        },
+                        model: {
+                          value: _vm.taskBeingUpdated.user_id,
+                          callback: function($$v) {
+                            _vm.$set(_vm.taskBeingUpdated, "user_id", $$v)
+                          },
+                          expression: "taskBeingUpdated.user_id"
                         }
                       }),
                       _vm._v(" "),
@@ -74967,6 +75006,13 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "v-btn",
+                        {
+                          attrs: {
+                            loading: _vm.editing,
+                            disabled: _vm.editing
+                          },
+                          on: { click: _vm.update }
+                        },
                         [
                           _c("v-icon", { staticClass: "mr-1" }, [
                             _vm._v("save")
@@ -75374,88 +75420,70 @@ var render = function() {
                           _c(
                             "td",
                             [
-                              _c(
-                                "v-btn",
-                                {
-                                  directives: [
+                              _vm.$can("tasks.update", task)
+                                ? _c(
+                                    "v-btn",
                                     {
-                                      name: "can",
-                                      rawName: "v-can",
-                                      value: _vm.tasks.show,
-                                      expression: "tasks.show"
-                                    }
-                                  ],
-                                  attrs: {
-                                    icon: "",
-                                    color: "primary",
-                                    flat: "",
-                                    title: "Muestra una tarea"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.showTasks(task)
-                                    }
-                                  }
-                                },
-                                [_c("v-icon", [_vm._v("visibility")])],
-                                1
-                              ),
+                                      attrs: {
+                                        color: "success",
+                                        icon: "",
+                                        flat: "",
+                                        title: "Modificar la tasca"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.showUpdate(task)
+                                        }
+                                      }
+                                    },
+                                    [_c("v-icon", [_vm._v("border_color")])],
+                                    1
+                                  )
+                                : _vm._e(),
                               _vm._v(" "),
-                              _c(
-                                "v-btn",
-                                {
-                                  directives: [
+                              _vm.$can("tasks.show", task)
+                                ? _c(
+                                    "v-btn",
                                     {
-                                      name: "can",
-                                      rawName: "v-can",
-                                      value: _vm.tasks.update,
-                                      expression: "tasks.update"
-                                    }
-                                  ],
-                                  attrs: {
-                                    icon: "",
-                                    color: "success",
-                                    flat: "",
-                                    title: "Edita una tarea"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.showUpdate(task)
-                                    }
-                                  }
-                                },
-                                [_c("v-icon", [_vm._v("edit")])],
-                                1
-                              ),
+                                      attrs: {
+                                        color: "warning",
+                                        icon: "",
+                                        flat: "",
+                                        title: "Modificar la tasca"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.showTasks(task)
+                                        }
+                                      }
+                                    },
+                                    [_c("v-icon", [_vm._v("remove_red_eye")])],
+                                    1
+                                  )
+                                : _vm._e(),
                               _vm._v(" "),
-                              _c(
-                                "v-btn",
-                                {
-                                  directives: [
+                              _vm.$can("tasks.destroy", task)
+                                ? _c(
+                                    "v-btn",
                                     {
-                                      name: "can",
-                                      rawName: "v-can",
-                                      value: _vm.tasks.destroy,
-                                      expression: "tasks.destroy"
-                                    }
-                                  ],
-                                  attrs: {
-                                    icon: "",
-                                    color: "error",
-                                    flat: "",
-                                    title: "Elimina una tarea",
-                                    loading: _vm.removing === task.id,
-                                    disabled: _vm.removing === task.id
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.destroy(task)
-                                    }
-                                  }
-                                },
-                                [_c("v-icon", [_vm._v("delete")])],
-                                1
-                              )
+                                      attrs: {
+                                        loading: _vm.removing === task.id,
+                                        disabled: _vm.removing === task.id,
+                                        color: "error",
+                                        flat: "",
+                                        icon: "",
+                                        title: "Eliminar la tasca"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.destroy(task)
+                                        }
+                                      }
+                                    },
+                                    [_c("v-icon", [_vm._v("delete")])],
+                                    1
+                                  )
+                                : _vm._e()
                             ],
                             1
                           )
@@ -75568,24 +75596,24 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-btn",
-        {
-          directives: [
+      _vm.$can("user.tasks.store")
+        ? _c(
+            "v-btn",
             {
-              name: "can",
-              rawName: "v-can",
-              value: _vm.tasks.create,
-              expression: "tasks.create"
-            }
-          ],
-          staticClass: "white--text",
-          attrs: { fab: "", bottom: "", right: "", fixed: "", color: "pink" },
-          on: { click: _vm.showCreate }
-        },
-        [_c("v-icon", [_vm._v("add")])],
-        1
-      )
+              staticClass: "white--text",
+              attrs: {
+                fab: "",
+                bottom: "",
+                right: "",
+                fixed: "",
+                color: "pink"
+              },
+              on: { click: _vm.showCreate }
+            },
+            [_c("v-icon", [_vm._v("add")])],
+            1
+          )
+        : _vm._e()
     ],
     1
   )
@@ -75806,6 +75834,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -75831,16 +75860,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (!this.$v.dataEmail.$dirty) {
         return errors;
       } else {
-        !this.$v.dataEmail.email && errors.push('E-mail invalido');
+        !this.$v.dataEmail.email && errors.push('e-mail invalid');
       }
-      !this.$v.dataEmail.required && errors.push('E-mail es obligatorio');
+      !this.$v.dataEmail.required && errors.push('e-mail is required');
       return errors;
     },
     passwordErrors: function passwordErrors() {
       var errors = [];
       if (!this.$v.password.$dirty) return errors;
-      !this.$v.password.required && errors.push('Password es obligatorio');
-      !this.$v.password.minLength && errors.push('Password debe mayor de 6');
+      !this.$v.password.required && errors.push('Password is required');
+      !this.$v.password.minLength && errors.push('Password it must be greater than 6');
       return errors;
     }
   }
@@ -76673,8 +76702,20 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-btn",
-            { attrs: { color: "primary", type: "submit", disable: "true" } },
+            {
+              staticClass: "white--text",
+              attrs: { color: "grey darken-4", type: "submit", disable: "true" }
+            },
             [_vm._v("Login")]
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "white--text",
+              attrs: { color: "grey darken-4", href: "/" }
+            },
+            [_vm._v("Cancel")]
           )
         ],
         1
@@ -76771,8 +76812,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
-// validationMixin = vuelidate.validationMixin
+
 
 
 
@@ -76780,7 +76822,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   mixins: [__WEBPACK_IMPORTED_MODULE_0_vuelidate__["validationMixin"]],
   validations: {
     name: { required: __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__["required"], minLength: Object(__WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__["minLength"])(3) },
-    dataEmail: { required: __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__["required"], minLength: Object(__WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__["minLength"])(6), email: __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__["email"] },
+    dataEmail: { required: __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__["required"], email: __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__["email"] },
     password: { required: __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__["required"], minLength: Object(__WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__["minLength"])(6) },
     password_confirmation: { sameAsPassword: Object(__WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__["sameAs"])('password') }
   },
@@ -76802,10 +76844,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     emailErrors: function emailErrors() {
       var errors = [];
       if (!this.$v.dataEmail.$dirty) return errors;
-
-      !this.$v.dataEmail.minLength && errors.push('El camp email ha de tindre una mida minima de 6 caracters');
-      !this.$v.dataEmail.required && errors.push('El camp email es obligatori');
-      !this.$v.dataEmail.email && errors.push('El camp email ha de tindre un format mail valid');
+      !this.$v.dataEmail.required && errors.push('The camp email is required');
+      !this.$v.dataEmail.email && errors.push('The camp emil is required');
       return errors;
     },
     nameErrors: function nameErrors() {
@@ -76813,20 +76853,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (!this.$v.name.$dirty) return errors;
 
       !this.$v.name.minLength && errors.push('El camp name ha de tindre una mida minima de 6 caracters');
-      !this.$v.name.required && errors.push('El camp name es obligatori');
+      !this.$v.name.required && errors.push('The camp name is required');
       return errors;
     },
     passwordErrors: function passwordErrors() {
       var errors = [];
       if (!this.$v.password.$dirty) return errors;
       !this.$v.password.minLength && errors.push('El camp password ha de tindre una mida minima de 6 caracters');
-      !this.$v.password.required && errors.push('El camp password es obligatori');
+      !this.$v.password.required && errors.push('The camp password is required');
       return errors;
     },
     password_confirmationErrors: function password_confirmationErrors() {
       var errors = [];
       if (!this.$v.password_confirmation.$dirty) return errors;
-      !this.$v.password_confirmation.sameAsPassword && errors.push('Les contrassenyes no coincideixen!');
+      !this.$v.password_confirmation.sameAsPassword && errors.push('Passwords are not the same');
       return errors;
     }
   }
@@ -76973,9 +77013,18 @@ var render = function() {
         [
           _c("v-spacer"),
           _vm._v(" "),
-          _c("v-btn", { attrs: { color: "primary", type: "submit" } }, [
+          _c("v-btn", { attrs: { color: "grey darken-4", type: "submit" } }, [
             _vm._v("Register")
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "white--text",
+              attrs: { color: "grey darken-4", href: "/" }
+            },
+            [_vm._v("Cancel")]
+          )
         ],
         1
       )
