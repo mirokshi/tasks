@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-<div id="app" v-cloak>
+<div id="app"  v-cloak>
     <v-app>
         <snackbar></snackbar>
         <v-navigation-drawer

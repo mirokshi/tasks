@@ -1,47 +1,5 @@
 <template>
   <span>
-      <v-dialog v-model="createDialog" @keydown.esc="createDialog=false">
-          <v-toolbar color="grey darken-3" class="white--text">
-              <v-btn flat icon class="white--text" @click="createDialog=false">
-              <v-icon class="mr-1">close</v-icon>
-              </v-btn>
-            <v-toolbar-title class="white--text">Create Task</v-toolbar-title>
-               <v-spacer></v-spacer>
-            <v-btn flat  class="white--text" @click="createDialog=false">
-                <v-icon class="mr-1">exit_to_app</v-icon>
-                EXIT
-            </v-btn>
-          <v-btn
-                  flat
-                  class="white--text"
-                  @click="create"
-                  :loading="creating"
-                  :disabled="creating"
-
-          >
-              <v-icon class="mr-1">save</v-icon>
-              SAVE
-          </v-btn>
-            </v-toolbar>
-          <v-card>
-              <v-card-text>
-                   <v-card-text>
-                <v-form>
-                    <v-text-field v-model="name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
-                    <v-switch v-model="completed" :label="completed ? 'Completada':'Pendiente'"></v-switch>
-                    <v-textarea v-model="description" label="Descripcion" hint="Descripcion"></v-textarea>
-                    <v-autocomplete v-model="user_id" :items="dataUsers" label="Usuario" item-text="name" item-value="id"></v-autocomplete>
-                     <v-btn @click="createDialog=false" ><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
-                    <v-btn
-                            @click="create"
-                            :loading="creating"
-                            :disabled="creating"
-                    ><v-icon class="mr-1">save</v-icon></v-btn>
-                </v-form>
-            </v-card-text>
-              </v-card-text>
-          </v-card>
-      </v-dialog>
       <v-dialog v-model="editDialog" @keydown.esc="editDialog=false">
         <v-toolbar color="grey darken-3" class="white--text">
           <v-btn flat icon class="white--text" @click="editDialog=false">
@@ -67,17 +25,14 @@
           <v-card>
             <v-card-text>
                 <v-form>
-                    <v-text-field v-model="taskBeingUpdated.name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
-                    <v-switch v-model="taskBeingUpdated.completed" :label="completed ? 'Completada':'Pendiente'"></v-switch>
-                    <v-textarea v-model="taskBeingUpdated.description" label="Descripcion" hint="Descripcion"></v-textarea>
-                    <v-autocomplete :items="dataUsers" v-model="taskBeingUpdated.user_id" label="Usuario" item-text="name"></v-autocomplete>
+                    <v-text-field v-model="taskBeingEdited.name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
+                    <v-switch v-model="taskBeingEdited.completed" :label="taskBeingEdited.completed ? 'Completada':'Pendiente'"></v-switch>
+                    <v-textarea v-model="taskBeingEdited.description" label="Descripcion" hint="Descripcion"></v-textarea>
+                    <v-autocomplete :items="dataUsers" v-model="taskBeingEdited.user_id" label="Usuario" item-text="name" item-value="id"></v-autocomplete>
+                    <div>
                      <v-btn @click="editDialog=false"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
-                    <v-btn
-                            @click="update"
-                            :loading="editing"
-                            :disabled="editing"
-                            >
-                        <v-icon class="mr-1">save</v-icon></v-btn>
+                    <v-btn @click="edit"> <v-icon class="mr-1">save</v-icon></v-btn>
+                        </div>
                 </v-form>
             </v-card-text>
         </v-card>
@@ -195,15 +150,15 @@
                             <span :title="task.updated_at_formatted">{{task.updated_at_human}}</span>
                         </td>
                         <td>
-                            <v-btn v-if="$can('tasks.update', task)" color="success" icon flat title="Modificar la tasca"
-                                     @click="showUpdate(task)">
+                            <v-btn v-if="$can('tasks.update', task)" color="teal lighten-1" icon flat title="Modificar la tasca"
+                                     @click="showEdit(task)">
                             <v-icon>border_color</v-icon>
                             </v-btn>
-                            <v-btn v-if="$can('tasks.show', task)" color="warning" icon flat title="Modificar la tasca"
+                            <v-btn v-if="$can('tasks.show', task)" color="indigo accent-1" icon flat title="Show Task"
                                    @click="showTasks(task)">
-                            <v-icon>remove_red_eye</v-icon>
+                            <v-icon>visibility</v-icon>
                             </v-btn>
-                            <v-btn v-if="$can('tasks.destroy', task)" :loading="removing === task.id" :disabled="removing === task.id" color="error" flat icon title="Eliminar la tasca"
+                            <v-btn v-if="$can('tasks.destroy', task)" :loading="removing === task.id" :disabled="removing === task.id" color="deep-orange lighten-1" flat icon title="Eliminar la tasca"
                                    @click="destroy(task)">
                             <v-icon>delete</v-icon>
                         </v-btn>
@@ -245,28 +200,20 @@
               </v-flex>
           </v-data-iterator>
       </v-card>
-      <v-btn
-              fab
-              bottom
-              right
-              fixed
-              color ="pink"
-              @click="showCreate"
-              v-if="$can('user.tasks.store')"
-      class="white--text">
-          <v-icon>add</v-icon>
-      </v-btn>
+      <task-create :users="users"></task-create>
   </span>
 </template>
 
 <script>
 import TaskCompletedToggle from './TaskCompletedToggle'
 import Toggle from './Toggle'
+import TaskCreate from './TaskCreate.vue'
 export default {
   name: 'Tasques',
   components: {
     'task-completed-toggle': TaskCompletedToggle,
-    'toggle': Toggle
+    'toggle': Toggle,
+    'task-create': TaskCreate
   },
   data () {
     return {
@@ -283,7 +230,7 @@ export default {
       snackbarMessage: '',
       snackbarTimeout: 3000,
       snackbarColor: 'success',
-      taskBeingUpdated: '',
+      taskBeingEdited: '',
       usersold: [
         'Jose',
         'Manuel',
@@ -344,22 +291,8 @@ export default {
         this.loading = false
       })
     },
-    create () {
-      this.creating = true
-      window.axios.post(this.uri, {
-        user_id: this.user_id,
-        name: this.name,
-        completed: this.completed,
-        description: this.description
-      }).then(() => {
-        this.refresh()
-        this.createDialog = false
-        this.$snackbar.showMessage('Se ha creado correctamente')
-        this.creating = false
-      }).catch((error) => {
-        this.$snackbar.showError(error.message)
-        this.creating = false
-      })
+    create (task) {
+      console.log('task')
     },
     // destroyWithPromises () {
     //   this.$confirm().then(
@@ -391,36 +324,34 @@ export default {
         })
       }
     },
-    update () {
-      this.editing = false
-      window.axios.post(this.uri + this.taskBeingUpdate.id, {
-        user_id: this.taskBeingUpdated.user_id,
-        name: this.taskBeingUpdated.name,
-        completed: this.taskBeingUpdated.completed,
-        description: this.taskBeingUpdated.description
+    edit () {
+      this.editing = true
+      window.axios.put(this.uri + this.taskBeingEdited.id, {
+        user_id: this.taskBeingEdited.user_id,
+        name: this.taskBeingEdited.name,
+        completed: this.taskBeingEdited.completed,
+        description: this.taskBeingEdited.description
       }).then(() => {
-        this.refresh()
-        this.editDialog = false
-        this.taskBeingUpdated = null
-        this.$snackbar.showMessage('Se ha modificado correctamente')
-        this.editing = false
+        this.editTask(this.taskBeingEdited)
+        this.$snackbar.showMessage("S'ha editat correctament la tasca")
       }).catch((error) => {
-        this.$snackbar.showError(error.message)
+        this.$snackbar.showError(error)
         this.editing = false
+        this.editDialog = false
+      }).finally(() => {
+        this.editing = false
+        this.editDialog = false
       })
     },
     removeTask (task) {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
     },
-    editTask(task){
-
+    editTask ($task) {
+      this.dataTasks.splice(this.dataTasks.indexOf($task), 1, $task)
     },
-    showCreate () {
-      this.createDialog = true
-    },
-    showUpdate (task) {
+    showEdit (task) {
       this.editDialog = true
-      this.taskBeingUpdated = task
+      this.taskBeingEdited = task
     },
     showTasks (task) {
       this.takeTask = task

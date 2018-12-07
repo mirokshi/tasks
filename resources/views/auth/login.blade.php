@@ -12,7 +12,7 @@
             >
                 <ul>
                     @foreach($errors->all() as $error)
-                        <li> {{$error}}</li>
+                        <li style="list-style-type: none;"> {{$error}}</li>
                     @endforeach
                 </ul>
             </v-alert>

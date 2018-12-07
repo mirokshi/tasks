@@ -47,24 +47,11 @@ class TasksController extends Controller
         return redirect('/tasks');
 
     }
-    public function edit(TaskUpdate $request)
+    public function edit(Request $request)
     {
         $task = Task::findOrFail($request->id);
         return view('task_edit',[ 'task' => $task]);
 
     }
-
-//    public function completed(Request $request, Task $task)
-//    {
-//        $task = Task::findorfail($request->id);
-//        if ($task->completed == true){
-//            $task->completed = false;
-//        }else{
-//            $task->completed = true;
-//        }
-//        $task->save();
-//        return redirect('/tasks');
-//
-//    }
 
 }

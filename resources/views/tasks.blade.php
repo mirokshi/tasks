@@ -17,11 +17,30 @@
                     <v-list-tile-avatar>
                         <img src="https://placeimg.com/100/100/any">
                     </v-list-tile-avatar>
+
+                    @if($task['completed'])
+                        <del>{{ $task['name'] }}</del>
+
+                        <form action="/completed_task/{{$task['id']}}" method="POST">
+                            @csrf
+                            {{ method_field('DELETE') }}
+                            <input type="hidden" name="id" value="{{ $task['id']  }}">
+                            <v-btn type="submit" color="blue-grey lighten-1">
+                                Descompletar
+                            </v-btn>
+                        </form>
+                    @else
                         {{ $task['name'] }}
-                    <form action="/completed_task/{{ $task['id'] }}" method="POST">
-                        @csrf
-                        <button><v-btn color="success">Completar</v-btn></button>
-                    </form>
+
+                        <form action="/completed_task/{{$task['id']}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $task['id'] }}">
+                            <v-btn type="submit" color="blue-grey lighten-1">
+                                Completar
+                            </v-btn>
+                        </form>
+                    @endif
+
                     <a href="/task_edit/{{ $task['id'] }}">
                         <button><v-btn color="warning">Modificar</v-btn></button>
                     </a>
