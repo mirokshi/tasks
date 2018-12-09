@@ -65,7 +65,7 @@
                 </v-card-text>
           </v-card>
       </v-dialog>
-       <v-toolbar color="grey darken-4">
+       <v-toolbar color="grey darken-1">
       <v-menu>
           <v-btn slot="activator" flat >
           <v-icon>more_vert</v-icon>

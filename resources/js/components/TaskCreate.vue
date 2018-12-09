@@ -1,6 +1,6 @@
 <template>
     <span>
-        <v-dialog v-model="dialog" >
+        <v-dialog v-model="dialog" @keydown.esc="dialog =false" >
         <v-toolbar color="grey darken-3" class="white--text">
             <v-btn flat icon class="white--text" @click="dialog=false">
                 <v-icon class="mr-1">close</v-icon>

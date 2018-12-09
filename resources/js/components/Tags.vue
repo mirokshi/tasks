@@ -29,10 +29,8 @@
   <v-dialog v-model="showDialog" @keydown.esc="showDialog = false">
         <v-toolbar color="grey darken-3" class="white--text">
             <v-btn color="white" flat icon @click="showDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
-
-                Crear tag
+                 <v-toolbar-title class="white--text">Etiqueta</v-toolbar-title>
                <v-spacer></v-spacer> <v-btn color="white" flat @click="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>SALIR</v-btn>
-               <v-btn color="white" flat @click="showDialog = false"><v-icon class="mr-1">save</v-icon>GUARDAR</v-btn>
             </v-toolbar>
             <v-card>
                 <v-card-text>
@@ -53,7 +51,7 @@
             <v-toolbar color="grey darken-3" class="white--text">
             <v-btn color="white" flat icon @click="createDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
 
-                Crear tag
+                 <v-toolbar-title class="white--text">Crear Etiqueta</v-toolbar-title>
                <v-spacer></v-spacer> <v-btn color="white" flat @click="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>SALIR</v-btn>
                <v-btn color="white" flat @click="createDialog = false"><v-icon class="mr-1">save</v-icon>GUARDAR</v-btn>
             </v-toolbar>
@@ -74,7 +72,7 @@
 
   </v-dialog>
 
-  <v-toolbar color="blue darken-1">
+  <v-toolbar color="grey darken-1">
       <v-toolbar-title class="white--text">Tags {{total}}</v-toolbar-title>
       <v-spacer></v-spacer>
 
