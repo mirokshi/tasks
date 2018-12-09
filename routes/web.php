@@ -11,6 +11,7 @@
 |
 */
 
+
 Auth::routes();
 
 //TODO
@@ -79,7 +80,7 @@ Route::get('/welcome', function (){
 });
 
 
-//Auth::logout();
+Auth::logout();
 
 
 
