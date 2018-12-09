@@ -9,7 +9,9 @@ class Tag extends Model
 {
     use FormattedDates;
 
-    protected $fillable = ['name','description','color'];
+    protected $guarded =  [];
+//    protected $fillable = ['name','description','color'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -17,6 +19,7 @@ class Tag extends Model
     public function assignUser(User $user)
     {
         $this->user()->associate($user);
+        $this->save();
     }
     public function map()
     {

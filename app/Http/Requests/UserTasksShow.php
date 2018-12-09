@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserTasksShow extends FormRequest
 {
@@ -13,7 +14,8 @@ class UserTasksShow extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::user()->can('user.tasks.show');
+//        return false;
     }
 
     /**

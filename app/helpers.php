@@ -24,6 +24,8 @@ if (!function_exists('create_primary_user')){
         ]);
          $user->assignRole('TasksManager');
          $user->assignRole('Tasks');
+         $user->assignRole('TagsManager');
+         $user->assignRole('Tags');
          $user->admin=true;
          $user->save();
     }
@@ -61,7 +63,7 @@ if (!function_exists('create_example_tags')) {
         Tag::create([
             'name' => 'Tag1',
             'description' => 'Aqui van las compras',
-            'color' => '#04B404'
+            'color' => '#4b4a9b'
         ]);
 
         Tag::create([
@@ -73,7 +75,7 @@ if (!function_exists('create_example_tags')) {
         Tag::create([
             'name' => 'Tag3',
             'description' => 'Aqui van los trabajos',
-            'color' => '#04B404'
+            'color' => '#48a89b'
         ]);
     }
 }
@@ -178,8 +180,6 @@ if (!function_exists('initialize_roles')) {
             'tags.show',
             'tags.store',
             'tags.update',
-            'tags.complete',
-            'tags.uncomplete',
             'tags.destroy'
         ];
         $userTaskPermissions = [
@@ -196,8 +196,6 @@ if (!function_exists('initialize_roles')) {
             'user.tags.show',
             'user.tags.store',
             'user.tags.update',
-            'user.tags.complete',
-            'user.tags.uncomplete',
             'user.tags.destroy'
         ];
         $permissions = array_merge($taskManagerPermissions, $userTaskPermissions, $tagsManagerPermissions, $userTagsPermissions);
@@ -222,8 +220,11 @@ if (!function_exists('initialize_roles')) {
 if (!function_exists('initialize_gates')){
     function initialize_gates(){
         Gate::define('tasks.manage',function ($user){
-            return $user->isSuperAdmin() || $user->hasRole('TaskManager');
+            return $user->isSuperAdmin() || $user->hasRole('TasksManager');
         });
+        Gate::define('tags.manage',function ($user){
+            return $user->isSuperAdmin() || $user->hasRole('TagsManager');
+         })  ;
     }
 }
 if (!function_exists('sample_users_and_tasks')) {

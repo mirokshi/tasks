@@ -6,7 +6,7 @@
     <v-container fluid>
         <v-layout>
             <v-flex>
-                <tags :tags="{{ $tags }}"></tags>
+                <tags :tags="{{ $tags }}" uri="{{$uri}}"></tags>
             </v-flex>
         </v-layout>
     </v-container>

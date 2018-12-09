@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TagIndex;
 use App\Tag;
-use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class TagsController extends Controller
 {
@@ -13,70 +14,16 @@ class TagsController extends Controller
     public function index(TagIndex $request)
     {
         $tags =map_collection(Tag::all());
-        return view('tags', [
-            'tags' => $tags
-        ]);
+        if (Auth::user()->can('tags.manage')){
+            $tags = map_collection(Tag::orderBy('created_at','desc') -> get());
+            $uri = 'api/v1/tag/';
+        }else {
+            $tags = map_collection($request->user()->tasks);
+            $uri = 'api/v1/user/tag/';
+        }
+        // MVC
+        $users= User::all();
+        return view('tags',compact('tags', 'uri'));
     }
 
-
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tag $tag)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tag $tag)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Tag $tag)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Tag $tag)
-    {
-        //
-    }
 }

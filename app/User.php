@@ -67,14 +67,45 @@ class User extends Authenticatable
         $this->tasks()->saveMany($tasks);
     }
 
-    public function haveTask($task)
+    public function haveTask(Task $task)
     {
-
+        return $this->tasks()->where('id',$task->id)->first();
     }
 
-    public function removeTask($task)
+    public function removeTask(Task $task)
     {
-        $this->tasks()->delete();
+        $task = $this->haveTask($task);
+        if(!is_null($task)) {
+            return $task->delete();
+        }
+        return false;
+    }
+
+    public function tags()
+    {
+        return $this->hasMany(Tag::class);
+    }
+
+    public function addTag(Tag $tag){
+        $this->tags()->save($tag);
+    }
+
+    public function addTags($tags){
+        $this->tags()->saveMany($tags);
+    }
+
+    public function haveTag(Tag $tag)
+    {
+        return $this->tags()->where('id',$tag->id)->first();
+    }
+
+    public function removeTag(Tag $tag)
+    {
+        $tag = $this->haveTag($tag);
+        if(!is_null($tag)) {
+            return $tag->delete();
+        }
+        return false;
     }
 
     /**

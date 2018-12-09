@@ -333,7 +333,7 @@ export default {
         description: this.taskBeingEdited.description
       }).then(() => {
         this.editTask(this.taskBeingEdited)
-        this.$snackbar.showMessage("S'ha editat correctament la tasca")
+        this.$snackbar.showMessage('Se ha editado correctamente la tarea')
       }).catch((error) => {
         this.$snackbar.showError(error)
         this.editing = false
