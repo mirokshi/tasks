@@ -80,7 +80,7 @@ Route::get('/welcome', function (){
 });
 
 
-Auth::logout();
+//Auth::logout();
 
 
 
