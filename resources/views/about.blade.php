@@ -20,15 +20,16 @@
                     >
                         mdi-magnify
                     </v-icon>
-                    <h2 class="display-1 white--text font-weight-light">Title 1</h2>
+                    <h2 class="display-1 white--text font-weight-light"> Aplicación de tareas</h2>
                 </v-card-title>
                 <v-container>
                     <v-layout>
                         <v-flex xs10>
-                            Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit.
+
+                            <v-text class="display-4">WIP</v-text>
                         </v-flex>
                         <v-flex xs2>
-                            <v-icon size="64">mdi-calendar-text</v-icon>
+                            <v-icon size="100" color="red">sentiment_satisfied_alt</v-icon>
                         </v-flex>
                     </v-layout>
                 </v-container>

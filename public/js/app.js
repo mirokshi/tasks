@@ -74987,6 +74987,17 @@ var render = function() {
       _c(
         "v-dialog",
         {
+          on: {
+            keydown: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "esc", 27, $event.key, "Escape")
+              ) {
+                return null
+              }
+              _vm.dialog = false
+            }
+          },
           model: {
             value: _vm.dialog,
             callback: function($$v) {
@@ -75485,7 +75496,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-toolbar",
-        { attrs: { color: "grey darken-4" } },
+        { attrs: { color: "grey darken-1" } },
         [
           _c(
             "v-menu",
@@ -76132,8 +76143,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Tags',
@@ -76543,7 +76552,11 @@ var render = function() {
                 [_c("v-icon", { staticClass: "mr-1" }, [_vm._v("close")])],
                 1
               ),
-              _vm._v("\n\n              Crear tag\n             "),
+              _vm._v(" "),
+              _c("v-toolbar-title", { staticClass: "white--text" }, [
+                _vm._v("Etiqueta")
+              ]),
+              _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
               _c(
@@ -76561,23 +76574,6 @@ var render = function() {
                     _vm._v("exit_to_app")
                   ]),
                   _vm._v("SALIR")
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "white", flat: "" },
-                  on: {
-                    click: function($event) {
-                      _vm.showDialog = false
-                    }
-                  }
-                },
-                [
-                  _c("v-icon", { staticClass: "mr-1" }, [_vm._v("save")]),
-                  _vm._v("GUARDAR")
                 ],
                 1
               )
@@ -76717,7 +76713,11 @@ var render = function() {
                 [_c("v-icon", { staticClass: "mr-1" }, [_vm._v("close")])],
                 1
               ),
-              _vm._v("\n\n              Crear tag\n             "),
+              _vm._v(" "),
+              _c("v-toolbar-title", { staticClass: "white--text" }, [
+                _vm._v("Crear Etiqueta")
+              ]),
+              _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
               _c(
@@ -76873,7 +76873,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-toolbar",
-        { attrs: { color: "blue darken-1" } },
+        { attrs: { color: "grey darken-1" } },
         [
           _c("v-toolbar-title", { staticClass: "white--text" }, [
             _vm._v("Tags " + _vm._s(_vm.total))
