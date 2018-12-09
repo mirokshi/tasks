@@ -273,11 +273,7 @@ if (!function_exists('sample_users_and_tasks')) {
         } catch (Exception $e) {}
 
         try {
-            $homersimpson->assignRole('TaskManager');
-            $homersimpson->assignRole('Tasks');
-        } catch (Exception $e) {}
-
-        try {
+            $homersimpson->assignRole('TasksManager');
             $homersimpson->assignRole('Tasks');
         } catch (Exception $e) {}
 
