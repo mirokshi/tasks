@@ -14,7 +14,7 @@
           <v-btn
                   flat
                   class="white--text"
-                  @click="update"
+                  @click="edit"
                   :loading="editing"
                   :disabled="editing"
           >
@@ -79,7 +79,7 @@
                     </v-list-tile>
                 </v-list>
       </v-menu>
-      <v-toolbar-title class="white--text">Tasques</v-toolbar-title>
+      <v-toolbar-title class="white--text">Tasques {{ total }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon class="white--text">
           <v-icon>settings</v-icon>
@@ -364,6 +364,11 @@ export default {
   created () {
     console.log('USUARIO LOGADO')
     console.log(window.laravel_user)
+  },
+  computed: {
+    total () {
+      return this.dataTasks.length
+    }
   }
 }
 </script>

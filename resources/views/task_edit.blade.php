@@ -1,11 +1,10 @@
 @extends('layout.app')
 @section('title')
-    Editar tasca
+    Editar tarea
 @endsection
 
 @section('content')
-
-            <v-card>
+    <v-card>
                 <v-card-title primary-title>
                     <div>
                         <h3 class="headline mb-0">EDITAR UNA TAREA</h3>
@@ -13,24 +12,21 @@
                 </v-card-title>
                 <v-card-text>
                     <form action="/tasks/{{$task['id']}}" method="POST">
+
                         @csrf
                         {{ method_field('PUT') }}
-                        <h5>NOMBRE</h5>
+                        NOMBRE :
                         <input name="name" type="text" value="{{$task['name']}}">
-
-                        <h5>COMPLETAR</h5>
-
+                        COMPLETAR
                         @if ( $task['completed'] )
                             <input name="completed" type="checkbox" checked>
                         @else
                             <input name="completed" type="checkbox">
                         @endif
-
                         <div class="text-xs-center">
                             <button>
                                 <v-btn color="success">
-                                    <v-icon class="mr-1" >save</v-icon>
-                                    Agregar
+                                  EDITAR
                                 </v-btn>
                             </button>
                         </div>

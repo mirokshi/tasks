@@ -2,19 +2,35 @@
 
 namespace App;
 
+use App\Traits\FormattedDates;
 use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    protected $guarded = [];
+    use FormattedDates;
 
+    protected $fillable = ['name','description','color'];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function assignUser(User $user)
+    {
+        $this->user()->associate($user);
+    }
     public function map()
     {
         return [
-            'id' =>$this->id,
-            'name'=>$this->name,
+            'id' => $this->id,
+            'name' => $this->name,
+            'color' => $this->color,
             'description' => $this->description,
-            'color' => $this->color
+            'created_at' => $this->created_at,
+            'created_at_formatted' => $this->created_at_formatted,
+            'created_at_human' => $this->created_at_human,
+            'updated_at' => $this->updated_at,
+            'updated_at_formatted' => $this->updated_at_formatted,
+            'updated_at_human' => $this->updated_at_human
         ];
     }
 

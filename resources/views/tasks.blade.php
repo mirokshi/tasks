@@ -51,6 +51,7 @@
                     </form>
                 </v-layout>
             @endforeach
+
             <form action="/tasks" method="POST">
                 @csrf
                 <input name="name" type="text" placeholder="New task">

@@ -4,6 +4,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TagIndex;
+use App\Http\Requests\TagStore;
+use App\Http\Requests\TagUpdate;
 use App\Http\Requests\UpdateTag;
 use App\Http\Requests\StoreTag;
 use App\Tag;
@@ -12,39 +15,38 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    public function index(Request $request)
+    public function index(TagIndex $request)
     {
-        return Tag::orderBy('created_at')->get();
+        $tags = map_collection(Tag::orderBy('created_at','desc')->get());
+        return $tags;
 
     }
 
-    public function show(Request $request, Tag $tag)
+    public function show(Tag $tag)
     {
+        $tag = Tag::findOrFail($tag->id);
         return $tag->map();
 
     }
 
     //DELETE
-    public function destroy(Request $request, Tag $tag)
+    public function destroy( Tag $tag)
     {
-        $tag->delete();
-    }
-
-    //CREATE
-    public function store(StoreTag $request)
-    {
-
-        $tag = new Tag();
-        $tag->name = $request->name;
-        $tag->description = $request->description;
-        $tag->color= $request->color;
-        $tag->save();
+        Tag::destroy($tag->id);
         return $tag->map();
     }
 
-    public function update(UpdateTag $request, Tag $tag)
+    //CREATE
+    public function store(TagStore $request)
     {
-        $tag->name = $request->name;
+
+        $tag = Tag::create($request->all());
+        return $tag->map();
+    }
+
+    public function update(TagUpdate $request, Tag $tag)
+    {
+        $tag->update($request->only(['name','description','color','user_id']));
         $tag->save();
         return $tag->map();
     }
