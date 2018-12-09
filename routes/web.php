@@ -60,8 +60,8 @@ Route::get('/task_edit/{id}','TasksController@edit'); //modifica
     //Tasques
     Route::get('/tasques','TasquesController@index');
 
-    //Home Vue
-    Route::get('/home','TasksVueController@index');
+    //Home
+    Route::get('/home','TasquesController@index');
 
     //LoggedUserTasksController
     Route::get('/user/tasks','LoggedUserTasksController@index');

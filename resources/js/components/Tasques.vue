@@ -5,11 +5,11 @@
           <v-btn flat icon class="white--text" @click="editDialog=false">
               <v-icon class="mr-1">close</v-icon>
           </v-btn>
-            <v-toolbar-title class="white--text">Editar Tasks</v-toolbar-title>
+            <v-toolbar-title class="white--text">Editar Tareas</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn flat  class="white--text" @click="editDialog=false">
                 <v-icon class="mr-1">exit_to_app</v-icon>
-                EXIT
+                SALIR
             </v-btn>
           <v-btn
                   flat
@@ -19,7 +19,7 @@
                   :disabled="editing"
           >
               <v-icon class="mr-1">save</v-icon>
-              SAVE
+              GUARDAR
           </v-btn>
 </v-toolbar>
           <v-card>
@@ -122,7 +122,7 @@
                   :headers="headers"
                   :items="dataTasks"
                   :search="search"
-                  no-results-text="No se ha encontrado ningun regustro"
+                  no-results-text="No se ha encontrado ningun registro"
                   no-data-text="No hay datos disponibles"
                   rows-per-page-text="Tareas por pagina"
                   :rows-per-page-items="[5,10,25,50,100,200,{'text':'Todos', 'value' : -1}]"
@@ -150,15 +150,15 @@
                             <span :title="task.updated_at_formatted">{{task.updated_at_human}}</span>
                         </td>
                         <td>
-                            <v-btn v-if="$can('tasks.update', task)" color="teal lighten-1" icon flat title="Modificar la tasca"
+                            <v-btn v-if="$can('tasks.update', task)" color="teal lighten-1" icon flat title="Modificar la tarea"
                                      @click="showEdit(task)">
                             <v-icon>border_color</v-icon>
                             </v-btn>
-                            <v-btn v-if="$can('tasks.show', task)" color="indigo accent-1" icon flat title="Show Task"
+                            <v-btn v-if="$can('tasks.show', task)" color="indigo accent-1" icon flat title="Mostrar tarea"
                                    @click="showTasks(task)">
                             <v-icon>visibility</v-icon>
                             </v-btn>
-                            <v-btn v-if="$can('tasks.destroy', task)" :loading="removing === task.id" :disabled="removing === task.id" color="deep-orange lighten-1" flat icon title="Eliminar la tasca"
+                            <v-btn v-if="$can('tasks.destroy', task)" :loading="removing === task.id" :disabled="removing === task.id" color="deep-orange lighten-1" flat icon title="Eliminar la tarea"
                                    @click="destroy(task)">
                             <v-icon>delete</v-icon>
                         </v-btn>
@@ -189,11 +189,15 @@
                       <v-list dense>
                           <v-list-tile>
                               <v-list-tile-content>Completed:</v-list-tile-content>
-                              <v-list-tile-content class="align-end">{{ task.completed }}</v-list-tile-content>
+                              <v-list-tile-content class="align-end">{{ task.completed ? 'Completada':'Pendiente'}}</v-list-tile-content>
                             </v-list-tile>
                             <v-list-tile>
                               <v-list-tile-content>User:</v-list-tile-content>
-                              <v-list-tile-content class="align-end">{{ task.user_id }}</v-list-tile-content>
+                              <v-list-tile-content class="align-end">
+                                  <v-avatar :title="task.user_name">
+                                <img :src="task.user_gravatar" alt="avatar">
+                                </v-avatar>
+                              </v-list-tile-content>
                             </v-list-tile>
                       </v-list>
                   </v-card>
@@ -258,7 +262,7 @@ export default {
         { text: 'COMPLETED', value: 'completed' },
         { text: 'CREACION', value: 'created_at_timestamp' },
         { text: 'ACTUALIZACION', value: 'updated_at_timestamp' },
-        { text: 'ACCION', sortable: false, value: 'full_search' }
+        { text: 'ACCIONES', sortable: false, value: 'full_search' }
       ]
     }
   },

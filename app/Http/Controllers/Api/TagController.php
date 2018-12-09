@@ -41,9 +41,8 @@ class TagController extends Controller
     {
         $tag = new Tag();
         $tag->name = $request->name;
+        $tag->description = $request->description;
         $tag->color = $request->color;
-        $tag->description = $request->description ?? null;
-        $tag->user_id = $request->user_id;
         $tag->save();
         return $tag->map();
     }
@@ -51,9 +50,8 @@ class TagController extends Controller
     public function update(TagUpdate $request, Tag $tag)
     {
         $tag->name = $request->name;
-        $tag->completed = $request->completed;
-        $tag->description = $request->description ?? $tag->description;
-        $tag->user_id = $request->user_id;
+        $tag->description = $request->description;
+        $tag->color = $request->color;
         $tag->save();
         return $tag->map();
     }

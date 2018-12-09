@@ -1,413 +1,298 @@
 <template>
-    <v-layout row>
-        <v-flex xs12 sm10 offset-sm1>
+    <span>
+  <v-dialog v-model="editDialog" @keydown.esc="editDialog = false">
+            <v-toolbar color="grey darken-3" class="white--text">
+            <v-btn flat icon class="white--text" @click="editDialog = false">
+                <v-icon class="mr-1">close</v-icon>
+            </v-btn>
+                <v-toolbar-title class="white--text">Editar Etiquetas</v-toolbar-title>
+               <v-spacer></v-spacer>
+                <v-btn color="white" flat @click="editDialog = false"><v-icon>exit_to_app</v-icon>SALIR</v-btn>
+               <v-btn color="white" flat @click="editDialog = false"><v-icon>save</v-icon>GUARDAR</v-btn>
+            </v-toolbar>
             <v-card>
-                <snackbar></snackbar>
-                <v-dialog v-model="createDialog" fullscreen>
-                    <v-toolbar dark color="deep-purple darken-4">
-                        <v-btn icon dark @click="createDialog = false">
-                            <v-icon>close</v-icon>
-                        </v-btn>
-                        <v-toolbar-title>New tag</v-toolbar-title>
-                        <v-spacer></v-spacer>
-                        <v-toolbar-items>
-                            <v-btn dark flat :disabled="$v.$invalid" @click="add">Save</v-btn>
-                        </v-toolbar-items>
-                    </v-toolbar>
-                    <v-card>
-                        <v-card-text>
-                            <v-form>
-                                <v-text-field
-                                        label="Name"
-                                        color="light-blue"
-                                        class="pr-2"
-                                        v-model="selectedTag.name"
-                                        @input="$v.selectedTag.name.$touch()"
-                                        @blur="$v.selectedTag.name.$touch()"
-                                        :error-messages="nameErrors"
-                                ></v-text-field>
-                                <v-text-field
-                                        label="Color"
-                                        color="light-blue"
-                                        v-model="selectedTag.color"
-                                        @input="$v.selectedTag.color.$touch()"
-                                        @blur="$v.selectedTag.color.$touch()"
-                                        :error-messages="colorErrors"
-                                ></v-text-field>
-                                <v-textarea
-                                        label="Description"
-                                        color="light-blue"
-                                        v-model="selectedTag.description"
-                                        @input="$v.selectedTag.description.$touch()"
-                                        @blur="$v.selectedTag.description.$touch()"
-                                        :error-messages="descriptionErrors"
-                                ></v-textarea>
-                            </v-form>
-                        </v-card-text>
-                    </v-card>
-                </v-dialog>
-                <v-dialog v-model="editDialog" @keydown.esc="editDialog=false">
-                        <v-toolbar dark color="grey darken-3" class="white--text">
-                            <v-btn icon dark @click="editDialog = false">
-                                <v-icon>close</v-icon>
-                            </v-btn>
-                            <v-toolbar-title>Edit tag</v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-btn flat  class="white--text" @click="editDialog=false">
-                                <v-icon class="mr-1">exit_to_app</v-icon>
-                                EXIT
-                            </v-btn>
-                            <v-btn
-                                    flat
-                                    class="white--text"
-                                    @click="edit"
-                                    :loading="editing"
-                                    :disabled="editing"
-                            >
-                                <v-icon class="mr-1">save</v-icon>
-                                SAVE
-                            </v-btn>
-                        </v-toolbar>
-                        <v-card>
-                            <v-card-text>
-                                <v-form>
-                                    <v-text-field v-model="tagBeingEdited.name" label="Nombre" hint="El nombre de la etiqueta "></v-text-field>
-                                    <v-text-field v-model="tagBeingEdited.color" label="Color" hint="#RRGGBB"></v-text-field>
-                                    <v-textarea v-model="tagBeingEdited.description" label="Descripcion"></v-textarea>
-                                    <div>
-                                        <v-btn @click="editDialog=false"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
-                                        <v-btn @click="edit"> <v-icon class="mr-1">save</v-icon></v-btn>
-                                    </div>
-                                </v-form>
-                            </v-card-text>
-                        </v-card>
-                </v-dialog>
-                <v-dialog v-model="infoDialog" fullscreen>
-                    <v-card>
-                        <v-toolbar dark color="blue">
-                            <v-btn icon dark @click="infoDialog = false">
-                                <v-icon>close</v-icon>
-                            </v-btn>
-                            <v-toolbar-title><strong>{{ this.selectedTag.name }}</strong> tag info</v-toolbar-title>
-                            <v-spacer></v-spacer>
-                            <v-toolbar-items>
-                                <v-btn dark flat @click="showEdit(selectedTag)">Edit</v-btn>
-                            </v-toolbar-items>
-                        </v-toolbar>
-                        <v-container>
-                            <v-layout row>
-                                <v-flex xs12 md6>
-                                    <v-text-field
-                                            label="Name"
-                                            color="light-blue"
-                                            class="pr-2"
-                                            v-model="this.selectedTag.name"
-                                            readonly
-                                    ></v-text-field>
-                                </v-flex>
-                                <v-flex xs12 md6>
-                                    <v-text-field
-                                            label="Color"
-                                            color="light-blue"
-                                            v-model="this.selectedTag.color"
-                                            readonly
-                                    ></v-text-field>
-                                </v-flex>
-                            </v-layout>
-                            <v-layout row>
-                                <v-flex xs12>
-                                    <v-textarea
-                                            label="Description"
-                                            color="light-blue"
-                                            v-model="this.selectedTag.description"
-                                            readonly
-                                    ></v-textarea>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
-                    </v-card>
-                </v-dialog>
-                <v-toolbar color="deep-purple darken-4" dark>
-                    <v-toolbar-title class="font-weight-bold">Tags ({{ total }})</v-toolbar-title>
+                <v-card-text>
+        <v-form>
+            <v-text-field v-model="tagBeingEdited.name" label="Nom" hint="El nom de la tag..."></v-text-field>
+            <!--<v-text-field v-model="tagBeingEdited.color" label="Color" hint="Color de la tag"></v-text-field>-->
+            <input type="color" v-model="tagBeingEdited.color" label="Color">
+          <v-textarea v-model="tagBeingEdited.description" label="Descripcio" hint="Descripció"></v-textarea>
+            <div class="text-xs-center">
+            <v-btn color="grey" @click="editDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>SALIR</v-btn>
+               <v-btn color="success" @click="edit()"><v-icon class="mr-1">save</v-icon>GUARDAR</v-btn>
+                </div>
+        </v-form>
+                </v-card-text>
+      </v-card>
 
-                    <v-spacer></v-spacer>
-                    <v-btn title="Refresh data" icon @click="refresh">
-                        <v-icon>refresh</v-icon>
-                    </v-btn>
-                </v-toolbar>
-                <v-card>
-                    <v-card-title>
-                        <v-spacer></v-spacer>
-                        <v-flex xs12 sm12>
-                            <v-text-field
-                                    label="Search..."
-                                    v-model="search"
-                                    append-icon="search"
-                                    color="deep-purple darken-4"
-                            ></v-text-field>
-                        </v-flex>
-                    </v-card-title>
-                    <v-data-table
-                            :headers="headers"
-                            :items="getTags"
-                            class="elevation-2 p-3"
-                            :search="search"
-                            :loading="loading"
-                    >
-                        <v-progress-linear slot="progress"
-                                           color="deep-purple darken-4"
-                                           indeterminate
-                        ></v-progress-linear>
-                        <template slot="items" slot-scope="{ item: tag }">
-                            <td>{{ tag.id }}</td>
-                            <td class="text-xs-left">{{ tag.name }}</td>
-                            <td class="text-xs-center">{{ tag.description }}</td>
-                            <td class="text-xs-left"><div class="elevation-2" :style="'background-color:' + tag.color+';border-radius: 4px;height: 15px;width: 15px;'"></div></td>
-                            <td class="text-xs-center">{{ tag.created_at_human }}</td>
-                            <td class="text-xs-center">{{ tag.editd_at_human}}</td>
-                            <td class="text-xs-center">
-                                <v-btn v-if="$can('tags.show')" @click="showInfo(tag)" fab small icon>
-                                    <v-icon title="Show tag" color="blue">visibility</v-icon>
-                                </v-btn>
-                                <v-btn v-if="$can('tags.update', tag)" @click="showEdit(tag)" fab small icon>
-                                    <v-icon title="Edit tag" color="green darken-2">edit</v-icon>
-                                </v-btn>
-                                <v-btn v-if="$can('tags.destroy', tag)" :loading="removing === tag.id" :disabled="removing === tag.id" @click="destroy(tag)" fab small icon>
-                                    <v-icon title="Delete tag" color="error">delete</v-icon>
-                                </v-btn>
-                            </td>
-                        </template>
-                    </v-data-table>
-                </v-card>
-                <v-btn
-                        v-if="$can('tags.store')"
-                        bottom
-                        fab
-                        right
-                        color="deep-purple darken-4"
-                        fixed
-                        dark
-                        class="elevation-4"
-                        @click="showCreate"
-                >
-                    <v-icon>add</v-icon>
-                </v-btn>
-            </v-card>
-        </v-flex>
-    </v-layout>
+  </v-dialog>
+  <v-dialog v-model="showDialog" @keydown.esc="showDialog = false">
+        <v-toolbar color="grey darken-3" class="white--text">
+            <v-btn color="white" flat icon @click="showDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
+
+                Crear tag
+               <v-spacer></v-spacer> <v-btn color="white" flat @click="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>SALIR</v-btn>
+               <v-btn color="white" flat @click="showDialog = false"><v-icon class="mr-1">save</v-icon>GUARDAR</v-btn>
+            </v-toolbar>
+            <v-card>
+                <v-card-text>
+        <v-form>
+            <v-text-field disabled v-model="tagBeingShow.name" label="Nom" hint="El nombre de la etiqueta..."></v-text-field>
+            <v-text-field disabled v-model="tagBeingShow.color" label="Color" hint="Color de la tag"></v-text-field>
+            <!--<input type="color" v-model="tagBeingShow.color" label="Color">-->
+          <v-textarea disabled v-model="tagBeingShow.description" label="Descripción" hint="Descripción"></v-textarea>
+            <div class="text-xs-center">
+            <v-btn color="grey" @click="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>SALIR</v-btn>
+                </div>
+        </v-form>
+                </v-card-text>
+      </v-card>
+
+  </v-dialog>
+  <v-dialog v-model="createDialog" @keydown.esc="createDialog = false">
+            <v-toolbar color="grey darken-3" class="white--text">
+            <v-btn color="white" flat icon @click="createDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
+
+                Crear tag
+               <v-spacer></v-spacer> <v-btn color="white" flat @click="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>SALIR</v-btn>
+               <v-btn color="white" flat @click="createDialog = false"><v-icon class="mr-1">save</v-icon>GUARDAR</v-btn>
+            </v-toolbar>
+            <v-card>
+                <v-card-text>
+        <v-form>
+            <v-text-field v-model="tagBeingCreated.name" label="Nom" hint="El nombre de la etiqueta..."></v-text-field>
+            <!--<v-text-field v-model="tagBeingCreated.color" label="Color" hint="#RRGGBB"></v-text-field>-->
+            <input type="color" v-model="tagBeingCreated.color" label="Color">
+          <v-textarea v-model="tagBeingCreated.description" label="Descripcio" hint="Descripción"></v-textarea>
+            <div class="text-xs-center">
+            <v-btn color="grey" @click="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>SALIR</v-btn>
+               <v-btn color="success" @click="create"><v-icon class="mr-1">save</v-icon>GUARDAR</v-btn>
+                </div>
+        </v-form>
+                </v-card-text>
+      </v-card>
+
+  </v-dialog>
+
+  <v-toolbar color="blue darken-1">
+      <v-toolbar-title class="white--text">Tags {{total}}</v-toolbar-title>
+      <v-spacer></v-spacer>
+
+        <v-btn icon dark class="white--text">
+            <v-icon>settings</v-icon>
+        </v-btn>
+        <v-btn icon dark class="white--text" @click="refresh" :loading="loading" :disabled="loading">
+            <v-icon>refresh</v-icon>
+        </v-btn>
+
+        </v-toolbar>
+        <v-card>
+        <v-card-title>
+            <v-layout row wrap>
+                <v-flex xs12>
+                    <v-text-field
+                            v-model="search"
+                            append-icon="search"
+                            label="Búsqueda"
+                            single-line
+                            hide-details
+                    ></v-text-field>
+                </v-flex>
+            </v-layout>
+            </v-card-title>
+            <v-data-table
+                    :headers="headers"
+                    :items="dataTags"
+                    :search="search"
+                    no-results-text="No se ha encontrado ningun registro"
+                    :loading="loading"
+                    no-data-text=""
+                    rows-per-page-text="Tags per pàgina"
+                    :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
+                    :pagination.sync="pagination"
+                    class="hidden-md-and-down">
+
+                <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
+                <template slot="items" slot-scope="{item: tag}">
+                    <tr>
+                        <td>{{ tag.id}}</td>
+                        <td>{{ tag.name}}</td>
+                        <td>{{tag.description}}</td>
+                        <td><v-icon x-large :color="tag.color">memory</v-icon></td>
+                        <td><span :title="tag.created_at_formatted">{{tag.created_at_human}}</span></td>
+                        <td><span :title="tag.updated_at_formatted">{{tag.updated_at_human}}</span></td>
+                        <td>
+                        <v-btn v-if="$can('tags.update', tag)" color="teal lighten-1" icon flat title="Modificar la etiqueta"
+                               @click="showEdit(tag)">
+                            <v-icon>border_color</v-icon>
+                        </v-btn>
+                            <v-btn v-if="$can('tags.show', tag)" color="indigo accent-1" icon flat
+                                   @click="showShow(tag)">
+                            <v-icon>visibility</v-icon>
+                        </v-btn>
+                        <v-btn v-if="$can('tags.destroy', tag)" :loading="removing === tag.id" :disabled="removing === tag.id" color="error" flat icon title="Eliminar la etiqueta"
+                               @click="destroy(tag)">
+                            <v-icon>delete</v-icon>
+                        </v-btn>
+                        </td>
+                    </tr>
+
+                </template>
+            </v-data-table>
+        </v-card>
+        <v-btn
+                fab
+                bottom
+                right
+                color="pink"
+                fixed
+                class="white--text"
+                @click="showCreate"
+                v-if="$can('user.tags.store')"
+        >
+            <v-icon>add</v-icon>
+
+        </v-btn>
+    </span>
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
-import { required, minLength, maxLength } from 'vuelidate/lib/validators'
-export default {
+export default{
   name: 'Tags',
   data () {
     return {
-      dataTags: this.tags,
       name: '',
-      color: '',
       description: '',
-      privateMode: false,
-      data: 'Tags',
-      errorMsg: '',
-      filter: 'all',
-      search: '',
-      errorMessage: '',
-      loading: false,
-      snackbar: true,
-      snackbarMessage: '',
-      snackbarTimeout: 3000,
-      snackbarColor: 'success',
-      deleteDialog: false,
-      removing: false,
+      color: '',
+      showName: '',
+      showDescription: '',
+      showCompleted: false,
+      dataTags: this.tags,
+      tagBeingRemoved: '',
+      tagBeingCreated: {},
+      tagBeingShow: '',
+      tagBeingEdited: '',
       createDialog: false,
       editDialog: false,
-      editing: null,
-      tagBeingEdited: '',
-      infoDialog: false,
-      selectedTag: {
-        name: '',
-        description: '',
-        color: '',
-        user_id: '',
-        user: ''
-      },
+      showDialog: false,
+      search: '',
+      loading: false,
+      creating: false,
+      editing: false,
+      removing: null,
       headers: [
-        { text: 'ID', value: 'id', align: 'left', sortable: true },
-        { text: 'NANME', value: 'name', align: 'left', sortable: true },
-        { text: 'DESCRIPTION', value: 'description', align: 'center', sortable: true },
-        { text: 'COLOR', value: 'color', align: 'left', sortable: true },
-        { text: 'CREATED AT', value: 'created_at', align: 'center', sortable: true },
-        { text: 'editD AT', value: 'edit_at', align: 'center', sortable: true },
-        { text: 'ACTIONS', align: 'center', sortable: false }
-      ]
-    }
-  },
-  mixins: [validationMixin],
-  validations: {
-    selectedTag: {
-      name: { required },
-      description: { required },
-      color: { required, minLength: minLength(7), maxLength: maxLength(7) }
-    }
-  },
-  methods: {
-    refresh () {
-      this.loading = true
-      window.axios.get(this.uri).then((response) => {
-        this.$snackbar.showMessage('Se ha actualizado correctamente')
-        this.dataTags = response.data
-        this.loading = false
-      }).catch((error) => {
-        this.$snackbar.showError(error.message)
-        this.loading = false
-        this.errorMessage = error.response.data
-      })
-    },
-    add () {
-      window.axios.post(this.uri, this.selectedTag).then((response) => {
-        this.createDialog = false
-        this.refresh()
-        this.$snackbar.showMessage('Tag ' + response.data.name + ' created!')
-        this.selectedTag = {
-          name: '',
-          description: '',
-          color: ''
-        }
-      }).catch((error) => {
-        this.errorMsg = error.message
-      })
-    },
-    edit () {
-      this.editing = true
-      window.axios.put(this.uri + this.tagBeingEdited.id, {
-        name: this.tagBeingEdited.name,
-        color: this.tagBeingEdited.color,
-        description: this.tagBeingEdited.description
-      }).then(() => {
-        this.editTag(this.tagBeingEdited)
-        this.$snackbar.showMessage('Se ha editado correctament la etiqueta')
-      }).catch((error) => {
-        this.$snackbar.showError(error)
-        this.editing = false
-        this.editDialog = false
-      }).finally(() => {
-        this.editing = false
-        this.editDialog = false
-      })
-    },
-    editTag ($tag) {
-      this.dataTags.splice(this.dataTags.indexOf($tag), 1, $tag)
-    },
-    showEdit (tag) {
-      this.editDialog = true
-      this.taskBeingEdited = tag
-    },
-    async destroy (tag) {
-      let result = await this.$confirm('Las etiquetas borradas no se puede recuperar', {
-        title: 'ESTA SEGURO?',
-        buttonTrueText: 'Eliminar',
-        buttonFalseColor: 'Cancelar'
-      })
-      if (result) {
-        this.removing = tag.id
-        window.axios.delete(this.uri + tag.id).then(() => {
-          this.refresh()
-          this.removeTag(tag)
-          this.deleteDialog = false
-          tag = null
-          this.$snackbar.showMessage('Se ha borrado correctamente')
-          this.removing = tag.id
-        }).catch(error => {
-          this.$snackbar.showError(error.message)
-          this.removing = tag.id
-        })
+        { text: 'ID', value: 'id' },
+        { text: 'NAME', value: 'name' },
+        { text: 'DESCRIPTION', value: 'description' },
+        { text: 'COLOR', value: 'completed' },
+        { text: 'CREACION', value: 'created_at_timestamp' },
+        { text: 'ACTUALIZACION', value: 'updated_at_timestamp' },
+        { text: 'ACCIONES', sortable: false, value: 'full_search' }
+      ],
+      pagination: {
+        rowsPerPage: 25
       }
-    },
-    removeTag (tag) {
-      this.dataTags.splice(this.dataTags.indexOf(tag), 1)
-    },
-    showCreate () {
-      this.selectedTag.name = ''
-      this.selectedTag.description = ''
-      this.selectedTag.color = ''
-      this.createDialog = true
-    },
-    showDestroy (tag) {
-      this.selectedTag = tag
-      this.deleteDialog = true
-    },
-    showInfo (tag) {
-      this.selectedTag = tag
-      this.infoDialog = true
     }
   },
   props: {
     tags: {
       type: Array,
-      required: false
-    },
-    'private': {
-      type: Boolean
+      required: true
     },
     uri: {
       type: String,
       required: true
+    },
+  },
+  methods: {
+    refresh () {
+      this.loading = true
+      window.axios.get(this.uri).then(response => {
+        console.log(response)
+        this.dataTags = response.data
+        this.loading = false
+      }).catch(error => {
+        console.log(error)
+        this.loading = false
+      })
+    },
+    create () {
+      this.creating = true
+      window.axios.post(this.uri, this.tagBeingCreated).then((response) => {
+        this.createTag(response.data)
+        this.$snackbar.showMessage('Se ha editado correctamente la etiqueta')
+        this.creating = false
+        this.editDialog = false
+      }).catch((error) => {
+        this.$snackbar.showError(error)
+        this.creating = false
+        this.editDialog = false
+      })
+    },
+    showCreate () {
+      this.createDialog = true
+    },
+    show (tag) {
+      console.log('Show Tag' + tag.id)
+    },
+    removeTag (tag) {
+      this.dataTags.splice(this.dataTags.indexOf(tag), 1)
+    },
+    editTag (tag) {
+      this.dataTags.splice(this.dataTags.indexOf(tag), 1, tag)
+    },
+    createTag (tag) {
+      this.dataTags.splice(0, 0, tag)
+    },
+    async destroy (tag) {
+      let result = await this.$confirm('La etiquetas borradas no se pueden recuperar',
+        { title: 'Esta seguro?', buttonTrueText: 'Eliminar', buttonFalseText: 'Cancelar', color: 'error' })
+      if (result) {
+        this.removing = tag.id
+        window.axios.delete(this.uri + tag.id).then(() => {
+          this.removeTag(tag)
+          this.$snackbar.showMessage('Se ha borrado correctamente la etiqueta')
+          this.removing = null
+        }).catch(error => {
+          this.$snackbar.showError(error)
+          this.removing = null
+        })
+      }
+    },
+    edit () {
+      this.editing = true
+      window.axios.put(this.uri + this.tagBeingEdited.id, this.tagBeingEdited).then(() => {
+        this.editTag(this.tagBeingEdited)
+        this.$snackbar.showMessage('Se ha editado correctamente la etiqueta')
+        this.editing = false
+        this.editDialog = false
+      }).catch((error) => {
+        this.$snackbar.showError(error)
+        this.editing = false
+        this.editDialog = false
+      })
+    },
+    showEdit (tag) {
+      this.editDialog = true
+      this.tagBeingEdited = tag
+    },
+    showShow (tag) {
+      this.showDialog = true
+      this.tagBeingShow = tag
+    },
+    complete (tag) {
+      this.tagBeingEdited = tag
+      this.edit()
     }
   },
   created () {
-    if (this.tags.length === 0) {
-      this.refresh()
-    } else {
-      this.dataTags = this.tags
-    }
-    if (this.private === true) {
-      this.privateMode = true
-    }
+    console.log('Usuario logado:')
+    console.log(window.laravel_user)
   },
   computed: {
     total () {
       return this.dataTags.length
-    },
-    getTags () {
-      return this.dataTags
-    },
-    nameErrors () {
-      const errors = []
-      if (!this.$v.selectedTag.name.$dirty) return errors
-      !this.$v.selectedTag.name.required && errors.push('Name field is required!')
-      return errors
-    },
-    descriptionErrors () {
-      const errors = []
-      if (!this.$v.selectedTag.description.$dirty) return errors
-      !this.$v.selectedTag.description.required && errors.push('Description field is required!')
-      return errors
-    },
-    colorErrors () {
-      const errors = []
-      if (!this.$v.selectedTag.color.$dirty) return errors
-      !this.$v.selectedTag.color.required && errors.push('Color field is required!')
-      !this.$v.selectedTag.color.minLength && errors.push('Color format is incorrect! Use hex format (#RRGGBB)')
-      !this.$v.selectedTag.color.maxLength && errors.push('Color format is incorrect! Use hex format (#RRGGBB)')
-      return errors
-    },
-    getIndexURL () {
-      return '/api/v1/tag'
-    },
-    getStoreURL () {
-      return '/api/v1/tag'
-    },
-    geteditURL () {
-      return '/api/v1/tag/'
-    },
-    getDestroyURL () {
-      return '/api/v1/tag/'
     }
   }
 }
 </script>
-
-<style scoped>
-</style>
