@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 25);
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -260,7 +260,7 @@ module.exports = function normalizeComponent (
 
 
 var bind = __webpack_require__(12);
-var isBuffer = __webpack_require__(46);
+var isBuffer = __webpack_require__(43);
 
 /*global toString:true*/
 
@@ -11553,7 +11553,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(27).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(24).setImmediate))
 
 /***/ }),
 /* 5 */
@@ -11645,7 +11645,7 @@ function toComment(sourceMap) {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(2);
-var normalizeHeaderName = __webpack_require__(48);
+var normalizeHeaderName = __webpack_require__(45);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -11745,7 +11745,7 @@ module.exports = defaults;
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(79);
+module.exports = __webpack_require__(76);
 
 
 /***/ }),
@@ -11985,7 +11985,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(32);
+var	fixUrls = __webpack_require__(29);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -25235,12 +25235,12 @@ module.exports = function bind(fn, thisArg) {
 
 
 var utils = __webpack_require__(2);
-var settle = __webpack_require__(49);
-var buildURL = __webpack_require__(51);
-var parseHeaders = __webpack_require__(52);
-var isURLSameOrigin = __webpack_require__(53);
+var settle = __webpack_require__(46);
+var buildURL = __webpack_require__(48);
+var parseHeaders = __webpack_require__(49);
+var isURLSameOrigin = __webpack_require__(50);
 var createError = __webpack_require__(14);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(54);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(51);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -25337,7 +25337,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(55);
+      var cookies = __webpack_require__(52);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -25421,7 +25421,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(50);
+var enhanceError = __webpack_require__(47);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -25484,9 +25484,9 @@ module.exports = Cancel;
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(74)
+var __vue_script__ = __webpack_require__(71)
 /* template */
-var __vue_template__ = __webpack_require__(75)
+var __vue_template__ = __webpack_require__(72)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25528,147 +25528,6 @@ module.exports = Component.exports
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(81)
-/* template */
-var __vue_template__ = __webpack_require__(82)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/TaskCompletedToggle.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0cc4d21f", Component.options)
-  } else {
-    hotAPI.reload("data-v-0cc4d21f", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(83)
-/* template */
-var __vue_template__ = __webpack_require__(84)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/Toggle.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-47b09f7f", Component.options)
-  } else {
-    hotAPI.reload("data-v-47b09f7f", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(85)
-/* template */
-var __vue_template__ = __webpack_require__(89)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/TaskCreate.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-86cdc1e8", Component.options)
-  } else {
-    hotAPI.reload("data-v-86cdc1e8", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -25686,7 +25545,7 @@ exports.default = exports.validationMixin = void 0;
 
 var _vval = __webpack_require__(96);
 
-var _params = __webpack_require__(22);
+var _params = __webpack_require__(19);
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
@@ -26347,7 +26206,7 @@ var _default = Vuelidate;
 exports.default = _default;
 
 /***/ }),
-/* 22 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26448,7 +26307,7 @@ function withParams(paramsOrClosure, maybeValidator) {
 }
 
 /***/ }),
-/* 23 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26636,7 +26495,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 24 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26650,36 +26509,36 @@ var EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 // bus.$on('show') -> Mostrar el snackbar
 
 /***/ }),
-/* 25 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(26);
+__webpack_require__(23);
 module.exports = __webpack_require__(139);
 
 
 /***/ }),
-/* 26 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuetify__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuetify__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuetify__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuetify_dist_vuetify_min_css__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuetify_dist_vuetify_min_css__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuetify_dist_vuetify_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuetify_dist_vuetify_min_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_material_design_icons_iconfont_dist_material_design_icons_css__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_material_design_icons_iconfont_dist_material_design_icons_css__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_material_design_icons_iconfont_dist_material_design_icons_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_material_design_icons_iconfont_dist_material_design_icons_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bootstrap__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bootstrap__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__bootstrap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__bootstrap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_App_vue__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_App_vue__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_App_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_ExampleComponent_vue__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_ExampleComponent_vue__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_ExampleComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_ExampleComponent_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Tasks_vue__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Tasks_vue__ = __webpack_require__(65);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_Tasks_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__components_Tasks_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Tasques_vue__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Tasques_vue__ = __webpack_require__(74);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Tasques_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_Tasques_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Tags_vue__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Tags_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_Tags_vue__);
@@ -26739,7 +26598,7 @@ window.Vue.component('user-select', __WEBPACK_IMPORTED_MODULE_14__components_Use
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_5__components_App_vue___default.a);
 
 /***/ }),
-/* 27 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
@@ -26795,7 +26654,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(28);
+__webpack_require__(25);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -26809,7 +26668,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ }),
-/* 28 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -27002,7 +26861,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(8)))
 
 /***/ }),
-/* 29 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -49781,13 +49640,13 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_vue__;
 //# sourceMappingURL=vuetify.js.map
 
 /***/ }),
-/* 30 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(31);
+var content = __webpack_require__(28);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -49812,7 +49671,7 @@ if(false) {
 }
 
 /***/ }),
-/* 31 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)(false);
@@ -49826,7 +49685,7 @@ exports.push([module.i, "/*!\n* Vuetify v1.3.2\n* Forged by John Leider\n* Relea
 
 
 /***/ }),
-/* 32 */
+/* 29 */
 /***/ (function(module, exports) {
 
 
@@ -49921,13 +49780,13 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 33 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(34);
+var content = __webpack_require__(31);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -49952,22 +49811,22 @@ if(false) {
 }
 
 /***/ }),
-/* 34 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var escape = __webpack_require__(35);
+var escape = __webpack_require__(32);
 exports = module.exports = __webpack_require__(5)(false);
 // imports
 
 
 // module
-exports.push([module.i, "@font-face {\n  font-family: 'Material Icons';\n  font-style: normal;\n  font-weight: 400;\n  src: url(" + escape(__webpack_require__(36)) + ");\n  /* For IE6-8 */\n  src: local(\"Material Icons\"), local(\"MaterialIcons-Regular\"), url(" + escape(__webpack_require__(37)) + ") format(\"woff2\"), url(" + escape(__webpack_require__(38)) + ") format(\"woff\"), url(" + escape(__webpack_require__(39)) + ") format(\"truetype\"); }\n.material-icons {\n  font-family: 'Material Icons';\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;\n  /* Preferred icon size */\n  display: inline-block;\n  line-height: 1;\n  text-transform: none;\n  letter-spacing: normal;\n  word-wrap: normal;\n  white-space: nowrap;\n  direction: ltr;\n  /* Support for all WebKit browsers. */\n  -webkit-font-smoothing: antialiased;\n  /* Support for Safari and Chrome. */\n  text-rendering: optimizeLegibility;\n  /* Support for Firefox. */\n  -moz-osx-font-smoothing: grayscale;\n  /* Support for IE. */\n  font-feature-settings: 'liga'; }\n", ""]);
+exports.push([module.i, "@font-face {\n  font-family: 'Material Icons';\n  font-style: normal;\n  font-weight: 400;\n  src: url(" + escape(__webpack_require__(33)) + ");\n  /* For IE6-8 */\n  src: local(\"Material Icons\"), local(\"MaterialIcons-Regular\"), url(" + escape(__webpack_require__(34)) + ") format(\"woff2\"), url(" + escape(__webpack_require__(35)) + ") format(\"woff\"), url(" + escape(__webpack_require__(36)) + ") format(\"truetype\"); }\n.material-icons {\n  font-family: 'Material Icons';\n  font-weight: normal;\n  font-style: normal;\n  font-size: 24px;\n  /* Preferred icon size */\n  display: inline-block;\n  line-height: 1;\n  text-transform: none;\n  letter-spacing: normal;\n  word-wrap: normal;\n  white-space: nowrap;\n  direction: ltr;\n  /* Support for all WebKit browsers. */\n  -webkit-font-smoothing: antialiased;\n  /* Support for Safari and Chrome. */\n  text-rendering: optimizeLegibility;\n  /* Support for Firefox. */\n  -moz-osx-font-smoothing: grayscale;\n  /* Support for IE. */\n  font-feature-settings: 'liga'; }\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 35 */
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = function escape(url) {
@@ -49989,35 +49848,35 @@ module.exports = function escape(url) {
 
 
 /***/ }),
-/* 36 */
+/* 33 */
 /***/ (function(module, exports) {
 
 module.exports = "/fonts/vendor/material-design-icons-icondist/MaterialIcons-Regular.eot?e79bfd88537def476913f3ed52f4f4b3";
 
 /***/ }),
-/* 37 */
+/* 34 */
 /***/ (function(module, exports) {
 
 module.exports = "/fonts/vendor/material-design-icons-icondist/MaterialIcons-Regular.woff2?570eb83859dc23dd0eec423a49e147fe";
 
 /***/ }),
-/* 38 */
+/* 35 */
 /***/ (function(module, exports) {
 
 module.exports = "/fonts/vendor/material-design-icons-icondist/MaterialIcons-Regular.woff?012cf6a10129e2275d79d6adac7f3b02";
 
 /***/ }),
-/* 39 */
+/* 36 */
 /***/ (function(module, exports) {
 
 module.exports = "/fonts/vendor/material-design-icons-icondist/MaterialIcons-Regular.ttf?a37b0c01c0baf1888ca812cc0508f6e2";
 
 /***/ }),
-/* 40 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(41);
+window._ = __webpack_require__(38);
 window.Popper = __webpack_require__(10).default;
 
 /**
@@ -50029,7 +49888,7 @@ window.Popper = __webpack_require__(10).default;
 try {
   window.$ = window.jQuery = __webpack_require__(11);
 
-  __webpack_require__(43);
+  __webpack_require__(40);
 } catch (e) {}
 
 /**
@@ -50038,7 +49897,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(44);
+window.axios = __webpack_require__(41);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -50082,7 +49941,7 @@ if (user) {
 // });
 
 /***/ }),
-/* 41 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -67194,10 +67053,10 @@ if (user) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(42)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(39)(module)))
 
 /***/ }),
-/* 42 */
+/* 39 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -67225,7 +67084,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 43 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -71175,13 +71034,13 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 44 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(45);
+module.exports = __webpack_require__(42);
 
 /***/ }),
-/* 45 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71189,7 +71048,7 @@ module.exports = __webpack_require__(45);
 
 var utils = __webpack_require__(2);
 var bind = __webpack_require__(12);
-var Axios = __webpack_require__(47);
+var Axios = __webpack_require__(44);
 var defaults = __webpack_require__(6);
 
 /**
@@ -71224,14 +71083,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(16);
-axios.CancelToken = __webpack_require__(61);
+axios.CancelToken = __webpack_require__(58);
 axios.isCancel = __webpack_require__(15);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(62);
+axios.spread = __webpack_require__(59);
 
 module.exports = axios;
 
@@ -71240,7 +71099,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 46 */
+/* 43 */
 /***/ (function(module, exports) {
 
 /*!
@@ -71267,7 +71126,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 47 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71275,8 +71134,8 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(6);
 var utils = __webpack_require__(2);
-var InterceptorManager = __webpack_require__(56);
-var dispatchRequest = __webpack_require__(57);
+var InterceptorManager = __webpack_require__(53);
+var dispatchRequest = __webpack_require__(54);
 
 /**
  * Create a new instance of Axios
@@ -71353,7 +71212,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 48 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71372,7 +71231,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 49 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71405,7 +71264,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 50 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71433,7 +71292,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 51 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71506,7 +71365,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 52 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71566,7 +71425,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 53 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71641,7 +71500,7 @@ module.exports = (
 
 
 /***/ }),
-/* 54 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71684,7 +71543,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 55 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71744,7 +71603,7 @@ module.exports = (
 
 
 /***/ }),
-/* 56 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71803,18 +71662,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 57 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(2);
-var transformData = __webpack_require__(58);
+var transformData = __webpack_require__(55);
 var isCancel = __webpack_require__(15);
 var defaults = __webpack_require__(6);
-var isAbsoluteURL = __webpack_require__(59);
-var combineURLs = __webpack_require__(60);
+var isAbsoluteURL = __webpack_require__(56);
+var combineURLs = __webpack_require__(57);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -71896,7 +71755,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 58 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71923,7 +71782,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 59 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71944,7 +71803,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 60 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71965,7 +71824,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 61 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -72029,7 +71888,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 62 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -72063,13 +71922,13 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 63 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(64)
+var __vue_script__ = __webpack_require__(61)
 /* template */
 var __vue_template__ = null
 /* template functional */
@@ -72110,7 +71969,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 64 */
+/* 61 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -72143,15 +72002,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 65 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(66)
+var __vue_script__ = __webpack_require__(63)
 /* template */
-var __vue_template__ = __webpack_require__(67)
+var __vue_template__ = __webpack_require__(64)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -72190,7 +72049,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 66 */
+/* 63 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -72219,7 +72078,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 67 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -72262,19 +72121,19 @@ if (false) {
 }
 
 /***/ }),
-/* 68 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(69)
+  __webpack_require__(66)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(73)
+var __vue_script__ = __webpack_require__(70)
 /* template */
-var __vue_template__ = __webpack_require__(76)
+var __vue_template__ = __webpack_require__(73)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -72313,17 +72172,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 69 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(70);
+var content = __webpack_require__(67);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(71)("26a1ac17", content, false, {});
+var update = __webpack_require__(68)("26a1ac17", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -72339,7 +72198,7 @@ if(false) {
 }
 
 /***/ }),
-/* 70 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(5)(false);
@@ -72353,7 +72212,7 @@ exports.push([module.i, "\n.strike {\n    text-decoration: line-through;\n}\n", 
 
 
 /***/ }),
-/* 71 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -72372,7 +72231,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(72)
+var listToStyles = __webpack_require__(69)
 
 /*
 type StyleObject = {
@@ -72581,7 +72440,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 72 */
+/* 69 */
 /***/ (function(module, exports) {
 
 /**
@@ -72614,7 +72473,7 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 73 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -72783,7 +72642,7 @@ var filters = {
 });
 
 /***/ }),
-/* 74 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -72836,7 +72695,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 75 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -72988,7 +72847,7 @@ if (false) {
 }
 
 /***/ }),
-/* 76 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -73200,13 +73059,13 @@ if (false) {
 }
 
 /***/ }),
-/* 77 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(78)
+var __vue_script__ = __webpack_require__(75)
 /* template */
 var __vue_template__ = __webpack_require__(90)
 /* template functional */
@@ -73247,23 +73106,27 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 78 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TaskCompletedToggle__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TaskCompletedToggle__ = __webpack_require__(78);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TaskCompletedToggle___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__TaskCompletedToggle__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Toggle__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Toggle__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Toggle___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Toggle__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TaskCreate_vue__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TaskCreate_vue__ = __webpack_require__(84);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TaskCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__TaskCreate_vue__);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -73509,7 +73372,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       removing: false,
       editing: null,
       dataTasks: this.tasks,
-      headers: [{ text: 'ID', value: 'id' }, { text: 'NAME', value: 'name' }, { text: 'USER', value: 'user_id' }, { text: 'COMPLETED', value: 'completed' }, { text: 'CREACION', value: 'created_at_timestamp' }, { text: 'ACTUALIZACION', value: 'updated_at_timestamp' }, { text: 'ACCION', sortable: false, value: 'full_search' }]
+      headers: [{ text: 'ID', value: 'id' }, { text: 'NAME', value: 'name' }, { text: 'USER', value: 'user_id' }, { text: 'COMPLETED', value: 'completed' }, { text: 'CREACION', value: 'created_at_timestamp' }, { text: 'ACTUALIZACION', value: 'updated_at_timestamp' }, { text: 'ACCIONES', sortable: false, value: 'full_search' }]
     };
   },
 
@@ -73614,7 +73477,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         description: this.taskBeingEdited.description
       }).then(function () {
         _this3.editTask(_this3.taskBeingEdited);
-        _this3.$snackbar.showMessage("S'ha editat correctament la tasca");
+        _this3.$snackbar.showMessage('Se ha editado correctamente la tarea');
       }).catch(function (error) {
         _this3.$snackbar.showError(error);
         _this3.editing = false;
@@ -73645,11 +73508,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   created: function created() {
     console.log('USUARIO LOGADO');
     console.log(window.laravel_user);
+  },
+
+  computed: {
+    total: function total() {
+      return this.dataTasks.length;
+    }
   }
 });
 
 /***/ }),
-/* 79 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -73674,7 +73543,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(80);
+module.exports = __webpack_require__(77);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -73690,7 +73559,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 80 */
+/* 77 */
 /***/ (function(module, exports) {
 
 /**
@@ -74423,7 +74292,54 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 81 */
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(79)
+/* template */
+var __vue_template__ = __webpack_require__(80)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/TaskCompletedToggle.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0cc4d21f", Component.options)
+  } else {
+    hotAPI.reload("data-v-0cc4d21f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 79 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74536,7 +74452,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 });
 
 /***/ }),
-/* 82 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -74569,7 +74485,54 @@ if (false) {
 }
 
 /***/ }),
-/* 83 */
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(82)
+/* template */
+var __vue_template__ = __webpack_require__(83)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Toggle.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-47b09f7f", Component.options)
+  } else {
+    hotAPI.reload("data-v-47b09f7f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -74635,7 +74598,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 84 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -74666,6 +74629,53 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-47b09f7f", module.exports)
   }
 }
+
+/***/ }),
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(85)
+/* template */
+var __vue_template__ = __webpack_require__(89)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/TaskCreate.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-86cdc1e8", Component.options)
+  } else {
+    hotAPI.reload("data-v-86cdc1e8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
 /* 85 */
@@ -75150,7 +75160,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("v-toolbar-title", { staticClass: "white--text" }, [
-                _vm._v("Editar Tasks")
+                _vm._v("Editar Tareas")
               ]),
               _vm._v(" "),
               _c("v-spacer"),
@@ -75170,7 +75180,7 @@ var render = function() {
                   _c("v-icon", { staticClass: "mr-1" }, [
                     _vm._v("exit_to_app")
                   ]),
-                  _vm._v("\n                EXIT\n            ")
+                  _vm._v("\n                SALIR\n            ")
                 ],
                 1
               ),
@@ -75184,11 +75194,11 @@ var render = function() {
                     loading: _vm.editing,
                     disabled: _vm.editing
                   },
-                  on: { click: _vm.update }
+                  on: { click: _vm.edit }
                 },
                 [
                   _c("v-icon", { staticClass: "mr-1" }, [_vm._v("save")]),
-                  _vm._v("\n              SAVE\n          ")
+                  _vm._v("\n              GUARDAR\n          ")
                 ],
                 1
               )
@@ -75511,7 +75521,7 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("v-toolbar-title", { staticClass: "white--text" }, [
-            _vm._v("Tasques")
+            _vm._v("Tasques " + _vm._s(_vm.total))
           ]),
           _vm._v(" "),
           _c("v-spacer"),
@@ -75619,7 +75629,7 @@ var render = function() {
                 headers: _vm.headers,
                 items: _vm.dataTasks,
                 search: _vm.search,
-                "no-results-text": "No se ha encontrado ningun regustro",
+                "no-results-text": "No se ha encontrado ningun registro",
                 "no-data-text": "No hay datos disponibles",
                 "rows-per-page-text": "Tareas por pagina",
                 "rows-per-page-items": [
@@ -75702,7 +75712,7 @@ var render = function() {
                                         color: "teal lighten-1",
                                         icon: "",
                                         flat: "",
-                                        title: "Modificar la tasca"
+                                        title: "Modificar la tarea"
                                       },
                                       on: {
                                         click: function($event) {
@@ -75723,7 +75733,7 @@ var render = function() {
                                         color: "indigo accent-1",
                                         icon: "",
                                         flat: "",
-                                        title: "Show Task"
+                                        title: "Mostrar tarea"
                                       },
                                       on: {
                                         click: function($event) {
@@ -75746,7 +75756,7 @@ var render = function() {
                                         color: "deep-orange lighten-1",
                                         flat: "",
                                         icon: "",
-                                        title: "Eliminar la tasca"
+                                        title: "Eliminar la tarea"
                                       },
                                       on: {
                                         click: function($event) {
@@ -75834,7 +75844,15 @@ var render = function() {
                                   _c(
                                     "v-list-tile-content",
                                     { staticClass: "align-end" },
-                                    [_vm._v(_vm._s(task.completed))]
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          task.completed
+                                            ? "Completada"
+                                            : "Pendiente"
+                                        )
+                                      )
+                                    ]
                                   )
                                 ],
                                 1
@@ -75848,7 +75866,21 @@ var render = function() {
                                   _c(
                                     "v-list-tile-content",
                                     { staticClass: "align-end" },
-                                    [_vm._v(_vm._s(task.user_id))]
+                                    [
+                                      _c(
+                                        "v-avatar",
+                                        { attrs: { title: task.user_name } },
+                                        [
+                                          _c("img", {
+                                            attrs: {
+                                              src: task.user_gravatar,
+                                              alt: "avatar"
+                                            }
+                                          })
+                                        ]
+                                      )
+                                    ],
+                                    1
                                   )
                                 ],
                                 1
@@ -75940,12 +75972,6 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TaskCompletedToggle__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__TaskCompletedToggle___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__TaskCompletedToggle__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Toggle__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Toggle___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Toggle__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TaskCreate_vue__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TaskCreate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__TaskCreate_vue__);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -76108,103 +76134,39 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Tasques',
-  components: {
-    'task-completed-toggle': __WEBPACK_IMPORTED_MODULE_1__TaskCompletedToggle___default.a,
-    'toggle': __WEBPACK_IMPORTED_MODULE_2__Toggle___default.a,
-    'task-create': __WEBPACK_IMPORTED_MODULE_3__TaskCreate_vue___default.a
-  },
+  name: 'Tags',
   data: function data() {
     return {
-      user: '',
-      takeTask: '',
-      dataUsers: this.users,
       name: '',
-      completed: false,
       description: '',
-      editDialog: false,
+      color: '',
+      showName: '',
+      showDescription: '',
+      showCompleted: false,
+      dataTags: this.tags,
+      tagBeingRemoved: '',
+      tagBeingCreated: {},
+      tagBeingShow: '',
+      tagBeingEdited: '',
       createDialog: false,
+      editDialog: false,
       showDialog: false,
-      snackbar: true,
-      snackbarMessage: '',
-      snackbarTimeout: 3000,
-      snackbarColor: 'success',
-      taskBeingEdited: '',
-      usersold: ['Jose', 'Manuel', 'Emilio'],
-      filter: 'Todos',
-      filters: ['Todos', 'Completados', 'Pendientes'],
       search: '',
-      pagination: {
-        rowsPerPage: 25
-      },
       loading: false,
       creating: false,
-      removing: false,
-      editing: null,
-      dataTasks: this.tasks,
-      headers: [{ text: 'ID', value: 'id' }, { text: 'NAME', value: 'name' }, { text: 'USER', value: 'user_id' }, { text: 'COMPLETED', value: 'completed' }, { text: 'CREACION', value: 'created_at_timestamp' }, { text: 'ACTUALIZACION', value: 'updated_at_timestamp' }, { text: 'ACCION', sortable: false, value: 'full_search' }]
+      editing: false,
+      removing: null,
+      headers: [{ text: 'ID', value: 'id' }, { text: 'NAME', value: 'name' }, { text: 'DESCRIPTION', value: 'description' }, { text: 'COLOR', value: 'completed' }, { text: 'CREACION', value: 'created_at_timestamp' }, { text: 'ACTUALIZACION', value: 'updated_at_timestamp' }, { text: 'ACCIONES', sortable: false, value: 'full_search' }],
+      pagination: {
+        rowsPerPage: 25
+      }
     };
   },
 
   props: {
-    tasks: {
-      type: Array,
-      required: true
-    },
-    users: {
+    tags: {
       type: Array,
       required: true
     },
@@ -76214,36 +76176,52 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }
   },
   methods: {
-    opcion1: function opcion1() {
-      console.log('TODO OPCION1');
-    },
     refresh: function refresh() {
       var _this = this;
 
       this.loading = true;
       window.axios.get(this.uri).then(function (response) {
-        _this.$snackbar.showMessage('Se ha actualizado correctamente');
-        _this.dataTasks = response.data;
+        console.log(response);
+        _this.dataTags = response.data;
         _this.loading = false;
       }).catch(function (error) {
-        _this.$snackbar.showError(error.message);
+        console.log(error);
         _this.loading = false;
       });
     },
-    create: function create(task) {
-      console.log('task');
-    },
+    create: function create() {
+      var _this2 = this;
 
-    // destroyWithPromises () {
-    //   this.$confirm().then(
-    //     window.axios.then
-    //   ).catch (
-    //
-    //   )
-    //   },
+      this.creating = true;
+      window.axios.post(this.uri, this.tagBeingCreated).then(function (response) {
+        _this2.createTag(response.data);
+        _this2.$snackbar.showMessage('Se ha editado correctamente la etiqueta');
+        _this2.creating = false;
+        _this2.editDialog = false;
+      }).catch(function (error) {
+        _this2.$snackbar.showError(error);
+        _this2.creating = false;
+        _this2.editDialog = false;
+      });
+    },
+    showCreate: function showCreate() {
+      this.createDialog = true;
+    },
+    show: function show(tag) {
+      console.log('Show Tag' + tag.id);
+    },
+    removeTag: function removeTag(tag) {
+      this.dataTags.splice(this.dataTags.indexOf(tag), 1);
+    },
+    editTag: function editTag(tag) {
+      this.dataTags.splice(this.dataTags.indexOf(tag), 1, tag);
+    },
+    createTag: function createTag(tag) {
+      this.dataTags.splice(0, 0, tag);
+    },
     destroy: function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(task) {
-        var _this2 = this;
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(tag) {
+        var _this3 = this;
 
         var result;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
@@ -76251,27 +76229,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return this.$confirm('Las tareas borrados no se puede recuperar', {
-                  title: 'Estas seguro?',
-                  buttonTrueText: 'Eliminar',
-                  buttonFalseText: 'Cancelar'
-                });
+                return this.$confirm('La etiquetas borradas no se pueden recuperar', { title: 'Esta seguro?', buttonTrueText: 'Eliminar', buttonFalseText: 'Cancelar', color: 'error' });
 
               case 2:
                 result = _context.sent;
 
                 if (result) {
-                  this.removing = task.id;
-                  window.axios.delete(this.uri + task.id).then(function () {
-                    _this2.refresh();
-                    _this2.removeTask(task);
-                    _this2.deleteDialog = false;
-                    task = null;
-                    _this2.$snackbar.showMessage('Se ha borrado correctamente la tarea');
-                    _this2.removing = task.id;
+                  this.removing = tag.id;
+                  window.axios.delete(this.uri + tag.id).then(function () {
+                    _this3.removeTag(tag);
+                    _this3.$snackbar.showMessage('Se ha borrado correctamente la etiqueta');
+                    _this3.removing = null;
                   }).catch(function (error) {
-                    _this2.$snackbar.showError(error.message);
-                    _this2.removing = task.id;
+                    _this3.$snackbar.showError(error);
+                    _this3.removing = null;
                   });
                 }
 
@@ -76290,47 +76261,42 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       return destroy;
     }(),
     edit: function edit() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.editing = true;
-      window.axios.put(this.uri + this.taskBeingEdited.id, {
-        user_id: this.taskBeingEdited.user_id,
-        name: this.taskBeingEdited.name,
-        completed: this.taskBeingEdited.completed,
-        description: this.taskBeingEdited.description
-      }).then(function () {
-        _this3.editTask(_this3.taskBeingEdited);
-        _this3.$snackbar.showMessage("S'ha editat correctament la tasca");
+      window.axios.put(this.uri + this.tagBeingEdited.id, this.tagBeingEdited).then(function () {
+        _this4.editTag(_this4.tagBeingEdited);
+        _this4.$snackbar.showMessage('Se ha editado correctamente la etiqueta');
+        _this4.editing = false;
+        _this4.editDialog = false;
       }).catch(function (error) {
-        _this3.$snackbar.showError(error);
-        _this3.editing = false;
-        _this3.editDialog = false;
-      }).finally(function () {
-        _this3.editing = false;
-        _this3.editDialog = false;
+        _this4.$snackbar.showError(error);
+        _this4.editing = false;
+        _this4.editDialog = false;
       });
     },
-    removeTask: function removeTask(task) {
-      this.dataTasks.splice(this.dataTasks.indexOf(task), 1);
-    },
-    editTask: function editTask($task) {
-      this.dataTasks.splice(this.dataTasks.indexOf($task), 1, $task);
-    },
-    showEdit: function showEdit(task) {
+    showEdit: function showEdit(tag) {
       this.editDialog = true;
-      this.taskBeingEdited = task;
+      this.tagBeingEdited = tag;
     },
-    showTasks: function showTasks(task) {
-      this.takeTask = task;
+    showShow: function showShow(tag) {
       this.showDialog = true;
+      this.tagBeingShow = tag;
     },
-    show: function show(task) {
-      this.showDialog = false;
+    complete: function complete(tag) {
+      this.tagBeingEdited = tag;
+      this.edit();
     }
   },
   created: function created() {
-    console.log('USUARIO LOGADO');
+    console.log('Usuario logado:');
     console.log(window.laravel_user);
+  },
+
+  computed: {
+    total: function total() {
+      return this.dataTags.length;
+    }
   }
 });
 
@@ -76388,7 +76354,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("v-toolbar-title", { staticClass: "white--text" }, [
-                _vm._v("Editar Tasks")
+                _vm._v("Editar Etiquetas")
               ]),
               _vm._v(" "),
               _c("v-spacer"),
@@ -76396,38 +76362,28 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  staticClass: "white--text",
-                  attrs: { flat: "" },
+                  attrs: { color: "white", flat: "" },
                   on: {
                     click: function($event) {
                       _vm.editDialog = false
                     }
                   }
                 },
-                [
-                  _c("v-icon", { staticClass: "mr-1" }, [
-                    _vm._v("exit_to_app")
-                  ]),
-                  _vm._v("\n                EXIT\n            ")
-                ],
+                [_c("v-icon", [_vm._v("exit_to_app")]), _vm._v("SALIR")],
                 1
               ),
               _vm._v(" "),
               _c(
                 "v-btn",
                 {
-                  staticClass: "white--text",
-                  attrs: {
-                    flat: "",
-                    loading: _vm.editing,
-                    disabled: _vm.editing
-                  },
-                  on: { click: _vm.update }
+                  attrs: { color: "white", flat: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.editDialog = false
+                    }
+                  }
                 },
-                [
-                  _c("v-icon", { staticClass: "mr-1" }, [_vm._v("save")]),
-                  _vm._v("\n              SAVE\n          ")
-                ],
+                [_c("v-icon", [_vm._v("save")]), _vm._v("GUARDAR")],
                 1
               )
             ],
@@ -76444,67 +76400,60 @@ var render = function() {
                     "v-form",
                     [
                       _c("v-text-field", {
-                        attrs: {
-                          label: "Nombre",
-                          hint: "El nombre de la tarea"
-                        },
+                        attrs: { label: "Nom", hint: "El nom de la tag..." },
                         model: {
-                          value: _vm.taskBeingEdited.name,
+                          value: _vm.tagBeingEdited.name,
                           callback: function($$v) {
-                            _vm.$set(_vm.taskBeingEdited, "name", $$v)
+                            _vm.$set(_vm.tagBeingEdited, "name", $$v)
                           },
-                          expression: "taskBeingEdited.name"
+                          expression: "tagBeingEdited.name"
                         }
                       }),
                       _vm._v(" "),
-                      _c("v-switch", {
-                        attrs: {
-                          label: _vm.taskBeingEdited.completed
-                            ? "Completada"
-                            : "Pendiente"
-                        },
-                        model: {
-                          value: _vm.taskBeingEdited.completed,
-                          callback: function($$v) {
-                            _vm.$set(_vm.taskBeingEdited, "completed", $$v)
-                          },
-                          expression: "taskBeingEdited.completed"
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.tagBeingEdited.color,
+                            expression: "tagBeingEdited.color"
+                          }
+                        ],
+                        attrs: { type: "color", label: "Color" },
+                        domProps: { value: _vm.tagBeingEdited.color },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.tagBeingEdited,
+                              "color",
+                              $event.target.value
+                            )
+                          }
                         }
                       }),
                       _vm._v(" "),
                       _c("v-textarea", {
-                        attrs: { label: "Descripcion", hint: "Descripcion" },
+                        attrs: { label: "Descripcio", hint: "Descripció" },
                         model: {
-                          value: _vm.taskBeingEdited.description,
+                          value: _vm.tagBeingEdited.description,
                           callback: function($$v) {
-                            _vm.$set(_vm.taskBeingEdited, "description", $$v)
+                            _vm.$set(_vm.tagBeingEdited, "description", $$v)
                           },
-                          expression: "taskBeingEdited.description"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-autocomplete", {
-                        attrs: {
-                          items: _vm.dataUsers,
-                          label: "Usuario",
-                          "item-text": "name",
-                          "item-value": "id"
-                        },
-                        model: {
-                          value: _vm.taskBeingEdited.user_id,
-                          callback: function($$v) {
-                            _vm.$set(_vm.taskBeingEdited, "user_id", $$v)
-                          },
-                          expression: "taskBeingEdited.user_id"
+                          expression: "tagBeingEdited.description"
                         }
                       }),
                       _vm._v(" "),
                       _c(
                         "div",
+                        { staticClass: "text-xs-center" },
                         [
                           _c(
                             "v-btn",
                             {
+                              attrs: { color: "grey" },
                               on: {
                                 click: function($event) {
                                   _vm.editDialog = false
@@ -76514,18 +76463,27 @@ var render = function() {
                             [
                               _c("v-icon", { staticClass: "mr-1" }, [
                                 _vm._v("exit_to_app")
-                              ])
+                              ]),
+                              _vm._v("SALIR")
                             ],
                             1
                           ),
                           _vm._v(" "),
                           _c(
                             "v-btn",
-                            { on: { click: _vm.edit } },
+                            {
+                              attrs: { color: "success" },
+                              on: {
+                                click: function($event) {
+                                  _vm.edit()
+                                }
+                              }
+                            },
                             [
                               _c("v-icon", { staticClass: "mr-1" }, [
                                 _vm._v("save")
-                              ])
+                              ]),
+                              _vm._v("GUARDAR")
                             ],
                             1
                           )
@@ -76575,8 +76533,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  staticClass: "white--text",
-                  attrs: { flat: "", icon: "" },
+                  attrs: { color: "white", flat: "", icon: "" },
                   on: {
                     click: function($event) {
                       _vm.showDialog = false
@@ -76586,16 +76543,13 @@ var render = function() {
                 [_c("v-icon", { staticClass: "mr-1" }, [_vm._v("close")])],
                 1
               ),
-              _vm._v(" "),
-              _c("v-toolbar-title", [_vm._v("Tasks")]),
-              _vm._v(" "),
+              _vm._v("\n\n              Crear tag\n             "),
               _c("v-spacer"),
               _vm._v(" "),
               _c(
                 "v-btn",
                 {
-                  staticClass: "white--text",
-                  attrs: { flat: "" },
+                  attrs: { color: "white", flat: "" },
                   on: {
                     click: function($event) {
                       _vm.showDialog = false
@@ -76603,7 +76557,27 @@ var render = function() {
                   }
                 },
                 [
-                  _c("v-icon", { staticClass: "mr-1" }, [_vm._v("exit_to_app")])
+                  _c("v-icon", { staticClass: "mr-1" }, [
+                    _vm._v("exit_to_app")
+                  ]),
+                  _vm._v("SALIR")
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "white", flat: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.showDialog = false
+                    }
+                  }
+                },
+                [
+                  _c("v-icon", { staticClass: "mr-1" }, [_vm._v("save")]),
+                  _vm._v("GUARDAR")
                 ],
                 1
               )
@@ -76621,57 +76595,47 @@ var render = function() {
                     "v-form",
                     [
                       _c("v-text-field", {
-                        attrs: { label: "Nombre", readonly: "" },
+                        attrs: {
+                          disabled: "",
+                          label: "Nom",
+                          hint: "El nombre de la etiqueta..."
+                        },
                         model: {
-                          value: _vm.takeTask.name,
+                          value: _vm.tagBeingShow.name,
                           callback: function($$v) {
-                            _vm.$set(_vm.takeTask, "name", $$v)
+                            _vm.$set(_vm.tagBeingShow, "name", $$v)
                           },
-                          expression: "takeTask.name"
+                          expression: "tagBeingShow.name"
                         }
                       }),
                       _vm._v(" "),
-                      _c("v-switch", {
+                      _c("v-text-field", {
                         attrs: {
-                          label: _vm.takeTask.completed
-                            ? "Completada"
-                            : "Pendiente",
-                          readonly: ""
+                          disabled: "",
+                          label: "Color",
+                          hint: "Color de la tag"
                         },
                         model: {
-                          value: _vm.takeTask.completed,
+                          value: _vm.tagBeingShow.color,
                           callback: function($$v) {
-                            _vm.$set(_vm.takeTask, "completed", $$v)
+                            _vm.$set(_vm.tagBeingShow, "color", $$v)
                           },
-                          expression: "takeTask.completed"
+                          expression: "tagBeingShow.color"
                         }
                       }),
                       _vm._v(" "),
                       _c("v-textarea", {
-                        attrs: { label: "Descripción", readonly: "" },
-                        model: {
-                          value: _vm.takeTask.description,
-                          callback: function($$v) {
-                            _vm.$set(_vm.takeTask, "description", $$v)
-                          },
-                          expression: "takeTask.description"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-autocomplete", {
                         attrs: {
-                          items: _vm.dataUsers,
-                          label: "Usuario",
-                          "item-text": "name",
-                          "return-object": "",
-                          readonly: ""
+                          disabled: "",
+                          label: "Descripción",
+                          hint: "Descripción"
                         },
                         model: {
-                          value: _vm.takeTask.user,
+                          value: _vm.tagBeingShow.description,
                           callback: function($$v) {
-                            _vm.$set(_vm.takeTask, "user", $$v)
+                            _vm.$set(_vm.tagBeingShow, "description", $$v)
                           },
-                          expression: "takeTask.user"
+                          expression: "tagBeingShow.description"
                         }
                       }),
                       _vm._v(" "),
@@ -76682,6 +76646,7 @@ var render = function() {
                           _c(
                             "v-btn",
                             {
+                              attrs: { color: "grey" },
                               on: {
                                 click: function($event) {
                                   _vm.showDialog = false
@@ -76689,9 +76654,204 @@ var render = function() {
                               }
                             },
                             [
-                              _c("v-icon", { staticClass: "mr-2" }, [
+                              _c("v-icon", { staticClass: "mr-1" }, [
                                 _vm._v("exit_to_app")
-                              ])
+                              ]),
+                              _vm._v("SALIR")
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          on: {
+            keydown: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "esc", 27, $event.key, "Escape")
+              ) {
+                return null
+              }
+              _vm.createDialog = false
+            }
+          },
+          model: {
+            value: _vm.createDialog,
+            callback: function($$v) {
+              _vm.createDialog = $$v
+            },
+            expression: "createDialog"
+          }
+        },
+        [
+          _c(
+            "v-toolbar",
+            { staticClass: "white--text", attrs: { color: "grey darken-3" } },
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "white", flat: "", icon: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.createDialog = false
+                    }
+                  }
+                },
+                [_c("v-icon", { staticClass: "mr-1" }, [_vm._v("close")])],
+                1
+              ),
+              _vm._v("\n\n              Crear tag\n             "),
+              _c("v-spacer"),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "white", flat: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.createDialog = false
+                    }
+                  }
+                },
+                [
+                  _c("v-icon", { staticClass: "mr-1" }, [
+                    _vm._v("exit_to_app")
+                  ]),
+                  _vm._v("SALIR")
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "white", flat: "" },
+                  on: {
+                    click: function($event) {
+                      _vm.createDialog = false
+                    }
+                  }
+                },
+                [
+                  _c("v-icon", { staticClass: "mr-1" }, [_vm._v("save")]),
+                  _vm._v("GUARDAR")
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-form",
+                    [
+                      _c("v-text-field", {
+                        attrs: {
+                          label: "Nom",
+                          hint: "El nombre de la etiqueta..."
+                        },
+                        model: {
+                          value: _vm.tagBeingCreated.name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.tagBeingCreated, "name", $$v)
+                          },
+                          expression: "tagBeingCreated.name"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.tagBeingCreated.color,
+                            expression: "tagBeingCreated.color"
+                          }
+                        ],
+                        attrs: { type: "color", label: "Color" },
+                        domProps: { value: _vm.tagBeingCreated.color },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.tagBeingCreated,
+                              "color",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-textarea", {
+                        attrs: { label: "Descripcio", hint: "Descripción" },
+                        model: {
+                          value: _vm.tagBeingCreated.description,
+                          callback: function($$v) {
+                            _vm.$set(_vm.tagBeingCreated, "description", $$v)
+                          },
+                          expression: "tagBeingCreated.description"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "text-xs-center" },
+                        [
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "grey" },
+                              on: {
+                                click: function($event) {
+                                  _vm.createDialog = false
+                                }
+                              }
+                            },
+                            [
+                              _c("v-icon", { staticClass: "mr-1" }, [
+                                _vm._v("exit_to_app")
+                              ]),
+                              _vm._v("SALIR")
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-btn",
+                            {
+                              attrs: { color: "success" },
+                              on: { click: _vm.create }
+                            },
+                            [
+                              _c("v-icon", { staticClass: "mr-1" }, [
+                                _vm._v("save")
+                              ]),
+                              _vm._v("GUARDAR")
                             ],
                             1
                           )
@@ -76713,50 +76873,17 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-toolbar",
-        { attrs: { color: "grey darken-4" } },
+        { attrs: { color: "blue darken-1" } },
         [
-          _c(
-            "v-menu",
-            [
-              _c(
-                "v-btn",
-                { attrs: { slot: "activator", flat: "" }, slot: "activator" },
-                [_c("v-icon", [_vm._v("more_vert")])],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-list",
-                [
-                  _c(
-                    "v-list-tile",
-                    { on: { click: _vm.opcion1 } },
-                    [_c("v-list-tile-title", [_vm._v("Opción 1")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-list-tile",
-                    { attrs: { href: "http://google.com" } },
-                    [_c("v-list-tile-title", [_vm._v("Google")])],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
           _c("v-toolbar-title", { staticClass: "white--text" }, [
-            _vm._v("Tasques")
+            _vm._v("Tags " + _vm._s(_vm.total))
           ]),
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
           _c(
             "v-btn",
-            { staticClass: "white--text", attrs: { icon: "" } },
+            { staticClass: "white--text", attrs: { icon: "", dark: "" } },
             [_c("v-icon", [_vm._v("settings")])],
             1
           ),
@@ -76765,7 +76892,12 @@ var render = function() {
             "v-btn",
             {
               staticClass: "white--text",
-              attrs: { icon: "", loading: _vm.loading, disabled: _vm.loading },
+              attrs: {
+                icon: "",
+                dark: "",
+                loading: _vm.loading,
+                disabled: _vm.loading
+              },
               on: { click: _vm.refresh }
             },
             [_c("v-icon", [_vm._v("refresh")])],
@@ -76783,54 +76915,19 @@ var render = function() {
             [
               _c(
                 "v-layout",
+                { attrs: { row: "", wrap: "" } },
                 [
                   _c(
                     "v-flex",
-                    { staticClass: "mr-2", attrs: { xs3: "" } },
-                    [
-                      _c("v-select", {
-                        attrs: { label: "Filters", items: _vm.filters },
-                        model: {
-                          value: _vm.filter,
-                          callback: function($$v) {
-                            _vm.filter = $$v
-                          },
-                          expression: "filter"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { staticClass: "mr-2", attrs: { xs4: "" } },
-                    [
-                      _c("v-select", {
-                        attrs: {
-                          label: "User",
-                          items: _vm.dataUsers,
-                          "item-text": "name",
-                          clearable: ""
-                        },
-                        model: {
-                          value: _vm.users,
-                          callback: function($$v) {
-                            _vm.users = $$v
-                          },
-                          expression: "users"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs5: "" } },
+                    { attrs: { xs12: "" } },
                     [
                       _c("v-text-field", {
-                        attrs: { "append-icon": "search", label: "Buscar" },
+                        attrs: {
+                          "append-icon": "search",
+                          label: "Búsqueda",
+                          "single-line": "",
+                          "hide-details": ""
+                        },
                         model: {
                           value: _vm.search,
                           callback: function($$v) {
@@ -76855,11 +76952,12 @@ var render = function() {
               staticClass: "hidden-md-and-down",
               attrs: {
                 headers: _vm.headers,
-                items: _vm.dataTasks,
+                items: _vm.dataTags,
                 search: _vm.search,
-                "no-results-text": "No se ha encontrado ningun regustro",
-                "no-data-text": "No hay datos disponibles",
-                "rows-per-page-text": "Tareas por pagina",
+                "no-results-text": "No se ha encontrado ningun registro",
+                loading: _vm.loading,
+                "no-data-text": "",
+                "rows-per-page-text": "Tags per pàgina",
                 "rows-per-page-items": [
                   5,
                   10,
@@ -76867,9 +76965,8 @@ var render = function() {
                   50,
                   100,
                   200,
-                  { text: "Todos", value: -1 }
+                  { text: "Tots", value: -1 }
                 ],
-                loading: _vm.loading,
                 pagination: _vm.pagination
               },
               on: {
@@ -76881,127 +76978,113 @@ var render = function() {
                 {
                   key: "items",
                   fn: function(ref) {
-                    var task = ref.item
+                    var tag = ref.item
                     return [
-                      _c(
-                        "tr",
-                        [
-                          _c("td", [_vm._v(_vm._s(task.id))]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v(_vm._s(task.name))]),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            [
-                              _c(
-                                "v-avatar",
-                                { attrs: { title: task.user_name } },
-                                [
-                                  _c("img", {
-                                    attrs: {
-                                      src: task.user_gravatar,
-                                      alt: "avatar"
-                                    }
-                                  })
-                                ]
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("toggle", {
-                            attrs: { completed: task.completed, id: task.id }
-                          }),
-                          _vm._v(" "),
-                          _c("td", [
+                      _c("tr", [
+                        _c("td", [_vm._v(_vm._s(tag.id))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(tag.name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(tag.description))]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
                             _c(
-                              "span",
-                              { attrs: { title: task.created_at_formatted } },
-                              [_vm._v(_vm._s(task.created_at_human))]
+                              "v-icon",
+                              { attrs: { "x-large": "", color: tag.color } },
+                              [_vm._v("memory")]
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c(
-                              "span",
-                              { attrs: { title: task.updated_at_formatted } },
-                              [_vm._v(_vm._s(task.updated_at_human))]
-                            )
-                          ]),
-                          _vm._v(" "),
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("td", [
                           _c(
-                            "td",
-                            [
-                              _vm.$can("tasks.update", task)
-                                ? _c(
-                                    "v-btn",
-                                    {
-                                      attrs: {
-                                        color: "teal lighten-1",
-                                        icon: "",
-                                        flat: "",
-                                        title: "Modificar la tasca"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.showEdit(task)
-                                        }
-                                      }
-                                    },
-                                    [_c("v-icon", [_vm._v("border_color")])],
-                                    1
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.$can("tasks.show", task)
-                                ? _c(
-                                    "v-btn",
-                                    {
-                                      attrs: {
-                                        color: "indigo accent-1",
-                                        icon: "",
-                                        flat: "",
-                                        title: "Show Task"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.showTasks(task)
-                                        }
-                                      }
-                                    },
-                                    [_c("v-icon", [_vm._v("visibility")])],
-                                    1
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.$can("tasks.destroy", task)
-                                ? _c(
-                                    "v-btn",
-                                    {
-                                      attrs: {
-                                        loading: _vm.removing === task.id,
-                                        disabled: _vm.removing === task.id,
-                                        color: "deep-orange lighten-1",
-                                        flat: "",
-                                        icon: "",
-                                        title: "Eliminar la tasca"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.destroy(task)
-                                        }
-                                      }
-                                    },
-                                    [_c("v-icon", [_vm._v("delete")])],
-                                    1
-                                  )
-                                : _vm._e()
-                            ],
-                            1
+                            "span",
+                            { attrs: { title: tag.created_at_formatted } },
+                            [_vm._v(_vm._s(tag.created_at_human))]
                           )
-                        ],
-                        1
-                      )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "span",
+                            { attrs: { title: tag.updated_at_formatted } },
+                            [_vm._v(_vm._s(tag.updated_at_human))]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            _vm.$can("tags.update", tag)
+                              ? _c(
+                                  "v-btn",
+                                  {
+                                    attrs: {
+                                      color: "teal lighten-1",
+                                      icon: "",
+                                      flat: "",
+                                      title: "Modificar la etiqueta"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.showEdit(tag)
+                                      }
+                                    }
+                                  },
+                                  [_c("v-icon", [_vm._v("border_color")])],
+                                  1
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.$can("tags.show", tag)
+                              ? _c(
+                                  "v-btn",
+                                  {
+                                    attrs: {
+                                      color: "indigo accent-1",
+                                      icon: "",
+                                      flat: ""
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.showShow(tag)
+                                      }
+                                    }
+                                  },
+                                  [_c("v-icon", [_vm._v("visibility")])],
+                                  1
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.$can("tags.destroy", tag)
+                              ? _c(
+                                  "v-btn",
+                                  {
+                                    attrs: {
+                                      loading: _vm.removing === tag.id,
+                                      disabled: _vm.removing === tag.id,
+                                      color: "error",
+                                      flat: "",
+                                      icon: "",
+                                      title: "Eliminar la etiqueta"
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.destroy(tag)
+                                      }
+                                    }
+                                  },
+                                  [_c("v-icon", [_vm._v("delete")])],
+                                  1
+                                )
+                              : _vm._e()
+                          ],
+                          1
+                        )
+                      ])
                     ]
                   }
                 }
@@ -77014,101 +77097,29 @@ var render = function() {
               })
             ],
             1
-          ),
-          _vm._v(" "),
-          _c("v-data-iterator", {
-            staticClass: "hidden-lg-and-up",
-            attrs: {
-              items: _vm.dataTasks,
-              search: _vm.search,
-              "no-results-text": "No se ha encontrado ningun registro",
-              "no-data-text": "No hay datos disponibles",
-              "rows-per-page-text": "Tareas por pagina",
-              "rows-per-page-items": [
-                5,
-                10,
-                25,
-                50,
-                100,
-                200,
-                { text: "Todos", value: -1 }
-              ],
-              loading: _vm.loading,
-              pagination: _vm.pagination
-            },
-            on: {
-              "update:pagination": function($event) {
-                _vm.pagination = $event
-              }
-            },
-            scopedSlots: _vm._u([
-              {
-                key: "item",
-                fn: function(ref) {
-                  var task = ref.item
-                  return _c(
-                    "v-flex",
-                    { attrs: { xs12: "", sm6: "", md4: "" } },
-                    [
-                      _c(
-                        "v-card",
-                        { staticClass: "mb-1" },
-                        [
-                          _c("v-card-title", {
-                            domProps: { textContent: _vm._s(task.name) }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "v-list",
-                            { attrs: { dense: "" } },
-                            [
-                              _c(
-                                "v-list-tile",
-                                [
-                                  _c("v-list-tile-content", [
-                                    _vm._v("Completed:")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-list-tile-content",
-                                    { staticClass: "align-end" },
-                                    [_vm._v(_vm._s(task.completed))]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-tile",
-                                [
-                                  _c("v-list-tile-content", [_vm._v("User:")]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-list-tile-content",
-                                    { staticClass: "align-end" },
-                                    [_vm._v(_vm._s(task.user_id))]
-                                  )
-                                ],
-                                1
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                }
-              }
-            ])
-          })
+          )
         ],
         1
       ),
       _vm._v(" "),
-      _c("task-create", { attrs: { users: _vm.users } })
+      _vm.$can("user.tags.store")
+        ? _c(
+            "v-btn",
+            {
+              staticClass: "white--text",
+              attrs: {
+                fab: "",
+                bottom: "",
+                right: "",
+                color: "pink",
+                fixed: ""
+              },
+              on: { click: _vm.showCreate }
+            },
+            [_c("v-icon", [_vm._v("add")])],
+            1
+          )
+        : _vm._e()
     ],
     1
   )
@@ -77176,9 +77187,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuelidate__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__);
 //
 //
@@ -77446,7 +77457,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-var withParams = Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}).BUILD === 'web' ? __webpack_require__(99).withParams : __webpack_require__(22).withParams;
+var withParams = Object({"MIX_PUSHER_APP_KEY":"","MIX_PUSHER_APP_CLUSTER":"mt1","NODE_ENV":"development"}).BUILD === 'web' ? __webpack_require__(99).withParams : __webpack_require__(19).withParams;
 var _default = withParams;
 exports.default = _default;
 
@@ -78170,9 +78181,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuelidate___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vuelidate__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuelidate_lib_validators__);
 //
 //
@@ -78902,7 +78913,7 @@ var cannot = function cannot(permission) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Snackbar_vue__ = __webpack_require__(132);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Snackbar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Snackbar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__eventBus__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__eventBus__ = __webpack_require__(21);
 
 
 
@@ -78977,7 +78988,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__eventBus__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__eventBus__ = __webpack_require__(21);
 //
 //
 //
@@ -79053,7 +79064,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("Tancar")]
+        [_vm._v("CERRAR")]
       )
     ],
     1

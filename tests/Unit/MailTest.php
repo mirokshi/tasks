@@ -11,8 +11,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
-class MailTest extends TestCase{
-    use RefreshDatabase;
+//class MailTest extends TestCase{
+  //  use RefreshDatabase;
 
 //    /**
 //     * @test
@@ -58,4 +58,4 @@ class MailTest extends TestCase{
 //        $this->assertTrue(true);
 //
 //    }
-}
+//}

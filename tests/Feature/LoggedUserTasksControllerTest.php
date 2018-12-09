@@ -18,7 +18,7 @@ class LoggedUserTasksControllerTest extends TestCase
      */
     public function can_list_logged_user_tasks()
     {
-
+    $this->withExceptionHandling();
         // 1
          $user = $this->login();
 
@@ -31,10 +31,12 @@ class LoggedUserTasksControllerTest extends TestCase
 
         // 2 execute
         $response = $this->get('/user/tasks');
-        $response->assertSuccessful();
 
+        $response->assertSuccessful();
         $response->assertViewIs('tasks.user.index');
+
         $response->assertViewHas('tasks', $user->tasks);
+
 
  }
  /**
