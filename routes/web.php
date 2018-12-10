@@ -62,7 +62,7 @@ Route::get('/task_edit/{id}','TasksController@edit'); //modifica
     Route::get('/tasques','TasquesController@index');
 
     //Home
-    Route::get('/home','TasquesController@index');
+    Route::get('/home','TasksVueController@index');
 
     //LoggedUserTasksController
     Route::get('/user/tasks','LoggedUserTasksController@index');

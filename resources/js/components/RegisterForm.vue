@@ -14,7 +14,7 @@
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="grey darken-4" type="submit">Register</v-btn>
+            <v-btn color="grey darken-4" class="white--text" type="submit">Register</v-btn>
             <v-btn color="grey darken-4"  class="white--text" href="/">Cancel</v-btn>
         </v-card-actions>
     </v-form>
@@ -58,14 +58,14 @@ export default {
       const errors = []
       if (!this.$v.name.$dirty) return errors
 
-      !this.$v.name.minLength && errors.push('El camp name ha de tindre una mida minima de 6 caracters')
+      !this.$v.name.minLength && errors.push('The camp name greater than 6 characters')
       !this.$v.name.required && errors.push('The camp name is required')
       return errors
     },
     passwordErrors () {
       const errors = []
       if (!this.$v.password.$dirty) return errors
-      !this.$v.password.minLength && errors.push('El camp password ha de tindre una mida minima de 6 caracters')
+      !this.$v.password.minLength && errors.push('The camp password greater than 6 characters')
       !this.$v.password.required && errors.push('The camp password is required')
       return errors
     },

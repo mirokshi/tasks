@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
-    public function index(TaskIndex $request)
+    public function index()
     {
         $tasks = map_collection(Task::orderBy('created_at','desc') -> get());
         return view('tasks', ['tasks' => $tasks]);
