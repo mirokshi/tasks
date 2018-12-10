@@ -78246,14 +78246,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var errors = [];
       if (!this.$v.name.$dirty) return errors;
 
-      !this.$v.name.minLength && errors.push('El camp name ha de tindre una mida minima de 6 caracters');
+      !this.$v.name.minLength && errors.push('The camp name greater than 6 characters');
       !this.$v.name.required && errors.push('The camp name is required');
       return errors;
     },
     passwordErrors: function passwordErrors() {
       var errors = [];
       if (!this.$v.password.$dirty) return errors;
-      !this.$v.password.minLength && errors.push('El camp password ha de tindre una mida minima de 6 caracters');
+      !this.$v.password.minLength && errors.push('The camp password greater than 6 characters');
       !this.$v.password.required && errors.push('The camp password is required');
       return errors;
     },
@@ -78407,9 +78407,14 @@ var render = function() {
         [
           _c("v-spacer"),
           _vm._v(" "),
-          _c("v-btn", { attrs: { color: "grey darken-4", type: "submit" } }, [
-            _vm._v("Register")
-          ]),
+          _c(
+            "v-btn",
+            {
+              staticClass: "white--text",
+              attrs: { color: "grey darken-4", type: "submit" }
+            },
+            [_vm._v("Register")]
+          ),
           _vm._v(" "),
           _c(
             "v-btn",
