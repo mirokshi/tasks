@@ -15,8 +15,8 @@
         <v-form>
             <v-text-field v-model="tagBeingEdited.name" label="Nom" hint="El nom de la tag..."></v-text-field>
             <!--<v-text-field v-model="tagBeingEdited.color" label="Color" hint="Color de la tag"></v-text-field>-->
-            <input type="color" v-model="tagBeingEdited.color" label="Color">
-          <v-textarea v-model="tagBeingEdited.description" label="Descripcio" hint="Descripció"></v-textarea>
+            <input type="color" v-model="tagBeingEdited.color" label="Color" style="width: 50px; height: 50px;">
+          <v-textarea v-model="tagBeingEdited.description" label="Descripción" hint="Descripció"></v-textarea>
             <div class="text-xs-center">
             <v-btn color="grey" @click="editDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>SALIR</v-btn>
                <v-btn color="success" @click="edit()"><v-icon class="mr-1">save</v-icon>GUARDAR</v-btn>
@@ -35,10 +35,9 @@
             <v-card>
                 <v-card-text>
         <v-form>
-            <v-text-field disabled v-model="tagBeingShow.name" label="Nom" hint="El nombre de la etiqueta..."></v-text-field>
-            <v-text-field disabled v-model="tagBeingShow.color" label="Color" hint="Color de la tag"></v-text-field>
-            <!--<input type="color" v-model="tagBeingShow.color" label="Color">-->
-          <v-textarea disabled v-model="tagBeingShow.description" label="Descripción" hint="Descripción"></v-textarea>
+            <v-text-field  v-model="tagBeingShow.name" label="Nom" hint="El nombre de la etiqueta..." readonly></v-text-field>
+            <input type="color" v-model="tagBeingShow.color" disabled style="width: 50px; height: 50px;">
+          <v-textarea  v-model="tagBeingShow.description" label="Descripción" hint="Descripción" readonly></v-textarea>
             <div class="text-xs-center">
             <v-btn color="grey" @click="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>SALIR</v-btn>
                 </div>
@@ -51,7 +50,7 @@
             <v-toolbar color="grey darken-3" class="white--text">
             <v-btn color="white" flat icon @click="createDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
 
-                 <v-toolbar-title class="white--text">Crear Etiqueta</v-toolbar-title>
+                 <v-toolbar-title class="white--text">Crear una etiqueta</v-toolbar-title>
                <v-spacer></v-spacer> <v-btn color="white" flat @click="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>SALIR</v-btn>
                <v-btn color="white" flat @click="createDialog = false"><v-icon class="mr-1">save</v-icon>GUARDAR</v-btn>
             </v-toolbar>
@@ -60,7 +59,7 @@
         <v-form>
             <v-text-field v-model="tagBeingCreated.name" label="Nom" hint="El nombre de la etiqueta..."></v-text-field>
             <!--<v-text-field v-model="tagBeingCreated.color" label="Color" hint="#RRGGBB"></v-text-field>-->
-            <input type="color" v-model="tagBeingCreated.color" label="Color">
+            <input type="color" v-model="tagBeingCreated.color" label="Color" style="width: 50px; height: 50px;">
           <v-textarea v-model="tagBeingCreated.description" label="Descripcio" hint="Descripción"></v-textarea>
             <div class="text-xs-center">
             <v-btn color="grey" @click="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>SALIR</v-btn>
@@ -206,7 +205,7 @@ export default{
     refresh () {
       this.loading = true
       window.axios.get(this.uri).then(response => {
-        console.log(response)
+        this.$snackbar.showMessage('Se ha actualizado correctamente')
         this.dataTags = response.data
         this.loading = false
       }).catch(error => {
@@ -218,13 +217,14 @@ export default{
       this.creating = true
       window.axios.post(this.uri, this.tagBeingCreated).then((response) => {
         this.createTag(response.data)
-        this.$snackbar.showMessage('Se ha editado correctamente la etiqueta')
+        this.$snackbar.showMessage('Se ha creado correctamente la etiqueta')
+        this.refresh()
         this.creating = false
-        this.editDialog = false
+        this.createDialog = false
       }).catch((error) => {
         this.$snackbar.showError(error)
         this.creating = false
-        this.editDialog = false
+        this.createDialog = false
       })
     },
     showCreate () {
@@ -262,6 +262,7 @@ export default{
       window.axios.put(this.uri + this.tagBeingEdited.id, this.tagBeingEdited).then(() => {
         this.editTag(this.tagBeingEdited)
         this.$snackbar.showMessage('Se ha editado correctamente la etiqueta')
+        this.refresh()
         this.editing = false
         this.editDialog = false
       }).catch((error) => {

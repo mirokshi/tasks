@@ -96,7 +96,7 @@
                         <ul>
                             <li>Nom : {{ Auth::user()->name }}</li>
                             <li>Email : {{ Auth::user()->email }}</li>
-                            <li>Admin : {{ Auth::user()->admin }}</li>
+                            <li>Admin : {{ Auth::user()->admin ? 'SI' : 'NO' }}</li>
                             <li>Roles : {{ implode(',',Auth::user()->map()['roles']) }}</li>
                             <li>Permissions : {{ implode(', ',Auth::user()->map()['permissions']) }}</li>
                         </ul>
@@ -104,7 +104,7 @@
                 </v-layout>
             </v-card>
             <v-card>
-                <v-card-title class="grey darken-3 white--text"><h4>Opcions administrador</h4></v-card-title>
+                <v-card-title class="grey darken-3 white--text"><h4>Opciones de administrador</h4></v-card-title>
 
                 <v-layout row wrap>
                     @impersonating
@@ -137,13 +137,15 @@
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Application</v-toolbar-title>
             <v-spacer></v-spacer>
+            <p class="mr-3 font-weight-light">{{ Auth::user()->email }}</p>
             <v-avatar @click.stop="drawerRight = !drawerRight" title="{{ Auth::user()->name }} ( {{ Auth::user()->email }} )">
                 <img src="https://www.gravatar.com/avatar/{{md5(Auth::user()-> email)}}" alt="avatar">
             </v-avatar>
             <v-form action="/logout" method="POST">
             @csrf
-                <v-btn color="transparent" type="submit">LOGOUT</v-btn>
+                <v-btn color="transparent" type="submit"><v-icon>exit_to_app</v-icon></v-btn>
             </v-form>
+            <v-btn href="/"><v-icon>home</v-icon></v-btn>
         </v-toolbar>
         <v-content>
             @yield('content')

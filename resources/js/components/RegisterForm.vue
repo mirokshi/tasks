@@ -14,7 +14,7 @@
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="grey darken-4" class="white--text" type="submit">Register</v-btn>
+            <v-btn color="grey darken-4" class="white--text" type="submit" :disabled="$v.$invalid">Register</v-btn>
             <v-btn color="grey darken-4"  class="white--text" href="/">Cancel</v-btn>
         </v-card-actions>
     </v-form>

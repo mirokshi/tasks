@@ -49,7 +49,7 @@ export default {
         description: this.description
       }
       window.axios.post(this.addUri, task).then(response => {
-        this.$snackbar.showMessage('Tarea creado a correctamente')
+        this.$snackbar.showMessage('Tarea creada a correctamente')
         this.$emit('created', response.data)
         this.loading = false
         this.$emit('close')

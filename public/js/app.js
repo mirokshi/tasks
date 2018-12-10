@@ -73333,6 +73333,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 
 
@@ -73360,9 +73361,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       snackbarTimeout: 3000,
       snackbarColor: 'success',
       taskBeingEdited: '',
-      usersold: ['Jose', 'Manuel', 'Emilio'],
-      filter: 'Todos',
-      filters: ['Todos', 'Completados', 'Pendientes'],
+      filter: 'all',
+      filters: ['Todos', 'Completedos', 'Pendientes'],
       search: '',
       pagination: {
         rowsPerPage: 25
@@ -73391,6 +73391,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     }
   },
   methods: {
+    setFilter: function setFilter(newFilter) {
+      this.filter = newFilter;
+    },
     opcion1: function opcion1() {
       console.log('TODO OPCION1');
     },
@@ -73513,6 +73516,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
   computed: {
     total: function total() {
       return this.dataTasks.length;
+    },
+    filteredTasks: function filteredTasks() {
+      return filters[this.filter](this.dataTasks);
     }
   }
 });
@@ -74851,7 +74857,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         description: this.description
       };
       window.axios.post(this.addUri, task).then(function (response) {
-        _this.$snackbar.showMessage('Tarea creado a correctamente');
+        _this.$snackbar.showMessage('Tarea creada a correctamente');
         _this.$emit('created', response.data);
         _this.loading = false;
         _this.$emit('close');
@@ -76142,7 +76148,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Tags',
@@ -76190,7 +76195,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
       this.loading = true;
       window.axios.get(this.uri).then(function (response) {
-        console.log(response);
+        _this.$snackbar.showMessage('Se ha actualizado correctamente');
         _this.dataTags = response.data;
         _this.loading = false;
       }).catch(function (error) {
@@ -76204,13 +76209,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       this.creating = true;
       window.axios.post(this.uri, this.tagBeingCreated).then(function (response) {
         _this2.createTag(response.data);
-        _this2.$snackbar.showMessage('Se ha editado correctamente la etiqueta');
+        _this2.$snackbar.showMessage('Se ha creado correctamente la etiqueta');
+        _this2.refresh();
         _this2.creating = false;
-        _this2.editDialog = false;
+        _this2.createDialog = false;
       }).catch(function (error) {
         _this2.$snackbar.showError(error);
         _this2.creating = false;
-        _this2.editDialog = false;
+        _this2.createDialog = false;
       });
     },
     showCreate: function showCreate() {
@@ -76276,6 +76282,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       window.axios.put(this.uri + this.tagBeingEdited.id, this.tagBeingEdited).then(function () {
         _this4.editTag(_this4.tagBeingEdited);
         _this4.$snackbar.showMessage('Se ha editado correctamente la etiqueta');
+        _this4.refresh();
         _this4.editing = false;
         _this4.editDialog = false;
       }).catch(function (error) {
@@ -76428,6 +76435,7 @@ var render = function() {
                             expression: "tagBeingEdited.color"
                           }
                         ],
+                        staticStyle: { width: "50px", height: "50px" },
                         attrs: { type: "color", label: "Color" },
                         domProps: { value: _vm.tagBeingEdited.color },
                         on: {
@@ -76445,7 +76453,7 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("v-textarea", {
-                        attrs: { label: "Descripcio", hint: "Descripció" },
+                        attrs: { label: "Descripción", hint: "Descripció" },
                         model: {
                           value: _vm.tagBeingEdited.description,
                           callback: function($$v) {
@@ -76592,9 +76600,9 @@ var render = function() {
                     [
                       _c("v-text-field", {
                         attrs: {
-                          disabled: "",
                           label: "Nom",
-                          hint: "El nombre de la etiqueta..."
+                          hint: "El nombre de la etiqueta...",
+                          readonly: ""
                         },
                         model: {
                           value: _vm.tagBeingShow.name,
@@ -76605,26 +76613,37 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c("v-text-field", {
-                        attrs: {
-                          disabled: "",
-                          label: "Color",
-                          hint: "Color de la tag"
-                        },
-                        model: {
-                          value: _vm.tagBeingShow.color,
-                          callback: function($$v) {
-                            _vm.$set(_vm.tagBeingShow, "color", $$v)
-                          },
-                          expression: "tagBeingShow.color"
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.tagBeingShow.color,
+                            expression: "tagBeingShow.color"
+                          }
+                        ],
+                        staticStyle: { width: "50px", height: "50px" },
+                        attrs: { type: "color", disabled: "" },
+                        domProps: { value: _vm.tagBeingShow.color },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.tagBeingShow,
+                              "color",
+                              $event.target.value
+                            )
+                          }
                         }
                       }),
                       _vm._v(" "),
                       _c("v-textarea", {
                         attrs: {
-                          disabled: "",
                           label: "Descripción",
-                          hint: "Descripción"
+                          hint: "Descripción",
+                          readonly: ""
                         },
                         model: {
                           value: _vm.tagBeingShow.description,
@@ -76715,7 +76734,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("v-toolbar-title", { staticClass: "white--text" }, [
-                _vm._v("Crear Etiqueta")
+                _vm._v("Crear una etiqueta")
               ]),
               _vm._v(" "),
               _c("v-spacer"),
@@ -76791,6 +76810,7 @@ var render = function() {
                             expression: "tagBeingCreated.color"
                           }
                         ],
+                        staticStyle: { width: "50px", height: "50px" },
                         attrs: { type: "color", label: "Color" },
                         domProps: { value: _vm.tagBeingCreated.color },
                         on: {
@@ -78098,7 +78118,12 @@ var render = function() {
             "v-btn",
             {
               staticClass: "white--text",
-              attrs: { color: "grey darken-4", type: "submit", disable: "true" }
+              attrs: {
+                color: "grey darken-4",
+                type: "submit",
+                disable: "true",
+                disabled: _vm.$v.$invalid
+              }
             },
             [_vm._v("Login")]
           ),
@@ -78411,7 +78436,11 @@ var render = function() {
             "v-btn",
             {
               staticClass: "white--text",
-              attrs: { color: "grey darken-4", type: "submit" }
+              attrs: {
+                color: "grey darken-4",
+                type: "submit",
+                disabled: _vm.$v.$invalid
+              }
             },
             [_vm._v("Register")]
           ),

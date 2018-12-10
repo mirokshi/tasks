@@ -30,7 +30,7 @@
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="grey darken-4" type="submit" disable="true" class="white--text">Login</v-btn>
+            <v-btn color="grey darken-4" type="submit" disable="true" class="white--text" :disabled="$v.$invalid">Login</v-btn>
             <v-btn color="grey darken-4"  class="white--text" href="/">Cancel</v-btn>
         </v-card-actions>
     </v-form>

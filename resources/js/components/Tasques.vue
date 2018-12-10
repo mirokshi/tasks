@@ -105,7 +105,8 @@
                               v-model="users"
                               item-text="name"
                               clearable
-                              ></v-select>
+                              >
+                      </v-select>
                   </v-flex>
                   <v-flex xs5>
                       <v-text-field
@@ -235,15 +236,10 @@ export default {
       snackbarTimeout: 3000,
       snackbarColor: 'success',
       taskBeingEdited: '',
-      usersold: [
-        'Jose',
-        'Manuel',
-        'Emilio'
-      ],
-      filter: 'Todos',
+      filter: 'all',
       filters: [
         'Todos',
-        'Completados',
+        'Completedos',
         'Pendientes'
       ],
       search: '',
@@ -281,6 +277,9 @@ export default {
     }
   },
   methods: {
+    setFilter (newFilter) {
+      this.filter = newFilter
+    },
     opcion1 () {
       console.log('TODO OPCION1')
     },
@@ -372,6 +371,9 @@ export default {
   computed: {
     total () {
       return this.dataTasks.length
+    },
+    filteredTasks () {
+      return filters[this.filter](this.dataTasks)
     }
   }
 }
