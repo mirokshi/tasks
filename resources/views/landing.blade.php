@@ -10,13 +10,14 @@
     <v-spacer></v-spacer>
     @if(empty(Auth::user()->email))
     <v-btn href="login" class="indigo darken-4 white--text"> LOGIN  </v-btn>
+        <v-btn href="register" class="indigo darken-4 white--text"> REGISTER</v-btn>
     @else
         <v-form action="/logout" method="POST">
             @csrf
             <v-btn class="indigo darken-4 white--text" type="submit">LOGOUT</v-btn>
         </v-form>
     @endif
-    <v-btn href="register" class="indigo darken-4 white--text"> REGISTER</v-btn>
+
 </v-toolbar>
 <v-content>
     <section>
