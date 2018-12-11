@@ -116,7 +116,8 @@
                     @endImpersonating
                     <v-flex xs12>
                         @canImpersonate
-                        <user-select label="Entrar como..." @selected="impersonate" url="/api/v1/regular_users"></user-select>
+                        <impersonate label="Entrar como..."url="/api/v1/regular_users"></impersonate>
+                        {{--<user-select label="Entrar como..." @selected="impersonate" url="/api/v1/regular_users"></user-select>--}}
                         @endCanImpersonate
                         @impersonating
                         {{ Auth::user()->impersonatedBy()->name }} esta suplatanto a {{ Auth::user()->name }}

@@ -9,19 +9,22 @@
     <v-toolbar-title> Homepage Tasks</v-toolbar-title>
     <v-spacer></v-spacer>
     @if(empty(Auth::user()->email))
-        <v-btn @click="loginForm = !loginForm">LOGIN</v-btn>
-        <v-btn @click="registerForm = !registerForm">REGISTER</v-btn>
-        <v-dialog v-model="loginForm" max-width="1000">
-            <v-card>
-                <login-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></login-form>
-            </v-card>
-        </v-dialog>
-        <v-dialog v-model="registerForm" max-width="1000">
-            <v-card>
-                <register-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></register-form>
-            </v-card>
+        <v-btn href="login" class="indigo darken-4 white--text"> LOGIN  </v-btn>
+        <v-btn href="register" class="indigo darken-4 white--text"> REGISTER</v-btn>
 
-        </v-dialog>
+        {{--<v-btn @click="loginForm = !loginForm">LOGIN</v-btn>--}}
+        {{--<v-btn @click="registerForm = !registerForm">REGISTER</v-btn>--}}
+        {{--<v-dialog v-model="loginForm" max-width="1000">--}}
+            {{--<v-card>--}}
+                {{--<login-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></login-form>--}}
+            {{--</v-card>--}}
+        {{--</v-dialog>--}}
+        {{--<v-dialog v-model="registerForm" max-width="1000">--}}
+            {{--<v-card>--}}
+                {{--<register-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></register-form>--}}
+            {{--</v-card>--}}
+
+        {{--</v-dialog>--}}
     @else
         <v-form action="/logout" method="POST">
             @csrf

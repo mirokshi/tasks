@@ -205,7 +205,7 @@
               </v-flex>
           </v-data-iterator>
       </v-card>
-      <task-create :users="users"></task-create>
+      <task-create :users="users" :uri="uri" @created="refresh" ></task-create>
   </span>
 </template>
 
