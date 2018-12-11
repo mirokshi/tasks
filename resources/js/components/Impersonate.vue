@@ -1,5 +1,5 @@
 <template>
-    <user-select :users="dataUsers" :label="label"></user-select>
+    <user-select :users="dataUsers" :label="label" @selected="impersonate"></user-select>
 </template>
 
 <script>

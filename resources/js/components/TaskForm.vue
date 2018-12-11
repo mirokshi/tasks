@@ -13,7 +13,7 @@
         <v-textarea v-model="description" label="Descripción" hint="Descripción de la tarea..."></v-textarea>
 
         <!--<v-autocomplete v-model="user_id" :items="dataUsers" label="Usuario" item-text="name" item-value="id"></v-autocomplete>-->
-        <user-select v-model= "user_id" :users="dataUsers" label="Usuario" ></user-select>
+        <user-select v-model= "user_id" :users="dataUsers" label="Usuario"></user-select>
         <div class="text-xs-center">
             <v-btn @click="$emit('close')">
                 <v-icon class="mr-1" >exit_to_app</v-icon>

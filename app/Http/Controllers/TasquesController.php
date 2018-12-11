@@ -22,7 +22,7 @@ class TasquesController extends Controller
             $uri = 'api/v1/user/tasks/';
         }
         // MVC
-        $users= User::all();
+        $users= map_collection(User::all());
         return view('tasques',compact('tasks', 'users', 'uri'));
     }
 }

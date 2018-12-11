@@ -22,7 +22,8 @@ class TasksController extends Controller
     {
     Task::create([
         'name'=> $request->name ,
-        'completed' => false
+        'completed' => false,
+        'user_id' => $request->user_id
     ]);
     //Regresar a /tasks
     return redirect('/tasks');

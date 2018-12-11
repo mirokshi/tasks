@@ -99,14 +99,15 @@
                       ></v-select>
                   </v-flex>
                       <v-flex xs4 class="mr-2">
-                      <v-select
-                              label="User"
-                              :items="dataUsers"
-                              v-model="users"
-                              item-text="name"
-                              clearable
-                              >
-                      </v-select>
+                      <!--<v-select-->
+                              <!--label="User"-->
+                              <!--:items="dataUsers"-->
+                              <!--v-model="users"-->
+                              <!--item-text="name"-->
+                              <!--clearable-->
+                              <!--&gt;-->
+                      <!--</v-select>-->
+                           <user-select v-model= "users" :users="dataUsers" label="User" ></user-select>
                   </v-flex>
                   <v-flex xs5>
                       <v-text-field
