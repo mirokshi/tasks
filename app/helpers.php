@@ -294,8 +294,8 @@ if (!function_exists('sample_users_and_tasks')) {
 }
 
 
-if (!function_exists('profe')){
-    function profe(){
+if (!function_exists('pikachusorprendido')){
+    function pikachusorprendido(){
 
         try {
             $profe = factory(User::class)->create([
@@ -316,7 +316,22 @@ if (!function_exists('profe')){
         }catch (Exception $e) {
 
         }
-    }
+        try {
+            $joan = factory(User::class)->create([
+                'name' => 'Tu carita toda preciosa',
+                'email' => 'joantiscar@iesebre.com',
+                'password' => bcrypt(env('PRIMARY_USER_PASSWORD', 'secret'))
+            ]);
+        }catch (Exception $e){
+
+        }
+        try{
+            $joan->admin=true;
+            $joan->save();
+        }catch (Exception $e){
+
+        }
+}
 }
 //TODO:  Crear multiples usuarios con diferentes roles
 // TODO: Como gestionar el superAdmin

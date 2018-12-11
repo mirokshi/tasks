@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         sample_users_and_tasks();
 
         //Crea usuario para profesor
-        profe();
+        pikachusorprendido();
 
         //TODO -> Como hacerlo en el register
     }
