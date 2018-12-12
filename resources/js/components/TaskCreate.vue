@@ -16,12 +16,12 @@
         </v-toolbar>
         <v-card>
             <v-card-text>
-                <task-form
+                <task-form-create
                         :users="users"
                         :uri="uri"
                         @close="dialog=false"
                         @created="$emit('created')"
-                ></task-form>
+                ></task-form-create>
             </v-card-text>
         </v-card>
     </v-dialog>
@@ -40,11 +40,11 @@
 </template>
 
 <script>
-import TaskForm from './TaskForm'
+import TaskFormCreate from './TaskFormCreate'
 export default {
   name: 'TaskCreate',
   components: {
-    'task-form': TaskForm
+    'task-form-create': TaskFormCreate
   },
   data () {
     return {
@@ -61,8 +61,8 @@ export default {
       required: true
     }
   },
-  methods : {
-    created(task){
+  methods: {
+    created (task) {
       this.$emit('created', task)
     }
   }

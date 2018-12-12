@@ -155,7 +155,7 @@ export default {
       dataUsers: this.users,
       filter: 'Totes',
       filters: [
-        'Totes',
+        'TODAS',
         'Completades',
         'Pendents'
       ],
@@ -164,13 +164,13 @@ export default {
         rowsPerPage: 25
       },
       headers: [
-        { text: 'Id', value: 'id' },
-        { text: 'Name', value: 'name' },
-        { text: 'User', value: 'user_id' },
-        { text: 'Completat', value: 'completed' },
-        { text: 'Creat', value: 'created_at_timestamp' },
-        { text: 'Modificat', value: 'updated_at_timestamp' },
-        { text: 'Accions', sortable: false, value: 'full_search' }
+        { text: 'ID', value: 'id' },
+        { text: 'NAME', value: 'name' },
+        { text: 'USER', value: 'user_id' },
+        { text: 'STATE', value: 'completed' },
+        { text: 'CREATED', value: 'created_at_timestamp' },
+        { text: 'UPDATED', value: 'updated_at_timestamp' },
+        { text: 'ACTIONS', sortable: false, value: 'full_search' }
       ]
     }
   },
@@ -197,7 +197,7 @@ export default {
       window.axios.get(this.uri).then(response => {
         this.dataTasks = response.data
         this.loading = false
-        this.$snackbar.showMessage('Tasques actualitzades correctament')
+        this.$snackbar.showMessage('Tareas actualizadas conrrectamente')
       }).catch(error => {
         console.log(error)
         this.loading = false
@@ -205,22 +205,22 @@ export default {
     },
     async destroy (task) {
       // ES6 async await
-      let result = await this.$confirm('Les tasques esborrades no es poden recuperar',
+      let result = await this.$confirm('Las tareas borradas ya no se puede recuperar',
         {
-          title: 'Esteu segurs?',
+          title: 'Seguro?',
           buttonTruetext: 'Eliminar',
-          buttonFalsetext: 'Cancel·lar',
+          buttonFalsetext: 'Cancelar',
           // icon: '',
           color: 'error'
         })
       if (result) {
         this.removing = task.id
-        window.axios.delete(this.uri + '/' + task.id).then(() => {
+        window.axios.delete(this.uri + task.id).then(() => {
           // this.refresh() // Problema -> rendiment
           this.removeTask(task)
           this.deleteDialog = false
           task = null
-          this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
+          this.$snackbar.showMessage('Se ha borrado correctamente la tarea')
           this.removing = null
         }).catch(error => {
           this.$snackbar.showError(error.message)
