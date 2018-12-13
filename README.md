@@ -90,3 +90,9 @@ http://php.net/manual/es/function.implode.php
 
 **flash of unstyled content**
 ``v-cloak``
+
+``Tests``
+ can_show_tasks -> TasksControllerTest 
+ [] aseerSee
+ 
+ 

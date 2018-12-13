@@ -13,32 +13,30 @@ class TasksControllerTest extends TestCase
 {
     use RefreshDatabase,CanLogin;
 
-    /** @test */
+    /**
+     * @test
+     */
     public function can_show_tasks()
     {
-//        $this->withoutExceptionHandling();
+        create_example_tasks();
+        $this->login();
 
-        //1 Prepare
-       create_example_tasks();
-        $user = $this->login();
-        initialize_roles();
-        $user ->assignRole('TasksManager');
+        $response = $this->get('/tasks');
 
-        //2 execute
-        $response = $this -> get('/tasks');
-//        dd($responde -> getContent());
-
-        //3 comprovar
         $response->assertSuccessful();
-        $response->assertSee('tasks');
+//        $response->assertSee('Tasques');
 
-        $response->assertSee('Comprar pan');
-        $response->assertSee('Comprar leche');
+        $response->assertSee('comprar pa');
+        $response->assertSee('comprar llet');
         $response->assertSee('Estudiar PHP');
 
-        //comprovar que se vean las tareas que hay en la BD
-        //Base de datos
-
+        $response->assertViewIs('tasks');
+        $response->assertViewHas('tasks', function($tasks) {
+            return count($tasks)===6 &&
+                $tasks[0]['name']==='comprar pa' &&
+                $tasks[1]['name']==='comprar llet' &&
+                $tasks[2]['name']==='Estudiar PHP';
+        });
     }
 
     /**
@@ -46,29 +44,22 @@ class TasksControllerTest extends TestCase
      */
     public function can_store_task()
     {
-        $user = $this->login();
-        initialize_roles();
-        $user ->assignRole('Tasks');
-    //1
-    $response = $this -> post('/tasks',[
-        'name'=> 'Comprar leche'
-    ]);
+        $this->login();
+        $response = $this->post('/tasks',[
+            'name' => 'Comprar llet'
+        ]);
 
-    //2
-    $response->assertStatus(302);
+        $response->assertStatus(302);
 
-    //3
-    $this->assertDatabaseHas('tasks', ['name' => 'Comprar leche']);
-
+        $this->assertDatabaseHas('tasks',['name' => 'Comprar llet']);
     }
+
     /**
      * @test
      */
-    public function user_whitout_permissions_can_not_delete_tasks()
+    public function cannot_delete_an_unexisting_task()
     {
-        $user = $this->login();
-        initialize_roles();
-        $user ->assignRole('TasksManager');
+        $this->login();
         $response = $this->delete('/tasks/1');
         $response->assertStatus(404);
     }
@@ -78,19 +69,17 @@ class TasksControllerTest extends TestCase
      */
     public function can_delete_task()
     {
-        initialize_roles();
-        $user = $this->login();
-        $user ->assignRole('TasksManager');
-
-
+        $this->login();
 
         $task = Task::create([
-            'name' => 'Comprar leche'
+            'name' => 'Comprar llet'
         ]);
+
         $response = $this->delete('/tasks/' . $task->id);
+
         $response->assertStatus(302);
-        $this->assertDatabaseMissing('tasks',['name' => 'Comprar leche']);
-        $this->assertTrue($user->hasRole('TasksManager'));
+        $this->assertDatabaseMissing('tasks',['name' => 'Comprar llet']);
+
     }
 
     /**
@@ -98,44 +87,46 @@ class TasksControllerTest extends TestCase
      */
     public function can_edit_a_task()
     {
-    //1
-        initialize_roles();
-        $user = $this->login();
-        $user ->assignRole('TasksManager');
-
+        $this->login();
         $task = Task::create([
-           'name'=>'Comprar leche',
-           'completed'=>false
+            'name' => 'asdasdasd',
+            'completed' => false
         ]);
-        //2
-        $response = $this->put('/tasks/'.$task->id,$newTask=[
-            'name'=>'Comprar pan',
-            'completed'=>true
+        $response = $this->put('/tasks/' . $task->id,$newTask = [
+            'name' => 'Comprar pa',
+            'completed' => true
         ]);
-
         $response->assertStatus(302);
 
-        $task=$task->fresh();
-        $this->assertEquals($task->name,'Comprar pan');
+        $task = $task->fresh();
+        $this->assertEquals($task->name,'Comprar pa');
         $this->assertEquals($task->completed,true);
     }
-
 
     /**
      * @test
      */
-    public function cannot_edit_an_unexisting_tasks()
+    public function cannot_edit_an_unexisting_task()
     {
-        initialize_roles();
-        $user = $this->login();
-        $user ->assignRole('Tasks');
-        //TDD -> Test Driven Development
-        //1
-        //2 execute HTTP request , HTTP response
-        $response=$this->put('user/tasks/1',[]);
+        $this->login();
+        $response = $this->put('/tasks/1',[]);
         $response->assertStatus(404);
-        $this->assertTrue($user->hasRole('Tasks'));
+    }
 
+    /**
+     * @test
+     */
+    public function can_show_edit_form()
+    {
+        $this->login();
+        $task = Task::create([
+            'name' => 'Comprar pa',
+            'completed' => false
+        ]);
+        $response = $this->get('/task_edit/' . $task->id);
+        $response->assertSuccessful();
+
+        $response->assertSee('Comprar pa');
     }
 
     /**
@@ -143,16 +134,8 @@ class TasksControllerTest extends TestCase
      */
     public function cannot_show_edit_form_unexisting_task()
     {
-
-        $user = $this->login();
-        initialize_roles();
-        $user ->assignRole('Tasks');
-        $response = $this->get('user/task_edit/1');
+        $this->login();
+        $response = $this->get('/task_edit/1');
         $response->assertStatus(404);
-        $this->assertTrue($user->hasRole('Tasks'));
     }
-
-
-
-
 }

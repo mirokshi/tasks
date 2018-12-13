@@ -12,6 +12,11 @@
 */
 
 
+use App\Http\Controllers\LoggedUserTasksController;
+use App\Http\Controllers\TagsController;
+use App\Http\Controllers\TasksController;
+use App\Http\Controllers\TasquesController;
+
 Auth::routes();
 
 //TODO
@@ -29,11 +34,12 @@ Route::get('/', function () {
 //GRUPS_ DE URLS  PARA USUARIOS AUTENTICADOS
 Route::middleware(['auth'])->group(function() {
 
-Route::get('/tasks','TasksController@index'); //muestra
-Route::post('/tasks','TasksController@store'); //agrega
-Route::delete('/tasks/{id}','TasksController@destroy'); //borra
-Route::put('/tasks/{id}','TasksController@update'); //modifica
-Route::get('/task_edit/{id}','TasksController@edit'); //modifica
+
+    Route::get('/tasks','\\'. TasksController::class . '@index'); //lista
+    Route::post('/tasks','\\'. TasksController::class . '@store'); //crea
+    Route::delete('/tasks/{id}','\\'. TasksController::class . '@destroy'); //boora
+    Route::put('/tasks/{id}','\\'. TasksController::class . '@update'); //modifica
+    Route::get('/task_edit/{id}','TasksController@edit'); //modifica
 
     //Uncompleted -> ESTADOS
     Route::delete('completed_task/{task}','CompletedTasksController@destroy');
@@ -59,19 +65,20 @@ Route::get('/task_edit/{id}','TasksController@edit'); //modifica
     Route::get('/tasks_vue','TasksVueController@index');
 
     //Tasques
-    Route::get('/tasques','TasquesController@index');
+    Route::get('/tasques','\\'. TasquesController::class . '@index');
+    Route::get('/home', '\\'. TasquesController::class . '@index');
 
     //Home
-    Route::get('/home','TasksVueController@index');
+//    Route::get('/home','TasksVueController@index');
 
     //LoggedUserTasksController
-    Route::get('/user/tasks','LoggedUserTasksController@index');
+    Route::get('/user/tasks','\\'. LoggedUserTasksController::class . '@index');
 
     //impersonate
     Route::impersonate();
 
     //Tags
-    Route::get('/tags','TagsController@index');
+    Route::get('/tags','\\'. TagsController::class . '@index');
 });
 
 //WELCOME

@@ -34,26 +34,48 @@ if (!function_exists('create_primary_user')){
 
 if (!function_exists('create_example_tasks')) {
     function create_example_tasks() {
-
+        $user1= factory(User::class)->create();
         Task::create([
-            'name' => 'Comprar pan',
+            'name' => 'comprar pa',
             'completed' => false,
-            'description' => 'Fui a comprar pan',
-            'user_id' => '1'
+            'description' => 'Bla bla bla',
+            'user_id' => $user1->id
         ]);
 
         Task::create([
-            'name' => 'Comprar leche',
+            'name' => 'comprar llet',
             'completed' => false,
-            'description' => 'Compre leche en el mercadona',
-            'user_id' => '2'
+            'description' => 'Bla bla bla',
+            'user_id' => $user1->id
         ]);
 
         Task::create([
             'name' => 'Estudiar PHP',
             'completed' => true,
-            'description' => 'Debo comprobar todos los tests',
-            'user_id' => '3'
+            'description' => 'JORL JORL JORL',
+            'user_id' => $user1->id
+        ]);
+
+        $user1= factory(User::class)->create();
+        Task::create([
+            'name' => 'comprar pa',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $user1->id
+        ]);
+
+        Task::create([
+            'name' => 'comprar llet',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $user1->id
+        ]);
+
+        Task::create([
+            'name' => 'Estudiar PHP',
+            'completed' => true,
+            'description' => 'JORL JORL JORL',
+            'user_id' => $user1->id
         ]);
     }
 }

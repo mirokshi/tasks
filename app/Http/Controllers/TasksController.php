@@ -18,7 +18,7 @@ class TasksController extends Controller
         return view('tasks', ['tasks' => $tasks]);
     }
 
-    public function store(TaskShow $request)
+    public function store(Request $request)
     {
     Task::create([
         'name'=> $request->name ,
@@ -30,7 +30,7 @@ class TasksController extends Controller
 
 }
 
-    public function destroy(TaskDestroy $request) //borra
+    public function destroy(Request $request) //borra
     {
 
        $task= Task::findOrFail($request->id);
@@ -38,7 +38,7 @@ class TasksController extends Controller
         return redirect()->back();
     }
 
-    public function update(TaskUpdate $request) //modifica
+    public function update(Request $request) //modifica
     {
 
         $task= Task::findOrFail($request->id);
