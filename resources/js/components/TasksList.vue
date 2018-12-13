@@ -1,6 +1,6 @@
 <template>
     <span>
-        <v-toolbar color="grey darken-3">
+        <v-toolbar color="blue darken-3">
             <v-menu>
                 <v-btn slot="activator" icon dark>
                     <v-icon>more_vert</v-icon>
@@ -74,7 +74,8 @@
                         </td>
                         <td>
                             <v-avatar :title="task.user_name">
-                                <img :src="task.user_gravatar" alt="avatar">
+                                <img v-if="task.user_gravatar" :src="task.user_gravatar" alt="avatar">
+                                <img v-else src="https://www.gravatar.com/avatar/" alt="avatar">
                             </v-avatar>
                         </td>
                         <td>
@@ -93,8 +94,8 @@
                                 <v-icon>visibility</v-icon>
                             </v-btn>
 
+                            <task-update :users="users" :task="task" @updated="updateTask" :uri="uri"></task-update>
                             <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
-
                         </td>
                     </tr>
                 </template>
@@ -138,24 +139,20 @@
 <script>
 import TaskCompletedToggle from './TaskCompletedToggle'
 import TaskDestroy from './TaskDestroy'
+import TaskUpdate from './TaskUpdate'
 export default {
   name: 'TasksList',
-  components: {
-    'task-completed-toggle': TaskCompletedToggle,
-    'task-destroy': TaskDestroy
-  },
   data () {
     return {
       user: '',
       loading: false,
-
       dataTasks: this.tasks,
       dataUsers: this.users,
-      filter: 'Totes',
+      filter: 'TODAS',
       filters: [
         'TODAS',
-        'Completades',
-        'Pendents'
+        'COMPLETEDAS',
+        'PENDIENTES'
       ],
       search: '',
       pagination: {
@@ -163,14 +160,19 @@ export default {
       },
       headers: [
         { text: 'ID', value: 'id' },
-        { text: 'NAME', value: 'name' },
-        { text: 'USER', value: 'user_id' },
-        { text: 'STATE', value: 'completed' },
-        { text: 'CREATED', value: 'created_at_timestamp' },
-        { text: 'UPDATED', value: 'updated_at_timestamp' },
-        { text: 'ACTIONS', sortable: false, value: 'full_search' }
+        { text: 'NOMBRE', value: 'name' },
+        { text: 'USUARIO', value: 'user_id' },
+        { text: 'COMPLETADO', value: 'completed' },
+        { text: 'CREADO', value: 'created_at_timestamp' },
+        { text: 'MODIFICADO', value: 'updated_at_timestamp' },
+        { text: 'ACCIONES', sortable: false, value: 'full_search' }
       ]
     }
+  },
+  components: {
+    'task-completed-toggle': TaskCompletedToggle,
+    'task-destroy': TaskDestroy,
+    'task-update': TaskUpdate
   },
   props: {
     tasks: {
@@ -187,19 +189,30 @@ export default {
     }
   },
   methods: {
+    removeTask (task) {
+      this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
+    },
+    updateTask (task) {
+      // No tinc collons -> Si algú té ganes de jugar
+      // this.dataTasks[this.dataTasks.indexOf(task)] = task
+      // const foundTask = this.dataTasks.find((t) => {
+      //   return t.id === task.id
+      // })
+      // console.log(foundTask)
+      // this.dataTasks[foundTask] = task
+      // TODO
+      this.refresh()
+    },
     refresh () {
       this.loading = true
       window.axios.get(this.uri).then(response => {
         this.dataTasks = response.data
         this.loading = false
-        this.$snackbar.showMessage('Tareas actualizadas correctamente')
+        this.$snackbar.showMessage('Tasques actualitzades correctament')
       }).catch(error => {
         console.log(error)
         this.loading = false
       })
-    },
-    removeTask (task) {
-      this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
     }
   }
 }
