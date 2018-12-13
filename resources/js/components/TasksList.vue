@@ -92,15 +92,9 @@
                                    @click="show(task)">
                                 <v-icon>visibility</v-icon>
                             </v-btn>
-                            <v-btn v-if="$can('tasks.update',task)" icon color="success" flat title="Canviar la tasca"
-                                   @click="showUpdate(task)">
-                                <v-icon>edit</v-icon>
-                            </v-btn>
-                            <v-btn v-can="tasks.destroy" icon color="error" flat title="Eliminar la tasca"
-                                   :loading="removing === task.id" :disabled="removing === task.id"
-                                   @click="destroy(task)">
-                                <v-icon>delete</v-icon>
-                            </v-btn>
+
+                            <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
+
                         </td>
                     </tr>
                 </template>
@@ -143,14 +137,18 @@
 
 <script>
 import TaskCompletedToggle from './TaskCompletedToggle'
-
+import TaskDestroy from './TaskDestroy'
 export default {
   name: 'TasksList',
+  components: {
+    'task-completed-toggle': TaskCompletedToggle,
+    'task-destroy': TaskDestroy
+  },
   data () {
     return {
       user: '',
       loading: false,
-      removing: null,
+
       dataTasks: this.tasks,
       dataUsers: this.users,
       filter: 'Totes',
@@ -174,9 +172,6 @@ export default {
       ]
     }
   },
-  components: {
-    'task-completed-toggle': TaskCompletedToggle
-  },
   props: {
     tasks: {
       type: Array,
@@ -197,38 +192,15 @@ export default {
       window.axios.get(this.uri).then(response => {
         this.dataTasks = response.data
         this.loading = false
-        this.$snackbar.showMessage('Tareas actualizadas conrrectamente')
+        this.$snackbar.showMessage('Tareas actualizadas correctamente')
       }).catch(error => {
         console.log(error)
         this.loading = false
       })
     },
-    async destroy (task) {
-      // ES6 async await
-      let result = await this.$confirm('Las tareas borradas ya no se puede recuperar',
-        {
-          title: 'Seguro?',
-          buttonTruetext: 'Eliminar',
-          buttonFalsetext: 'Cancelar',
-          // icon: '',
-          color: 'error'
-        })
-      if (result) {
-        this.removing = task.id
-        window.axios.delete(this.uri + task.id).then(() => {
-          // this.refresh() // Problema -> rendiment
-          this.removeTask(task)
-          this.deleteDialog = false
-          task = null
-          this.$snackbar.showMessage('Se ha borrado correctamente la tarea')
-          this.removing = null
-        }).catch(error => {
-          this.$snackbar.showError(error.message)
-          this.removing = null
-        })
-      }
+    removeTask (task) {
+      this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
     }
-
   }
 }
 </script>
