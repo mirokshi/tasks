@@ -12,8 +12,8 @@
         <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendiente'"></v-switch>
         <v-textarea v-model="description" label="Descripción" hint="Descripción de la tarea..."></v-textarea>
 
-        <!--<v-autocomplete v-model="user_id" :items="dataUsers" label="Usuario" item-text="name" item-value="id"></v-autocomplete>-->
-        <user-select v-model= "user_id" :users="dataUsers" label="Usuario"></user-select>
+        <!--<v-autocomplete v-model="user" :items="dataUsers" label="Usuario" item-text="name" item-value="id"></v-autocomplete>-->
+        <user-select v-model="user" :users="dataUsers" label="Usuario"></user-select>
         <div class="text-xs-center">
             <v-btn @click="$emit('close')">
                 <v-icon class="mr-1" >exit_to_app</v-icon>
@@ -37,7 +37,7 @@ export default {
     name: { required }
   },
   name: 'TaskFormCreate',
-  components:{
+  components: {
     'user-select': UserSelect
   },
   data () {
@@ -58,6 +58,12 @@ export default {
     uri: {
       type: String,
       default: '/api/v1/tasks'
+    },
+    value: {
+      type: Object,
+      default: function () {
+        return {}
+      }
     }
   },
   computed: {
@@ -80,7 +86,7 @@ export default {
     add () {
       this.loading = true
       const task = {
-        user_id: this.user_id,
+        user: this.user,
         name: this.name,
         completed: this.completed,
         description: this.description

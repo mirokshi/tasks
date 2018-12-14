@@ -236,9 +236,7 @@ class TasksControllerTest extends TestCase
      */
     public function superadmin_can_create_task()
     {
-        $user = $this->login('api');
-        $user->admin=true;
-        $user->save();
+     $this->loginAsSuperAdmin('api');
 
         Gate::define('task.store', function ($user){
             $user->givePermissionTo('task.store');

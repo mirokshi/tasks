@@ -34,10 +34,19 @@ export default {
   data () {
     return {
       dataUsers: this.users,
-      selectedUser: null
+      selectedUser: this.value
     }
   },
+  model: {
+    prop: 'user'
+  },
   props: {
+    user :{
+      type : Object,
+      default : function () {
+        return {}
+      }
+    },
     users: {
       type: Array,
       required: true
@@ -50,6 +59,7 @@ export default {
   watch: {
     selectedUser (newValue) {
       this.$emit('selected', newValue)
+      this.$emit('input', newValue)
     },
     users () {
       this.dataUsers = this.users
