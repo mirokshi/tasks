@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Task;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -53,6 +54,8 @@ class TagsControllerTest extends TestCase
      */
     public function tag_manager_can_index_tags()
     {
+        $this->withoutExceptionHandling();
+
         create_example_tags();
 
         $this->loginAsTagsManager();
@@ -60,6 +63,7 @@ class TagsControllerTest extends TestCase
         $response->assertSuccessful();
         $response->assertViewIs('tags');
         $response->assertViewHas('tags', function($tags) {
+            dd(count($tags));
             return count($tags)===3 &&
                 $tags[0]['name']==='Tag1' &&
                 $tags[1]['name']==='Tag2' &&

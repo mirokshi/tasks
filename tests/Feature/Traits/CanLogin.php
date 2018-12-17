@@ -57,9 +57,18 @@ trait CanLogin
      * @param null $guard
      * @return mixed
      */
+    protected function loginAsTagManager($guard = null)
+    {
+        return $this->loginAsUsingRole($guard, ['TagsManager', 'Tags']);
+    }
+
+    /**
+     * @param null $guard
+     * @return mixed
+     */
     protected function loginAsTagsManager($guard = null)
     {
-        return $this->loginAsUsingRole($guard,'TagsManager');
+        return $this->loginAsUsingRole($guard,['TagsManager','Tags']);
     }
 
     /**

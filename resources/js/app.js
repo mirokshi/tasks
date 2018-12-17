@@ -17,6 +17,7 @@ import permissions from './plugins/permissions'
 import snackbar from './plugins/snackbar'
 import confirm from './plugins/confirm'
 import Impersonate from './components/Impersonate'
+import GitInfo from './components/GitInfo'
 
 // instalacion vuetify
 window.Vue = Vue
@@ -38,6 +39,8 @@ window.Vue.component('register-form', RegisterForm)
 window.Vue.component('user-list', UserList)
 window.Vue.component('user-select', UserSelect)
 window.Vue.component('impersonate', Impersonate)
+window.Vue.component('git-info', GitInfo)
+
 
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)
