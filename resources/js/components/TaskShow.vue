@@ -5,43 +5,33 @@
             <v-btn flat icon class="white--text" @click="dialog=false">
                 <v-icon>close</v-icon>
             </v-btn>
-            <v-toolbar-title class="white--text">Crear Tasca</v-toolbar-title>
+            <v-toolbar-title class="white--text">Mostrar Tasca</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn flat class="white--text" @click="dialog=false">
                 <v-icon class="mr-1">exit_to_app</v-icon>
                 Sortir
             </v-btn>
-            <v-btn flat class="white--text">
-                <v-icon class="mr-1">save</v-icon>
-                Afegir
-            </v-btn>
         </v-toolbar>
             <v-card>
                 <v-card-text>
-                    <task-form-create :users="users" :uri="uri" @close="dialog=false" @created="created" ></task-form-create>
+                    <task-show-form :task="task"></task-show-form>
                 </v-card-text>
             </v-card>
         </v-dialog>
-        <v-btn
-            @click="dialog = true"
-            fab
-            bottom
-            right
-            fixed
-            color="pink"
-            class="white--text"
-        >
-                <v-icon>add</v-icon>
-            </v-btn>
+
+        <v-btn icon color="primary" flat title="Mostrar la tasca"
+               @click="dialog=true">
+            <v-icon>visibility</v-icon>
+        </v-btn>
     </span>
 </template>
 
 <script>
-import TaskFormCreate from './TaskFormCreate'
+import TaskFormShow from './TaskFormShow'
 export default {
-  name: 'TaskCreate',
+  name: 'TaskShow',
   components: {
-    'task-form-create': TaskFormCreate
+    'task-form-show': TaskFormShow
   },
   data () {
     return {
@@ -49,18 +39,9 @@ export default {
     }
   },
   props: {
-    users: {
-      type: Array,
+    task: {
+      type: Object,
       required: true
-    },
-    uri: {
-      type: String,
-      required: true
-    }
-  },
-  methods: {
-    created (task) {
-      this.$emit('created', task)
     }
   }
 }

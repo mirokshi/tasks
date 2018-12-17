@@ -28,42 +28,42 @@
                 <v-layout row wrap>
                     <v-flex lg3 class="mr-2">
                         <v-select
-                                label="Filtres"
-                                :items="filters"
-                                v-model="filter"
-                                item-text="name"
+                            label="Filtres"
+                            :items="filters"
+                            v-model="filter"
+                            item-text="name"
                         >
                         </v-select>
                     </v-flex>
                     <v-flex lg4 class="mr-2">
                         <v-select
-                                label="User"
-                                :items="dataUsers"
-                                v-model="user"
-                                item-text="name"
-                                clearable>
+                            label="User"
+                            :items="dataUsers"
+                            v-model="user"
+                            item-text="name"
+                            clearable>
                         </v-select>
                     </v-flex>
                     <v-flex lg5>
                         <v-text-field
-                                append-icon="search"
-                                label="Buscar"
-                                v-model="search"
+                            append-icon="search"
+                            label="Buscar"
+                            v-model="search"
                         ></v-text-field>
                     </v-flex>
                 </v-layout>
             </v-card-title>
             <v-data-table
-                    :headers="headers"
-                    :items="dataTasks"
-                    :search="search"
-                    no-results-text="No s'ha trobat cap registre coincident"
-                    no-data-text="No hi han dades disponibles"
-                    rows-per-page-text="Tasques per pàgina"
-                    :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
-                    :loading="loading"
-                    :pagination.sync="pagination"
-                    class="hidden-md-and-down"
+                :headers="headers"
+                :items="dataTasks"
+                :search="search"
+                no-results-text="No s'ha trobat cap registre coincident"
+                no-data-text="No hi han dades disponibles"
+                rows-per-page-text="Tasques per pàgina"
+                :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
+                :loading="loading"
+                :pagination.sync="pagination"
+                class="hidden-md-and-down"
             >
                 <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
                 <template slot="items" slot-scope="{item: task}">
@@ -79,8 +79,7 @@
                             </v-avatar>
                         </td>
                         <td>
-                            <!--<toggle :completed="task.completed" :id="task.id"></toggle>-->
-                            <task-completed-toggle :task="task"></task-completed-toggle>
+                            <toggle :value="task.completed" uri="/api/v1/completed_task" active-text="Completada" unactive-text="Pendent" :resource="task"></toggle>
                         </td>
                         <td>
                             <span :title="task.created_at_formatted">{{ task.created_at_human}}</span>
@@ -89,11 +88,7 @@
                             <span :title="task.updated_at_formatted">{{ task.updated_at_human}}</span>
                         </td>
                         <td>
-                            <v-btn icon color="primary" flat title="Mostrar la tasca"
-                                   @click="show(task)">
-                                <v-icon>visibility</v-icon>
-                            </v-btn>
-
+                            <task-show :task="task"></task-show>
                             <task-update :users="users" :task="task" @updated="updateTask" :uri="uri"></task-update>
                             <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
                         </td>
@@ -111,11 +106,11 @@
                              :pagination.sync="pagination"
             >
                 <v-flex
-                        slot="item"
-                        slot-scope="{item:task}"
-                        xs12
-                        sm6
-                        md4
+                    slot="item"
+                    slot-scope="{item:task}"
+                    xs12
+                    sm6
+                    md4
                 >
                     <v-card class="mb-1">
                         <v-card-title v-text="task.name"></v-card-title>
@@ -137,9 +132,10 @@
 </template>
 
 <script>
-import TaskCompletedToggle from './TaskCompletedToggle'
+import Toggle from './Toggle'
 import TaskDestroy from './TaskDestroy'
 import TaskUpdate from './TaskUpdate'
+import TaskShow from './TaskShow'
 export default {
   name: 'TasksList',
   data () {
@@ -148,31 +144,32 @@ export default {
       loading: false,
       dataTasks: this.tasks,
       dataUsers: this.users,
-      filter: 'TODAS',
+      filter: 'Totes',
       filters: [
-        'TODAS',
-        'COMPLETEDAS',
-        'PENDIENTES'
+        'Totes',
+        'Completades',
+        'Pendents'
       ],
       search: '',
       pagination: {
         rowsPerPage: 25
       },
       headers: [
-        { text: 'ID', value: 'id' },
-        { text: 'NOMBRE', value: 'name' },
-        { text: 'USUARIO', value: 'user_id' },
-        { text: 'COMPLETADO', value: 'completed' },
-        { text: 'CREADO', value: 'created_at_timestamp' },
-        { text: 'MODIFICADO', value: 'updated_at_timestamp' },
-        { text: 'ACCIONES', sortable: false, value: 'full_search' }
+        { text: 'Id', value: 'id' },
+        { text: 'Name', value: 'name' },
+        { text: 'User', value: 'user_id' },
+        { text: 'Completat', value: 'completed' },
+        { text: 'Creat', value: 'created_at_timestamp' },
+        { text: 'Modificat', value: 'updated_at_timestamp' },
+        { text: 'Accions', sortable: false, value: 'full_search' }
       ]
     }
   },
   components: {
-    'task-completed-toggle': TaskCompletedToggle,
+    'toggle': Toggle,
     'task-destroy': TaskDestroy,
-    'task-update': TaskUpdate
+    'task-update': TaskUpdate,
+    'task-show': TaskShow
   },
   props: {
     tasks: {
@@ -188,11 +185,17 @@ export default {
       required: true
     }
   },
+  watch: {
+    tasks (newTasks) {
+      this.dataTasks = newTasks
+    }
+  },
   methods: {
     removeTask (task) {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
     },
     updateTask (task) {
+      // TODO
       // No tinc collons -> Si algú té ganes de jugar
       // this.dataTasks[this.dataTasks.indexOf(task)] = task
       // const foundTask = this.dataTasks.find((t) => {
@@ -200,7 +203,6 @@ export default {
       // })
       // console.log(foundTask)
       // this.dataTasks[foundTask] = task
-      // TODO
       this.refresh()
     },
     refresh () {

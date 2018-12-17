@@ -1,42 +1,55 @@
 <template>
     <v-form>
         <v-text-field
-                v-model="name"
-                label="Nombre"
-                hint="El nombre de la tarea..."
-                placeholder="Nombre de la tarea"
-                :error-messages="nameErrors"
-                @input="$v.name.$touch()"
-                @blur="$v.name.$touch()"
+            autofocus
+            v-model="name"
+            label="Nom"
+            hint="El nom de la tasca..."
+            placeholder="Nom de la tasca"
+            :error-messages="nameErrors"
+            @input="$v.name.$touch()"
+            @blur="$v.name.$touch()"
         ></v-text-field>
-        <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendiente'"></v-switch>
-        <v-textarea v-model="description" label="Descripción" hint="Descripción de la tarea..."></v-textarea>
 
-        <!--<v-autocomplete v-model="user" :items="dataUsers" label="Usuario" item-text="name" item-value="id"></v-autocomplete>-->
-        <user-select v-model="user" :users="dataUsers" label="Usuario"></user-select>
+        <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
+
+        <v-textarea v-model="description" label="Descripció" hint="Escriu la descripció de la tasca..."></v-textarea>
+
+        <user-select :item-value="null" v-model="user" :users="dataUsers" label="Usuari"></user-select>
+
+        <!--<user-select v-model="variable"></user-select>-->
+
+        <!--<user-select :value="variable" @input="this.variable = $event.target.value"></user-select>-->
+        <!--<user-select v-bind:value="variable" v-on:input=""></user-select>-->
+
+        <!--v-model equivalent for <user-select v-model="user_id" ..> -->
+        <!--<user-select-->
+        <!--v-bind:value="user_id"-->
+        <!--v-on:input="user_id = $event.target.value"-->
+        <!--&gt;-->
         <div class="text-xs-center">
             <v-btn @click="$emit('close')">
-                <v-icon class="mr-1" >exit_to_app</v-icon>
-                Cancelar
+                <v-icon class="mr-1">exit_to_app</v-icon>
+                Cancel·lar
             </v-btn>
             <v-btn color="success" @click="add" :disabled="loading || $v.$invalid" :loading="loading">
                 <v-icon class="mr-1" >save</v-icon>
-                Agregar
+                Afegir
             </v-btn>
         </div>
     </v-form>
 </template>
+
 <script>
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 import UserSelect from './UserSelect'
-
 export default {
+  name: 'TaskFormCreate',
   mixins: [validationMixin],
   validations: {
     name: { required }
   },
-  name: 'TaskFormCreate',
   components: {
     'user-select': UserSelect
   },
@@ -47,7 +60,7 @@ export default {
       description: '',
       dataUsers: this.users,
       loading: false,
-      user_id: null
+      user: null
     }
   },
   props: {
@@ -58,41 +71,40 @@ export default {
     uri: {
       type: String,
       default: '/api/v1/tasks'
-    },
-    value: {
-      type: Object,
-      default: function () {
-        return {}
-      }
     }
   },
   computed: {
     nameErrors () {
       const errors = []
-      if (!this.$v.name.$dirty) {
-        return errors
-      } else {
-        !this.$v.name.required && errors.push('El nombre es obligatorio')
-      }
+      if (!this.$v.name.$dirty) return errors
+      !this.$v.name.required && errors.push('El camp name és obligatori.')
+      return errors
     }
   },
   methods: {
+    selectLoggedUser () {
+      if (window.laravel_user) {
+        this.user = this.users.find((user) => {
+          return parseInt(user.id) === parseInt(window.laravel_user.id)
+        })
+      }
+    },
     reset () {
-      this.user_id = ''
       this.name = ''
       this.description = ''
-      this.completed = ''
+      this.completed = false
+      this.user = null
     },
     add () {
       this.loading = true
       const task = {
-        user: this.user,
-        name: this.name,
-        completed: this.completed,
-        description: this.description
+        'name': this.name,
+        'description': this.description,
+        'completed': this.completed,
+        'user_id': this.user.id
       }
       window.axios.post(this.uri, task).then(response => {
-        this.$snackbar.showMessage('Tarea creada a correctamente')
+        this.$snackbar.showMessage('Tasca creada correctament')
         this.reset()
         this.$emit('created', response.data)
         this.loading = false
@@ -102,6 +114,8 @@ export default {
         this.loading = false
       })
     }
+  },
+  created () {
+    this.selectLoggedUser()
   }
 }
-</script>

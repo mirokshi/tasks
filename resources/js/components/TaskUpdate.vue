@@ -1,7 +1,8 @@
 <template>
     <span>
-        <v-dialog v-model="dialog" @keydown.esc="dialog=false">
-            <v-toolbar color="grey darken-3" class="white--text">
+        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition"
+                  @keydown.esc="dialog=false">
+            <v-toolbar color="blue darken-3" class="white--text">
                 <v-btn flat icon class="white--text" @click="dialog=false">
                     <v-icon class="mr-1">close</v-icon>
                 </v-btn>
@@ -9,17 +10,17 @@
                 <v-spacer></v-spacer>
                 <v-btn flat class="white--text" @click="dialog=false">
                     <v-icon class="mr-1">exit_to_app</v-icon>
-                  SALIR
+                    Sortir
                 </v-btn>
                 <!--TODO-->
                 <v-btn flat class="white--text">
                     <v-icon class="mr-1">save</v-icon>
-                    GUARDAR
+                    Guardar
                 </v-btn>
             </v-toolbar>
             <v-card>
                 <v-card-text>
-                    <task-form-update :task="task" :uri="uri" :users="users" @close="dialog=false" @updated="updated"></task-form-update>
+                    <task-update-form :task="task" :uri="uri" :users="users" @close="dialog=false" @updated="updated"></task-update-form>
                 </v-card-text>
             </v-card>
         </v-dialog>
@@ -36,7 +37,7 @@ import TaskFormUpdate from './TaskFormUpdate'
 export default {
   name: 'TaskUpdate',
   components: {
-    'task-form-update': TaskFormUpdate
+    'task-update-form': TaskFormUpdate
   },
   data () {
     return {
