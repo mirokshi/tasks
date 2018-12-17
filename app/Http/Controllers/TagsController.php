@@ -20,7 +20,7 @@ class TagsController extends Controller
 //            'tags' => $tags
 //        ]);
 
-        if (Auth::user()->can('tag.manage')){
+        if (Auth::user()->can('tags.manage')){
             $tags = map_collection(Tag::orderBy('created_at','desc')->get());
             $uri = '/api/v1/tags';
         }else{

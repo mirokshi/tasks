@@ -17,7 +17,7 @@ import permissions from './plugins/permissions'
 import snackbar from './plugins/snackbar'
 import confirm from './plugins/confirm'
 import Impersonate from './components/Impersonate'
-import GitInfo from './components/GitInfo'
+import GitInfo from './components/git/GitInfoComponent'
 
 // instalacion vuetify
 window.Vue = Vue

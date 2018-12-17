@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\GitController;
+use App\Http\Controllers\TagsController;
 use App\Task;
 use Illuminate\Http\Request;
 
@@ -32,11 +33,11 @@ Route::middleware('auth:api')->group(function() {
     Route::post('/v1/completed_task/{task}', 'Api\CompletedTasksController@store');
 
     //TAGS
-    Route::get('/v1/tag', 'Api\TagController@index');                // BROWSE
-Route::get('/v1/tag/{tag}', 'Api\TagController@show');          // READ
-Route::delete('/v1/tag/{tag}', 'Api\TagController@destroy');    // DELETE
-Route::post('/v1/tag', 'Api\TagController@store');               // CREATE
-Route::put('/v1/tag/{tag}', 'Api\TagController@update');         // EDIT
+    Route::get('/v1/tags','\\'. TagsController::class . '@index');                // BROWSE
+    Route::get('/v1/tags/{tag}','\\'. TagsController::class . '@show');          // READ
+    Route::delete('/v1/tags/{tag}','\\'. TagsController::class . '@destroy');    // DELETE
+    Route::post('/v1/tags','\\'. TagsController::class . '@store');               // CREATE
+    Route::put('/v1/tags/{tag}','\\'. TagsController::class . '@update');         // EDIT
 
 //Logged
 Route::get('/v1/user/tasks', 'Api\LoggedUserTasksController@index');
