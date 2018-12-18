@@ -86,15 +86,14 @@ class UserTest extends TestCase{
      */
     public function haveTask()
     {
-        $this->markTestSkipped();
-        //1
+
         $user = factory(User::class)->create();
         $task = factory(Task::class)->create();
-        //2
-        $user->haveTask();
-        // https://laravel.com/docs/5.7/eloquent-relationships#inserting-and-updating-related-models
+        //2 execute
+        $user->addTask($task);
+        $response= $user->haveTask($task);
+        $this->assertEquals($task->map(), $response->map());
 
-        //3
     }
 
     /**
@@ -102,9 +101,14 @@ class UserTest extends TestCase{
      */
     public function removeTask()
     {
-        $this->markTestSkipped();
-        //2
-        $user->removeTask();
+        $user = factory(User::class)->create();
+        $task = factory(Task::class)->create();
+        //2 execute
+        $user->addTask($task);
+        $response = $user->haveTask($task);
+        $this->assertEquals($task->map(), $response->map());
+        $user->removeTask($task);
+        $this->assertEmpty($user->tasks);
     }
 
     /**

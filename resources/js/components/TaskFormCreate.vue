@@ -45,6 +45,7 @@ import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 import UserSelect from './UserSelect'
 export default {
+
   name: 'TaskFormCreate',
   mixins: [validationMixin],
   validations: {
