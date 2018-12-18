@@ -65,6 +65,14 @@ class TasquesControllerTest extends TestCase
                 $users[2]['gravatar']=== $user->gravatar &&
                 $users[2]['admin']=== $user->admin;
         });
+        $response->assertViewHas('tags', function($tags) use ($tag) {
+            return count($tags)===3 &&
+                $tags[2]['id']=== $tag->id &&
+                $tags[2]['name']=== $tag->name &&
+                $tags[2]['email']=== $tag->email &&
+                $tags[2]['gravatar']=== $tag->gravatar &&
+                $tags[2]['admin']=== $tag->admin;
+        });
     }
 
     /**
