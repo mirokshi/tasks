@@ -128,17 +128,17 @@ export default {
       window.axios.post('/api/v1/tasks', {
         name: this.newTask
       }).then((response) => {
-        this.datatasks.splice(0, 0, { id: response.data.id, name: this.newTask, completed: false })
+        this.datatasks.splice(0, 0, { id: response.data.id, name: this.newTask, completed: false})
         this.newTask = ''
       }).catch((error) => {
-        console.log(response)
+        console.log(error)
       })
     },
     remove (task) {
       axios.delete('/api/v1/tasks/' + task.id, {}).then((response) => {
         this.datatasks.splice(this.datatasks.indexOf(task), 1)
       }).catch((error) => {
-        console.log(response)
+        console.log(error)
       })
     }
   },

@@ -18,24 +18,27 @@ class LoggedUserTasksControllerTest extends TestCase
      */
     public function can_list_logged_user_tasks()
     {
-
+        $this->markTestSkipped();
+//    $this->withoutExceptionHandling();
 
         // 1
-         $user = $this->login();
-
+        $user = $this->login();
         $task1 = factory(Task::class)->create();
         $task2 = factory(Task::class)->create();
         $task3 = factory(Task::class)->create();
 
         $tasks = collect([$task1,$task2,$task3]);
+
         $user->addTasks($tasks);
 
         // 2 execute
         $response = $this->get('/user/tasks');
-        $response->assertSuccessful();
 
+        $response->assertSuccessful();
         $response->assertViewIs('tasks.user.index');
+
         $response->assertViewHas('tasks', $user->tasks);
+
 
  }
  /**
@@ -43,10 +46,11 @@ class LoggedUserTasksControllerTest extends TestCase
   */
     public function cannot_list_logged_user_tasks_if_user_is_not_logged()
     {
-        $this->markTestSkipped();
+
         //2
-        $this->login();
-        $response = $this->get('/user/tasks');
-        $response -> assertStatus(404);
+        $response = $this->json('GET','/user/tasks');
+        $response -> assertStatus(401);
  }
+
+
 }

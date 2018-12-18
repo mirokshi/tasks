@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserTasksDestroy;
+use App\Http\Requests\UserTasksIndex;
+use App\Http\Requests\UserTasksStore;
+use App\Http\Requests\UserTasksUpdate;
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoggedUserTasksController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-//        return Task::where('user_id', Auth::user()->id);
-        return Auth::user()->tasks;
+        return map_collection($request->user()->tasks);
+//        return Auth::user()->tasks;
     }
 
     public function store(Request $request)
@@ -21,25 +25,21 @@ class LoggedUserTasksController extends Controller
         return Auth::user()->addTask($task);
     }
 
-    public function destroy(Request $request, Task $task)
-    {
-        $task->delete();
-
-        return Auth::user()->removeTask($task);
-    }
 
     public function update(Request $request, Task $task)
     {
-//        findOrFail
         Auth::user()->tasks()->findOrFail($task->id);
         $task->name = $request->name;
+        $task->description = $request->description;
         $task->completed = $request->completed;
         $task->save();
+        return $task;
+    }
 
-//        if (Auth::user()->haveTask($task)) {
-//            $task->name = $request->name;
-//            $task->completed = $request->completed;
-//            $task->save();
-//        }
+    public function destroy(Request $request, Task $task)
+    {
+        Auth::user()->tasks()->findOrFail($task->id);
+        $task->delete();
+//        $user->remoTask(); //contrario addTask
     }
 }

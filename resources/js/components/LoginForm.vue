@@ -1,6 +1,6 @@
 <template>
     <v-form action="/login" method="POST">
-        <v-toolbar dark color="primary">
+        <v-toolbar dark color="grey darken-4">
             <v-toolbar-title>Login form</v-toolbar-title>
             <v-spacer></v-spacer>
         </v-toolbar>
@@ -30,7 +30,8 @@
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" type="submit" disable="true">Login</v-btn>
+            <v-btn color="grey darken-4" type="submit" disable="true" class="white--text" :disabled="$v.$invalid">Login</v-btn>
+            <v-btn color="grey darken-4"  class="white--text" href="/">Cancel</v-btn>
         </v-card-actions>
     </v-form>
 </template>
@@ -58,15 +59,15 @@ export default {
       const errors = []
       if (!this.$v.dataEmail.$dirty) {
         return errors
-      } else { !this.$v.dataEmail.email && errors.push('E-mail invalido') }
-      !this.$v.dataEmail.required && errors.push('E-mail es obligatorio')
+      } else { !this.$v.dataEmail.email && errors.push('e-mail invalid') }
+      !this.$v.dataEmail.required && errors.push('e-mail is required')
       return errors
     },
     passwordErrors () {
       const errors = []
       if (!this.$v.password.$dirty) return errors
-      !this.$v.password.required && errors.push('Password es obligatorio')
-      !this.$v.password.minLength && errors.push('Password debe mayor de 6')
+      !this.$v.password.required && errors.push('Password is required')
+      !this.$v.password.minLength && errors.push('Password it must be greater than 6')
       return errors
     }
   }

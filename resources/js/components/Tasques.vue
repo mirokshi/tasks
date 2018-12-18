@@ -1,268 +1,22 @@
 <template>
-  <span>
-      <v-dialog v-model="deleteDialog">
-            <v-card>
-                <v-card-title class="headline">Seguro?</v-card-title>
-                <v-card-text>
-                    Esta opercion no se puede deshacer
-                </v-card-text>
-                <v-card-actions>
-                    <v-spacer></v-spacer>
-                      <v-btn
-                              color="green darken-1"
-                              flat
-                              @click="deleteDialog = false"
-                      >
-                        Cancelar
-                      </v-btn>
-                      <v-btn
-                              color="error darken-1"
-                              flat="flat"
-                              @click="destroy"
-                      >
-                        Confirmar
-                      </v-btn>
-        </v-card-actions>
-        </v-card>
-        </v-dialog>
-      <v-dialog v-model="createDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-         <v-toolbar color="blue darken-3" class="white--text">
-            ADD A TASK
-          <v-btn flat class="white--text"><v-icon>exit</v-icon></v-btn>
-          <v-btn flat class="white--text"><v-icon>save</v-icon></v-btn>
-            </v-toolbar>
-          <v-card>
-              <v-card-text>
-                   <v-card-text>
-                <v-form>
-                    <v-text-field v-model="name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
-                    <v-switch v-model="completed" :label="completed ? 'Completada':'Pendiente'"></v-switch>
-                    <v-textarea v-model="description" label="Descripcion" hint="Descripcion"></v-textarea>
-                     <v-btn @click="createDialog=false"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
-                    <v-btn><v-icon class="mr-1">save</v-icon></v-btn>
-                </v-form>
-            </v-card-text>
-              </v-card-text>
-          </v-card>
-      </v-dialog>
-      <v-dialog v-model="editDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-        <v-toolbar color="blue darken-3" class="white--text">EDIT A TASK
-          <v-btn @click="editDialog=false" flat class="white--text"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
-          <v-btn flat class="white--text"><v-icon class="mr-1">save</v-icon></v-btn>
-</v-toolbar>
-          <v-card>
-            <v-card-text>
-                <v-form>
-                    <v-text-field v-model="name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
-                    <v-switch v-model="completed" :label="completed ? 'Completada':'Pendiente'"></v-switch>
-                    <v-textarea v-model="description" label="Descripcion" hint="Descripcion"></v-textarea>
-                    <v-autocomplete :items="dataUsers" label="Usuario" item-text="name"></v-autocomplete>
-                     <v-btn @click="editDialog=false"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
-                    <v-btn><v-icon class="mr-1">save</v-icon></v-btn>
-                </v-form>
-            </v-card-text>
-        </v-card>
-
-      </v-dialog>
-      <v-dialog v-model="showDialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-         <v-toolbar color="blue darken-3" class="white--text">TASKS
-              <v-btn @click="showDialog=false" flat class="white--text"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
-          <v-btn flat class="white--text"><v-icon class="mr-1">save</v-icon></v-btn>
-         </v-toolbar>
-          <v-card>
-              <v-card-text>
-                <v-form>
-                    <v-text-field v-model="name" label="Nombre" hint="El nombre de la tarea"></v-text-field>
-                    <v-switch v-model="completed" :label="completed ? 'Completada':'Pendiente'"></v-switch>
-                    <v-textarea v-model="description" label="Descripcion" hint="Descripcion"></v-textarea>
-                    <v-autocomplete :items="dataUsers" label="Usuario" item-text="name"></v-autocomplete>
-                     <v-btn @click="showDialog=false"><v-icon class="mr-1">exit_to_app</v-icon></v-btn>
-                    <v-btn><v-icon class="mr-1">save</v-icon></v-btn>
-                </v-form>
-            </v-card-text>
-          </v-card>
-      </v-dialog>
-      <v-snackbar :timeout="3000" color="warning" v-model="snackbar" >
-          Esto es una SNACKBAR
-          <v-btn dark flat @click="snackbar=false" >X</v-btn>
-      </v-snackbar>
-      <v-toolbar color="grey darken-4">
-      <v-menu>
-          <v-btn slot="activator" flat >
-          <v-icon>more_vert</v-icon>
-          </v-btn>
-         <v-list>
-                    <v-list-tile @click="opcion1">
-                        <v-list-tile-title>Opción 1</v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile href="http://google.com">
-                        <v-list-tile-title>Google</v-list-tile-title>
-                    </v-list-tile>
-                </v-list>
-      </v-menu>
-      <v-toolbar-title class="white--text">Tasques</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn icon class="white--text">
-          <v-icon>settings</v-icon>
-          </v-btn>
-      <v-btn icon class="white--text" @click="refresh" :loading="loading" :disabled="loading">
-          <v-icon>refresh</v-icon>
-          </v-btn>
-          </v-toolbar>
-      <v-card>
-          <v-card-title>
-              <v-layout>
-                  <v-flex xs3 class="mr-2">
-                      <v-select
-                              label="Filters"
-                              :items="filters"
-                              v-model="filter"
-                      ></v-select>
-                  </v-flex>
-                      <v-flex xs4 class="mr-2">
-                      <v-select
-                              label="User"
-                              :items="dataUsers"
-                              v-model="users"
-                              cleanable
-                              ></v-select>
-                  </v-flex>
-                  <v-flex xs5>
-                      <v-text-field
-                              append-icon="search"
-                              label="Buscar"
-                              v-model="search"
-
-                      ></v-text-field>
-                  </v-flex>
-              </v-layout>
-
-          </v-card-title>
-          <v-data-table
-                  :headers="headers"
-                  :items="dataTasks"
-                  :search="search"
-                  no-results-text="No se ha encontrado ningun regustro"
-                  no-data-text="No hay datos disponibles"
-                  rows-per-page-text="Tareas por pagina"
-                  :rows-per-page-items="[5,10,25,50,100,200,{'text':'Todos', 'value' : -1}]"
-                  :loading="loading"
-                  :pagination.sync="pagination"
-                  class="hidden-md-and-down"
-          >
-              <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
-                <template slot="items" slot-scope="{item: task}">
-                    <tr>
-                        <td v-text="task.id"></td>
-                        <td  v-text="task.name"></td>
-                        <td  v-text="task.dataUsers_id"></td>
-                        <td v-text="task.completed"></td>
-                        <td  v-text="task.created_at"></td>
-                        <td v-text="task.updated_at"></td>
-                        <td>
-
-                            <v-btn icon color="primary" flat title="Muestra una tarea"
-                                   @click="showTasks(task)">
-                                <v-icon>visibility</v-icon>
-                            </v-btn>
-                            <v-btn icon color="success" flat title="Edita una tarea"
-                                   @click="showUpdate(task)">
-                                <v-icon>update</v-icon>
-                            </v-btn>
-                            <v-btn icon color="error" flat title="Elimina una tarea"
-                            @click="showDestroy(task)">
-                                <v-icon>delete</v-icon>
-                            </v-btn>
-
-                        </td>
-                    </tr>
-                </template>
-          </v-data-table>
-          <v-data-iterator
-                  class="hidden-lg-and-up"
-                  :items="dataTasks"
-                  :search="search"
-                  no-results-text="No se ha encontrado ningun registro"
-                  no-data-text="No hay datos disponibles"
-                  rows-per-page-text="Tareas por pagina"
-                  :rows-per-page-items="[5,10,25,50,100,200,{'text':'Todos', 'value' : -1}]"
-                  :loading="loading"
-                  :pagination.sync="pagination"
-          >
-              <v-flex
-                      slot="item"
-                      slot-scope="{item:task}"
-                      xs12
-                      sm6
-                      md4
-              >
-                  <v-card class="mb-1">
-                      <v-card-title v-text="task.name"></v-card-title>
-                      <v-list dense>
-                          <v-list-tile>
-                              <v-list-content>Completed</v-list-content>
-                              <v-list-content class="align-end">task.completed</v-list-content>
-                          </v-list-tile>
-                      </v-list>
-                  </v-card>
-              </v-flex>
-          </v-data-iterator>
-      </v-card>
-      <v-btn
-              @click="showCreate"
-              fab
-              bottom
-              right
-              fixed
-              color ="pink"
-      class="white--text">
-          <v-icon>add</v-icon>
-      </v-btn>
-  </span>
+    <span>
+        <tasks-list :users="users" :uri="uri" :tasks="dataTasks"></tasks-list>
+        <task-create :users="users" :uri="uri" @created="add" ></task-create>
+    </span>
 </template>
 
 <script>
-
+import TaskCreate from './TaskCreate'
+import TasksList from './TasksList'
 export default {
   name: 'Tasques',
+  components: {
+    'tasks-list': TasksList,
+    'task-create': TaskCreate
+  },
   data () {
     return {
-      dataUsers: this.users,
-      name: '',
-      completed: false,
-      description: '',
-      deleteDialog: false,
-      editDialog: false,
-      createDialog: false,
-      showDialog: false,
-      snackbar: true,
-      user: '',
-      users: [
-        'Jose',
-        'Manuel',
-        'Emilio'
-      ],
-      filter: 'Todos',
-      filters: [
-        'Todos',
-        'Completados',
-        'Pendientes'
-      ],
-      search: '',
-      pagination: {
-        rowsPerPage: 25
-      },
-      loading: false,
-      dataTasks: this.tasks,
-      headers: [
-        { text: 'ID', value: 'id' },
-        { text: 'NAME', value: 'name' },
-        { text: 'USER ID', value: 'user_id' },
-        { text: 'COMPLETED', value: 'comleted' },
-        { text: 'CREACION', value: 'created_at' },
-        { text: 'ACTUALIZACION', value: 'updated_at' },
-        { text: 'ACCION', sortable: false }
-      ]
+      dataTasks: this.tasks
     }
   },
   props: {
@@ -273,54 +27,16 @@ export default {
     users: {
       type: Array,
       required: true
+    },
+    uri: {
+      type: String,
+      required: true
     }
   },
   methods: {
-    refresh () {
-      this.loading = true
-      // setTimeout(() => { this.loading = false }, 5000)
-      // ¡!¡! CAMBIA SEGUN EL CASO
-      window.axios.get('/api/v1/user/tasks').then(response => {
-        // SHOW SNACKBAR MENSAJE DE OK
-        this.dataTasks = response.data
-      }).catch(eror => {
-        // SOW SNACKNBAR ERRO TODO
-        console.log(error)
-      })
-      // window.axios.get('/api/v1/user/tasks').then().catch()
-    },
-    opcion1 () {
-      console.log('TODO OPCION1')
-    },
-    showDestroy (task) {
-      this.deleteDialog = true
-    },
-    showUpdate () {
-      this.editDialog = true
-    },
-    showCreate () {
-      this.createDialog = true
-    },
-    showTasks () {
-      this.showDialog = true
-    },
-    destroy (task) {
-      this.deleteDialog = false
-    },
-    update () {
-      this.editDialog = false
-    },
-    create () {
-      this.createDialog = false
-    },
-    show () {
-      this.showDialog = false
+    add (task) {
+      this.dataTasks.push(task)
     }
-
   }
 }
 </script>
-
-<style>
-
-</style>

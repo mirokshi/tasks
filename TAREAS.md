@@ -1,27 +1,27 @@
 A 12/11/2018:
 
 - [x] Vue i Vuetify instal·lat
-- [] Welcome page:
-  - [ ] Welcome page amb Vuetify i Parallax theme (https://vuetifyjs.com/en/layout/pre-made-themes)
+- [ ] Welcome page:
+  - [x] Welcome page amb Vuetify i Parallax theme (https://vuetifyjs.com/en/layout/pre-made-themes)
   - [ ] Utilitzar layout Blade diferent de la "intranet" (@extends('layouts.landing')
-  - [ ] CTA (Call To action - Boto principal enmig de la pantall) que porti a la home
-  - [ ] Acció de login (Boto)
-    - [ ] Opcional-> El registre/login es poden mostrar en un dialte no una URL a part
-  - [ ] Acció de registre (Boto)
+  - [x] CTA (Call To action - Boto principal enmig de la pantall) que porti a la home
+  - [x] Acció de login (Boto)
+    - [ ] Opcional-> El registre/login es poden mostrar en un dialog no una URL a part
+  - [x] Acció de registre (Boto)
 - [ ] Login
   - [ ] Pàgina de Login: 
     - [x] Vista Laravel amb layout propi (Contingut centrat)
-    - [ ] Realitzada amb PHP (no cal Axios ni peticions XHR)
+    - [x] Realitzada amb PHP (no cal Axios ni peticions XHR)
     - [ ] Errors de validació amb Laravel i PHP (objecte error)
-    - [ ] El formulari manté els valors ja introduits en cas d'error de validació (old)
-    - [ ] Validació en línia amb vuelidate
-  - [ ] Testos del Login de Laravel
-  - [ ] Testos i implementació alternativa (feta per naltros) de Login
+    - [x] El formulari manté els valors ja introduits en cas d'error de validació (old)
+    - [x] Validació en línia (Javascript) amb vuelidate
+  - [x] Testos del Login de Laravel
+  - [ ] Testos i implementació alternativa (feta per naltros) de Login (LoginAlt)
 - [ ] Registre
   - [ ] Pàgina de registre: 
     - [x] Vista Laravel amb layout propi (Contingut centrat)
-    - [ ] Realitzada amb PHP (no cal vue ni axios)
-    - [ ] Errors de validació amb Laravel i PHP (objecte error)
+    - [] Realitzada amb PHP (no cal Axios ni peticions XHR)
+    - [] Errors de validació amb Laravel i PHP (objecte error)
     - [ ] Validació en línia amb vuelidate
   - [ ] Testos del registre de Laravel
   - [ ] Testos i implementació alternativa (feta per naltros) de registre
@@ -40,10 +40,10 @@ A 12/11/2018:
     - [ ] Totes les operacions CRUD (CREATE RETRIEVE UPDATE DELETE), només PHP
   - [ ] Versió simple inicial PHP+VUE  
     - [ ] Presentació amb TailwindCSS   
-  - [ ] Versió definitiva  
+  - [ ] Versió definitiva  WIP
     - [ ] Presentació amb Vuetify
 - [ ] Preparació de la base de dades, usuaris, permisos i entorns:
- - [x] Usuari personal creat per defecte (el vostre propi usuari)
+ - [ ] Usuari personal creat per defecte (el vostre propi usuari)
    - [ ] Helper per a crear usuari per defecte
    - [ ] Executar als seeders
 - [ ] Tags

@@ -4,27 +4,46 @@
 @endsection
 
 @section('content')
-    <v-app light>
-<v-toolbar class="white">
+    <v-app light  class="grey darken-4 white--text">
+<v-toolbar class="grey darken-4 white--text">
     <v-toolbar-title> Homepage Tasks</v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn href="login" color="primary"> LOGIN</v-btn>
-    <v-btn href="register" color="primary"> REGISTER</v-btn>
+    @if(empty(Auth::user()->email))
+        <v-btn href="login" class="indigo darken-4 white--text"> LOGIN  </v-btn>
+        <v-btn href="register" class="indigo darken-4 white--text"> REGISTER</v-btn>
+
+        {{--<v-btn @click="loginForm = !loginForm">LOGIN</v-btn>--}}
+        {{--<v-btn @click="registerForm = !registerForm">REGISTER</v-btn>--}}
+        {{--<v-dialog v-model="loginForm" max-width="1000">--}}
+            {{--<v-card>--}}
+                {{--<login-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></login-form>--}}
+            {{--</v-card>--}}
+        {{--</v-dialog>--}}
+        {{--<v-dialog v-model="registerForm" max-width="1000">--}}
+            {{--<v-card>--}}
+                {{--<register-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></register-form>--}}
+            {{--</v-card>--}}
+
+        {{--</v-dialog>--}}
+    @else
+        <v-form action="/logout" method="POST">
+            @csrf
+            <v-btn class="indigo darken-4 white--text" type="submit">LOGOUT</v-btn>
+        </v-form>
+    @endif
+
 </v-toolbar>
 <v-content>
     <section>
-        <v-parallax src="img/hero.jpeg" height="600">
+        <v-parallax src="https://placeimg.com/1000/1000/tech" height="600">
             <v-layout
                     column
                     align-center
                     justify-center
-                    class="white--text"
             >
-                <img src="img/vuetify.png" alt="Vuetify.js" height="200">
                 <h1 class="white--text mb-2 display-1 text-xs-center">Tasks</h1>
-                <div class="subheading mb-3 text-xs-center">Powered by Vuetify</div>
                 <v-btn
-                        class="blue lighten-2 mt-5"
+                        class="indigo darken-4 mt-5"
                         dark
                         large
                         href="/home"
@@ -41,8 +60,9 @@
                 wrap
                 class="my-5"
                 align-center
+
         >
-            <v-flex xs12 sm4 class="my-3">
+            <v-flex xs12 sm4 class="my-3 ">
                 <div class="text-xs-center">
                     <h2 class="headline">The best way to start developing</h2>
                     <span class="subheading">
@@ -50,18 +70,18 @@
               </span>
                 </div>
             </v-flex>
-            <v-flex xs12>
-                <v-container grid-list-xl>
-                    <v-layout row wrap align-center>
+            <v-flex xs12 >
+                <v-container grid-list-xl >
+                    <v-layout row wrap align-center >
                         <v-flex xs12 md4>
                             <v-card class="elevation-0 transparent">
-                                <v-card-text class="text-xs-center">
+                                <v-card-text class="text-xs-center ">
                                     <v-icon x-large class="blue--text text--lighten-2">color_lens</v-icon>
                                 </v-card-text>
                                 <v-card-title primary-title class="layout justify-center">
                                     <div class="headline text-xs-center">Material Design</div>
                                 </v-card-title>
-                                <v-card-text>
+                                <v-card-text >
                                     Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare.
                                     Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
                                     Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
@@ -105,12 +125,12 @@
     </section>
 
     <section>
-        <v-parallax src="img/section.jpg" height="380">
+        <v-parallax src="https://placeimg.com/1000/1000/any" height="380">
             <v-layout column align-center justify-center>
                 <div class="headline white--text mb-3 text-xs-center">Web development has never been easier</div>
                 <em>Kick-start your application today</em>
                 <v-btn
-                        class="blue lighten-2 mt-5"
+                        class="indigo darken-4 mt-5"
                         dark
                         large
                         href="/pre-made-themes"

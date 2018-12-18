@@ -164,20 +164,38 @@ use RefreshDatabase;
      */
     public function map()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create([
+            'name' => 'Pepe Pardo Jeans',
+            'email' => 'pepepardo@jeans.com'
+        ]);
+
         $task = factory(Task::class)->create([
            'name' => 'Comprar pan',
+            'description' => 'bla bla bla',
             'completed' => false,
-            'user_id' => $user->id
         ]);
+        $task->assignUser($user);
         $mappedTask = $task->map();
 
         $this->assertEquals($mappedTask['id'],1);
         $this->assertEquals($mappedTask['name'],'Comprar pan');
+        $this->assertEquals($mappedTask['description'],'bla bla bla');
         $this->assertEquals($mappedTask['completed'],false);
         $this->assertEquals($mappedTask['user_id'],$user->id);
         $this->assertEquals($mappedTask['user_name'],$user->name);
         $this->assertEquals($mappedTask['user_email'],$user->email);
+        $this->assertNotNull($mappedTask['created_at']);
+        $this->assertNotNull($mappedTask['created_at_formatted']);
+        $this->assertNotNull($mappedTask['created_at_human']);
+        $this->assertNotNull($mappedTask['created_at_timestamp']);
+        $this->assertNotNull($mappedTask['updated_at']);
+        $this->assertNotNull($mappedTask['updated_at_formatted']);
+        $this->assertNotNull($mappedTask['updated_at_human']);
+        $this->assertNotNull($mappedTask['updated_at_timestamp']);
+        $this->assertEquals($mappedTask['user_gravatar'],'https://www.gravatar.com/avatar/'.md5('pepepardo@jeans.com'));
+        $this->assertEquals($mappedTask['full_search'],'1 Comprar pan bla bla bla Pendiente Pepe Pardo Jeans pepepardo@jeans.com');
+
+        //TODO fullsearch
         $this->assertTrue($user->is($mappedTask['user']));
 
 

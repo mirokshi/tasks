@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Http\Requests\TaskCompleted;
+use App\Http\Requests\TaskUncompleted;
 use App\Task;
 use Illuminate\Http\Request;
 
@@ -12,7 +15,6 @@ class CompletedTasksController extends Controller
     {
         $task->completed = true;
         $task->save();
-
         return redirect('/tasks');
 }
 

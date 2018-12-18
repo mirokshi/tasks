@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 
@@ -19,9 +20,11 @@ class RegisterAltControllerTest extends TestCase
     public function can_resgister_a_user()
     {
 
-       $this->withoutExceptionHandling();
+
         //1
+        initialize_roles();
         $this->assertNull(Auth::user());
+
 
         //2
         $response = $this->post( '/register_alt', $user = [
@@ -43,6 +46,7 @@ class RegisterAltControllerTest extends TestCase
         $this->assertEquals($user['name'], Auth::user()->name);
 //        $this->assertEquals(bcrypt($user->password),Auth::user()->password);
         $this->assertTrue(Hash::check($user['password'],Auth::user()->password));
+
 
 
     }

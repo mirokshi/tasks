@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StoreTask extends FormRequest
+class UserTasksIndex extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,8 +14,8 @@ class StoreTask extends FormRequest
      */
     public function authorize()
     {
-        return true;
-//        return Auth::user()->can('task.store');
+        return Auth::user()->can('user.tasks.index');
+//return false;
     }
 
     /**
@@ -26,7 +26,7 @@ class StoreTask extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            //
         ];
     }
 }

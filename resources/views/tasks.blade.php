@@ -5,36 +5,60 @@
 @section('content')
 {{--LARAVEL BLADE--}}
 {{--//CARD--}}
+<v-container fluid>
+    <v-toolbar color="grey darken-3">
+        <v-toolbar-title class="white--text">Tasks con PHP</v-toolbar-title>
+    </v-toolbar>
+<v-card>
+    <v-list>
+        <v-list-tile-content>
+            @foreach ($tasks as $task)
+                <v-layout>
+                    <v-list-tile-avatar>
+                        <img src="https://placeimg.com/100/100/any">
+                    </v-list-tile-avatar>
 
-        <v-card grid-list-md text-xs-center >
-            <v-toolbar dark>
-                <v-toolbar-title>Tasks con PHP</v-toolbar-title>
-            </v-toolbar>
-            <v-spacer></v-spacer>
-            <v-list >
-                <v-list-tile-content>
-                    {{--CONTENIDO--}}
-                    <form action="/tasks" method="POST" class="p-5 pl-5">
-                        {{--label--}}
+                    @if($task['completed'])
+                        <del>{{ $task['name'] }}</del>
+
+                        <form action="/completed_task/{{$task['id']}}" method="POST">
+                            @csrf
+                            {{ method_field('DELETE') }}
+                            <input type="hidden" name="id" value="{{ $task['id']  }}">
+                            <v-btn type="submit" color="blue-grey lighten-1">
+                                Descompletar
+                            </v-btn>
+                        </form>
+                    @else
+                        {{ $task['name'] }}
+
+                        <form action="/completed_task/{{$task['id']}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $task['id'] }}">
+                            <v-btn type="submit" color="blue-grey lighten-1">
+                                Completar
+                            </v-btn>
+                        </form>
+                    @endif
+
+                    <a href="/task_edit/{{ $task['id'] }}">
+                        <button><v-btn color="warning">Modificar</v-btn></button>
+                    </a>
+                    <form action="/tasks/{{ $task['id'] }}" method="POST">
                         @csrf
-                        <input name="name" type="text" placeholder="New task" class="elevation-10 ">
-                        <button><v-btn color="info">Agregar</v-btn></button>
+                        {{ method_field('DELETE') }}
+                        <button><v-btn color="error">Eliminar</v-btn></button>
                     </form>
-                    @foreach ($tasks as $task)
-                        <v-layout>{{ $task->name }}
-                            <button><v-btn color="success"> Completar </v-btn></button>
-                            <a href="/task_edit/{{$task->id}}">
-                                <button><v-btn color="warning">Modificar</v-btn></button>
-                            </a>
-                            <form action="/tasks/{{ $task->id }}" method="POST">
-                                @csrf
-                                {{ method_field('DELETE') }}
-                                <button><v-btn color="error">Eliminar</v-btn></button>
-                            </form>
-                        </v-layout>
-                            @endforeach
-                </v-list-tile-content>
-            </v-list>
-        </v-card>
+                </v-layout>
+            @endforeach
 
+            <form action="/tasks" method="POST">
+                @csrf
+                <input name="name" type="text" placeholder="New task">
+                <button><v-btn color="info">Agregar</v-btn></button>
+            </form>
+        </v-list-tile-content>
+    </v-list>
+</v-card>
+</v-container>
 @endsection

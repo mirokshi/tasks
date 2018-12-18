@@ -4,50 +4,63 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateTask;
-use App\Http\Requests\StoreTask;
+use App\Http\Requests\TaskDestroy;
+use App\Http\Requests\TaskIndex;
+use App\Http\Requests\TaskShow;
+use App\Http\Requests\TaskStore;
+use App\Http\Requests\TaskUpdate;
 use App\Task;
 use Illuminate\Http\Request;
 
 
 class TasksController extends Controller
 {
-    public function index(Request $request)
+    public function index(TaskIndex $request)
     {
-        return Task::orderBy('created_at')->get();
+        return map_collection(Task::orderBy('created_at','desc')->get());
 
     }
 
-    public function show(Request $request, Task $task) //Route Model Binding
+    public function show(TaskShow $request, Task $task) //Route Model Binding
     {
         return $task->map();
-//        return Task::findOrFail($request -> task);
-    }
-
-    public function destroy(Request $request, Task $task)
-    {
-        $task->delete();
     }
 
     //CREATE
 
-    public function store(StoreTask $request)
+    public function store(TaskStore $request)
     {
-
-
         $task = new Task();
         $task->name = $request->name;
-        $task->completed = false;
+        $task->completed = $request->completed ? true : false;
+        $task->description = $request->description;
+        $task->user_id = $request->user_id;
         $task->save();
         return $task->map();
     }
 
-    public function update(UpdateTask $request, Task $task)
+    public function destroy(TaskDestroy $request, Task $task)
+    {
+        $task->delete();
+        return $task;
+    }
+
+    public function update(TaskUpdate $request, Task $task)
     {
         $task->name = $request->name;
+        $task->completed = $request->completed;
+        $task->description = $request->description ?? $task->description;
+        $task->user_id = $request->user_id;
         $task->save();
         return $task->map();
     }
+
+//    public function edit(TaskUpdate $request)
+//    {
+//        $task = Task::findOrFail($request->id);
+//        return view('task_edit',[ 'task' => $task]);
+//
+//    }
 
 
 }
