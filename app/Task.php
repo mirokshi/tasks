@@ -97,8 +97,8 @@ protected $hidden = [
             'created_at_timestamp'=>$this->created_at_timestamp,
             'updated_at_timestamp'=>$this->updated_at_timestamp,
             'user' => $this->user,
-            'full_search' => $this->full_search
-//            'tags' => $this->tags,
+            'full_search' => $this->full_search,
+            'tags' => $this->tags,
 //            'file' => $this->file
 
         ];

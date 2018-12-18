@@ -29,7 +29,6 @@ if (!function_exists('create_primary_user')){
     }
     }
 }
-
 if (!function_exists('create_example_tasks')) {
     function create_example_tasks() {
         $user1= factory(User::class)->create();
@@ -77,9 +76,9 @@ if (!function_exists('create_example_tasks')) {
         ]);
     }
 }
-
 if (!function_exists('create_example_tags')) {
-    function create_example_tags() {
+    function create_example_tags()
+    {
         Tag::create([
             'name' => 'Tag1',
             'description' => 'Aqui van las compras',
@@ -99,7 +98,6 @@ if (!function_exists('create_example_tags')) {
         ]);
     }
 }
-
 if (!function_exists('create_mysql_database')){
     function create_mysql_database($name){
         //PDO
@@ -108,7 +106,6 @@ if (!function_exists('create_mysql_database')){
         DB::connection('mysqlroot')->getPdo()->exec($statement);
     }
 }
-
 if (!function_exists('drop_mysql_database')){
     function drop_mysql_database($name){
         //PDO
@@ -117,7 +114,6 @@ if (!function_exists('drop_mysql_database')){
         DB::connection('mysqlroot')->getPdo()->exec($statement);
     }
 }
-
 if (!function_exists('create_mysql_user')){
     function create_mysql_user($name, $password = null, $host='localhost'){
         //PDO
@@ -129,7 +125,6 @@ if (!function_exists('create_mysql_user')){
         return $password;
     }
 }
-
 if (!function_exists('grant_mysql_privileges')) {
     function grant_mysql_privileges($user, $database, $host = 'localhost')
     {
@@ -140,7 +135,6 @@ if (!function_exists('grant_mysql_privileges')) {
         DB::connection('mysqlroot')->getPdo()->exec($statement);
     }
 }
-
 if (!function_exists('create_database')) {
     function create_database()
     {
@@ -149,7 +143,6 @@ if (!function_exists('create_database')) {
         grant_mysql_privileges(env('DB_USERNAME'),env('DB_DATABASE'));
     }
 }
-
 if (!function_exists('create_role')) {
     function create_role($role)
     {
@@ -174,7 +167,6 @@ if (!function_exists('create_permission')) {
         }
     }
 }
-
 if (!function_exists('initialize_roles')) {
     function initialize_roles() {
         $roles = [
@@ -236,7 +228,6 @@ if (!function_exists('initialize_roles')) {
         }
     }
 }
-
 if (!function_exists('initialize_gates')){
     function initialize_gates(){
         Gate::define('tasks.manage',function ($user){
@@ -312,8 +303,6 @@ if (!function_exists('sample_users_and_tasks')) {
         ]);
     }
 }
-
-
 if (!function_exists('pikachusorprendido')){
     function pikachusorprendido(){
 
@@ -345,13 +334,11 @@ if (!function_exists('map_collection')){
       });
   }
 }
-
 if (!function_exists('logged_user')){
     function logged_user(){
         return json_encode(optional(Auth::user())->map());
     }
 }
-
 if (! function_exists('git')) {
     function git() {
         return Cache::remember('git_info', 5, function () {
@@ -437,5 +424,11 @@ if (! function_exists('git_remote_origin_url')) {
     {
         exec("git config --get remote.origin.url", $output);
         return $output[0];
+    }
+}
+
+if (!function_exists('create_sample_tags')){
+    function create_sample_tasks_with_tags(){
+
     }
 }

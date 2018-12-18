@@ -35,7 +35,7 @@
 </v-toolbar>
 <v-content>
     <section>
-        <v-parallax src="https://placeimg.com/1000/1000/tech" height="600">
+        <v-parallax src="https://picsum.photos/1000/1000/?random" height="600">
             <v-layout
                     column
                     align-center

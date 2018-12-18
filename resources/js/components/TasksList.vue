@@ -82,6 +82,10 @@
                             <toggle :value="task.completed" uri="/api/v1/completed_task" active-text="Completada" unactive-text="Pendent" :resource="task"></toggle>
                         </td>
                         <td>
+                            TODO TAGS
+                            <tasks-tags :task="task" :tags="tags"></tasks-tags>
+                        </td>
+                        <td>
                             <span :title="task.created_at_formatted">{{ task.created_at_human}}</span>
                         </td>
                         <td>
@@ -136,8 +140,17 @@ import Toggle from './Toggle'
 import TaskDestroy from './TaskDestroy'
 import TaskUpdate from './TaskUpdate'
 import TaskShow from './TaskShow'
+import TasksTags from './TasksTags'
+
 export default {
   name: 'TasksList',
+  components: {
+    'toggle': Toggle,
+    'task-destroy': TaskDestroy,
+    'task-update': TaskUpdate,
+    'task-show': TaskShow,
+    'tasks-tags': TasksTags
+  },
   data () {
     return {
       user: '',
@@ -155,24 +168,23 @@ export default {
         rowsPerPage: 25
       },
       headers: [
-        { text: 'Id', value: 'id' },
-        { text: 'Name', value: 'name' },
-        { text: 'User', value: 'user_id' },
-        { text: 'Completat', value: 'completed' },
-        { text: 'Creat', value: 'created_at_timestamp' },
-        { text: 'Modificat', value: 'updated_at_timestamp' },
-        { text: 'Accions', sortable: false, value: 'full_search' }
+        { text: 'ID', value: 'id' },
+        { text: 'NAME', value: 'name' },
+        { text: 'USER', value: 'user_id' },
+        { text: 'COMPLETED', value: 'completed' },
+        { text: 'TAGS', value: 'tags' },
+        { text: 'CREATED', value: 'created_at_timestamp' },
+        { text: 'UPDATED', value: 'updated_at_timestamp' },
+        { text: 'ACTIONS', sortable: false, value: 'full_search' }
       ]
     }
   },
-  components: {
-    'toggle': Toggle,
-    'task-destroy': TaskDestroy,
-    'task-update': TaskUpdate,
-    'task-show': TaskShow
-  },
   props: {
     tasks: {
+      type: Array,
+      required: true
+    },
+    tags: {
       type: Array,
       required: true
     },
