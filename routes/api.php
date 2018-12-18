@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\GitController;
-use App\Http\Controllers\TagsController;
+use App\Http\Controllers\Api\TagsController;
+use App\Http\Controllers\Api\TasksController;
+
 use App\Task;
 use Illuminate\Http\Request;
 
@@ -21,11 +23,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:api')->group(function() {
-    Route::get('/v1/tasks', 'Api\TasksController@index');                // BROWSE
-    Route::get('/v1/tasks/{task}', 'Api\TasksController@show');          // READ
-    Route::delete('/v1/tasks/{task}', 'Api\TasksController@destroy');    // DELETE
-    Route::post('/v1/tasks', 'Api\TasksController@store');               // CREATE
-    Route::put('/v1/tasks/{task}', 'Api\TasksController@update');         // EDIT
+
+    Route::get('/v1/tasks','\\' . TasksController::class . '@index');                // BROWSE
+    Route::get('/v1/tasks/{task}','\\' . TasksController::class . '@show');          // READ
+    Route::delete('/v1/tasks/{task}','\\' . TasksController::class . '@destroy');    // DELETE
+    Route::post('/v1/tasks','\\' . TasksController::class . '@store');               // CREATE
+    Route::put('/v1/tasks/{task}','\\' . TasksController::class . '@update');
 
 //Uncompleted -> ESTADOS
     Route::delete('/v1/completed_task/{task}', 'Api\CompletedTasksController@destroy');
@@ -39,7 +42,7 @@ Route::middleware('auth:api')->group(function() {
     Route::post('/v1/tags','\\'. TagsController::class . '@store');               // CREATE
     Route::put('/v1/tags/{tag}','\\'. TagsController::class . '@update');         // EDIT
 
-//Logged
+//Logged (User Tasks)
 Route::get('/v1/user/tasks', 'Api\LoggedUserTasksController@index');
 Route::post('/v1/user/tasks/{task}', 'Api\LoggedUserTasksController@show');
 Route::post('/v1/user/tasks', 'Api\LoggedUserTasksController@store');

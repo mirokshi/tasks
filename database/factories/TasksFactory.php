@@ -19,6 +19,5 @@ $factory->define(Task::class, function (Faker $faker) {
         'name' => $faker->sentence,
         'description' => $faker->text,
         'completed' => false,
-        'user_id' => 1
     ];
 });

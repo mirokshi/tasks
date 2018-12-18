@@ -15,7 +15,7 @@ use App\Tag;
 use Illuminate\Http\Request;
 
 
-class TagController extends Controller
+class TagsController extends Controller
 {
     public function index(TagIndex $request)
     {
@@ -34,6 +34,7 @@ class TagController extends Controller
     public function destroy(TagDestroy $request, Tag $tag)
     {
         $tag->delete();
+        return $tag;
     }
 
     //CREATE

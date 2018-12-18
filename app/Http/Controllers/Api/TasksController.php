@@ -32,8 +32,8 @@ class TasksController extends Controller
     {
         $task = new Task();
         $task->name = $request->name;
-        $task->completed = $request->completed;
-        $task->description = $request->description ? true : false;
+        $task->completed = $request->completed ? true : false;
+        $task->description = $request->description;
         $task->user_id = $request->user_id;
         $task->save();
         return $task->map();
@@ -42,6 +42,7 @@ class TasksController extends Controller
     public function destroy(TaskDestroy $request, Task $task)
     {
         $task->delete();
+        return $task;
     }
 
     public function update(TaskUpdate $request, Task $task)
