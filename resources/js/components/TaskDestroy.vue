@@ -36,7 +36,7 @@ export default {
         })
       if (result) {
         this.removing = true
-        window.axios.delete(this.uri + '/' + task.id).then(() => {
+        window.axios.delete(this.uri + task.id).then(() => {
           this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
           this.$emit('removed', task)
           this.removing = false

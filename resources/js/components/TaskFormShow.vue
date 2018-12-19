@@ -9,7 +9,7 @@
             :readony="true"
         ></v-text-field>
 
-        <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
+        <v-switch :readonly="true" v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
 
         <v-textarea
             v-model="description"
@@ -18,7 +18,7 @@
             :readony="true"
         ></v-textarea>
 
-        <!--// TODO USER AVATAR-->
+        <user-select :readonly="true" :users="dataUsers" label="Usuario"></user-select>
     </v-form>
 </template>
 
@@ -28,14 +28,34 @@ export default {
     return {
       name: this.task.name,
       completed: this.task.completed,
-      description: this.task.description
+      description: this.task.description,
+      dataUsers: this.users
     }
   },
   props: {
     task: {
       type: Object,
       required: true
+    },
+    users: {
+      type: Array,
+      required: true
     }
+  },
+  watch: {
+    task (task) {
+      this.updateUser(task)
+    }
+  },
+  methods: {
+    updateUser (task) {
+      this.user = this.user.find((user) => {
+        return parseInt(user.id) === parseInt(task.user_id)
+      })
+    }
+  },
+  created () {
+    this.updateUser(this.task)
   }
 }
 </script>

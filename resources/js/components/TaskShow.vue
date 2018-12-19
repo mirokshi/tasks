@@ -1,7 +1,7 @@
 <template>
     <span>
-        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition" @keydown.esc.stop.prevent="dialog=false">
-            <v-toolbar color="blue darken-3" class="white--text">
+        <v-dialog v-model="dialog"  @keydown.esc.stop.prevent="dialog=false">
+            <v-toolbar color="grey darken-3" class="white--text">
             <v-btn flat icon class="white--text" @click="dialog=false">
                 <v-icon>close</v-icon>
             </v-btn>
@@ -14,7 +14,7 @@
         </v-toolbar>
             <v-card>
                 <v-card-text>
-                    <task-show-form :task="task" :users="users"></task-show-form>
+                    <task-form-show :task="task" :users="users"></task-form-show>
                 </v-card-text>
             </v-card>
         </v-dialog>

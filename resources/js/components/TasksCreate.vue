@@ -1,7 +1,7 @@
 <template>
     <span>
-        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition" @keydown.esc.stop.prevent="dialog=false">
-            <v-toolbar color="blue darken-3" class="white--text">
+        <v-dialog v-model="dialog"  @keydown.esc.stop.prevent="dialog=false">
+            <v-toolbar color="grey darken-3" class="white--text">
             <v-btn flat icon class="white--text" @click="dialog=false">
                 <v-icon>close</v-icon>
             </v-btn>
@@ -39,7 +39,7 @@
 <script>
 import TaskFormCreate from './TaskFormCreate'
 export default {
-  name: 'TaskCreate',
+  name: 'TasksCreate',
   components: {
     'task-form-create': TaskFormCreate
   },

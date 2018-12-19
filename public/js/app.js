@@ -73427,16 +73427,6 @@ module.exports = Component.exports
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /***/ }),
 /* 81 */
@@ -73778,7 +73768,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__TaskShow___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__TaskShow__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TasksTags__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TasksTags___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__TasksTags__);
-//
 //
 //
 //
@@ -75736,6 +75725,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     task: {
       type: Object,
       required: true
+    },
+    users: {
+      type: Array,
+      required: true
     }
   }
 });
@@ -75996,7 +75989,11 @@ var render = function() {
             [
               _c(
                 "v-card-text",
-                [_c("task-show-form", { attrs: { task: _vm.task } })],
+                [
+                  _c("task-show-form", {
+                    attrs: { task: _vm.task, users: _vm.users }
+                  })
+                ],
                 1
               )
             ],
@@ -76158,9 +76155,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     removeTag: function removeTag() {
       var _this = this;
 
-      console.log('TODO');
-      window.axios.delete('/api/v1/tasks' + this.task.id + '/tag/' + this.tag).then(function (response) {
-        _this.$snackbar.showMessage('Etiqueta eliminada correctamente');
+      // TODO ASYNC PRIMER EXECUTAR UN CONFIRM
+      console.log('TODO REMOVE TAG');
+      window.axios.delete('/api/v1/tasks/' + this.task.id + '/tag/' + this.tag).then(function (response) {
+        _this.$snackbar.showMessage('Etiqueta eliminada correctament');
       }).catch(function (error) {
         _this.$snackbar.showError(error);
       });
@@ -76168,16 +76166,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     addTag: function addTag() {
       var _this2 = this;
 
-      console.log('TODO');
+      console.log('TODO ADD TAG');
       var tag = {};
-      window.axios.post('/api/v1/tasks/' + this.task.id + '/tag').then(function (response) {
-        _this2.$snackbar.showMessage('Etiqueta añadida correctamente');
+      window.axios.post('/api/v1/tasks/' + this.task.id + '/tag', tag).then(function (response) {
+        _this2.$snackbar.showMessage('Etiqueta afegida correctament');
       }).catch(function (error) {
         _this2.$snackbar.showError(error);
       });
     }
   }
-
 });
 
 /***/ }),
@@ -76202,8 +76199,15 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-btn",
-        { attrs: { icon: "" } },
-        [_c("v-icon", [_vm._v("remove")])],
+        {
+          attrs: { icon: "" },
+          on: {
+            click: function($event) {
+              _vm.dialog = true
+            }
+          }
+        },
+        [_c("v-icon", [_vm._v("add")])],
         1
       ),
       _vm._v(" "),
@@ -76217,7 +76221,7 @@ var render = function() {
             }
           }
         },
-        [_c("v-icon", [_vm._v("add")])],
+        [_c("v-icon", [_vm._v("remove")])],
         1
       ),
       _vm._v(" "),
@@ -76275,7 +76279,7 @@ var render = function() {
                               [
                                 _vm._v(
                                   "\n                            " +
-                                    _vm._s(_vm.data.item) +
+                                    _vm._s(_vm.data.item.name) +
                                     "\n                        "
                                 )
                               ]
@@ -76591,9 +76595,6 @@ var render = function() {
                         _c(
                           "td",
                           [
-                            _vm._v(
-                              "\n                        TODO TAGS\n                        "
-                            ),
                             _c("tasks-tags", {
                               attrs: { task: task, tags: _vm.tags }
                             })
@@ -76770,7 +76771,12 @@ var render = function() {
     "span",
     [
       _c("tasks-list", {
-        attrs: { users: _vm.users, uri: _vm.uri, tasks: _vm.dataTasks }
+        attrs: {
+          users: _vm.users,
+          uri: _vm.uri,
+          tasks: _vm.dataTasks,
+          tags: _vm.tags
+        }
       }),
       _vm._v(" "),
       _c("task-create", {
