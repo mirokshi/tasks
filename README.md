@@ -95,9 +95,6 @@ http://php.net/manual/es/function.implode.php
  can_show_tasks -> TasksControllerTest 
  [] aseerSee
  
- 
- ayer tu madre me visito
- desnuda
- y caliente
+ dkhecbrvjh
  
  
