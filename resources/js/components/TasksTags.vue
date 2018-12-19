@@ -1,8 +1,8 @@
 <template>
     <span>
-        <v-chip v-for="tag in task.tags" :key="tag.id" v-text="tag.name" :color="tag.color" @dblclick="removeTag"></v-chip>
-        <v-btn icon><v-icon>remove</v-icon></v-btn>
+         <v-chip v-for="tag in task.tags" :key="tag.id" v-text="tag.name" :color="tag.color" @dblclick="removeTag"></v-chip>
         <v-btn icon @click="dialog = true"><v-icon>add</v-icon></v-btn>
+        <v-btn icon @click="dialog = true"><v-icon>remove</v-icon></v-btn>
         <v-dialog v-model="dialog" width="500">
             <v-card>
                 <v-card-title> Añadir etiqueta a la tarea</v-card-title>
@@ -25,7 +25,7 @@
                                 class="v-chip--select-multi"
                                 @input="data.parent.selectItem(data.item.name)"
                             >
-                                {{ data.item }}
+                                {{ data.item.name }}
                             </v-chip>
 
                         </template>
@@ -62,23 +62,23 @@ export default {
   },
   methods: {
     removeTag () {
-      console.log('TODO')
-      window.axios.delete('/api/v1/tasks' + this.task.id + '/tag/' + this.tag).then(response => {
-        this.$snackbar.showMessage('Etiqueta eliminada correctamente')
+      // TODO ASYNC PRIMER EXECUTAR UN CONFIRM
+      console.log('TODO REMOVE TAG')
+      window.axios.delete('/api/v1/tasks/' + this.task.id + '/tag/' + this.tag).then(response => {
+        this.$snackbar.showMessage('Etiqueta eliminada correctament')
       }).catch(error => {
         this.$snackbar.showError(error)
       })
     },
     addTag () {
-      console.log('TODO')
+      console.log('TODO ADD TAG')
       let tag = {}
-      window.axios.post('/api/v1/tasks/' + this.task.id + '/tag').then(response => {
-        this.$snackbar.showMessage('Etiqueta añadida correctamente')
+      window.axios.post('/api/v1/tasks/' + this.task.id + '/tag', tag).then(response => {
+        this.$snackbar.showMessage('Etiqueta afegida correctament')
       }).catch(error => {
         this.$snackbar.showError(error)
       })
     }
   }
-
 }
 </script>

@@ -75,6 +75,7 @@ if (!function_exists('create_example_tasks')) {
             'user_id' => $user1->id
         ]);
     }
+
 }
 if (!function_exists('create_example_tags')) {
     function create_example_tags()
@@ -96,6 +97,158 @@ if (!function_exists('create_example_tags')) {
             'description' => 'Aqui van los trabajos',
             'color' => '#48a89b'
         ]);
+    }
+}
+
+if (!function_exists('create_sample_tasks')) {
+    function create_sample_tasks($user)
+    {
+        $task = Task::create([
+            'name' => 'Comprar pa',
+            'description' => 'Bla bla bla',
+            'completed' => false,
+        ]);
+        $task->assignUser($user);
+
+        $tag1 = Tag::create([
+            'name' => 'Tag1',
+            'color' => 'blue',
+            'description' => 'bla bla bla'
+        ]);
+        $tag2 = Tag::create([
+            'name' => 'Tag2',
+            'color' => 'red',
+            'description' => 'Jorl Jorl'
+        ]);
+
+        $task->addTag($tag1);
+        $task->addTag($tag2);
+        return $task;
+    }
+}
+
+if (!function_exists('sample_users_and_tasks')) {
+    function sample_users_and_tasks() {
+        // Superadmin no cal -> soc jo mateix
+
+        // Pepe Pringao -> No té cap permis ni cap rol
+
+        try {
+            factory(User::class)->create([
+                'name' => 'Pepe Pringao',
+                'email' => 'pepepringao@hotmail.com'
+            ]);
+        } catch (Exception $e) {}
+
+        try {
+            $bartsimpson = factory(User::class)->create([
+                'name' => 'Bart Simpson',
+                'email' => 'bartsimpson@simpson.com'
+            ]);
+        } catch (Exception $e) {}
+
+        Task::create([
+            'name' => 'Patinar pels carrers',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $bartsimpson->id
+        ]);
+
+        Task::create([
+            'name' => 'Escriure 100 vegades no...',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $bartsimpson->id
+        ]);
+
+        try {
+            $bartsimpson->assignRole('Tasks');
+        } catch (Exception $e) {}
+
+        try {
+            $homersimpson = factory(User::class)->create([
+                'name' => 'Homer Simpson',
+                'email' => 'homersimpson@simpson.com'
+            ]);
+        } catch (Exception $e) {}
+
+        try {
+            $homersimpson->assignRole('TasksManager');
+            $homersimpson->assignRole('Tasks');
+        } catch (Exception $e) {}
+
+        Task::create([
+            'name' => 'Anar a treballar a la central nuclear',
+            'completed' => false,
+            'description' => 'quin pal',
+            'user_id' => $homersimpson->id
+        ]);
+
+        Task::create([
+            'name' => 'Gestionar les tasques',
+            'completed' => false,
+            'description' => 'Hey you!',
+            'user_id' => $homersimpson->id
+        ]);
+    }
+}
+
+if (!function_exists('create_example_tasks_with_tags')){
+    function create_example_tasks_with_tags(){
+        $user1= factory(User::class)->create();
+        Task::create([
+            'name' => 'comprar pa',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $user1->id
+        ]);
+        Task::create([
+            'name' => 'comprar llet',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $user1->id
+        ]);
+        Task::create([
+            'name' => 'Estudiar PHP',
+            'completed' => true,
+            'description' => 'JORL JORL JORL',
+            'user_id' => $user1->id
+        ]);
+        $user1= factory(User::class)->create();
+        $comprarpa = Task::create([
+            'name' => 'comprar pa',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $user1->id
+        ]);
+        $comprarllet = Task::create([
+            'name' => 'comprar llet',
+            'completed' => false,
+            'description' => 'Bla bla bla',
+            'user_id' => $user1->id
+        ]);
+        $estudiarPHP = Task::create([
+            'name' => 'Estudiar PHP',
+            'completed' => true,
+            'description' => 'JORL JORL JORL',
+            'user_id' => $user1->id
+        ]);
+        $tag1 = Tag::create([
+            'name' => 'Tag1',
+            'color' => 'blue',
+            'description' => 'bla bla bla'
+        ]);
+        $tag2 = Tag::create([
+            'name' => 'Tag2',
+            'color' => 'red',
+            'description' => 'Jorl Jorl'
+        ]);
+        $estudiarPHP->addTag($tag1);
+        $estudiarPHP->addTag($tag2);
+        $comprarllet->addTag($tag1);
+        $comprarllet->addTag($tag2);
+        $comprarpa->addTag($tag1);
+
     }
 }
 if (!function_exists('create_mysql_database')){
@@ -236,71 +389,6 @@ if (!function_exists('initialize_gates')){
         Gate::define('tags.manage',function ($user){
             return $user->isSuperAdmin() || $user->hasRole('TagsManager');
          })  ;
-    }
-}
-if (!function_exists('sample_users_and_tasks')) {
-    function sample_users_and_tasks() {
-        // Superadmin no cal -> soc jo mateix
-
-        // Pepe Pringao -> No té cap permis ni cap rol
-
-        try {
-            factory(User::class)->create([
-                'name' => 'Pepe Pringao',
-                'email' => 'pepepringao@hotmail.com'
-            ]);
-        } catch (Exception $e) {}
-
-        try {
-            $bartsimpson = factory(User::class)->create([
-                'name' => 'Bart Simpson',
-                'email' => 'bartsimpson@simpson.com'
-            ]);
-        } catch (Exception $e) {}
-
-        Task::create([
-            'name' => 'Patinar pels carrers',
-            'completed' => false,
-            'description' => 'Bla bla bla',
-            'user_id' => $bartsimpson->id
-        ]);
-
-        Task::create([
-            'name' => 'Escriure 100 vegades no...',
-            'completed' => false,
-            'description' => 'Bla bla bla',
-            'user_id' => $bartsimpson->id
-        ]);
-
-        try {
-            $bartsimpson->assignRole('Tasks');
-        } catch (Exception $e) {}
-
-        try {
-            $homersimpson = factory(User::class)->create([
-                'name' => 'Homer Simpson',
-                'email' => 'homersimpson@simpson.com'
-            ]);
-        } catch (Exception $e) {}
-
-        try {
-            $homersimpson->assignRole('TasksManager');
-            $homersimpson->assignRole('Tasks');
-        } catch (Exception $e) {}
-
-        Task::create([
-            'name' => 'Anar a treballar a la central nuclear',
-            'completed' => false,
-            'description' => 'quin pal',
-            'user_id' => $homersimpson->id
-        ]);
-
-        Task::create([
-            'name' => 'Gestionar les tasques',
-            'completed' => false,
-            'description' => 'Hey you!',
-            'user_id' => $homersimpson->id
-        ]);
     }
 }
 if (!function_exists('pikachusorprendido')){

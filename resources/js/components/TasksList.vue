@@ -82,7 +82,6 @@
                             <toggle :value="task.completed" uri="/api/v1/completed_task" active-text="Completada" unactive-text="Pendent" :resource="task"></toggle>
                         </td>
                         <td>
-                            TODO TAGS
                             <tasks-tags :task="task" :tags="tags"></tasks-tags>
                         </td>
                         <td>

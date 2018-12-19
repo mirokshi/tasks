@@ -77,8 +77,9 @@ export default {
   computed: {
     nameErrors () {
       const errors = []
-      if (!this.$v.name.$dirty) return errors
-      !this.$v.name.required && errors.push('El camp name és obligatori.')
+      if (!this.$v.name.$dirty) {
+        return errors
+      } else { !this.$v.name.required && errors.push('El camp name és obligatori.') }
       return errors
     }
   },

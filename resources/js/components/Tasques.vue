@@ -1,6 +1,6 @@
 <template>
     <span>
-        <tasks-list :users="users" :uri="uri" :tasks="dataTasks"></tasks-list>
+        <tasks-list :users="users" :uri="uri" :tasks="dataTasks" :tags="tags"></tasks-list>
         <task-create :users="users" :uri="uri" @created="add" ></task-create>
     </span>
 </template>

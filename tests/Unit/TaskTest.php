@@ -169,34 +169,14 @@ use RefreshDatabase;
             'email' => 'pepepardo@jeans.com'
         ]);
 
-        $task = factory(Task::class)->create([
-           'name' => 'Comprar pan',
-            'description' => 'bla bla bla',
-            'completed' => false,
-        ]);
+        $task = create_sample_tasks($user);
+
         $task->assignUser($user);
         $mappedTask = $task->map();
 
-        $tag1 = Tag::create([
-            'name' => 'Tag1',
-            'color' => '#ff6000',
-            'description' => 'bla bla'
-
-        ]);
-
-        $tag2 = Tag::create([
-            'name' => 'Tag2',
-            'color' => '#ff6000',
-            'description' => 'bla bla'
-
-        ]);
-        $task->addTag($tag1);
-        $task->addTag($tag2);
-
-
         $this->assertEquals($mappedTask['id'],1);
-        $this->assertEquals($mappedTask['name'],'Comprar pan');
-        $this->assertEquals($mappedTask['description'],'bla bla bla');
+        $this->assertEquals($mappedTask['name'],'Comprar pa');
+        $this->assertEquals($mappedTask['description'],'Bla bla bla');
         $this->assertEquals($mappedTask['completed'],false);
         $this->assertEquals($mappedTask['user_id'],$user->id);
         $this->assertEquals($mappedTask['user_name'],$user->name);
@@ -210,12 +190,15 @@ use RefreshDatabase;
         $this->assertNotNull($mappedTask['updated_at_human']);
         $this->assertNotNull($mappedTask['updated_at_timestamp']);
         $this->assertEquals($mappedTask['user_gravatar'],'https://www.gravatar.com/avatar/'.md5('pepepardo@jeans.com'));
-        $this->assertEquals($mappedTask['full_search'],'1 Comprar pan bla bla bla Pendiente Pepe Pardo Jeans pepepardo@jeans.com');
+        $this->assertEquals($mappedTask['full_search'],'1 Comprar pa Bla bla bla Pendiente Pepe Pardo Jeans pepepardo@jeans.com');
 
-        dd($mappedTask['tags'],[0]);
-        $this->assertEquals($mappedTask['tags'],[]); //TODO
-        $this->assertEquals($mappedTask['tags'],[]); //TODO
-        $this->assertEquals($mappedTask['tags'],[]); //TODO
+
+        $this->assertEquals($mappedTask['tags'][0]->name,'Tag1');
+        $this->assertEquals($mappedTask['tags'][0]->color,'blue');
+        $this->assertEquals($mappedTask['tags'][0]->description,'bla bla bla');
+        $this->assertEquals($mappedTask['tags'][1]->name,'Tag2');
+        $this->assertEquals($mappedTask['tags'][1]->color,'red');
+        $this->assertEquals($mappedTask['tags'][1]->description,'Jorl Jorl');
 
 
         //TODO fullsearch
