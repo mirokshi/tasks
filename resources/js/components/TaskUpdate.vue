@@ -1,8 +1,8 @@
 <template>
     <span>
-        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition"
+        <v-dialog v-model="dialog"
                   @keydown.esc="dialog=false">
-            <v-toolbar color="blue darken-3" class="white--text">
+            <v-toolbar color="grey darken-3" class="white--text">
                 <v-btn flat icon class="white--text" @click="dialog=false">
                     <v-icon class="mr-1">close</v-icon>
                 </v-btn>

@@ -17,16 +17,6 @@
 
         <user-select :item-value="null" v-model="user" :users="dataUsers" label="Usuari"></user-select>
 
-        <!--<user-select v-model="variable"></user-select>-->
-
-        <!--<user-select :value="variable" @input="this.variable = $event.target.value"></user-select>-->
-        <!--<user-select v-bind:value="variable" v-on:input=""></user-select>-->
-
-        <!--v-model equivalent for <user-select v-model="user_id" ..> -->
-        <!--<user-select-->
-        <!--v-bind:value="user_id"-->
-        <!--v-on:input="user_id = $event.target.value"-->
-        <!--&gt;-->
         <div class="text-xs-center">
             <v-btn @click="$emit('close')">
                 <v-icon class="mr-1">exit_to_app</v-icon>
@@ -41,16 +31,17 @@
 </template>
 
 <script>
+
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 import UserSelect from './UserSelect'
-export default {
 
-  name: 'TaskFormCreate',
+export default {
   mixins: [validationMixin],
   validations: {
     name: { required }
   },
+  name: 'TaskFormCreate',
   components: {
     'user-select': UserSelect
   },
@@ -77,8 +68,9 @@ export default {
   computed: {
     nameErrors () {
       const errors = []
-      if (!this.$v.name.$dirty) return errors
-      !this.$v.name.required && errors.push('El camp name és obligatori.')
+      if (!this.$v.name.$dirty) {
+        return errors
+      } else { !this.$v.name.required && errors.push('El camp name és obligatori.') }
       return errors
     }
   },
@@ -120,3 +112,4 @@ export default {
     this.selectLoggedUser()
   }
 }
+</script>

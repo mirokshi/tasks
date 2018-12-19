@@ -50,6 +50,7 @@
                 >
                     Get Started
                 </v-btn>
+                <div class="subheading mb-3 text-xs-center"> Mode: {{ config('app.env') }}</div>
             </v-layout>
         </v-parallax>
     </section>

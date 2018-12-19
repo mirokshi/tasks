@@ -1,6 +1,6 @@
 <template>
     <span>
-        <v-toolbar color="blue darken-3">
+        <v-toolbar color="grey darken-3">
             <v-menu>
                 <v-btn slot="activator" icon dark>
                     <v-icon>more_vert</v-icon>
@@ -82,7 +82,6 @@
                             <toggle :value="task.completed" uri="/api/v1/completed_task" active-text="Completada" unactive-text="Pendent" :resource="task"></toggle>
                         </td>
                         <td>
-                            TODO TAGS
                             <tasks-tags :task="task" :tags="tags"></tasks-tags>
                         </td>
                         <td>
@@ -92,7 +91,7 @@
                             <span :title="task.updated_at_formatted">{{ task.updated_at_human}}</span>
                         </td>
                         <td>
-                            <task-show :task="task"></task-show>
+                            <task-show  :users="users" :task="task"></task-show>
                             <task-update :users="users" :task="task" @updated="updateTask" :uri="uri"></task-update>
                             <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
                         </td>
@@ -207,14 +206,6 @@ export default {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
     },
     updateTask (task) {
-      // TODO
-      // No tinc collons -> Si algú té ganes de jugar
-      // this.dataTasks[this.dataTasks.indexOf(task)] = task
-      // const foundTask = this.dataTasks.find((t) => {
-      //   return t.id === task.id
-      // })
-      // console.log(foundTask)
-      // this.dataTasks[foundTask] = task
       this.refresh()
     },
     refresh () {
@@ -222,7 +213,7 @@ export default {
       window.axios.get(this.uri).then(response => {
         this.dataTasks = response.data
         this.loading = false
-        this.$snackbar.showMessage('Tasques actualitzades correctament')
+        this.$snackbar.showMessage('Tareas actualizadas correctamente')
       }).catch(error => {
         console.log(error)
         this.loading = false

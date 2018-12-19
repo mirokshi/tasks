@@ -1,18 +1,18 @@
 <template>
     <span>
-        <tasks-list :users="users" :uri="uri" :tasks="dataTasks"></tasks-list>
-        <task-create :users="users" :uri="uri" @created="add" ></task-create>
+        <tasks-list :users="users" :uri="uri" :tasks="dataTasks" :tags="tags"></tasks-list>
+        <tasks-create :users="users" :uri="uri" @created="add" ></tasks-create>
     </span>
 </template>
 
 <script>
-import TaskCreate from './TaskCreate'
+import TasksCreate from './TasksCreate'
 import TasksList from './TasksList'
 export default {
   name: 'Tasques',
   components: {
     'tasks-list': TasksList,
-    'task-create': TaskCreate
+    'tasks-create': TasksCreate
   },
   data () {
     return {

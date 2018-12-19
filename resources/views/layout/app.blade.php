@@ -140,7 +140,7 @@
             <v-toolbar-title>Application</v-toolbar-title>
             <v-spacer></v-spacer>
             <span v-role="'SuperAdmin'"><git-info></git-info></span>
-            <p class="mr-3 font-weight-light">{{ Auth::user()->email }}</p>
+
             <v-avatar @click.stop="drawerRight = !drawerRight" title="{{ Auth::user()->name }} ( {{ Auth::user()->email }} )">
                 <img src="https://www.gravatar.com/avatar/{{md5(Auth::user()-> email)}}" alt="avatar">
             </v-avatar>
