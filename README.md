@@ -97,5 +97,7 @@ http://php.net/manual/es/function.implode.php
  
  
  ayer tu madre me visito
+ desnuda
+ y caliente
  
  
