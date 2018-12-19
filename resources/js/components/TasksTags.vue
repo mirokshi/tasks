@@ -16,14 +16,14 @@
                     >
                         <template
                             slot="selection"
-                            slot-scope="{ data: tag }"
+                            slot-scope="data"
                         >
                             <v-chip
                                 :selected="data.selected"
                                 :disabled="data.disabled"
-                                :key="JSON.stringify(data.item.name)"
+                                :key="JSON.stringify(data.item)"
                                 class="v-chip--select-multi"
-                                @input="data.parent.selectItem(data.item.name)"
+                                @input="data.parent.selectItem(data.item)"
                             >
                                 {{ data.item.name }}
                             </v-chip>
@@ -43,11 +43,11 @@
 </template>
 <script>
 export default {
-  name: 'TasksTag',
+  name: 'TasksTags',
   data () {
     return {
       dialog: false,
-      selectedTags: {}
+      selectedTags: []
     }
   },
   props: {
@@ -64,7 +64,7 @@ export default {
     removeTag () {
       // TODO ASYNC PRIMER EXECUTAR UN CONFIRM
       console.log('TODO REMOVE TAG')
-      window.axios.delete('/api/v1/tasks/' + this.task.id + '/tag/' + this.tag).then(response => {
+      window.axios.delete('api/v1/tasks/' + this.task.id + '/tag/' + this.tag).then(response => {
         this.$snackbar.showMessage('Etiqueta eliminada correctament')
       }).catch(error => {
         this.$snackbar.showError(error)
@@ -73,7 +73,7 @@ export default {
     addTag () {
       console.log('TODO ADD TAG')
       let tag = {}
-      window.axios.post('/api/v1/tasks/' + this.task.id + '/tag', tag).then(response => {
+      window.axios.post('/api/v1/tasks/' + this.task.id + '/tag/', tag).then(response => {
         this.$snackbar.showMessage('Etiqueta afegida correctament')
       }).catch(error => {
         this.$snackbar.showError(error)
