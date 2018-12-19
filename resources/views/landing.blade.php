@@ -4,7 +4,7 @@
 @endsection
 
 @section('content')
-    <v-app light  class="grey darken-4 white--text">
+    <v-app light  class="blue-grey lighten-5 white--text">
 <v-toolbar class="grey darken-4 white--text">
     <v-toolbar-title> Homepage Tasks</v-toolbar-title>
     <v-spacer></v-spacer>
@@ -42,14 +42,14 @@
                     justify-center
             >
                 <h1 class="white--text mb-2 display-1 text-xs-center">Tasks</h1>
-                <v-btn
-                        class="indigo darken-4 mt-5"
-                        dark
-                        large
-                        href="/home"
-                >
-                    Get Started
+
+                <div>
+                <v-btn href="/home" class="black white--text" icon fab >GO!</v-btn>
+                <v-btn href="https://github.com/mirokshi/tasks" class="black white--text" icon fab >
+                <v-icon>fab fa-github</v-icon>
                 </v-btn>
+                </div>
+
                 <div class="subheading mb-3 text-xs-center"> Mode: {{ config('app.env') }}</div>
             </v-layout>
         </v-parallax>

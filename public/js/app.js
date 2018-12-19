@@ -72039,8 +72039,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   name: 'App',
   data: function data() {
     return {
-      drawer: null,
-      drawerRight: null,
+      drawer: false,
+      drawerRight: false,
       items: [{ icon: 'home', text: 'Welcome', url: '/' }, {
         icon: 'keyboard_arrow_up',
         'icon-alt': 'keyboard_arrow_down',
