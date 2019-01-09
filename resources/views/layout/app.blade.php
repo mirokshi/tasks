@@ -10,6 +10,8 @@
     <meta name="git" content="{{ git() }}">
 
     <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#317EFB"/>
+
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 

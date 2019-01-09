@@ -26629,7 +26629,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 // instalacion vuetify
 window.Vue = __WEBPACK_IMPORTED_MODULE_0_vue___default.a;
-window.Vue.use(__WEBPACK_IMPORTED_MODULE_1_vuetify___default.a);
+window.Vuetify = __WEBPACK_IMPORTED_MODULE_1_vuetify___default.a;
+
+var PRIMARY_COLOR_KEY = 'primary_color_key';
+
+var primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#035388';
+
+// window.Vue.use(Vuetify)
+window.Vue.use(__WEBPACK_IMPORTED_MODULE_1_vuetify___default.a, {
+  theme: {
+    primary: {
+      base: primaryColor
+    }
+  }
+});
+
 window.Vue.use(__WEBPACK_IMPORTED_MODULE_15__plugins_permissions__["a" /* default */]);
 window.Vue.use(__WEBPACK_IMPORTED_MODULE_16__plugins_snackbar__["a" /* default */]);
 window.Vue.use(__WEBPACK_IMPORTED_MODULE_17__plugins_confirm__["a" /* default */]);
@@ -79142,6 +79156,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -79271,6 +79286,10 @@ var render = function() {
         "v-card-actions",
         [
           _c("v-spacer"),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { href: "/auth/facebook" } }, [
+            _vm._v("Login con Facebook")
+          ]),
           _vm._v(" "),
           _c(
             "v-btn",
