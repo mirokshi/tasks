@@ -21,7 +21,21 @@ import GitInfo from './components/git/GitInfoComponent'
 
 // instalacion vuetify
 window.Vue = Vue
-window.Vue.use(Vuetify)
+window.Vuetify = Vuetify
+
+const PRIMARY_COLOR_KEY = 'primary_color_key'
+
+const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#035388'
+
+// window.Vue.use(Vuetify)
+window.Vue.use(Vuetify, {
+  theme: {
+    primary: {
+      base: primaryColor
+    }
+  }
+})
+
 window.Vue.use(permissions)
 window.Vue.use(snackbar)
 window.Vue.use(confirm)
@@ -40,7 +54,6 @@ window.Vue.component('user-list', UserList)
 window.Vue.component('user-select', UserSelect)
 window.Vue.component('impersonate', Impersonate)
 window.Vue.component('git-info', GitInfo)
-
 
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)

@@ -28,6 +28,9 @@ Route::get('/', function () {
     return view('landing');
 });
 
+Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+
 //TDD -> TEST DRIVEN DEVELOPMENT
 
 //MIDDLEWARE
