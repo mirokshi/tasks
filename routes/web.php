@@ -12,6 +12,7 @@
 */
 
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\LoggedUserTasksController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TasksController;
@@ -28,8 +29,10 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('auth/facebook', 'Auth\LoginController@redirectToProvider');
-Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+//Login with Social's Network
+Route::get('auth/{provider}','\\'.LoginController::class.'@redirectToProvider');
+Route::get('/auth/{provider}/callback', '\\'. LoginController::class . '@handleProviderCallback');
+
 
 //TDD -> TEST DRIVEN DEVELOPMENT
 
