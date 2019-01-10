@@ -13,7 +13,10 @@
 
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LoggedUserPhotoController;
 use App\Http\Controllers\LoggedUserTasksController;
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\TasquesController;
@@ -85,6 +88,15 @@ Route::middleware(['auth'])->group(function() {
 
     //Tags
     Route::get('/tags','\\'. TagsController::class . '@index');
+
+    //Profile
+    Route::get('/profile', '\\'. ProfileController::class . '@show');
+
+    //Photo
+    Route::post('/photo', '\\'. PhotoController::class . '@store');
+
+    //LoggedUserPhoto
+    Route::get('/user/photo', '\\'. LoggedUserPhotoController::class . '@show');
 });
 
 //WELCOME
