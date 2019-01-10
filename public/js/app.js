@@ -79157,6 +79157,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -79288,7 +79289,11 @@ var render = function() {
           _c("v-spacer"),
           _vm._v(" "),
           _c("v-btn", { attrs: { href: "/auth/facebook" } }, [
-            _vm._v("Login con Facebook")
+            _vm._v(" Facebook")
+          ]),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { href: "/auth/facebook" } }, [
+            _vm._v("GitHub")
           ]),
           _vm._v(" "),
           _c(
