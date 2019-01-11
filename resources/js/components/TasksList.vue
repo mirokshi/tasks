@@ -28,7 +28,7 @@
                 <v-layout row wrap>
                     <v-flex lg3 class="pr-2">
                         <v-select
-                            label="Filtres"
+                            label="Filtros"
                             :items="filters"
                             v-model="filter"
                             item-text="name"

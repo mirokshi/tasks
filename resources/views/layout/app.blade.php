@@ -8,8 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="user" content="{{ logged_user() }}">
     <meta name="git" content="{{ git() }}">
-
     <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="img/icon.ico">
     <meta name="theme-color" content="#317EFB"/>
 
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
