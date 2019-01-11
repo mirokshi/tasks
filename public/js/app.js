@@ -80916,7 +80916,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       colorPrincipal: window.localStorage.getItem('PRIMARY_COLOR_KEY'),
-      colorSecundari: window.localStorage.getItem('SECONDARY_COLOR_KEY')
+      colorSecundario: window.localStorage.getItem('SECONDARY_COLOR_KEY')
     };
   },
 
@@ -80924,8 +80924,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     colorPrincipal: function colorPrincipal() {
       window.localStorage.setItem('PRIMARY_COLOR_KEY', this.colorPrincipal);
     },
-    colorSecundari: function colorSecundari() {
-      window.localStorage.setItem('SECONDARY_COLOR_KEY', this.colorSecundari);
+    colorSecundario: function colorSecundario() {
+      window.localStorage.setItem('SECONDARY_COLOR_KEY', this.colorSecundario);
     }
   }
 });
@@ -80996,31 +80996,31 @@ var render = function() {
         _c("h4", [_vm._v("Tema")])
       ]),
       _vm._v(" "),
-      _c(
-        "v-layout",
-        [
-          _c("swatches", {
-            model: {
-              value: _vm.colorPrincipal,
-              callback: function($$v) {
-                _vm.colorPrincipal = $$v
-              },
-              expression: "colorPrincipal"
-            }
-          }),
-          _vm._v(" "),
-          _c("swatches", {
-            model: {
-              value: _vm.colorSecundari,
-              callback: function($$v) {
-                _vm.colorSecundari = $$v
-              },
-              expression: "colorSecundari"
-            }
-          })
-        ],
-        1
-      )
+      _c("p", [_vm._v("Color principal")]),
+      _vm._v(" "),
+      _c("swatches", {
+        attrs: { inline: "" },
+        model: {
+          value: _vm.colorPrincipal,
+          callback: function($$v) {
+            _vm.colorPrincipal = $$v
+          },
+          expression: "colorPrincipal"
+        }
+      }),
+      _vm._v(" "),
+      _c("p", [_vm._v("Color secundario")]),
+      _vm._v(" "),
+      _c("swatches", {
+        attrs: { inline: "" },
+        model: {
+          value: _vm.colorSecundario,
+          callback: function($$v) {
+            _vm.colorSecundario = $$v
+          },
+          expression: "colorSecundario"
+        }
+      })
     ],
     1
   )
