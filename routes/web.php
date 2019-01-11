@@ -33,7 +33,7 @@ Route::get('/', function () {
 });
 
 //Login with Social's Network
-Route::get('auth/{provider}','\\'.LoginController::class.'@redirectToProvider');
+Route::get('/auth/{provider}','\\'.LoginController::class.'@redirectToProvider');
 Route::get('/auth/{provider}/callback', '\\'. LoginController::class . '@handleProviderCallback');
 
 

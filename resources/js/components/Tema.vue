@@ -1,11 +1,11 @@
 <template>
     <v-card>
         <v-card-title class="grey darken-3 white--text"><h4>Tema</h4></v-card-title>
-        <v-layout>
-            
-            <swatches v-model="colorPrincipal"></swatches>
-         <swatches v-model="colorSecundari"></swatches>
-        </v-layout>
+            <p>Color principal</p>
+            <swatches v-model="colorPrincipal" inline></swatches>
+            <p>Color secundario</p>
+         <swatches v-model="colorSecundario" inline></swatches>
+
     </v-card>
 </template>
 
@@ -19,15 +19,15 @@ export default {
   data () {
     return {
       colorPrincipal: window.localStorage.getItem('PRIMARY_COLOR_KEY'),
-      colorSecundari: window.localStorage.getItem('SECONDARY_COLOR_KEY')
+      colorSecundario: window.localStorage.getItem('SECONDARY_COLOR_KEY')
     }
   },
   watch: {
     colorPrincipal () {
       window.localStorage.setItem('PRIMARY_COLOR_KEY', this.colorPrincipal)
     },
-    colorSecundari () {
-      window.localStorage.setItem('SECONDARY_COLOR_KEY', this.colorSecundari)
+    colorSecundario () {
+      window.localStorage.setItem('SECONDARY_COLOR_KEY', this.colorSecundario)
     }
   }
 }

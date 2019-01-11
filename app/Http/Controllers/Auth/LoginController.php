@@ -62,12 +62,14 @@ class LoginController extends Controller
     {
         try {
             $user = Socialite::driver($provider)->user();
+            dd($provider);
         } catch (Exception $e) {
             return Redirect::to('auth/'.$provider);
         }
         $authUser = $this->findOrCreateUser($user);
 
         $authUser->assignRole('Tasks');
+
         Auth::login($authUser, true);
 
         return Redirect::to('home');
@@ -77,18 +79,18 @@ class LoginController extends Controller
     /**
      * Return user if exists; create and return if doesn't
      *
-     * @param $githubUser
+     * @param $user
      * @return User
      */
-    private function findOrCreateUser($githubUser)
+    private function findOrCreateUser($user)
     {
-        if ($authUser = User::where('email', $githubUser->email)->first()) {
+        if ($authUser = User::where('email', $user->email)->first()) {
             return $authUser;
         }
 
         return User::create([
-            'name' => $githubUser->name,
-            'email' => $githubUser->email,
+            'name' => $user->name,
+            'email' => $user->email,
             'password' => str_random()
         ]);
     }
