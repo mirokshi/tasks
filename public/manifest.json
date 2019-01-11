@@ -1,11 +1,11 @@
 {
-    "name": "Tasks",
+    "name": "Application Tasks",
     "short_name": "Tasks",
     "icons": [
         {
-            "src": "img/mario.png",
-            "sizes": "144 × 144",
-            "type": "image/png"
+            "src": "img/icon.ico",
+            "sizes": "256 × 256",
+            "type": "image/ico"
         }
     ],
     "start_url": "/",

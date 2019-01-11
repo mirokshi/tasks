@@ -161,14 +161,14 @@
             </v-avatar>
             <v-form action="/logout" method="POST">
             @csrf
-                <v-btn color="transparent" type="submit"><v-icon>exit_to_app</v-icon></v-btn>
+                <v-btn color="transparent" icon type="submit"><v-icon>exit_to_app</v-icon></v-btn>
             </v-form>
-            <v-btn href="/"><v-icon>home</v-icon></v-btn>
+            <v-btn  color="transparent" icon href="/"><v-icon>home</v-icon></v-btn>
         </v-toolbar>
         <v-content>
             @yield('content')
         </v-content>
-        <v-footer color="grey darken-4" app>
+        <v-footer color="primary" app>
             <span class="white--text pl-3">&copy; 2018 Rojas Diaz Mirokshi</span>
         </v-footer>
     </v-app>
