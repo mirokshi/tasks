@@ -8,8 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="user" content="{{ logged_user() }}">
     <meta name="git" content="{{ git() }}">
-
     <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="img/icon.ico">
     <meta name="theme-color" content="#317EFB"/>
 
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
@@ -21,8 +21,8 @@
         [v-cloak]::before {
             content: " ";
             display: block;
-            width: 16px;
-            height: 16px;
+            width: 200px;
+            height: 200px;
             background-image: url('data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==');
         }
     </style>
@@ -161,14 +161,14 @@
             </v-avatar>
             <v-form action="/logout" method="POST">
             @csrf
-                <v-btn color="transparent" type="submit"><v-icon>exit_to_app</v-icon></v-btn>
+                <v-btn color="transparent" icon type="submit"><v-icon>exit_to_app</v-icon></v-btn>
             </v-form>
-            <v-btn href="/"><v-icon>home</v-icon></v-btn>
+            <v-btn  color="transparent" icon href="/"><v-icon>home</v-icon></v-btn>
         </v-toolbar>
         <v-content>
             @yield('content')
         </v-content>
-        <v-footer color="grey darken-4" app>
+        <v-footer color="primary" app>
             <span class="white--text pl-3">&copy; 2018 Rojas Diaz Mirokshi</span>
         </v-footer>
     </v-app>

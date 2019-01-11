@@ -5,12 +5,12 @@
 
 @section('content')
     <v-app light  class="blue-grey lighten-5 white--text">
-<v-toolbar class="grey darken-4 white--text">
+<v-toolbar class="primary white--text">
     <v-toolbar-title> Homepage Tasks</v-toolbar-title>
     <v-spacer></v-spacer>
     @if(empty(Auth::user()->email))
-        <v-btn href="login" class="indigo darken-4 white--text"> LOGIN  </v-btn>
-        <v-btn href="register" class="indigo darken-4 white--text"> REGISTER</v-btn>
+        <v-btn href="login" class="secondary white--text"> LOGIN  </v-btn>
+        <v-btn href="register" class="secondary white--text"> REGISTER</v-btn>
 
         {{--<v-btn @click="loginForm = !loginForm">LOGIN</v-btn>--}}
         {{--<v-btn @click="registerForm = !registerForm">REGISTER</v-btn>--}}
@@ -197,7 +197,7 @@
         </v-container>
     </section>
 
-    <v-footer class="blue darken-2">
+    <v-footer class="primary">
         <v-layout row wrap align-center>
             <v-flex xs12>
                 <div class="white--text ml-3">

@@ -1,6 +1,6 @@
 <template>
     <span>
-        <v-toolbar color="grey darken-3">
+        <v-toolbar color="primary">
             <v-menu>
                 <v-btn slot="activator" icon dark>
                     <v-icon>more_vert</v-icon>
@@ -26,30 +26,24 @@
         <v-card>
             <v-card-title>
                 <v-layout row wrap>
-                    <v-flex lg3 class="mr-2">
+                    <v-flex lg3 class="pr-2">
                         <v-select
-                            label="Filtres"
+                            label="Filtros"
                             :items="filters"
                             v-model="filter"
                             item-text="name"
                         >
                         </v-select>
                     </v-flex>
-                    <v-flex lg4 class="mr-2">
-                        <v-select
-                            label="User"
-                            :items="dataUsers"
-                            v-model="user"
-                            item-text="name"
-                            clearable>
-                        </v-select>
+                    <v-flex lg4 class="pr-2">
+                        <user-select></user-select>
                     </v-flex>
                     <v-flex lg5>
-                        <v-text-field
-                            append-icon="search"
-                            label="Buscar"
-                            v-model="search"
-                        ></v-text-field>
+                         <v-text-field
+                             append-icon="search"
+                             label="Buscar"
+                             v-model="search"
+                         ></v-text-field>
                     </v-flex>
                 </v-layout>
             </v-card-title>
@@ -140,6 +134,7 @@ import TaskDestroy from './TaskDestroy'
 import TaskUpdate from './TaskUpdate'
 import TaskShow from './TaskShow'
 import TasksTags from './TasksTags'
+import UserSelect from './UserSelect'
 
 export default {
   name: 'TasksList',
@@ -148,7 +143,8 @@ export default {
     'task-destroy': TaskDestroy,
     'task-update': TaskUpdate,
     'task-show': TaskShow,
-    'tasks-tags': TasksTags
+    'tasks-tags': TasksTags,
+    'user-select': UserSelect
   },
   data () {
     return {
@@ -156,11 +152,11 @@ export default {
       loading: false,
       dataTasks: this.tasks,
       dataUsers: this.users,
-      filter: 'Totes',
+      filter: 'Todo',
       filters: [
-        'Totes',
-        'Completades',
-        'Pendents'
+        'Todo',
+        'Completados',
+        'Pendientes'
       ],
       search: '',
       pagination: {
