@@ -140,6 +140,13 @@
                     </v-flex>
                 </v-layout>
             </v-card>
+            <v-card>
+                <v-card-title class="grey darken-3 white--text"><h4>Temas</h4></v-card-title>
+                <v-layout>
+                    {{--TODO--}}
+                    TODO
+                </v-layout>
+            </v-card>
         </v-navigation-drawer>
         <v-toolbar
                 color="primary"
