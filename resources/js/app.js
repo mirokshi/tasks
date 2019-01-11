@@ -18,22 +18,27 @@ import snackbar from './plugins/snackbar'
 import confirm from './plugins/confirm'
 import Impersonate from './components/Impersonate'
 import GitInfo from './components/git/GitInfoComponent'
+import Tema from './components/Tema.vue'
 import Profile from './components/Profile'
-
 
 // instalacion vuetify
 window.Vue = Vue
 window.Vuetify = Vuetify
 
-const PRIMARY_COLOR_KEY = 'primary_color_key'
+const PRIMARY_COLOR_KEY = 'PRIMARY_COLOR_KEY'
+const SECONDARY_COLOR_KEY = 'SECONDARY_COLOR_KEY'
 
 const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#035388'
+const secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#035388'
 
 // window.Vue.use(Vuetify)
 window.Vue.use(Vuetify, {
   theme: {
     primary: {
       base: primaryColor
+    },
+    secondary: {
+      base: secondaryColor
     }
   }
 })
@@ -56,6 +61,7 @@ window.Vue.component('user-list', UserList)
 window.Vue.component('user-select', UserSelect)
 window.Vue.component('impersonate', Impersonate)
 window.Vue.component('git-info', GitInfo)
+window.Vue.component('tema', Tema)
 window.Vue.component('profile', Profile)
 
 // eslint-disable-next-line no-unused-vars
