@@ -62,7 +62,6 @@ class LoginController extends Controller
     {
         try {
             $user = Socialite::driver($provider)->user();
-            dd($provider);
         } catch (Exception $e) {
             return Redirect::to('auth/'.$provider);
         }
