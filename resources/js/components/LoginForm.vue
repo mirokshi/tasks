@@ -31,7 +31,7 @@
         <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn href="/auth/facebook"> Facebook</v-btn>
-            <v-btn href="/auth/facebook">GitHub</v-btn>
+            <v-btn href="/auth/github">GitHub</v-btn>
             <v-btn color="grey darken-4" type="submit" disable="true" class="white--text" :disabled="$v.$invalid">Login</v-btn>
             <v-btn color="grey darken-4"  class="white--text" href="/">Cancel</v-btn>
         </v-card-actions>

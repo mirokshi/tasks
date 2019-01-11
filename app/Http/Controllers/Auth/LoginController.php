@@ -62,12 +62,14 @@ class LoginController extends Controller
     {
         try {
             $user = Socialite::driver($provider)->user();
+            dd($provider);
         } catch (Exception $e) {
             return Redirect::to('auth/'.$provider);
         }
         $authUser = $this->findOrCreateUser($user);
 
         $authUser->assignRole('Tasks');
+
         Auth::login($authUser, true);
 
         return Redirect::to('home');
