@@ -3,14 +3,39 @@
     "short_name": "Tasks",
     "icons": [
         {
-            "src": "img/icon.ico",
-            "sizes": "256 × 256",
+            "src": "img/appIcon/icon48-48.png",
+            "sizes": "48×48",
+            "type": "image/png"
+        },
+        {
+            "src": "img/appIcon/icon72-72.png",
+            "sizes": "72×72",
+            "type": "image/png"
+        },
+        {
+            "src": "img/appIcon/icon96-96.png",
+            "sizes": "96×96",
+            "type": "image/png"
+        },
+        {
+            "src": "img/appIcon/icon144-144.png",
+            "sizes": "144×144",
+            "type": "image/png"
+        },
+        {
+            "src": "img/appIcon/icon192-192.png",
+            "sizes": "192×192",
+            "type": "image/png"
+        },
+        {
+            "src": "img/appIcon/icon512-512.png",
+            "sizes": "512×512",
             "type": "image/ico"
         }
     ],
     "start_url": "/",
     "display": "standalone",
     "background_color": "#317EFB",
-    "theme_color": "#2F3BA2"
+    "theme_color": "primary"
 }
 
