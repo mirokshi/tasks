@@ -20,6 +20,10 @@ import Impersonate from './components/Impersonate'
 import GitInfo from './components/git/GitInfoComponent'
 import Tema from './components/Tema.vue'
 import Profile from './components/Profile'
+// ChangeLog
+import Changelog from './components/changelog/ChangelogComponent.vue'
+import VueTimeago from 'vue-timeago'
+import TreeView from 'vue-json-tree-view'
 
 // instalacion vuetify
 window.Vue = Vue
@@ -30,6 +34,15 @@ const SECONDARY_COLOR_KEY = 'SECONDARY_COLOR_KEY'
 
 const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#035388'
 const secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#035388'
+
+window.Vue.use(VueTimeago, {
+  locale: 'es', // Default locale
+  locales: {
+    'es': require('date-fns/locale/es')
+  }
+})
+
+window.Vue.use(TreeView)
 
 // window.Vue.use(Vuetify)
 window.Vue.use(Vuetify, {
@@ -63,6 +76,7 @@ window.Vue.component('impersonate', Impersonate)
 window.Vue.component('git-info', GitInfo)
 window.Vue.component('tema', Tema)
 window.Vue.component('profile', Profile)
-
+// Changelog
+window.Vue.component('changelog', Changelog)
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)

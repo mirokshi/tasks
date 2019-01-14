@@ -1,31 +1,29 @@
 <template>
     <v-snackbar :timeout="timeout" :color="color" v-model="show">
-        {{message }}
-        <v-btn dark flat @click="show=false" >X</v-btn>
+        {{ message }}
+        <v-btn dark flat @click="show=false">Tancar</v-btn>
     </v-snackbar>
 </template>
 
 <script>
-
-
+import EventBus from '../../eventBus'
 export default {
   data () {
     return {
-      message: '',
+      message: 'Prova',
       timeout: 3000,
       color: 'success',
       show: false
     }
   },
   methods: {
-    // SNACKNBAR
     showMessage (message) {
       this.message = message
       this.color = 'success'
       this.show = true
     },
     showError (error) {
-      this.message = error.message
+      this.message = error
       this.color = 'error'
       this.show = true
     }
@@ -34,17 +32,12 @@ export default {
     EventBus.$on('showSnackbar', () => {
       this.show = true
     })
-    EventBus.$on('showError', () => {
-      this.showError()
+    EventBus.$on('showError', (error) => {
+      this.showError(error)
     })
-    EventBus.$on('showMessage', () => {
-      this.showMessage()
+    EventBus.$on('showMessage', (message) => {
+      this.showMessage(message)
     })
   }
 }
-
 </script>
-
-<style scoped>
-
-</style>
