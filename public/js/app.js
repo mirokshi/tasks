@@ -75349,7 +75349,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   data: function data() {
     return {
-      user: '',
+      user: null,
       loading: false,
       dataTasks: this.tasks,
       dataUsers: this.users,
@@ -77809,7 +77809,7 @@ var render = function() {
     [
       _c(
         "v-toolbar",
-        { attrs: { color: "primary" } },
+        { attrs: { color: "secondary" } },
         [
           _c(
             "v-menu",
@@ -77908,7 +77908,18 @@ var render = function() {
                   _c(
                     "v-flex",
                     { staticClass: "pr-2", attrs: { lg4: "" } },
-                    [_c("user-select")],
+                    [
+                      _c("user-select", {
+                        attrs: { users: _vm.dataUsers },
+                        model: {
+                          value: _vm.user,
+                          callback: function($$v) {
+                            _vm.user = $$v
+                          },
+                          expression: "user"
+                        }
+                      })
+                    ],
                     1
                   ),
                   _vm._v(" "),
@@ -79187,7 +79198,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-toolbar",
-        { attrs: { color: "grey darken-1" } },
+        { attrs: { color: "secondary" } },
         [
           _c("v-toolbar-title", { staticClass: "white--text" }, [
             _vm._v("Tags " + _vm._s(_vm.total))
@@ -84193,7 +84204,7 @@ var render = function() {
     [
       _c(
         "v-toolbar",
-        { attrs: { color: "blue darken-3" } },
+        { attrs: { color: "secondary" } },
         [
           _c(
             "v-menu",
