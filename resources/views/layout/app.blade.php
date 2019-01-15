@@ -9,11 +9,9 @@
     <meta name="user" content="{{ logged_user() }}">
     <meta name="git" content="{{ git() }}">
     <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="img/icon.ico">
+    <link rel="icon" href="img/icon.png">
     <meta name="theme-color" content="#317EFB"/>
-
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
     <title>@yield('title','Put your title here')</title>
     <style>
@@ -54,7 +52,8 @@
                             :prepend-icon="item.model ? item.icon : item['icon-alt']"
                             append-icon=""
                     >
-                        <v-list-tile slot="activator" :href="item.url">
+                        <v-list-tile slot="activator"  :href="item.url"
+                        >
                             <v-list-tile-content>
                                 <v-list-tile-title>
                                     @{{ item.text }}
@@ -62,6 +61,7 @@
                             </v-list-tile-content>
                         </v-list-tile>
                         <v-list-tile
+
                                 v-for="(child, i) in item.children"
                                 :key="i"
                                 :href="child.url"
