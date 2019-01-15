@@ -1,4 +1,6 @@
 {
+    "name": "Application Tasks",
+    "short_name": "Tasks",
     "theme_color": "#2196f3",
     "background_color": "#2196f3",
     "display": "standalone",
