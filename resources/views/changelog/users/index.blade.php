@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @php
 $channel = 'App.Log.User.' . studly_case($user->id);

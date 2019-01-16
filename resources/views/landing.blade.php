@@ -1,4 +1,4 @@
-@extends('layout.landing')
+@extends('layouts.landing')
 @section('title')
     Homepage Tasks
 @endsection
