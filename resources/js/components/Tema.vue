@@ -2,10 +2,8 @@
     <v-card>
         <v-card-title class="grey darken-3 white--text"><h4>Tema</h4></v-card-title>
             <p>Color principal</p>
-            <swatches v-model="colorPrincipal" inline></swatches>
-            <p>Color secundario</p>
-         <swatches v-model="colorSecundario" inline></swatches>
-
+           <swatches v-model="color" inline></swatches>
+        <v-btn>Aplicar</v-btn>
     </v-card>
 </template>
 
@@ -18,16 +16,12 @@ export default {
   components: { Swatches },
   data () {
     return {
-      colorPrincipal: window.localStorage.getItem('PRIMARY_COLOR_KEY'),
-      colorSecundario: window.localStorage.getItem('SECONDARY_COLOR_KEY')
+      color: '#2680C2'
     }
   },
   watch: {
-    colorPrincipal () {
-      window.localStorage.setItem('PRIMARY_COLOR_KEY', this.colorPrincipal)
-    },
-    colorSecundario () {
-      window.localStorage.setItem('SECONDARY_COLOR_KEY', this.colorSecundario)
+    color: function (newColor) {
+      window.localStorage.setItem('PRIMARY_COLOR_KEY', newColor)
     }
   }
 }
