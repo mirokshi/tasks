@@ -12,10 +12,10 @@ use Tests\TestCase;
 class LoggedUserTasksControllerTest extends TestCase
 {
  use RefreshDatabase, CanLogin;
-
-    /**
-     * @test
-     */
+//
+//    /**
+//     * @test
+//     */
     public function can_list_logged_user_tasks()
     {
         $this->markTestSkipped();

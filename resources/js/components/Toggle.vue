@@ -53,6 +53,7 @@ export default {
       }).catch(error => {
         this.loading = false
         this.$snackbar.showError(error)
+
       })
     },
     uncompleteTask () {

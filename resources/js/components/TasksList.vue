@@ -73,7 +73,7 @@
                             </v-avatar>
                         </td>
                         <td>
-                            <toggle :value="task.completed" uri="/api/v1/completed_task" active-text="Completada" unactive-text="Pendent" :resource="task"></toggle>
+                            <toggle :value="task.completed" uri="/api/v1/completed_task" active-text="Completada" unactive-text="Pendiente" :resource="task"></toggle>
                         </td>
                         <td>
                             <tasks-tags :task="task" :tags="tags"></tasks-tags>
