@@ -21,7 +21,8 @@ export default {
           ]
         },
         { icon: 'help', text: 'Contact', url: '/contact' },
-        { icon: 'public', text: 'About', url: '/about' }
+        { icon: 'public', text: 'About', url: '/about' },
+        { icon: 'compare_arrows', text: 'Changelog', url: '/changelog' }
       ]
     }
   }
