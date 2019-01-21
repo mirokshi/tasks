@@ -1,7 +1,7 @@
 @component('mail::message')
-# Introduction
+# Bienvenido a la aplicacion de gestion de tareas
 
-The body of your message.
+:heart_eyes: :anger:
 
 @component('mail::button', ['url' => '/'])
 Button Text

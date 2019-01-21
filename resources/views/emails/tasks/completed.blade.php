@@ -1,12 +1,14 @@
 @component('mail::message')
-# Introduction
+# Tarea Pendiente
 
-The body of your message.
+Se ha marcado com a pendiente la tarea:
+{{--{{ $task->name }}--}}
+
 
 @component('mail::button', ['url' => ''])
 Button Text
 @endcomponent
 
 Thanks,<br>
-{{ config('app.name') }}
+{{ config('tasks.manager_email') }}
 @endcomponent
