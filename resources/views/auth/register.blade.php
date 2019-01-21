@@ -1,4 +1,4 @@
-@extends('layout.login')
+@extends('layouts.login')
 @section('title')
     Tasks  | Register
 @endsection

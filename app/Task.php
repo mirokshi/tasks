@@ -111,4 +111,8 @@ protected $hidden = [
         return "$this->id $this->name $this->description $state $username $useremail";
     }
 
+    public function subject()
+    {
+        return ellipsis('Tarea pendiente (' . $this->id . '): ' . $this->name, 80);
+    }
 }

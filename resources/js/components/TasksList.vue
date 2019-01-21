@@ -1,6 +1,6 @@
 <template>
     <span>
-        <v-toolbar color="primary">
+        <v-toolbar color="secondary">
             <v-menu>
                 <v-btn slot="activator" icon dark>
                     <v-icon>more_vert</v-icon>
@@ -36,7 +36,7 @@
                         </v-select>
                     </v-flex>
                     <v-flex lg4 class="pr-2">
-                        <user-select></user-select>
+                        <user-select v-model="user" :users="dataUsers"></user-select>
                     </v-flex>
                     <v-flex lg5>
                          <v-text-field
@@ -73,7 +73,7 @@
                             </v-avatar>
                         </td>
                         <td>
-                            <toggle :value="task.completed" uri="/api/v1/completed_task" active-text="Completada" unactive-text="Pendent" :resource="task"></toggle>
+                            <toggle :value="task.completed" uri="/api/v1/completed_task" active-text="Completada" unactive-text="Pendiente" :resource="task"></toggle>
                         </td>
                         <td>
                             <tasks-tags :task="task" :tags="tags"></tasks-tags>
@@ -148,7 +148,7 @@ export default {
   },
   data () {
     return {
-      user: '',
+      user: null,
       loading: false,
       dataTasks: this.tasks,
       dataUsers: this.users,

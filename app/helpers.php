@@ -1,5 +1,6 @@
 <?php
 
+use App\Log;
 use App\Tag;
 use App\Task;
 use App\User;
@@ -389,6 +390,11 @@ if (!function_exists('initialize_gates')){
         Gate::define('tags.manage',function ($user){
             return $user->isSuperAdmin() || $user->hasRole('TagsManager');
          })  ;
+
+        // Changelog
+        Gate::define('changelog.list', function ($user) {
+            return $user->hasRole('ChangelogManager');
+        });
     }
 }
 if (!function_exists('pikachusorprendido')){
@@ -518,5 +524,72 @@ if (! function_exists('git_remote_origin_url')) {
 if (!function_exists('create_sample_tags')){
     function create_sample_tasks_with_tags(){
 
+    }
+}
+
+if (! function_exists('sample_logs')) {
+    function sample_logs()
+    {
+        $user1 = factory(User::class)->create();
+        $user2 = factory(User::class)->create();
+
+        $task = Task::create([
+            'name' => 'Comprar pa',
+        ]);
+        $task->assignUser($user1);
+
+        $log1 = Log::create([
+            'text' => 'Ha creat la tasca TODO_LINK_TASCA',
+            'time' => Carbon::now(),
+            'action_type' => 'store',
+            'module_type' => 'Tasks',
+            'loggable_id' => $task->id,
+            'loggable_type' => Task::class,
+            'user_id' => $user1->id,
+            'icon' => 'home',
+            'color' => 'teal'
+        ]);
+        $log2 = Log::create([
+            'text' => 'Ha modificat la tasca TODO_LINK_TASCA',
+            'time' => Carbon::now(),
+            'action_type' => 'update',
+            'module_type' => 'Tasks',
+            'loggable_id' => 1,
+            'loggable_type' => Task::class,
+            'user_id' => $user2->id,
+            'icon' => 'home',
+            'color' => 'teal'
+        ]);
+        $log3 = Log::create([
+            'text' => 'Ha modificat la tasca TODO_LINK_TASCA',
+            'time' => Carbon::now(),
+            'action_type' => 'update',
+            'module_type' => 'Tasks',
+            'loggable_id' => 1,
+            'loggable_type' => Task::class,
+            'user_id' => $user2->id,
+            'icon' => 'home',
+            'color' => 'teal'
+        ]);
+        $log4 = Log::create([
+            'text' => 'BLA BLA BLA',
+            'time' => Carbon::now(),
+            'action_type' => 'update',
+            'module_type' => 'OtherModule',
+            'loggable_id' => 1,
+            'loggable_type' => User::class,
+            'user_id' => $user2->id,
+            'icon' => 'home',
+            'color' => 'teal'
+        ]);
+        return [$log1,$log2,$log3,$log4];
+    }
+
+    if (!function_exists('ellipsis')){
+        function ellipsis($text,$max=50)
+        {
+            $ellipted = strlen($text) > $max ? substr($text,0,$max)."..." : $text;
+            return $ellipted;
+        }
     }
 }

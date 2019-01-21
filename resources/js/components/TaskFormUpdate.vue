@@ -3,7 +3,8 @@
         <v-text-field v-model="name" label="Nom" hint="El nom de la tasca..." placeholder="Nom de la tasca"></v-text-field>
 
         <!--TODO toggle component? -->
-        <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
+        <!--<toggle></toggle>-->
+        <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>b5cd979b1eb4b0
 
         <v-textarea v-model="description" label="Descripció" hint="bla bla bla..."></v-textarea>
 
@@ -23,8 +24,10 @@
 </template>
 
 <script>
+import Toggle from './Toggle'
 export default {
   name: 'TaskFormUpdate',
+  components: { Toggle },
   data () {
     return {
       name: this.task.name,

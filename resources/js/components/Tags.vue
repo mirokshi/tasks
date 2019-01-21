@@ -71,7 +71,7 @@
 
   </v-dialog>
 
-  <v-toolbar color="grey darken-1">
+  <v-toolbar color="secondary">
       <v-toolbar-title class="white--text">Tags {{total}}</v-toolbar-title>
       <v-spacer></v-spacer>
 

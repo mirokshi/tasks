@@ -1,40 +1,40 @@
 <template>
     <v-card
-        v-bind="$attrs"
-        :style="styles"
-        v-on="$listeners"
+            v-bind="$attrs"
+            :style="styles"
+            v-on="$listeners"
     >
         <helper-offset
-            v-if="hasOffset"
-            :inline="inline"
-            :full-width="fullWidth"
-            :offset="offset"
+                v-if="hasOffset"
+                :inline="inline"
+                :full-width="fullWidth"
+                :offset="offset"
         >
             <v-card
-                v-if="!$slots.offset"
-                :color="color"
-                :class="`elevation-${elevation}`"
-                class="v-card--material__header"
-                dark
+                    v-if="!$slots.offset"
+                    :color="color"
+                    :class="`elevation-${elevation}`"
+                    class="v-card--material__header"
+                    dark
             >
                 <slot
-                    v-if="!title && !text"
-                    name="header"
+                        v-if="!title && !text"
+                        name="header"
                 />
                 <span v-else>
           <h4
-              class="title font-weight-light mb-2"
-              v-text="title"
+                  class="title font-weight-light mb-2"
+                  v-text="title"
           />
           <p
-              class="category font-weight-thin"
-              v-text="text"
+                  class="category font-weight-thin"
+                  v-text="text"
           />
         </span>
             </v-card>
             <slot
-                v-else
-                name="offset"
+                    v-else
+                    name="offset"
             />
         </helper-offset>
 
@@ -43,8 +43,8 @@
         </v-card-text>
 
         <v-divider
-            v-if="$slots.actions"
-            class="mx-3"
+                v-if="$slots.actions"
+                class="mx-3"
         />
 
         <v-card-actions v-if="$slots.actions">
@@ -95,9 +95,9 @@ export default {
   computed: {
     hasOffset () {
       return this.$slots.header ||
-                    this.$slots.offset ||
-                    this.title ||
-                    this.text
+          this.$slots.offset ||
+          this.title ||
+          this.text
     },
     styles () {
       if (!this.hasOffset) return null

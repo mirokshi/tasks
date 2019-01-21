@@ -13,6 +13,7 @@
 
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ChangelogController;
 use App\Http\Controllers\LoggedUserPhotoController;
 use App\Http\Controllers\LoggedUserTasksController;
 use App\Http\Controllers\PhotoController;
@@ -97,6 +98,9 @@ Route::middleware(['auth'])->group(function() {
 
     //LoggedUserPhoto
     Route::get('/user/photo', '\\'. LoggedUserPhotoController::class . '@show');
+
+    //Changelog
+    Route::get('/changelog','\\'. ChangelogController::class . '@index');
 });
 
 //WELCOME
