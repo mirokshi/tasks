@@ -72808,7 +72808,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         text: 'Tasks',
         model: true,
         children: [{ icon: 'build', text: 'Tasks  PHP', url: '/tasks' }, { icon: 'build', text: 'Tasks TailWind ', url: '/tasks_vue' }, { icon: 'build', text: 'Tasques ', url: '/tasques' }, { icon: 'build', text: 'Tags ', url: '/tags' }]
-      }, { icon: 'help', text: 'Contact', url: '/contact' }, { icon: 'public', text: 'About', url: '/about' }]
+      }, { icon: 'help', text: 'Contact', url: '/contact' }, { icon: 'public', text: 'About', url: '/about' }, { icon: 'compare_arrows', text: 'Changelog', url: '/changelog' }]
     };
   }
 });
@@ -80491,6 +80491,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.message = error;
       this.color = 'error';
       this.show = true;
+      console.log(error.response);
     }
   },
   mounted: function mounted() {

@@ -1,9 +1,9 @@
 @component('mail::message')
-# Tarea Completada
+# Tarea Pendiente
 
-Se ha marcado como  pendiente la tarea:
+Se ha marcado com a pendiente la tarea:
 {{--{{ $task->name }}--}}
-:anger:
+
 
 @component('mail::button', ['url' => ''])
 Button Text

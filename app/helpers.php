@@ -538,6 +538,7 @@ if (! function_exists('sample_logs')) {
         ]);
         $task->assignUser($user1);
 
+
         $log1 = Log::create([
             'text' => 'Ha creat la tasca TODO_LINK_TASCA',
             'time' => Carbon::now(),

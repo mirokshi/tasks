@@ -26,6 +26,7 @@ export default {
       this.message = error
       this.color = 'error'
       this.show = true
+      console.log(error.response)
     }
   },
   mounted () {

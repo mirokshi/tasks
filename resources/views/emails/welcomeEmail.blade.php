@@ -1,7 +1,6 @@
 @component('mail::message')
-# Introduction
+# Bienvenido a la aplicacion de gestion de tareas
 
-The body of your message.
 
 @component('mail::button', ['url' => '/'])
 Button Text

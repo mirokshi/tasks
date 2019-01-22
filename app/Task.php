@@ -113,6 +113,6 @@ protected $hidden = [
 
     public function subject()
     {
-        return ellipsis('Tarea pendiente (' . $this->id . '): ' . $this->name, 80);
+        return ellipsis('Cambios en la aplicación de Tasks (' . $this->id . '): ' . $this->name, 80);
     }
 }
