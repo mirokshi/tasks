@@ -43,6 +43,8 @@ class TasksController extends Controller
     {
         $task->delete();
         return $task;
+
+
     }
 
     public function update(TaskUpdate $request, Task $task)

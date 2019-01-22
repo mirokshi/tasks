@@ -8,15 +8,16 @@ use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class LogTaskCompletedTest extends TestCase
+class LogTaskDestroyTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
      * @test
      */
-    public function a_task_completed_log_has_been_created()
+    public function a_task_destroy_log_has_been_created()
     {
+
         // 1 Preparar
         $user = factory(User::class)->create();
         $task = Task::create([
@@ -26,20 +27,20 @@ class LogTaskCompletedTest extends TestCase
         // Executar
 //        event(new TaskUncompleted($task));
 
-        $listener = new \App\Listeners\LogTaskCompleted();
-        $listener->handle(new \App\Events\TaskCompleted($task));
+        $listener = new \App\Listeners\SendMailTaskDestroy();
+        $listener->handle(new \App\Events\TaskDestroy($task));
         // 3 ASSERT
         // Test log is inserted
         $log  = Log::find(1);
-        $this->assertEquals($log->text,"Se ha marcado como completada 'Comprar pa'");
-        $this->assertEquals($log->action_type,'Completar');
+        $this->assertEquals($log->text,"Se ha eliminado la tarea 'Comprar pa'");
+        $this->assertEquals($log->action_type,'Eliminar');
         $this->assertEquals($log->module_type,'Tasques');
         $this->assertEquals($log->user_id,$user->id);
-        $this->assertEquals($log->old_value,0);
-        $this->assertEquals($log->new_value,true);
+        $this->assertEquals($log->old_value,$task->name);
+        $this->assertEquals($log->new_value,"");
         $this->assertEquals($log->loggable_id,$task->id);
         $this->assertEquals($log->loggable_type,Task::class);
-        $this->assertEquals($log->icon,'lock');
+        $this->assertEquals($log->icon,'delete_forever');
         $this->assertEquals($log->color,'green');
     }
 }
