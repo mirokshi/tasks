@@ -51,10 +51,10 @@
                 :headers="headers"
                 :items="dataTasks"
                 :search="search"
-                no-results-text="No s'ha trobat cap registre coincident"
-                no-data-text="No hi han dades disponibles"
-                rows-per-page-text="Tasques per pàgina"
-                :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
+                no-results-text="No se ha encontrado ningún registro"
+                no-data-text="No hay datos disponibles"
+                rows-per-page-text="Tareas por pagina"
+                :rows-per-page-items="[5,10,25,50,100,200,{'text':'Todos','value':-1}]"
                 :loading="loading"
                 :pagination.sync="pagination"
                 class="hidden-md-and-down"
@@ -93,14 +93,17 @@
                 </template>
             </v-data-table>
             <v-data-iterator class="hidden-lg-and-up"
-                             :items="dataTasks"
+                             :items="filteredTasks"
                              :search="search"
-                             no-results-text="No s'ha trobat cap registre coincident"
-                             no-data-text="No hi han dades disponibles"
-                             rows-per-page-text="Tasques per pàgina"
-                             :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
+                             no-results-text="No se ha encontrado ninguna coincidencia"
+                             no-data-text="No hay datos disponibles"
+                             rows-per-page-text="Treas por pagina"
+                             :rows-per-page-items="[5,10,25,50,100,{'text':'Todos','value':-1}]"
                              :loading="loading"
                              :pagination.sync="pagination"
+                             content-tag="v-layout"
+                             row
+                             wrap
             >
                 <v-flex
                     slot="item"
@@ -108,20 +111,41 @@
                     xs12
                     sm6
                     md4
+                    lg3
+                    class="pb-2"
                 >
-                    <v-card class="mb-1">
-                        <v-card-title v-text="task.name"></v-card-title>
-                        <v-list dense>
-                            <v-list-tile>
-                                <v-list-tile-content>Completed:</v-list-tile-content>
-                                <v-list-tile-content class="align-end">{{ task.completed }}</v-list-tile-content>
-                            </v-list-tile>
-                            <v-list-tile>
-                                <v-list-tile-content>User:</v-list-tile-content>
-                                <v-list-tile-content class="align-end">{{ task.user_id }}</v-list-tile-content>
-                            </v-list-tile>
-                        </v-list>
-                    </v-card>
+                <v-card
+                    class="mx-auto"
+                    color="primary lighten-5"
+                    dark
+                >
+    <v-card-title>
+      <v-icon
+          large
+          left
+      >
+     assignment
+      </v-icon>
+      <span class="subheading font-weight-light text-uppercase grey--text">{{task.name}}</span>
+    </v-card-title>
+
+    <v-card-actions>
+      <v-list-tile class="grow">
+        <v-list-tile-avatar color="grey darken-3">
+              <img class="elevation-6" v-if="task.user_gravatar" :src="task.user_gravatar" alt="avatar">
+                                <img class="elevation-6" v-else src="https://www.gravatar.com/avatar/" alt="avatar">
+        </v-list-tile-avatar>
+
+        <v-layout
+            align-center
+            justify-end
+        >
+          <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
+          <task-update :users="users" :task="task" @updated="updateTask" :uri="uri"></task-update>
+        </v-layout>
+      </v-list-tile>
+    </v-card-actions>
+  </v-card>
                 </v-flex>
             </v-data-iterator>
         </v-card>

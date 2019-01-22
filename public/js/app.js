@@ -75447,6 +75447,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -78031,9 +78055,9 @@ var render = function() {
                 headers: _vm.headers,
                 items: _vm.dataTasks,
                 search: _vm.search,
-                "no-results-text": "No s'ha trobat cap registre coincident",
-                "no-data-text": "No hi han dades disponibles",
-                "rows-per-page-text": "Tasques per pàgina",
+                "no-results-text": "No se ha encontrado ningún registro",
+                "no-data-text": "No hay datos disponibles",
+                "rows-per-page-text": "Tareas por pagina",
                 "rows-per-page-items": [
                   5,
                   10,
@@ -78041,7 +78065,7 @@ var render = function() {
                   50,
                   100,
                   200,
-                  { text: "Tots", value: -1 }
+                  { text: "Todos", value: -1 }
                 ],
                 loading: _vm.loading,
                 pagination: _vm.pagination
@@ -78175,22 +78199,24 @@ var render = function() {
           _c("v-data-iterator", {
             staticClass: "hidden-lg-and-up",
             attrs: {
-              items: _vm.dataTasks,
+              items: _vm.filteredTasks,
               search: _vm.search,
-              "no-results-text": "No s'ha trobat cap registre coincident",
-              "no-data-text": "No hi han dades disponibles",
-              "rows-per-page-text": "Tasques per pàgina",
+              "no-results-text": "No se ha encontrado ninguna coincidencia",
+              "no-data-text": "No hay datos disponibles",
+              "rows-per-page-text": "Treas por pagina",
               "rows-per-page-items": [
                 5,
                 10,
                 25,
                 50,
                 100,
-                200,
-                { text: "Tots", value: -1 }
+                { text: "Todos", value: -1 }
               ],
               loading: _vm.loading,
-              pagination: _vm.pagination
+              pagination: _vm.pagination,
+              "content-tag": "v-layout",
+              row: "",
+              wrap: ""
             },
             on: {
               "update:pagination": function($event) {
@@ -78204,45 +78230,91 @@ var render = function() {
                   var task = ref.item
                   return _c(
                     "v-flex",
-                    { attrs: { xs12: "", sm6: "", md4: "" } },
+                    {
+                      staticClass: "pb-2",
+                      attrs: { xs12: "", sm6: "", md4: "", lg3: "" }
+                    },
                     [
                       _c(
                         "v-card",
-                        { staticClass: "mb-1" },
+                        {
+                          staticClass: "mx-auto",
+                          attrs: { color: "primary lighten-5", dark: "" }
+                        },
                         [
-                          _c("v-card-title", {
-                            domProps: { textContent: _vm._s(task.name) }
-                          }),
+                          _c(
+                            "v-card-title",
+                            [
+                              _c("v-icon", { attrs: { large: "", left: "" } }, [
+                                _vm._v("\n   assignment\n    ")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "subheading font-weight-light text-uppercase grey--text"
+                                },
+                                [_vm._v(_vm._s(task.name))]
+                              )
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
                           _c(
-                            "v-list",
-                            { attrs: { dense: "" } },
+                            "v-card-actions",
                             [
                               _c(
                                 "v-list-tile",
+                                { staticClass: "grow" },
                                 [
-                                  _c("v-list-tile-content", [
-                                    _vm._v("Completed:")
-                                  ]),
+                                  _c(
+                                    "v-list-tile-avatar",
+                                    { attrs: { color: "grey darken-3" } },
+                                    [
+                                      task.user_gravatar
+                                        ? _c("img", {
+                                            staticClass: "elevation-6",
+                                            attrs: {
+                                              src: task.user_gravatar,
+                                              alt: "avatar"
+                                            }
+                                          })
+                                        : _c("img", {
+                                            staticClass: "elevation-6",
+                                            attrs: {
+                                              src:
+                                                "https://www.gravatar.com/avatar/",
+                                              alt: "avatar"
+                                            }
+                                          })
+                                    ]
+                                  ),
                                   _vm._v(" "),
                                   _c(
-                                    "v-list-tile-content",
-                                    { staticClass: "align-end" },
-                                    [_vm._v(_vm._s(task.completed))]
-                                  )
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-list-tile",
-                                [
-                                  _c("v-list-tile-content", [_vm._v("User:")]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-list-tile-content",
-                                    { staticClass: "align-end" },
-                                    [_vm._v(_vm._s(task.user_id))]
+                                    "v-layout",
+                                    {
+                                      attrs: {
+                                        "align-center": "",
+                                        "justify-end": ""
+                                      }
+                                    },
+                                    [
+                                      _c("task-destroy", {
+                                        attrs: { task: task, uri: _vm.uri },
+                                        on: { removed: _vm.removeTask }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("task-update", {
+                                        attrs: {
+                                          users: _vm.users,
+                                          task: task,
+                                          uri: _vm.uri
+                                        },
+                                        on: { updated: _vm.updateTask }
+                                      })
+                                    ],
+                                    1
                                   )
                                 ],
                                 1
