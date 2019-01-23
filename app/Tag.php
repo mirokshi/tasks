@@ -37,6 +37,17 @@ class Tag extends Model
         ];
     }
 
+    public function addTask($task)
+    {
+        !is_int($task) ?: $task = Task::find($task);
+        $this->tasks()->save($task);
+        return $this;
+    }
 
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class);
+
+    }
 
 }

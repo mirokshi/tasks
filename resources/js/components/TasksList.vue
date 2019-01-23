@@ -93,7 +93,7 @@
                 </template>
             </v-data-table>
             <v-data-iterator class="hidden-lg-and-up"
-                             :items="filteredTasks"
+                             :items="dataTasks"
                              :search="search"
                              no-results-text="No se ha encontrado ninguna coincidencia"
                              no-data-text="No hay datos disponibles"
