@@ -4,9 +4,12 @@
 namespace Tests\Feature\Api;
 
 
+
+use App\Events\TaskDestroy;
 use App\Task;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -85,17 +88,23 @@ class TasksControllerTest extends TestCase
      */
     public function tasks_manager_can_delete_task()
     {
+        $this->withoutExceptionHandling();
         $this->loginAsTaskManager('api');
         $task = factory(Task::class)->create();
 
+        Event::fake();
         $response = $this->json('DELETE','/api/v1/tasks/' . $task->id);
-
         $result = json_decode($response->getContent());
 
         $response->assertSuccessful();
+
         $this->assertEquals($result->name, $task->name);
 
         $this->assertNull(Task::find($task->id));
+
+        Event::assertDispatched(TaskDestroy::class, function ($event) use ($task) {
+            return $event->task->is($task);
+        });
     }
 
     /**

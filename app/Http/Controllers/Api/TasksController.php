@@ -3,7 +3,9 @@
 
 namespace App\Http\Controllers\Api;
 
+
 use App\Http\Controllers\Controller;
+
 use App\Http\Requests\TaskDestroy;
 use App\Http\Requests\TaskIndex;
 use App\Http\Requests\TaskShow;
@@ -42,6 +44,10 @@ class TasksController extends Controller
     public function destroy(TaskDestroy $request, Task $task)
     {
         $task->delete();
+
+        //  HOOK -> EVENT
+        event(new \App\Events\TaskDestroy($task));
+
         return $task;
 
 

@@ -22,6 +22,7 @@ import Tema from './components/Tema.vue'
 import Profile from './components/Profile'
 // ChangeLog
 import Changelog from './components/changelog/ChangelogComponent.vue'
+import Navigation from './components/Navigation'
 import ServiceWorker from './components/ServiceWorker.vue'
 import VueTimeago from 'vue-timeago'
 import TreeView from 'vue-json-tree-view'
@@ -146,6 +147,7 @@ window.Vue.component('tema', Tema)
 window.Vue.component('profile', Profile)
 // Changelog
 window.Vue.component('changelog', Changelog)
+window.Vue.component('navigation', Navigation)
 window.Vue.component('service-worker', ServiceWorker)
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)
