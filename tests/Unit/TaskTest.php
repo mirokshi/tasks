@@ -63,6 +63,28 @@ use RefreshDatabase;
     /**
      * @test
      */
+    public function can_asign_tag_to_task_using_id()
+    {
+        //1 Prepare
+        $task = Task::create([
+            'name' => 'Comprar pan'
+        ]);
+        $tag = Tag::create ([
+            'name' => 'home'
+        ]);
+
+        //2
+        $task->addTag($tag->id);
+        //3
+        $tags = $task->tags;
+
+        $this->assertTrue($tags[0]->is($tag));
+
+    }
+
+    /**
+     * @test
+     */
     public function a_task_can_have_tags()
     {
         //1 Prepare

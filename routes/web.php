@@ -30,7 +30,7 @@ Route::post('register_alt','Auth\RegisterAltController@register');
 
 
 Route::get('/', function () {
-    return view('landing');
+    return view('layouts/landing');
 });
 
 //Login with Social's Network

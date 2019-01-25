@@ -13,18 +13,18 @@
 
         <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
 
-        <v-textarea v-model="description" label="Descripció" hint="Escriu la descripció de la tasca..."></v-textarea>
+        <v-textarea v-model="description" label="Descripción" hint="Escriu la descripció de la tasca..."></v-textarea>
 
         <user-select :item-value="null" v-model="user" :users="dataUsers" label="Usuari"></user-select>
 
         <div class="text-xs-center">
             <v-btn @click="$emit('close')">
                 <v-icon class="mr-1">exit_to_app</v-icon>
-                Cancel·lar
+                CANCELAR
             </v-btn>
             <v-btn color="success" @click="add" :disabled="loading || $v.$invalid" :loading="loading">
                 <v-icon class="mr-1" >save</v-icon>
-                Afegir
+                AÑADIR
             </v-btn>
         </div>
     </v-form>

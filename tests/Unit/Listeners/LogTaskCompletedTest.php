@@ -15,7 +15,7 @@ class LogTaskCompletedTest extends TestCase
     /**
      * @test
      */
-    public function a_task_uncompleted_log_has_been_created()
+    public function a_task_completed_log_has_been_created()
     {
         // 1 Preparar
         $user = factory(User::class)->create();

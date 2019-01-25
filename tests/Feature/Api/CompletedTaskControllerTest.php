@@ -26,7 +26,6 @@ class CompletedTaskControllerTest extends TestCase
      */
     public function can_complete_a_task()
     {
-        $this->withoutExceptionHandling();
         $this->login('api');
         $task= Task::create([
             'name' => 'comprar pa',
@@ -38,6 +37,9 @@ class CompletedTaskControllerTest extends TestCase
         $task = $task->fresh();
         $this->assertEquals($task->completed, true);
 
+        Event::assertDispatched(TaskCompleted::class, function ($event) use ($task) {
+            return $event->task->is($task);
+        });
     }
 
     /**

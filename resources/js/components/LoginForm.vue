@@ -28,12 +28,15 @@
                     @blur="$v.password.$touch()"
             ></v-text-field>
         </v-card-text>
+        <v-divider light></v-divider>
         <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn href="/auth/facebook"> Facebook</v-btn>
-            <v-btn href="/auth/github">GitHub</v-btn>
             <v-btn color="grey darken-4" type="submit" disable="true" class="white--text" :disabled="$v.$invalid">Login</v-btn>
             <v-btn color="grey darken-4"  class="white--text" href="/">Cancel</v-btn>
+            <v-spacer></v-spacer>
+            <p class="subheading font-weight-regular">Iniciar sesión con</p>
+            <a href="/auth/facebook"> Facebook</a>
+            <a href="/auth/github">GitHub</a>
+
         </v-card-actions>
     </v-form>
 </template>
