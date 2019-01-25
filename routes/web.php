@@ -108,6 +108,10 @@ Route::get('/welcome', function (){
     return view('welcome');
 });
 
+Route::get('/prueba_cola',function (){
+ \App\Jobs\SleepJob::dispatch();
+});
+
 
 //Auth::logout();
 
