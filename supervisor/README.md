@@ -1,3 +1,5 @@
+# SUPERVISOR 
+
 PATH 
 ````
 /etc/supervisor/conf.d/tasks.mirokshi.scool.cat.conf
@@ -30,4 +32,32 @@ user=forge
 numprocs=8
 redirect_stderr=true
 stdout_logfile=/home/forge/tasks.mirokshi.scool.cat/storage/logs/worker.log
+````
+
+
+# SUPERVISOR PARA HORIZON
+
+/etc/supervisor/conf.d/horizon-tasks-mirokshi-scool-cat.conf
+
+````
+[program:horizon-tasks-mirokshi-scool-cat]
+process_name=%(program_name)s
+command=php /home/mirokshi/code/mirokshi/tasks/artisan horizon
+autostart=true
+autorestart=true
+user=mirokshi
+redirect_stderr=true
+stdout_logfile=/home/mirokshi/code/mirokshi/tasks/storage/logs/horizon.log
+````
+
+*Producition
+````
+[program:horizon-tasks-mirokshi-scool-cat]
+process_name=%(program_name)s
+command=php /home/mirokshi/code/mirokshi/tasks/app.com/artisan horizon
+autostart=true
+autorestart=true
+user=mirokshi
+redirect_stderr=true
+stdout_logfile=/home/forge/tasks.mirokshi.scool.cat/storage/logs/horizon.log
 ````

@@ -88,7 +88,7 @@ class TasksControllerTest extends TestCase
      */
     public function tasks_manager_can_delete_task()
     {
-        
+
         $this->loginAsTaskManager('api');
         $task = factory(Task::class)->create();
 
