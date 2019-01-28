@@ -1,5 +1,5 @@
 <template>
-    <user-select :users="dataUsers" :label="label" @selected="impersonate"></user-select>
+    <user-select :users="dataUsers" :label="label" @selected="impersonate" item-value="null"></user-select>
 </template>
 
 <script>
@@ -29,9 +29,9 @@ export default {
     }
   },
   methods: {
-    impersonate(user) {
+    impersonate (user) {
       if (user) {
-        window.location.href = '/impersonate/take/' + user
+        window.location.href = '/impersonate/take/' + user.id
       }
     }
   },
