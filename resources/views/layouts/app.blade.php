@@ -91,6 +91,9 @@
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Application</v-toolbar-title>
             <v-spacer></v-spacer>
+
+            <notifications-widget></notifications-widget>
+
             <span v-role="'SuperAdmin'"><git-info></git-info></span>
 
             <v-avatar @click.stop="drawerRight = !drawerRight" title="{{ Auth::user()->name }} ( {{ Auth::user()->email }} )">
