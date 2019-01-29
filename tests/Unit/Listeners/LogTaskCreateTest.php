@@ -1,6 +1,5 @@
 <?php
-
-
+namespace Tests\Feature\Api;
 
 use App\Log;
 use App\Task;

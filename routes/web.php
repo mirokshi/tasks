@@ -13,6 +13,7 @@
 
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ChangelogController;
 use App\Http\Controllers\LoggedUserPhotoController;
 use App\Http\Controllers\LoggedUserTasksController;
@@ -95,6 +96,10 @@ Route::middleware(['auth'])->group(function() {
 
     //Photo
     Route::post('/photo', '\\'. PhotoController::class . '@store');
+
+    //Avatar
+    Route::post('/avatar', '\\'. AvatarController::class . '@store');
+
 
     //LoggedUserPhoto
     Route::get('/user/photo', '\\'. LoggedUserPhotoController::class . '@show');

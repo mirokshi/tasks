@@ -1,7 +1,6 @@
 <template>
     <v-card>
         <v-card-title class="grey darken-3 white--text"><h4>Tema</h4></v-card-title>
-            <p>Color principal</p>
            <swatches v-model="color" inline></swatches>
         <v-btn>Aplicar</v-btn>
     </v-card>

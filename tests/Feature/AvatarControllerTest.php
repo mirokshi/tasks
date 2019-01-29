@@ -2,72 +2,72 @@
 
 namespace Tests\Feature;
 
-use App\Photo;
+use App\Avatar;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class PhotoControllerTest extends TestCase
+class AvatarControllerTest extends TestCase
 {
     use RefreshDatabase, CanLogin;
 
     /**
      * @test
      */
-    public function upload_photo()
+    public function upload_avatar()
     {
 //        $this->withoutExceptionHandling();
         Storage::fake('local');
         Storage::fake('google');
 
         $user = $this->login();
-        $response = $this->post('/photo',[
-            'photo' => UploadedFile::fake()->image('photo.jpg')
+        $response = $this->post('/avatar',[
+            'avatar' => UploadedFile::fake()->image('avatar.jpg')
         ]);
         $response->assertRedirect();
 
-        Storage::disk('local')->assertExists($photoUrl = 'photos/' . $user->id . '.jpg');
+        Storage::disk('local')->assertExists($photoUrl = 'avatars/' . $user->id . '.jpg');
         Storage::disk('google')->assertExists('/' . $user->id . '.jpg');
 
-        $photo = Photo::first();
+        $photo = Avatar::first();
         $this->assertEquals($photoUrl, $photo->url);
         $this->assertNotNull($photo->user);
         $this->assertEquals($user->id, $photo->user->id);
         $user = $user->fresh();
-        $this->assertNotNull($user->photo);
-        $this->assertEquals($photoUrl, $user->photo->url);
+        $this->assertNotNull($user->avatar);
+        $this->assertEquals($photoUrl, $user->avatar->url);
     }
 
     /**
      * @test
      */
-    public function upload_photo_update()
+    public function upload_avatar_update()
     {
         $user = $this->login();
-        $photoUrl = 'photos/' . $user->id . '.jpg';
-        Photo::create([
+        $photoUrl = 'avatars/' . $user->id . '.jpg';
+        Avatar::create([
             'url' => $photoUrl,
             'user_id' => $user->id
         ]);
 
         Storage::fake('local');
 
-        $response = $this->post('/photo',[
-            'photo' => UploadedFile::fake()->image('photo.jpg')
+        $response = $this->post('/avatar',[
+            'avatar' => UploadedFile::fake()->image('avatar.jpg')
         ]);
         $response->assertRedirect();
 
         Storage::disk('local')->assertExists($photoUrl);
 
-        $photo = Photo::first();
+        $photo = Avatar::first();
         $this->assertEquals($photoUrl, $photo->url);
         $this->assertNotNull($photo->user);
         $this->assertEquals($user->id, $photo->user->id);
         $user = $user->fresh();
-        $this->assertNotNull($user->photo);
-        $this->assertEquals($photoUrl, $user->photo->url);
+        $this->assertNotNull($user->avatar);
+        $this->assertEquals($photoUrl, $user->avatar->url);
     }
 
 }
