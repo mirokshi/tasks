@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Api;
 
 use App\Photo;
 use Illuminate\Http\UploadedFile;
@@ -22,8 +22,8 @@ class PhotoControllerTest extends TestCase
         Storage::fake('local');
         Storage::fake('google');
 
-        $user = $this->login();
-        $response = $this->post('/photo',[
+        $user = $this->login('api');
+        $response = $this->json('POST','/api/v1/user/photo',[
             'photo' => UploadedFile::fake()->image('photo.jpg')
         ]);
         $response->assertRedirect();

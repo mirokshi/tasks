@@ -20,10 +20,12 @@ import Impersonate from './components/Impersonate'
 import GitInfo from './components/git/GitInfoComponent'
 import Tema from './components/Tema.vue'
 import Profile from './components/Profile'
-// ChangeLog
 import Changelog from './components/changelog/ChangelogComponent.vue'
 import Navigation from './components/Navigation'
 import ServiceWorker from './components/ServiceWorker.vue'
+import NotificationsWidget from './components/NotificationsWidget.vue'
+
+
 import VueTimeago from 'vue-timeago'
 import TreeView from 'vue-json-tree-view'
 
@@ -149,5 +151,7 @@ window.Vue.component('profile', Profile)
 window.Vue.component('changelog', Changelog)
 window.Vue.component('navigation', Navigation)
 window.Vue.component('service-worker', ServiceWorker)
+window.Vue.component('notifications-widget', NotificationsWidget)
+
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)

@@ -39,6 +39,8 @@ stdout_logfile=/home/forge/tasks.mirokshi.scool.cat/storage/logs/worker.log
 
 /etc/supervisor/conf.d/horizon-tasks-mirokshi-scool-cat.conf
 
+*Local
+
 ````
 [program:horizon-tasks-mirokshi-scool-cat]
 process_name=%(program_name)s
@@ -50,14 +52,14 @@ redirect_stderr=true
 stdout_logfile=/home/mirokshi/code/mirokshi/tasks/storage/logs/horizon.log
 ````
 
-*Producition
+*Production
 ````
 [program:horizon-tasks-mirokshi-scool-cat]
 process_name=%(program_name)s
-command=php /home/mirokshi/code/mirokshi/tasks/app.com/artisan horizon
+command=php /home/forge/tasks.mirokshi.scool.cat/artisan horizon
 autostart=true
 autorestart=true
-user=mirokshi
+user=forge
 redirect_stderr=true
 stdout_logfile=/home/forge/tasks.mirokshi.scool.cat/storage/logs/horizon.log
 ````

@@ -27,17 +27,17 @@ export default {
   methods: {
     async destroy (task) {
       // ES6 async await
-      let result = await this.$confirm('Les tasques esborrades no es poden recuperar',
+      let result = await this.$confirm('Las tareas borradas ya no se podrán recuperar',
         {
-          title: 'Esteu segurs?',
+          title: 'Esta seguro?',
           buttonTruetext: 'Eliminar',
-          buttonFalsetext: 'Cancel·lar',
+          buttonFalsetext: 'Cancelar',
           color: 'error'
         })
       if (result) {
         this.removing = true
         window.axios.delete(this.uri + task.id).then(() => {
-          this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
+          this.$snackbar.showMessage('Se ha borrado correctamente la tarea')
           this.$emit('removed', task)
           this.removing = false
         }).catch(error => {
