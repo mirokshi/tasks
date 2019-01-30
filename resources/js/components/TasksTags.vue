@@ -13,6 +13,7 @@
                         multiple
                         chips
                         item-text="name"
+                        @change="formarTag"
                     >
                         <template
                             slot="selection"
@@ -61,20 +62,36 @@ export default {
     }
   },
   methods: {
+    formarTag (event) {
+      var value = this.selectedTags[this.selectedTags.length - 1]
+      if (typeof value === 'string') {
+        this.selectedTags[this.selectedTags.length - 1] = {
+          'color': 'grey',
+          'name': this.selectedTags[this.selectedTags - 1]
+        }
+      }
+    },
     removeTag () {
       // TODO ASYNC PRIMER EXECUTAR UN CONFIRM
       console.log('TODO REMOVE TAG')
-      window.axios.delete('api/v1/tasks/' + this.task.id + '/tag/' + this.tag).then(response => {
-        this.$snackbar.showMessage('Etiqueta eliminada correctament')
+      window.axios.delete('api/v1/tasks/' + this.task.id + '/tags/' + this.tag).then(response => {
+        this.$snackbar.showMessage('Etiqueta eliminada correctamente')
       }).catch(error => {
         this.$snackbar.showError(error)
       })
     },
     addTag () {
-      console.log('TODO ADD TAG')
-      let tag = {}
-      window.axios.post('/api/v1/tasks/' + this.task.id + '/tag/', tag).then(response => {
-        this.$snackbar.showMessage('Etiqueta afegida correctament')
+      // pluck collection Laravel
+      //   console.log(this.selectedTags)
+      this.loading = true
+      window.axios.put('/api/v1/tasks/' + this.task.id + '/tags/', {
+        tags: this.selectedTags.map((tag) => {
+          if (tag.id) return tag.id
+          else return tag.name
+        })
+      }).then(response => {
+          this.dialog = false
+        this.$snackbar.showMessage('Etiqueta agregada correctamente')
       }).catch(error => {
         this.$snackbar.showError(error)
       })

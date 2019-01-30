@@ -77688,6 +77688,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'TasksTags',
@@ -77709,13 +77710,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
+    formarTag: function formarTag() {
+      console.log('TODO');
+    },
     removeTag: function removeTag() {
       var _this = this;
 
       // TODO ASYNC PRIMER EXECUTAR UN CONFIRM
       console.log('TODO REMOVE TAG');
-      window.axios.delete('api/v1/tasks/' + this.task.id + '/tag/' + this.tag).then(function (response) {
-        _this.$snackbar.showMessage('Etiqueta eliminada correctament');
+      window.axios.delete('api/v1/tasks/' + this.task.id + '/tags/' + this.tag).then(function (response) {
+        _this.$snackbar.showMessage('Etiqueta eliminada correctamente');
       }).catch(function (error) {
         _this.$snackbar.showError(error);
       });
@@ -77723,10 +77727,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     addTag: function addTag() {
       var _this2 = this;
 
-      console.log('TODO ADD TAG');
-      var tag = {};
-      window.axios.post('/api/v1/tasks/' + this.task.id + '/tag/', tag).then(function (response) {
-        _this2.$snackbar.showMessage('Etiqueta afegida correctament');
+      // pluck collection Laravel
+      //   console.log(this.selectedTags)
+      window.axios.put('/api/v1/tasks/' + this.task.id + '/tags/', {
+        // this.selectedTags.map(tag => tag['id'])
+      }).then(function (response) {
+        _this2.$snackbar.showMessage('Etiqueta agregada correctamente');
       }).catch(function (error) {
         _this2.$snackbar.showError(error);
       });
@@ -77810,6 +77816,7 @@ var render = function() {
                       chips: "",
                       "item-text": "name"
                     },
+                    on: { change: _vm.formarTag },
                     scopedSlots: _vm._u([
                       {
                         key: "selection",
