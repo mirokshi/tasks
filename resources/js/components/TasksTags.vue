@@ -1,6 +1,6 @@
 <template>
     <span>
-         <v-chip v-for="tag in task.tags" :key="tag.id" v-text="tag.name" :color="tag.color" @dblclick="removeTag"></v-chip>
+         <v-chip v-for="tag in taskTags" :key="tag.id" v-text="tag.name" :color="tag.color" @dblclick="removeTag"></v-chip>
         <v-btn icon @click="dialog = true"><v-icon>add</v-icon></v-btn>
         <v-btn icon @click="dialog = true"><v-icon>remove</v-icon></v-btn>
         <v-dialog v-model="dialog" width="500">
@@ -13,13 +13,14 @@
                         multiple
                         chips
                         item-text="name"
-                        @change="formarTag"
+                        @change="formatTag"
                     >
                         <template
                             slot="selection"
                             slot-scope="data"
                         >
                             <v-chip
+                                :color="data.item.color"
                                 :selected="data.selected"
                                 :disabled="data.disabled"
                                 :key="JSON.stringify(data.item)"
@@ -35,7 +36,7 @@
                 <v-divider></v-divider>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn flat @click="dialog = false">CANCELAR</v-btn>
+                    <v-btn flat @click="dialog = false" :loading="loading" :disabled="loading">CANCELAR</v-btn>
                     <v-btn color="grey darken-3" flat @click="addTag">AÑADIR</v-btn>
                 </v-card-actions>
             </v-card>
@@ -48,7 +49,9 @@ export default {
   data () {
     return {
       dialog: false,
-      selectedTags: []
+      loading: false,
+      selectedTags: [],
+      dataTaskTags: this.taskTags
     }
   },
   props: {
@@ -59,15 +62,24 @@ export default {
     tags: {
       type: Array,
       required: true
+    },
+    taskTags: {
+      type: Array,
+      required: true
+    }
+  },
+  watch: {
+    taskTags (taskTags) {
+      this.dataTaskTags = taskTags
     }
   },
   methods: {
-    formarTag (event) {
+    formatTag () {
       var value = this.selectedTags[this.selectedTags.length - 1]
       if (typeof value === 'string') {
         this.selectedTags[this.selectedTags.length - 1] = {
           'color': 'grey',
-          'name': this.selectedTags[this.selectedTags - 1]
+          'name': this.selectedTags[this.selectedTags.length - 1]
         }
       }
     },
@@ -90,8 +102,10 @@ export default {
           else return tag.name
         })
       }).then(response => {
-          this.dialog = false
         this.$snackbar.showMessage('Etiqueta agregada correctamente')
+        this.dialog = false
+        this.loading = false
+        this.$emit('change', this.selectedTags)
       }).catch(error => {
         this.$snackbar.showError(error)
       })
