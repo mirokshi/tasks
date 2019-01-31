@@ -85116,6 +85116,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Navigation',
@@ -85149,6 +85151,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   model: {
     prop: 'drawer',
     event: 'input'
+  },
+  methods: {
+    setSelectedItem: function setSelectedItem() {
+      var currentPath = window.location.pathname;
+      var selected = this.items.indexOf(this.items.find(function (item) {
+        return item.url === currentPath;
+      }));
+      this.items[selected].selected = true;
+    },
+    selectedStyle: function selectedStyle(item) {
+      if (item.selected) {
+        return {
+          'border-right': '5px solid #F0B429',
+          'background-color': '#c3f8ec',
+          'font-size': '1em'
+        };
+      }
+    }
+  },
+  created: function created() {
+    this.setSelectedItem();
   }
 });
 
@@ -85226,6 +85249,7 @@ var render = function() {
                       "v-list-group",
                       {
                         key: item.text,
+                        style: _vm.selectedStyle(item),
                         attrs: {
                           "prepend-icon": item.model
                             ? item.icon
@@ -85302,7 +85326,11 @@ var render = function() {
                     )
                   : _c(
                       "v-list-tile",
-                      { key: item.text, attrs: { href: item.url } },
+                      {
+                        key: item.text,
+                        style: _vm.selectedStyle(item),
+                        attrs: { href: item.url }
+                      },
                       [
                         _c(
                           "v-list-tile-action",
