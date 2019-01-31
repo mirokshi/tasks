@@ -75547,11 +75547,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     refresh: function refresh() {
       var _this = this;
 
+      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
       this.loading = true;
       window.axios.get(this.uri).then(function (response) {
         _this.dataTasks = response.data;
         _this.loading = false;
-        _this.$snackbar.showMessage('Tareas actualizadas correctamente');
+        if (message) _this.$snackbar.showMessage('Tareas actualizadas correctamente');
       }).catch(function (error) {
         console.log(error);
         _this.loading = false;
@@ -77689,13 +77691,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'TasksTags',
   data: function data() {
     return {
       dialog: false,
-      selectedTags: []
+      loading: false,
+      selectedTags: [],
+      dataTaskTags: this.taskTags
     };
   },
 
@@ -77707,11 +77712,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     tags: {
       type: Array,
       required: true
+    },
+    taskTags: {
+      type: Array,
+      required: true
+    }
+  },
+  watch: {
+    taskTags: function taskTags(_taskTags) {
+      this.dataTaskTags = _taskTags;
     }
   },
   methods: {
-    formarTag: function formarTag() {
-      console.log('TODO');
+    formatTag: function formatTag() {
+      var value = this.selectedTags[this.selectedTags.length - 1];
+      if (typeof value === 'string') {
+        this.selectedTags[this.selectedTags.length - 1] = {
+          'color': 'grey',
+          'name': this.selectedTags[this.selectedTags.length - 1]
+        };
+      }
     },
     removeTag: function removeTag() {
       var _this = this;
@@ -77729,10 +77749,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       // pluck collection Laravel
       //   console.log(this.selectedTags)
+      this.loading = true;
       window.axios.put('/api/v1/tasks/' + this.task.id + '/tags/', {
-        // this.selectedTags.map(tag => tag['id'])
+        tags: this.selectedTags.map(function (tag) {
+          if (tag.id) return tag.id;else return tag.name;
+        })
       }).then(function (response) {
         _this2.$snackbar.showMessage('Etiqueta agregada correctamente');
+        _this2.dialog = false;
+        _this2.loading = false;
+        _this2.$emit('change', _this2.selectedTags);
       }).catch(function (error) {
         _this2.$snackbar.showError(error);
       });
@@ -77751,7 +77777,7 @@ var render = function() {
   return _c(
     "span",
     [
-      _vm._l(_vm.task.tags, function(tag) {
+      _vm._l(_vm.taskTags, function(tag) {
         return _c("v-chip", {
           key: tag.id,
           attrs: { color: tag.color },
@@ -77816,7 +77842,7 @@ var render = function() {
                       chips: "",
                       "item-text": "name"
                     },
-                    on: { change: _vm.formarTag },
+                    on: { change: _vm.formatTag },
                     scopedSlots: _vm._u([
                       {
                         key: "selection",
@@ -77828,6 +77854,7 @@ var render = function() {
                                 key: JSON.stringify(data.item),
                                 staticClass: "v-chip--select-multi",
                                 attrs: {
+                                  color: data.item.color,
                                   selected: data.selected,
                                   disabled: data.disabled
                                 },
@@ -77871,7 +77898,11 @@ var render = function() {
                   _c(
                     "v-btn",
                     {
-                      attrs: { flat: "" },
+                      attrs: {
+                        flat: "",
+                        loading: _vm.loading,
+                        disabled: _vm.loading
+                      },
                       on: {
                         click: function($event) {
                           _vm.dialog = false
@@ -78152,7 +78183,16 @@ var render = function() {
                           "td",
                           [
                             _c("tasks-tags", {
-                              attrs: { task: task, tags: _vm.tags }
+                              attrs: {
+                                task: task,
+                                "task-tags": task.tags,
+                                tags: _vm.tags
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.refresh(false)
+                                }
+                              }
                             })
                           ],
                           1
@@ -81874,7 +81914,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   props: {
     user: {
-      type: Array,
+      type: Object,
       required: true
     }
   }
@@ -85082,7 +85122,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       dataDrawer: this.drawer,
-      items: [{ icon: 'home', text: 'Welcome', url: '/' }, { icon: 'home', text: 'Home', url: '/home' }, {
+      items: [{ icon: 'home', text: 'Home', url: '/' }, {
         icon: 'keyboard_arrow_up',
         'icon-alt': 'keyboard_arrow_down',
         text: 'Tasques',

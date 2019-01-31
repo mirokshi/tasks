@@ -73,8 +73,7 @@ export default {
     return {
       dataDrawer: this.drawer,
       items: [
-        { icon: 'home', text: 'Welcome', url: '/' },
-        { icon: 'home', text: 'Home', url: '/home' },
+        { icon: 'home', text: 'Home', url: '/' },
         {
           icon: 'keyboard_arrow_up',
           'icon-alt': 'keyboard_arrow_down',

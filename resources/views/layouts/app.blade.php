@@ -46,7 +46,7 @@
                 <v-layout row wrap>
                     <v-flex xs12>
                         <ul>
-                            <li>Nom : {{ Auth::user()->name }}</li>
+                            <li>Nombre : {{ Auth::user()->name }}</li>
                             <li>Email : {{ Auth::user()->email }}</li>
                             <li>Admin : {{ Auth::user()->admin ? 'SI' : 'NO' }}</li>
                             <li>Roles : {{ implode(',',Auth::user()->map()['roles']) }}</li>
@@ -79,6 +79,10 @@
             </v-card>
                     <tema></tema>
 
+            <v-form action="/logout" method="POST">
+                @csrf
+                <v-btn color="indigo lighten-2"type="submit"><v-icon>exit_to_app</v-icon>CERRAR SESION</v-btn>
+            </v-form>
         </v-navigation-drawer>
         <v-toolbar
                 color="primary"
@@ -95,15 +99,12 @@
             <notifications-widget></notifications-widget>
 
             <span v-role="'SuperAdmin'"><git-info></git-info></span>
-
-            <v-avatar @click.stop="drawerRight = !drawerRight" title="{{ Auth::user()->name }} ( {{ Auth::user()->email }} )">
+            <v-btn href="/profile" icon flat>
+            <v-avatar  title="{{ Auth::user()->name }} ( {{ Auth::user()->email }} )">
                 <img src="https://www.gravatar.com/avatar/{{md5(Auth::user()-> email)}}" alt="avatar">
             </v-avatar>
-            <v-form action="/logout" method="POST">
-            @csrf
-                <v-btn color="transparent" icon type="submit"><v-icon>exit_to_app</v-icon></v-btn>
-            </v-form>
-            <v-btn  color="transparent" icon href="/"><v-icon>home</v-icon></v-btn>
+            </v-btn>
+            <v-btn @click.stop="drawerRight = !drawerRight" icon flat><v-icon>reorder</v-icon></v-btn>
         </v-toolbar>
         <v-content>
             @yield('content')
