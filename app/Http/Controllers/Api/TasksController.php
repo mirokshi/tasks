@@ -38,6 +38,8 @@ class TasksController extends Controller
         $task->description = $request->description;
         $task->user_id = $request->user_id;
         $task->save();
+        //  HOOK -> EVENT
+        event(new \App\Events\TaskCreate($task));
         return $task->map();
     }
 

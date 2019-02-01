@@ -4,11 +4,11 @@ namespace App\Listeners;
 
 
 
-use App\Mail\TaskDestroy;
+use App\Mail\TaskCreate;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
-class SendMailTaskDestroy
+class SendMailTaskCreate implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -31,6 +31,6 @@ class SendMailTaskDestroy
         $subject = $event->task->subject();
         Mail::to($event->task->user)
             ->cc(config('tasks.manager_email'))
-            ->send((new TaskDestroy($event->task))->subject($subject));
+            ->send((new TaskCreate($event->task))->subject($subject));
     }
 }

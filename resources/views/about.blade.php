@@ -26,7 +26,7 @@
                     <v-layout>
                         <v-flex xs10>
 
-                            <v-text class="display-4">WIP</v-text>
+                            <v-text class="display-4">WIP &#10240; &#x2800;</v-text>
                         </v-flex>
                         <v-flex xs2>
                             <v-icon size="100" color="red">sentiment_satisfied_alt</v-icon>
@@ -89,6 +89,7 @@
                                 xs4
                         >
                             Lorem ipsum dolor sit amet, no nam oblique veritus no nam oblique.
+
                         </v-flex>
                     </v-layout>
                 </v-container>

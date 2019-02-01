@@ -11,11 +11,10 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class TaskCompleted
+class TaskCreate
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $task;
     /**
      * Create a new event instance.
      *
