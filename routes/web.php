@@ -117,6 +117,12 @@ Route::get('/prueba_cola',function (){
  \App\Jobs\SleepJob::dispatch();
 });
 
+Route::get('/omplir', function () {
+    //10 000
+    for ($i =1; $i <=50; $i++){
+        factory(App\Task::class)->create();
+    }
+});
 
 //Auth::logout();
 
