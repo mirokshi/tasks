@@ -12,6 +12,7 @@ class TaskCreate extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $task;
     /**
      * Create a new message instance.
      *

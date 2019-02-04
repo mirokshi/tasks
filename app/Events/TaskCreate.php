@@ -15,6 +15,7 @@ class TaskCreate
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $task;
     /**
      * Create a new event instance.
      *

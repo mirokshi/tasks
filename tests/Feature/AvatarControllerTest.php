@@ -31,10 +31,10 @@ class AvatarControllerTest extends TestCase
         Storage::disk('local')->assertExists($photoUrl = 'avatars/' . $user->id . '.jpg');
         Storage::disk('google')->assertExists('/' . $user->id . '.jpg');
 
-        $photo = Avatar::first();
-        $this->assertEquals($photoUrl, $photo->url);
-        $this->assertNotNull($photo->user);
-        $this->assertEquals($user->id, $photo->user->id);
+        $avatar = Avatar::first();
+        $this->assertEquals($photoUrl, $avatar->url);
+        $this->assertNotNull($avatar->user);
+        $this->assertEquals($user->id, $avatar->user->id);
         $user = $user->fresh();
         $this->assertNotNull($user->avatar);
         $this->assertEquals($photoUrl, $user->avatar->url);
@@ -61,10 +61,10 @@ class AvatarControllerTest extends TestCase
 
         Storage::disk('local')->assertExists($photoUrl);
 
-        $photo = Avatar::first();
-        $this->assertEquals($photoUrl, $photo->url);
-        $this->assertNotNull($photo->user);
-        $this->assertEquals($user->id, $photo->user->id);
+        $avatar = Avatar::first();
+        $this->assertEquals($photoUrl, $avatar->url);
+        $this->assertNotNull($avatar->user);
+        $this->assertEquals($user->id, $avatar->user->id);
         $user = $user->fresh();
         $this->assertNotNull($user->avatar);
         $this->assertEquals($photoUrl, $user->avatar->url);

@@ -160,7 +160,7 @@ class TasksControllerTest extends TestCase
     public function superadmin_can_create_task()
     {
         $this->loginAsSuperAdmin('api');
-
+        Event::fake();
         $response = $this->json('POST','/api/v1/tasks/',[
             'name' => 'Comprar pa',
             'description' => 'Bla bla bla',
@@ -210,7 +210,7 @@ class TasksControllerTest extends TestCase
     public function superadmin_can_create_completed_task()
     {
         $this->loginAsSuperAdmin('api');
-
+        Event::fake();
         $response = $this->json('POST','/api/v1/tasks/',[
             'name' => 'Comprar pa',
             'description' => 'Bla bla bla',
@@ -236,6 +236,7 @@ class TasksControllerTest extends TestCase
     {
         $this->loginAsTaskManager('api');
 
+        Event::fake();
         $response = $this->json('POST','/api/v1/tasks/',[
             'name' => 'Comprar pa'
         ]);
