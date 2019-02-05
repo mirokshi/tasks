@@ -23,7 +23,7 @@ import Profile from './components/Profile'
 import Changelog from './components/changelog/ChangelogComponent.vue'
 import Navigation from './components/Navigation'
 import ServiceWorker from './components/ServiceWorker.vue'
-import NotificationsWidget from './components/NotificationsWidget.vue'
+import NotificationsWidget from './components/NotificationsWidget'
 import Notifications from './components/notifications/Notifications'
 
 
