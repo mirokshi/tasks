@@ -129,9 +129,7 @@ export default {
         }
       }
     }
-  },
-  created () {
-    this.setSelectedItem()
   }
+  
 }
 </script>
