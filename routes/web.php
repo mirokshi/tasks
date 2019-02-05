@@ -17,6 +17,7 @@ use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ChangelogController;
 use App\Http\Controllers\LoggedUserPhotoController;
 use App\Http\Controllers\LoggedUserTasksController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagsController;
@@ -106,6 +107,8 @@ Route::middleware(['auth'])->group(function() {
 
     //Changelog
     Route::get('/changelog','\\'. ChangelogController::class . '@index');
+
+    Route::get('/notifications', '\\' . NotificationController::class . '@index');
 });
 
 //WELCOME
@@ -115,6 +118,18 @@ Route::get('/welcome', function (){
 
 Route::get('/prueba_cola',function (){
  \App\Jobs\SleepJob::dispatch();
+});
+
+Route::get('/prueva', function () {
+    $rows = array_map('str_getcsv', file('/home/mirokshi/Descargas/csvcopia.csv'));
+    $header = array_shift($rows);
+    $csv = array();
+    foreach ($rows as $row) {
+        $csv[] = array_combine($header, $row);
+    }
+    return $csv;
+
+
 });
 
 Route::get('/omplir', function () {

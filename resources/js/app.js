@@ -24,6 +24,7 @@ import Changelog from './components/changelog/ChangelogComponent.vue'
 import Navigation from './components/Navigation'
 import ServiceWorker from './components/ServiceWorker.vue'
 import NotificationsWidget from './components/NotificationsWidget.vue'
+import Notifications from './components/notifications/Notifications'
 
 
 import VueTimeago from 'vue-timeago'
@@ -152,6 +153,7 @@ window.Vue.component('changelog', Changelog)
 window.Vue.component('navigation', Navigation)
 window.Vue.component('service-worker', ServiceWorker)
 window.Vue.component('notifications-widget', NotificationsWidget)
+window.Vue.component('notifications', Notifications)
 
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)
