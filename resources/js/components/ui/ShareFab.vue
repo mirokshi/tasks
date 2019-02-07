@@ -1,6 +1,6 @@
 <template>
     <v-btn
-        v-if="show"
+        v-if="show()"
         v-model="fab"
         color="accent"
         dark
@@ -9,7 +9,7 @@
         bottom
         right
         large
-        onclick="share()"
+        onclick="share"
     >
         <v-icon>share</v-icon>
     </v-btn>

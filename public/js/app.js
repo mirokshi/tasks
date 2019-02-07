@@ -88946,7 +88946,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.show
+  return _vm.show()
     ? _c(
         "v-btn",
         {
@@ -88958,7 +88958,7 @@ var render = function() {
             bottom: "",
             right: "",
             large: "",
-            onclick: "share()"
+            onclick: "share"
           },
           model: {
             value: _vm.fab,
