@@ -11,13 +11,13 @@
     <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
     <meta name="theme-color" content="#317EFB"/>
     <script defer src="https://use.fontawesome.com/releases/v5.6.1/js/all.js" integrity="sha384-R5JkiUweZpJjELPWqttAYmYM1P3SNEJRM6ecTQF05pFFtxmCO+Y1CiUhvuDzgSVZ" crossorigin="anonymous"></script>
-    <meta property="og:image" content="/og-image.jpg">
+    <meta property="og:image" content="img/shareImage.jpeg">
     <meta property="og:image:width" content="439">
     <meta property="og:image:height" content="659">
     <meta property="og:title" content="Application Tasks ">
-    <meta property="og:description" content="TODO TODO TODO TODO TODO TODO ">
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Descriptin tasks">
     <meta property="og:url" content="https://tasks.mirokshi.scool.cat/">
-
     <title>Homepage Tasks</title>
     <style>
         [v-cloak] > * { display:none; }
