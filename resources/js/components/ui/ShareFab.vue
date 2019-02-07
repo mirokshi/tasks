@@ -9,7 +9,7 @@
         bottom
         right
         large
-        onclick="share"
+        @click="share"
     >
         <v-icon>share</v-icon>
     </v-btn>
@@ -18,7 +18,7 @@
 <script>
 export default {
   name: 'ShareFab',
-  data: function () {
+  data () {
     return {
       fab: false
     }
@@ -32,10 +32,9 @@ export default {
       if (!('share' in navigator)) {
         return
       }
-
       navigator.share({
-        title: 'Aplicacion de tareas',
-        text: 'Can I rely on the Web Platform features to build my app? An overview of the device integration HTML5 APIs',
+        title: 'Aplicación de tareas',
+        text: 'Aplicacion de gestion de tareas',
         url: 'https://tasks.mirokshi.scool.cat'
       })
         .then(() => console.log('Successful share'))
@@ -44,7 +43,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
