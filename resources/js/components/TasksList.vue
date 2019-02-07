@@ -228,7 +228,7 @@ export default {
     updateTask (task) {
       this.refresh()
     },
-    refresh (message = true ) {
+    refresh (message = true) {
       this.loading = true
       window.axios.get(this.uri).then(response => {
         this.dataTasks = response.data
@@ -238,6 +238,11 @@ export default {
         console.log(error)
         this.loading = false
       })
+    }
+  },
+  computed: {
+    total () {
+      return this.dataTasks.length
     }
   }
 }

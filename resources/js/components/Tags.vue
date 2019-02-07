@@ -133,7 +133,6 @@
                         </v-btn>
                         </td>
                     </tr>
-
                 </template>
             </v-data-table>
         </v-card>
