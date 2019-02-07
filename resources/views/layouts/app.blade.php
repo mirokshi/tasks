@@ -16,7 +16,7 @@
     <meta property="og:image:width" content="439">
     <meta property="og:image:height" content="659">
     <meta property="og:title" content="Application Tasks ">
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="website"/>
     <meta property="og:description" content="Descriptin tasks">
     <meta property="og:url" content="https://tasks.mirokshi.scool.cat/">
     <title>@yield('title','Put your title here')</title>
