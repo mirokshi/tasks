@@ -25,7 +25,7 @@ import Navigation from './components/Navigation'
 import ServiceWorker from './components/ServiceWorker.vue'
 import NotificationsWidget from './components/NotificationsWidget'
 import Notifications from './components/notifications/Notifications'
-
+import ShareFab from './components/ui/ShareFab.vue'
 
 import VueTimeago from 'vue-timeago'
 import TreeView from 'vue-json-tree-view'
@@ -154,6 +154,6 @@ window.Vue.component('navigation', Navigation)
 window.Vue.component('service-worker', ServiceWorker)
 window.Vue.component('notifications-widget', NotificationsWidget)
 window.Vue.component('notifications', Notifications)
-
+window.Vue.component('share-fab', ShareFab)
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)
