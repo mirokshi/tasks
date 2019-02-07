@@ -200,7 +200,7 @@ export default {
   },
   props: {
     user: {
-      type: Array,
+      type: Object,
       required: true
     }
   }

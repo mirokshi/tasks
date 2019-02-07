@@ -14,7 +14,7 @@ class AvatarController extends Controller
     {
         $extension = $request->file('avatar')->getClientOriginalExtension();
         $path = $request->file('avatar')->storeAs(
-            'photos', $request->user()->id. '.'. $extension
+            'avatars', $request->user()->id. '.'. $extension
         );
         $request->file('avatar')->storeAs(
             '',$request->user()->id. '.'. $extension,'google'
@@ -34,19 +34,19 @@ class AvatarController extends Controller
     public function storeExamples(AvatarStore $request)
     {
         //Nom definit per Laravel amb un sistema per evitar colisions:
-        $path = $request->file('avatar')->store('photos');
-//        $path = Storage::putFile('photos', $request->file('avatar'));
+        $path = $request->file('avatar')->store('avatars');
+//        $path = Storage::putFile('avatars', $request->file('avatar'));
         //CustomFileName
         $path = $request->file('avatar')->storeAs(
-            'photos', $request->user()->id
+            'avatars', $request->user()->id
         );
         //CustomFileName with extension
         $path = $request->file('avatar')->storeAs(
-            'photos', $request->user()->id
+            'avatars', $request->user()->id
         );
         // Specificar un disk
 //        $path = $request->file('avatar')->store(
-//            'photos/'.$request->user()->id, 's3'
+//            'avatars/'.$request->user()->id, 's3'
 //        );
         dump($path);
         return Avatar::create([

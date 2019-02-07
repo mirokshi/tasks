@@ -3,13 +3,18 @@
 namespace App\Providers;
 
 use App\Events\TaskCompleted;
+use App\Events\TaskCreate;
 use App\Events\TaskDestroy;
 use App\Events\TaskUncompleted;
+use App\Events\TaskUpdate;
 use App\Listeners\AddRolesToRegisterUser;
 use App\Listeners\LogTaskCompleted;
+use App\Listeners\LogTaskCreate;
 use App\Listeners\LogTaskDestroy;
 use App\Listeners\LogTaskUncompleted;
+use App\Listeners\LogTaskUpdate;
 use App\Listeners\SendMailTaskCompleted;
+use App\Listeners\SendMailTaskCreate;
 use App\Listeners\SendMailTaskDestroy;
 use App\Listeners\SendMailTaskUncompleted;
 use Illuminate\Support\Facades\Event;
@@ -40,6 +45,14 @@ class EventServiceProvider extends ServiceProvider
         TaskDestroy::class => [
             LogTaskDestroy::class,
             SendMailTaskDestroy::class
+        ],
+        TaskCreate::class => [
+            LogTaskCreate::class,
+            SendMailTaskCreate::class
+        ],
+        TaskUpdate::class => [
+            LogTaskUpdate::class,
+
         ]
 
     ];

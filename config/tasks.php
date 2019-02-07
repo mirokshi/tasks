@@ -14,4 +14,11 @@ return [
     */
 
    'manager_email' => env('TASKS_MANAGER_EMAIL', 'tasksmanager@miemepresa.com'),
+
+    /*
+     *
+     */
+
+    'salt' => env('TASKS_SALT'),
+
 ];

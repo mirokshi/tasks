@@ -10,6 +10,12 @@
     <link rel="icon" href="img/icon.png">
     <meta name="theme-color" content="#317EFB"/>
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <meta property="og:image" content="img/shareImage.jpeg">
+    <meta property="og:image:width" content="439">
+    <meta property="og:image:height" content="659">
+    <meta property="og:title" content="Application Tasks ">
+    <meta property="og:description" content="Descriptin tasks">
+    <meta property="og:url" content="https://tasks.mirokshi.scool.cat/">
     <title>@yield('title')</title>
     <style>
         [v-cloak] > * { display:none; }

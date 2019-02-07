@@ -18,7 +18,7 @@ class AvatarControllerTest extends TestCase
      */
     public function upload_avatar()
     {
-//        $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         Storage::fake('local');
         Storage::fake('google');
 
@@ -26,18 +26,19 @@ class AvatarControllerTest extends TestCase
         $response = $this->post('/avatar',[
             'avatar' => UploadedFile::fake()->image('avatar.jpg')
         ]);
+
         $response->assertRedirect();
 
-        Storage::disk('local')->assertExists($photoUrl = 'avatars/' . $user->id . '.jpg');
+        Storage::disk('local')->assertExists($avatarUrl = 'avatars/' . $user->id . '.jpg');
         Storage::disk('google')->assertExists('/' . $user->id . '.jpg');
+        $avatar = Avatar::first();
+        $this->assertEquals($avatarUrl, $avatar->url);
+        $this->assertNotNull($avatar->user);
 
-        $photo = Avatar::first();
-        $this->assertEquals($photoUrl, $photo->url);
-        $this->assertNotNull($photo->user);
-        $this->assertEquals($user->id, $photo->user->id);
+        $this->assertEquals($user->id, $avatar->user->id);
         $user = $user->fresh();
         $this->assertNotNull($user->avatar);
-        $this->assertEquals($photoUrl, $user->avatar->url);
+        $this->assertEquals($avatarUrl, $user->avatar->url);
     }
 
     /**
@@ -46,9 +47,9 @@ class AvatarControllerTest extends TestCase
     public function upload_avatar_update()
     {
         $user = $this->login();
-        $photoUrl = 'avatars/' . $user->id . '.jpg';
+        $avatarUrl = 'avatars/' . $user->id . '.jpg';
         Avatar::create([
-            'url' => $photoUrl,
+            'url' => $avatarUrl,
             'user_id' => $user->id
         ]);
 
@@ -59,15 +60,15 @@ class AvatarControllerTest extends TestCase
         ]);
         $response->assertRedirect();
 
-        Storage::disk('local')->assertExists($photoUrl);
+        Storage::disk('local')->assertExists($avatarUrl);
 
-        $photo = Avatar::first();
-        $this->assertEquals($photoUrl, $photo->url);
-        $this->assertNotNull($photo->user);
-        $this->assertEquals($user->id, $photo->user->id);
+        $avatar = Avatar::first();
+        $this->assertEquals($avatarUrl, $avatar->url);
+        $this->assertNotNull($avatar->user);
+        $this->assertEquals($user->id, $avatar->user->id);
         $user = $user->fresh();
         $this->assertNotNull($user->avatar);
-        $this->assertEquals($photoUrl, $user->avatar->url);
+        $this->assertEquals($avatarUrl, $user->avatar->url);
     }
 
 }
