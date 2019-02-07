@@ -36,6 +36,7 @@
 <body>
 <div id="app" v-cloak>
     <v-app light  class="blue-grey lighten-5 white--text">
+        <share-fab></share-fab>
         <v-toolbar class="primary white--text">
             <img src="/img/icon.png" alt="Aplicacion de tareas" height="50">
             <v-toolbar-title> Homepage Tasks</v-toolbar-title>
