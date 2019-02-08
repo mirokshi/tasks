@@ -37,11 +37,13 @@ class EventServiceProvider extends ServiceProvider
         ],
         TaskUncompleted::class => [
             LogTaskUncompleted::class,
-            SendMailTaskUncompleted::class
+            SendMailTaskUncompleted::class,
+            ForgetTasksCache::class
         ],
         TaskCompleted::class => [
             LogTaskCompleted::class,
-            SendMailTaskCompleted::class
+            SendMailTaskCompleted::class,
+            ForgetTasksCache::class
         ],
         TaskDestroy::class => [
             LogTaskDestroy::class,
@@ -50,11 +52,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         TaskCreate::class => [
             LogTaskCreate::class,
-            SendMailTaskCreate::class
+            SendMailTaskCreate::class,
+            ForgetTasksCache::class
         ],
         TaskUpdate::class => [
             LogTaskUpdate::class,
-
+            ForgetTasksCache::class
         ]
 
     ];
