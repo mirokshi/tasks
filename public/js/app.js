@@ -79642,7 +79642,7 @@ var render = function() {
                 "no-results-text": "No se ha encontrado ningun registro",
                 loading: _vm.loading,
                 "no-data-text": "",
-                "rows-per-page-text": "Tags per pàgina",
+                "rows-per-page-text": "Tags por pagina",
                 "rows-per-page-items": [
                   5,
                   10,

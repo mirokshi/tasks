@@ -17,9 +17,12 @@ use Illuminate\Http\Request;
 
 class TasksController extends Controller
 {
+
     public function index(TaskIndex $request)
     {
+
         return map_collection(Task::orderBy('created_at','desc')->get());
+
 
     }
 

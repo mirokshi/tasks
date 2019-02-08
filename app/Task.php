@@ -9,6 +9,8 @@ class Task extends Model
 {
     use FormattedDates;
 
+    const TASKS_CACHE_KEY= 'tasks.mirokshi.scool.cat' ;
+
     protected $guarded = [];
 //    protected $fillable = ['name', 'completed'];
 

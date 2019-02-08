@@ -9,6 +9,7 @@ use App\Events\TaskDestroy;
 use App\Task;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Spatie\Permission\Models\Permission;
@@ -47,12 +48,15 @@ class TasksControllerTest extends TestCase
      */
     public function superadmin_can_show_a_task()
     {
+
+
         $this->loginAsSuperAdmin('api');
         $task = factory(Task::class)->create();
 
         $response = $this->json('GET','/api/v1/tasks/' . $task->id);
 
         $result = json_decode($response->getContent());
+
         $response->assertSuccessful();
         $this->assertEquals($task->name, $result->name);
         $this->assertEquals($task->completed, (boolean) $result->completed);

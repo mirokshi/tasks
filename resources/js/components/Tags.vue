@@ -104,7 +104,7 @@
                     no-results-text="No se ha encontrado ningun registro"
                     :loading="loading"
                     no-data-text=""
-                    rows-per-page-text="Tags per pàgina"
+                    rows-per-page-text="Tags por pagina"
                     :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
                     :pagination.sync="pagination"
                     class="hidden-md-and-down">

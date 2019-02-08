@@ -8,6 +8,7 @@ use App\Events\TaskDestroy;
 use App\Events\TaskUncompleted;
 use App\Events\TaskUpdate;
 use App\Listeners\AddRolesToRegisterUser;
+use App\Listeners\ForgetTasksCache;
 use App\Listeners\LogTaskCompleted;
 use App\Listeners\LogTaskCreate;
 use App\Listeners\LogTaskDestroy;
@@ -44,7 +45,8 @@ class EventServiceProvider extends ServiceProvider
         ],
         TaskDestroy::class => [
             LogTaskDestroy::class,
-            SendMailTaskDestroy::class
+            SendMailTaskDestroy::class,
+            ForgetTasksCache::class
         ],
         TaskCreate::class => [
             LogTaskCreate::class,
