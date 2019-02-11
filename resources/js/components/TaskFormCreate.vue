@@ -3,9 +3,9 @@
         <v-text-field
             autofocus
             v-model="name"
-            label="Nom"
-            hint="El nom de la tasca..."
-            placeholder="Nom de la tasca"
+            label="Nombre"
+            hint="El nombre de la tarea..."
+            placeholder="Nombre de la tarea"
             :error-messages="nameErrors"
             @input="$v.name.$touch()"
             @blur="$v.name.$touch()"
@@ -70,7 +70,7 @@ export default {
       const errors = []
       if (!this.$v.name.$dirty) {
         return errors
-      } else { !this.$v.name.required && errors.push('El camp name és obligatori.') }
+      } else { !this.$v.name.required && errors.push('El nombre  es obligatorio.') }
       return errors
     }
   },
@@ -96,7 +96,7 @@ export default {
         'completed': this.completed,
         'user_id': this.user.id
       }
-      window.axios.post(this.uri, task).then(response => {
+      window.axios.post(this.uri, ta,sk).then(response => {
         this.$snackbar.showMessage('Tasca creada correctament')
         this.reset()
         this.$emit('created', response.data)

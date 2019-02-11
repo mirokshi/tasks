@@ -74175,7 +74175,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       if (!this.$v.name.$dirty) {
         return errors;
       } else {
-        !this.$v.name.required && errors.push('El camp name és obligatori.');
+        !this.$v.name.required && errors.push('El nombre  es obligatorio.');
       }
       return errors;
     }
@@ -74204,7 +74204,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'completed': this.completed,
         'user_id': this.user.id
       };
-      window.axios.post(this.uri, task).then(function (response) {
+      window.axios.post(this.uri, ta, sk).then(function (response) {
         _this.$snackbar.showMessage('Tasca creada correctament');
         _this.reset();
         _this.$emit('created', response.data);
@@ -75155,9 +75155,9 @@ var render = function() {
       _c("v-text-field", {
         attrs: {
           autofocus: "",
-          label: "Nom",
-          hint: "El nom de la tasca...",
-          placeholder: "Nom de la tasca",
+          label: "Nombre",
+          hint: "El nombre de la tarea...",
+          placeholder: "Nombre de la tarea",
           "error-messages": _vm.nameErrors
         },
         on: {
@@ -88644,18 +88644,18 @@ var render = function() {
                     "td",
                     {
                       staticClass: "text-xs-left cell",
-                      attrs: { title: props.item.formatted_created_at }
+                      attrs: { title: props.item.created_at_formatted }
                     },
                     [
                       _c("v-tooltip", { attrs: { bottom: "" } }, [
                         _c(
                           "span",
                           { attrs: { slot: "activator" }, slot: "activator" },
-                          [_vm._v(_vm._s(props.item.formatted_created_at_diff))]
+                          [_vm._v(_vm._s(props.item.created_at_human))]
                         ),
                         _vm._v(" "),
                         _c("span", [
-                          _vm._v(_vm._s(props.item.formatted_created_at))
+                          _vm._v(_vm._s(props.item.created_at_formatted))
                         ])
                       ])
                     ],
@@ -88666,18 +88666,18 @@ var render = function() {
                     "td",
                     {
                       staticClass: "text-xs-left cell",
-                      attrs: { title: props.item.formatted_updated_at }
+                      attrs: { title: props.item.updated_at_formatted }
                     },
                     [
                       _c("v-tooltip", { attrs: { bottom: "" } }, [
                         _c(
                           "span",
                           { attrs: { slot: "activator" }, slot: "activator" },
-                          [_vm._v(_vm._s(props.item.formatted_updated_at_diff))]
+                          [_vm._v(_vm._s(props.item.updated_at_human))]
                         ),
                         _vm._v(" "),
                         _c("span", [
-                          _vm._v(_vm._s(props.item.formatted_updated_at))
+                          _vm._v(_vm._s(props.item.updated_at_formatted))
                         ])
                       ])
                     ],
@@ -88720,7 +88720,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-container",
-    { attrs: { "grid-list-md": "", "text-xs-center": "" } },
+    { attrs: { "grid-list-md": "", "text-xs-center": "", fluid: "" } },
     [
       _c(
         "v-layout",

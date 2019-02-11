@@ -23,7 +23,6 @@ class NotificationsControllerTest extends TestCase
      */
     public function show_notifications_module()
     {
-        $this->withoutExceptionHandling();
         factory(User::class)->create([
             'name' => 'Pepe Pardo Jeans',
             'email' => 'pepepardo@jeans.com'
