@@ -1,8 +1,8 @@
 <template>
     <v-card>
         <v-card-title class="grey darken-3 white--text"><h4>Tema</h4></v-card-title>
-           <swatches v-model="color" inline></swatches>
-        <v-btn>Aplicar</v-btn>
+           <swatches v-model="colorPrincipal" inline></swatches>
+        <v-btn @click="principalDefault">DEFAULT</v-btn>
     </v-card>
 </template>
 
@@ -15,12 +15,18 @@ export default {
   components: { Swatches },
   data () {
     return {
-      color: '#2680C2'
+      colorPrincipal: window.localStorage.getItem('PRIMARY_COLOR_KEY')
     }
   },
   watch: {
-    color: function (newColor) {
-      window.localStorage.setItem('PRIMARY_COLOR_KEY', newColor)
+    colorPrincipal () {
+      window.localStorage.setItem('PRIMARY_COLOR_KEY', this.colorPrincipal)
+      this.$vuetify.theme.primary = this.colorPrincipal
+    }
+  },
+  methods: {
+    principalDefault () {
+      window.localStorage.removeItem('PRIMARY_COLOR_KEY')
     }
   }
 }

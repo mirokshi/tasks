@@ -1,9 +1,20 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
+
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import './bootstrap'
 import AppComponent from './components/App.vue'
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faCoffee)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.config.productionTip = false
+
+
 import ExampleComponent from './components/ExampleComponent.vue'
 import Tasks from './components/Tasks.vue'
 import Tasques from './components/Tasques.vue'
@@ -51,6 +62,9 @@ window.Vue.use(TreeView)
 
 // window.Vue.use(Vuetify)
 window.Vue.use(Vuetify, {
+  options: {
+    customProperties: true
+  },
   theme: {
     primary: {
       base: primaryColor,

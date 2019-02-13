@@ -1,5 +1,5 @@
 <template>
-    <v-btn v-can="'tasks.destroy'" icon color="error" flat title="Eliminar la tasca"
+    <v-btn v-can="'tasks.destroy'" icon color="error" flat title="Eliminar la tarea"
            :loading="removing" :disabled="removing"
            @click="destroy(task)">
         <v-icon>delete</v-icon>

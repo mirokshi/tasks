@@ -27,13 +27,11 @@
             <v-card-title>
                 <v-layout row wrap>
                     <v-flex lg3 class="pr-2">
-                        <v-select
-                            label="Filtros"
-                            :items="filters"
-                            v-model="filter"
-                            item-text="name"
-                        >
-                        </v-select>
+                        <ul style="list-style-type:none;">
+                            <li><v-icon color="red" @click="setFilter('completed')">lock</v-icon> : Completadas</li>
+                            <li><v-icon color="blue" @click="setFilter('active')">lock_open</v-icon> : Pendientes</li>
+                            <li><v-icon color="green" @click="setFilter('all')">done_all</v-icon> : Todos</li>
+                        </ul>
                     </v-flex>
                     <v-flex lg4 class="pr-2">
                         <user-select v-model="user" :users="dataUsers"></user-select>
@@ -60,7 +58,7 @@
                 class="hidden-md-and-down"
             >
                 <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
-                <template slot="items" slot-scope="{item: task}">
+                <template slot="items" slot-scope="{item: task}" v-for="task in filteredTasks">
                     <tr>
                         <td>{{ task.id }}</td>
                         <td>
@@ -160,6 +158,22 @@ import TaskShow from './TaskShow'
 import TasksTags from './TasksTags'
 import UserSelect from './UserSelect'
 
+var filters = {
+  all: function (dataTasks) {
+    return dataTasks
+  },
+  completed: function (dataTasks) {
+    return dataTasks.filter(function (task) {
+      return task.completed
+    })
+  },
+  active: function (dataTasks) {
+    return dataTasks.filter(function (task) {
+      return !task.completed
+    })
+  }
+}
+
 export default {
   name: 'TasksList',
   components: {
@@ -172,16 +186,11 @@ export default {
   },
   data () {
     return {
+      filter: 'all',
       user: null,
       loading: false,
       dataTasks: this.tasks,
       dataUsers: this.users,
-      filter: 'Todo',
-      filters: [
-        'Todo',
-        'Completados',
-        'Pendientes'
-      ],
       search: '',
       pagination: {
         rowsPerPage: 25
@@ -194,7 +203,7 @@ export default {
         { text: 'TAGS', value: 'tags' },
         { text: 'CREATED', value: 'created_at_timestamp' },
         { text: 'UPDATED', value: 'updated_at_timestamp' },
-        { text: 'ACTIONS', sortable: false, value: 'full_search' }
+        { text: 'ACTIONS', sortable: false, value: 'ful1l_search' }
       ]
     }
   },
@@ -222,6 +231,9 @@ export default {
     }
   },
   methods: {
+    setFilter (newFilter) {
+      this.filter = newFilter
+    },
     removeTask (task) {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
     },
@@ -243,6 +255,9 @@ export default {
   computed: {
     total () {
       return this.dataTasks.length
+    },
+    filteredTasks () {
+      return filters[this.filter](this.dataTasks)
     }
   }
 }

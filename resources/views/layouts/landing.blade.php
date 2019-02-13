@@ -45,18 +45,6 @@
                 <v-btn href="login" class="secondary "> LOGIN  </v-btn>
                 <v-btn href="register" class="secondary"> REGISTER</v-btn>
 
-                {{--<v-btn @click="LoginForm = !LoginForm">LOGIN</v-btn>--}}
-                {{--<v-btn @click="registerForm = !registerForm">REGISTER</v-btn>--}}
-                {{--<v-dialog v-model="loginForm" max-width="1000">--}}
-                {{--<v-card>--}}
-                {{--<login-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></login-form>--}}
-                {{--</v-card>--}}
-                {{--</v-dialog>--}}
-                {{--<v-dialog v-model="registerForm" max-width="1000">--}}
-                {{--<v-card>--}}
-                {{--<register-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></register-form>--}}
-                {{--</v-card>--}}
-                {{--</v-dialog>--}}
             @else
                 <v-form action="/logout" method="POST">
                     @csrf
@@ -86,6 +74,7 @@
                     >
                         <h1 class="white--text text--ligthen-2 mb-2 display-4 text-xs-center font-weight-bold"
                             style="text-shadow: 0 0 50px hsla(0, 0%, 0%, .4);font-family: 'Montserrat', sans-serif !important; z-index: 10;"
+                            :class="{'display-2': $vuetify.breakpoint.md, 'display-1': $vuetify.breakpoint.xs}"
                         >Aplicación de tareas</h1>
                         <div>
                             <v-btn
