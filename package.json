@@ -30,7 +30,13 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.6.1",
+        "@fortawesome/fontawesome-svg-core": "^1.2.15",
+        "@fortawesome/free-solid-svg-icons": "^5.7.2",
+        "@fortawesome/vue-fontawesome": "^0.1.5",
         "font-awesome": "^4.7.0",
+        "i": "^0.3.6",
+        "npm": "^6.7.0",
+        "vue-awesome": "^3.3.1",
         "vue-json-tree-view": "^2.1.4",
         "vue-swatches": "^1.0.2",
         "vue-timeago": "^5.0.0",

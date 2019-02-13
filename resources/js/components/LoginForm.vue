@@ -32,12 +32,13 @@
         <v-card-actions>
             <v-btn color="grey darken-4" type="submit" disable="true" class="white--text" :disabled="$v.$invalid">Login</v-btn>
             <v-btn color="grey darken-4"  class="white--text" href="/">Cancel</v-btn>
-            <v-spacer></v-spacer>
-            <p class="subheading font-weight-regular">Iniciar sesión con</p>
-            <a href="/auth/facebook"> Facebook</a>
-            <a href="/auth/github">GitHub</a>
-
         </v-card-actions>
+        <div>
+            <p class="subheading font-weight-regular grey--text">Iniciar sesión con :</p>
+            <v-btn href="/auth/facebook">Facebook</v-btn>
+            <v-btn href="/auth/github">GitHub</v-btn>
+            <font-awesome-icon icon="android"></font-awesome-icon>
+        </div>
     </v-form>
 </template>
 

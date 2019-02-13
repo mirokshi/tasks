@@ -6,16 +6,16 @@
                 <v-btn flat icon class="white--text" @click="dialog=false">
                     <v-icon class="mr-1">close</v-icon>
                 </v-btn>
-                <v-toolbar-title class="white--text">Editar Tasca</v-toolbar-title>
+                <v-toolbar-title class="white--text">Editar Tarea</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-btn flat class="white--text" @click="dialog=false">
                     <v-icon class="mr-1">exit_to_app</v-icon>
-                    Sortir
+                    SALIR
                 </v-btn>
                 <!--TODO-->
                 <v-btn flat class="white--text">
                     <v-icon class="mr-1">save</v-icon>
-                    Guardar
+                    GUARDAR
                 </v-btn>
             </v-toolbar>
             <v-card>
@@ -24,7 +24,7 @@
                 </v-card-text>
             </v-card>
         </v-dialog>
-        <v-btn v-if="$can('tasks.update',task)" icon color="success" flat title="Canviar la tasca"
+        <v-btn v-if="$can('tasks.update',task)" icon color="pink" flat title="Cambiar la tarea"
                @click="dialog=true">
             <v-icon>edit</v-icon>
         </v-btn>

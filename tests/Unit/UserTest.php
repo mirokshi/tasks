@@ -5,6 +5,7 @@ use App\Photo;
 use App\Task;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
@@ -172,12 +173,14 @@ class UserTest extends TestCase{
 
         $mappedUser = $user->map();
 
+
         $this->assertEquals($mappedUser['name'], 'Pepe Pardo Jeans');
         $this->assertEquals($mappedUser['email'], 'pepepardo@jeans.com');
         $this->assertEquals($mappedUser['gravatar'], 'https://www.gravatar.com/avatar/6849ef9c40c2540dc23ad9699a79a2f8');
         $this->assertEquals($mappedUser['admin'],false);
         $this->assertCount(0,$mappedUser['roles']);
         $this->assertCount(0,$mappedUser['permissions']);
+
         $user->admin = true;
         $user->save();
         $rol1 = Role::create([
@@ -199,12 +202,29 @@ class UserTest extends TestCase{
         $user = $user->fresh();
         $mappedUser = $user->map();
         $this->assertEquals($mappedUser['admin'],true);
+
         $this->assertCount(2,$mappedUser['roles']);
         $this->assertCount(2,$mappedUser['permissions']);
         $this->assertEquals($mappedUser['roles'][0],'Rol1');
         $this->assertEquals($mappedUser['roles'][1],'Rol2');
         $this->assertEquals($mappedUser['permissions'][0],'Permission1');
         $this->assertEquals($mappedUser['permissions'][1],'Permission2');
+
+    }
+
+    /**
+     * @test
+     */
+    public function mapOnline()
+    {
+        $user=factory(User::class)->create();
+
+        Cache::shouldReceive('has')
+            ->andReturn(true);
+        $mappedUser = $user->map();
+
+        $this->assertTrue($mappedUser['online']);
+
     }
 
     /**

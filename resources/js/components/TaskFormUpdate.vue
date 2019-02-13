@@ -1,23 +1,23 @@
 <template>
     <v-form>
-        <v-text-field v-model="name" label="Nom" hint="El nom de la tasca..." placeholder="Nom de la tasca"></v-text-field>
+        <v-text-field v-model="name" label="Nombre" hint="El nombre de la tasca tarea" placeholder="Nombre de la tarea"></v-text-field>
 
         <!--TODO toggle component? -->
         <!--<toggle></toggle>-->
-        <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>b5cd979b1eb4b0
+        <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendiente'"></v-switch>
 
-        <v-textarea v-model="description" label="Descripció" hint="bla bla bla..."></v-textarea>
+        <v-textarea v-model="description" label="Descripción" hint="bla bla bla..."></v-textarea>
 
-        <user-select v-model="user" :users="dataUsers" label="Usuari"></user-select>
+        <user-select v-model="user" :users="dataUsers" label="Usuario"></user-select>
 
         <div class="text-xs-center">
             <v-btn @click="$emit('close')">
                 <v-icon class="mr-1">exit_to_app</v-icon>
-                Cancel·lar
+                Cancelar
             </v-btn>
             <v-btn color="success" @click="update" :disabled="working" :loading="working">
                 <v-icon class="mr-1" >save</v-icon>
-                Actualitzar
+                Actualizar
             </v-btn>
         </div>
     </v-form>
