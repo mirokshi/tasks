@@ -9,11 +9,7 @@ import AppComponent from './components/App.vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-library.add(faCoffee)
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-Vue.config.productionTip = false
-
+import { dom } from '@fortawesome/fontawesome-svg-core'
 
 import ExampleComponent from './components/ExampleComponent.vue'
 import Tasks from './components/Tasks.vue'
@@ -40,6 +36,11 @@ import ShareFab from './components/ui/ShareFab.vue'
 
 import VueTimeago from 'vue-timeago'
 import TreeView from 'vue-json-tree-view'
+
+library.add(faCoffee)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.config.productionTip = false
+dom.watch()
 
 // instalacion vuetify
 window.Vue = Vue
