@@ -12,6 +12,7 @@
     <link rel="icon" href="img/icon.png">
     <meta name="theme-color" content="#317EFB"/>
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <meta property="og:image" content="/img/shareImage.jpeg" />
     <meta property="og:image:width" content="439" />
     <meta property="og:image:height" content="659" />
