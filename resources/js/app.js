@@ -37,6 +37,8 @@ import ShareFab from './components/ui/ShareFab.vue'
 import VueTimeago from 'vue-timeago'
 import TreeView from 'vue-json-tree-view'
 
+// window.location.reload(true)
+
 library.add(faCoffee)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
