@@ -120,18 +120,6 @@ Route::get('/prueba_cola',function (){
  \App\Jobs\SleepJob::dispatch();
 });
 
-Route::get('/prueva', function () {
-    $rows = array_map('str_getcsv', file('/home/mirokshi/Descargas/csvcopia.csv'));
-    $header = array_shift($rows);
-    $csv = array();
-    foreach ($rows as $row) {
-        $csv[] = array_combine($header, $row);
-    }
-    return $csv;
-
-
-});
-
 Route::get('/omplir', function () {
     //10 000
     for ($i =1; $i <=50; $i++){
