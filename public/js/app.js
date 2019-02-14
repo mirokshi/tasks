@@ -29890,6 +29890,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+// window.location.reload(true)
+
 __WEBPACK_IMPORTED_MODULE_6__fortawesome_fontawesome_svg_core__["d" /* library */].add(__WEBPACK_IMPORTED_MODULE_7__fortawesome_free_solid_svg_icons__["a" /* faCoffee */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('font-awesome-icon', __WEBPACK_IMPORTED_MODULE_8__fortawesome_vue_fontawesome__["a" /* FontAwesomeIcon */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.config.productionTip = false;
