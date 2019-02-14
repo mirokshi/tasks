@@ -96,7 +96,7 @@ export default {
         'completed': this.completed,
         'user_id': this.user.id
       }
-      window.axios.post(this.uri, ta,sk).then(response => {
+      window.axios.post(this.uri, task).then(response => {
         this.$snackbar.showMessage('Tasca creada correctament')
         this.reset()
         this.$emit('created', response.data)

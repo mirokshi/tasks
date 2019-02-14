@@ -1,5 +1,4 @@
 <template>
-    <span>
     <v-form action="/login" method="POST">
         <v-toolbar dark color="primary">
             <v-toolbar-title>Login form</v-toolbar-title>
@@ -33,14 +32,13 @@
         <v-card-actions>
             <v-btn color="grey darken-4" type="submit" disable="true" class="white--text" :disabled="$v.$invalid">Login</v-btn>
             <v-btn color="grey darken-4"  class="white--text" href="/">Cancel</v-btn>
-        </v-card-actions>
-    </v-form>
-        <div>
+            <div>
             <p class="text-grey-darker">Iniciar sesión con :</p>
             <v-btn href="/auth/facebook" icon><i class="fab fa-facebook fa-3x" style="color:#3b5998;"></i></v-btn>
             <v-btn href="/auth/github" icon ><i class="fab fa-github-square fa-3x"></i></v-btn>
         </div>
-        </span>
+        </v-card-actions>
+    </v-form>
 </template>
 
 <script>
