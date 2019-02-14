@@ -1,8 +1,8 @@
 {
-    "name": "Application Tasks",
-    "short_name": "Tasks",
-    "theme_color": "#2196f3",
-    "background_color": "#2196f3",
+    "name": "Application Tasks Mirokshi Rojas",
+    "short_name": "App Tasks",
+    "theme_color": "#6c1235",
+    "background_color": "#6c1235",
     "display": "standalone",
     "Scope": "/",
     "start_url": "/",
