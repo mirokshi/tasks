@@ -83336,6 +83336,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -83661,7 +83676,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'completed': this.completed,
         'user_id': this.user.id
       };
-      window.axios.post(this.uri, ta, sk).then(function (response) {
+      window.axios.post(this.uri, task).then(function (response) {
         _this.$snackbar.showMessage('Tasca creada correctament');
         _this.reset();
         _this.$emit('created', response.data);
@@ -88091,25 +88106,122 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "span",
-    [
-      _c("tasks-list", {
-        attrs: {
-          users: _vm.users,
-          uri: _vm.uri,
-          tasks: _vm.dataTasks,
-          tags: _vm.tags
-        }
-      }),
-      _vm._v(" "),
-      _c("tasks-create", {
-        attrs: { users: _vm.users, uri: _vm.uri },
-        on: { created: _vm.add }
-      })
-    ],
-    1
-  )
+  return _c("span", [
+    _vm.dataTasks.length > 0
+      ? _c(
+          "span",
+          [
+            _c("tasks-list", {
+              attrs: {
+                users: _vm.users,
+                uri: _vm.uri,
+                tasks: _vm.dataTasks,
+                tags: _vm.tags
+              }
+            }),
+            _vm._v(" "),
+            _c("tasks-create", {
+              attrs: { users: _vm.users, uri: _vm.uri },
+              on: { created: _vm.add }
+            })
+          ],
+          1
+        )
+      : _c(
+          "span",
+          [
+            _c(
+              "v-container",
+              { attrs: { "grid-list-md": "", "text-xs-center": "" } },
+              [
+                _c(
+                  "v-layout",
+                  { attrs: { row: "", wrap: "" } },
+                  [
+                    _c(
+                      "v-flex",
+                      {
+                        staticClass: "mt-3",
+                        attrs: { xs12: "", md6: "", "offset-md3": "" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "grey lighten-3",
+                            staticStyle: {
+                              width: "240px",
+                              height: "240px",
+                              padding: "60px",
+                              "border-radius": "50%",
+                              display: "inline-flex"
+                            }
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                style:
+                                  "width:120px;height:120px;fill: " +
+                                  this.$vuetify.theme.primary.base +
+                                  ";",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  viewBox: "0 0 24 24"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: { fill: "none", d: "M0 0h24v24H0V0z" }
+                                }),
+                                _c("circle", {
+                                  attrs: { cx: "15.5", cy: "9.5", r: "1.5" }
+                                }),
+                                _c("circle", {
+                                  attrs: { cx: "8.5", cy: "9.5", r: "1.5" }
+                                }),
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm0-6c-2.33 0-4.32 1.45-5.12 3.5h1.67c.69-1.19 1.97-2 3.45-2s2.75.81 3.45 2h1.67c-.8-2.05-2.79-3.5-5.12-3.5z"
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-flex",
+                      {
+                        staticClass: "mt-3",
+                        attrs: { xs12: "", md4: "", "offset-md4": "" }
+                      },
+                      [
+                        _c(
+                          "h1",
+                          {
+                            staticClass: "display-1 grey--text text--darken-2"
+                          },
+                          [
+                            _c("strong", [_vm._v("Uups!")]),
+                            _vm._v("No hay niguna tarea")
+                          ]
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -89440,8 +89552,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -89491,136 +89601,130 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "span",
+    "v-form",
+    { attrs: { action: "/login", method: "POST" } },
     [
       _c(
-        "v-form",
-        { attrs: { action: "/login", method: "POST" } },
+        "v-toolbar",
+        { attrs: { dark: "", color: "primary" } },
         [
-          _c(
-            "v-toolbar",
-            { attrs: { dark: "", color: "primary" } },
-            [
-              _c("v-toolbar-title", [_vm._v("Login form")]),
-              _vm._v(" "),
-              _c("v-spacer")
-            ],
-            1
-          ),
+          _c("v-toolbar-title", [_vm._v("Login form")]),
           _vm._v(" "),
-          _c(
-            "v-card-text",
-            [
-              _c("input", {
-                attrs: { type: "hidden", name: "_token" },
-                domProps: { value: _vm.csrfToken }
-              }),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: {
-                  "prepend-icon": "person",
-                  name: "email",
-                  label: "Login",
-                  type: "text",
-                  "error-messages": _vm.emailErrors
-                },
-                on: {
-                  input: function($event) {
-                    _vm.$v.dataEmail.$touch()
-                  },
-                  blur: function($event) {
-                    _vm.$v.dataEmail.$touch()
-                  }
-                },
-                model: {
-                  value: _vm.dataEmail,
-                  callback: function($$v) {
-                    _vm.dataEmail = $$v
-                  },
-                  expression: "dataEmail"
-                }
-              }),
-              _vm._v(" "),
-              _c("v-text-field", {
-                attrs: {
-                  id: "password",
-                  "prepend-icon": "lock",
-                  name: "password",
-                  label: "Password",
-                  type: "password",
-                  "error-messages": _vm.passwordErrors
-                },
-                on: {
-                  input: function($event) {
-                    _vm.$v.password.$touch()
-                  },
-                  blur: function($event) {
-                    _vm.$v.password.$touch()
-                  }
-                },
-                model: {
-                  value: _vm.password,
-                  callback: function($$v) {
-                    _vm.password = $$v
-                  },
-                  expression: "password"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("v-divider", { attrs: { light: "" } }),
-          _vm._v(" "),
-          _c(
-            "v-card-actions",
-            [
-              _c(
-                "v-btn",
-                {
-                  staticClass: "white--text",
-                  attrs: {
-                    color: "grey darken-4",
-                    type: "submit",
-                    disable: "true",
-                    disabled: _vm.$v.$invalid
-                  }
-                },
-                [_vm._v("Login")]
-              ),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  staticClass: "white--text",
-                  attrs: { color: "grey darken-4", href: "/" }
-                },
-                [_vm._v("Cancel")]
-              )
-            ],
-            1
-          )
+          _c("v-spacer")
         ],
         1
       ),
       _vm._v(" "),
       _c(
-        "div",
+        "v-card-text",
         [
-          _c("p", { staticClass: "text-grey-darker" }, [
-            _vm._v("Iniciar sesión con :")
-          ]),
+          _c("input", {
+            attrs: { type: "hidden", name: "_token" },
+            domProps: { value: _vm.csrfToken }
+          }),
           _vm._v(" "),
-          _c("v-btn", { attrs: { href: "/auth/facebook", icon: "" } }, [
-            _c("i", {
-              staticClass: "fab fa-facebook fa-3x",
-              staticStyle: { color: "#3b5998" }
-            })
-          ]),
+          _c("v-text-field", {
+            attrs: {
+              "prepend-icon": "person",
+              name: "email",
+              label: "Login",
+              type: "text",
+              "error-messages": _vm.emailErrors
+            },
+            on: {
+              input: function($event) {
+                _vm.$v.dataEmail.$touch()
+              },
+              blur: function($event) {
+                _vm.$v.dataEmail.$touch()
+              }
+            },
+            model: {
+              value: _vm.dataEmail,
+              callback: function($$v) {
+                _vm.dataEmail = $$v
+              },
+              expression: "dataEmail"
+            }
+          }),
           _vm._v(" "),
-          _c("v-btn", { attrs: { href: "/auth/github", icon: "" } }, [
-            _c("i", { staticClass: "fab fa-github-square fa-3x" })
-          ])
+          _c("v-text-field", {
+            attrs: {
+              id: "password",
+              "prepend-icon": "lock",
+              name: "password",
+              label: "Password",
+              type: "password",
+              "error-messages": _vm.passwordErrors
+            },
+            on: {
+              input: function($event) {
+                _vm.$v.password.$touch()
+              },
+              blur: function($event) {
+                _vm.$v.password.$touch()
+              }
+            },
+            model: {
+              value: _vm.password,
+              callback: function($$v) {
+                _vm.password = $$v
+              },
+              expression: "password"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-divider", { attrs: { light: "" } }),
+      _vm._v(" "),
+      _c(
+        "v-card-actions",
+        [
+          _c(
+            "v-btn",
+            {
+              staticClass: "white--text",
+              attrs: {
+                color: "grey darken-4",
+                type: "submit",
+                disable: "true",
+                disabled: _vm.$v.$invalid
+              }
+            },
+            [_vm._v("Login")]
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              staticClass: "white--text",
+              attrs: { color: "grey darken-4", href: "/" }
+            },
+            [_vm._v("Cancel")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c("p", { staticClass: "text-grey-darker" }, [
+                _vm._v("Iniciar sesión con :")
+              ]),
+              _vm._v(" "),
+              _c("v-btn", { attrs: { href: "/auth/facebook", icon: "" } }, [
+                _c("i", {
+                  staticClass: "fab fa-facebook fa-3x",
+                  staticStyle: { color: "#3b5998" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("v-btn", { attrs: { href: "/auth/github", icon: "" } }, [
+                _c("i", { staticClass: "fab fa-github-square fa-3x" })
+              ])
+            ],
+            1
+          )
         ],
         1
       )
@@ -90532,7 +90636,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     message: {
       type: String,
-      required: 'Hola'
+      default: 'Hola'
     },
     title: {
       type: String
@@ -95063,7 +95167,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -95081,13 +95185,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ServiceWorker',
+  methods: {
+    registerServiceWorker: function registerServiceWorker() {
+      if (!('serviceWorker' in navigator)) {
+        console.log('Service workers are not supported in tyhis browser');
+        return;
+      }
+      navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
+        console.log('Registratin succesfull, scope is : ', registration.scope);
+      }).catch(function (error) {
+        console.log('Service worker resgistration failed, errror :', error);
+      });
+    }
+  },
   // QUIERO EJECUTAR EL REGISTRE DEL SERVICE WORKER
   mounted: function mounted() {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js');
-    } else {
-      console.log('NAVEGADOR OBSOLETO');
-    }
+    this.registerServiceWorker();
   }
 });
 
