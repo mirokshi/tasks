@@ -83,19 +83,19 @@ if (!function_exists('create_example_tags')) {
     function create_example_tags()
     {
         Tag::create([
-            'name' => 'Tag1',
+            'name' => 'Buy',
             'description' => 'Aqui van las compras',
             'color' => '#4b4a9b'
         ]);
 
         Tag::create([
-            'name' => 'Tag2',
+            'name' => 'Study',
             'description' => 'Aqui van los estudios',
             'color' => '#04B404'
         ]);
 
         Tag::create([
-            'name' => 'Tag3',
+            'name' => 'Works',
             'description' => 'Aqui van los trabajos',
             'color' => '#48a89b'
         ]);
@@ -113,12 +113,12 @@ if (!function_exists('create_sample_tasks')) {
         $task->assignUser($user);
 
         $tag1 = Tag::create([
-            'name' => 'Tag1',
+            'name' => 'Buy',
             'color' => 'blue',
             'description' => 'bla bla bla'
         ]);
         $tag2 = Tag::create([
-            'name' => 'Tag2',
+            'name' => 'Funny',
             'color' => 'red',
             'description' => 'Jorl Jorl'
         ]);

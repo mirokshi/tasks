@@ -83353,6 +83353,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -88152,8 +88153,8 @@ var render = function() {
                           {
                             staticClass: "grey lighten-3",
                             staticStyle: {
-                              width: "240px",
-                              height: "240px",
+                              width: "340px",
+                              height: "340px",
                               padding: "60px",
                               "border-radius": "50%",
                               display: "inline-flex"
@@ -88164,7 +88165,7 @@ var render = function() {
                               "svg",
                               {
                                 style:
-                                  "width:120px;height:120px;fill: " +
+                                  "width:220px;height:220px;fill: " +
                                   this.$vuetify.theme.primary.base +
                                   ";",
                                 attrs: {
@@ -88207,12 +88208,15 @@ var render = function() {
                           {
                             staticClass: "display-1 grey--text text--darken-2"
                           },
-                          [
-                            _c("strong", [_vm._v("Uups!")]),
-                            _vm._v("No hay niguna tarea")
-                          ]
-                        )
-                      ]
+                          [_vm._v("No hay niguna tarea")]
+                        ),
+                        _vm._v(" "),
+                        _c("tasks-create", {
+                          attrs: { users: _vm.users, uri: _vm.uri },
+                          on: { created: _vm.add }
+                        })
+                      ],
+                      1
                     )
                   ],
                   1
@@ -89552,8 +89556,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -89612,7 +89614,18 @@ var render = function() {
         [
           _c("v-toolbar-title", [_vm._v("Login form")]),
           _vm._v(" "),
-          _c("v-spacer")
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { href: "/auth/facebook", icon: "" } }, [
+            _c("i", {
+              staticClass: "fab fa-facebook fa-3x",
+              staticStyle: { color: "#3b5998" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("v-btn", { attrs: { href: "/auth/github", icon: "" } }, [
+            _c("i", { staticClass: "fab fa-github-square fa-3x" })
+          ])
         ],
         1
       ),
@@ -89705,27 +89718,6 @@ var render = function() {
               attrs: { color: "grey darken-4", href: "/" }
             },
             [_vm._v("Cancel")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            [
-              _c("p", { staticClass: "text-grey-darker" }, [
-                _vm._v("Iniciar sesión con :")
-              ]),
-              _vm._v(" "),
-              _c("v-btn", { attrs: { href: "/auth/facebook", icon: "" } }, [
-                _c("i", {
-                  staticClass: "fab fa-facebook fa-3x",
-                  staticStyle: { color: "#3b5998" }
-                })
-              ]),
-              _vm._v(" "),
-              _c("v-btn", { attrs: { href: "/auth/github", icon: "" } }, [
-                _c("i", { staticClass: "fab fa-github-square fa-3x" })
-              ])
-            ],
-            1
           )
         ],
         1

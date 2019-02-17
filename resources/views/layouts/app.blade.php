@@ -88,7 +88,7 @@
 
             <v-form action="/logout" method="POST">
                 @csrf
-                <v-btn color="indigo lighten-2"type="submit"><v-icon>exit_to_app</v-icon>CERRAR SESION</v-btn>
+                <v-btn color="indigo lighten-2" class="text-md-center" type="submit" ><v-icon>exit_to_app</v-icon>CERRAR SESION</v-btn>
             </v-form>
         </v-navigation-drawer>
         <v-toolbar
