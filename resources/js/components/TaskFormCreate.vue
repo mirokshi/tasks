@@ -13,9 +13,11 @@
 
         <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
 
-        <v-textarea v-model="description" label="Descripción" hint="Escriu la descripció de la tasca..."></v-textarea>
+        <v-textarea v-model="description" label="Descripción" hint="Escribe la descripción de la tarea..."></v-textarea>
 
         <user-select :item-value="null" v-model="user" :users="dataUsers" label="Usuari"></user-select>
+
+        <!--<tasks-tags :task-tags="tags" :tags="tags"></tasks-tags>-->
 
         <div class="text-xs-center">
             <v-btn @click="$emit('close')">
@@ -35,6 +37,7 @@
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 import UserSelect from './UserSelect'
+import TasksTags from './TasksTags'
 
 export default {
   mixins: [validationMixin],
@@ -43,7 +46,8 @@ export default {
   },
   name: 'TaskFormCreate',
   components: {
-    'user-select': UserSelect
+    'user-select': UserSelect,
+    'tasks-tags': TasksTags
   },
   data () {
     return {
@@ -57,6 +61,10 @@ export default {
   },
   props: {
     users: {
+      type: Array,
+      required: true
+    },
+    tags: {
       type: Array,
       required: true
     },
@@ -97,7 +105,7 @@ export default {
         'user_id': this.user.id
       }
       window.axios.post(this.uri, task).then(response => {
-        this.$snackbar.showMessage('Tasca creada correctament')
+        this.$snackbar.showMessage('Tarea creada correctamente')
         this.reset()
         this.$emit('created', response.data)
         this.loading = false

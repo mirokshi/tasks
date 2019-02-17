@@ -18,7 +18,7 @@
         </v-toolbar>
             <v-card>
                 <v-card-text>
-                    <task-form-create :users="users" :uri="uri" @close="dialog=false" @created="created" ></task-form-create>
+                    <task-form-create :users="users"  :uri="uri" @close="dialog=false" :tags="tags" @created="created" ></task-form-create>
                 </v-card-text>
             </v-card>
         </v-dialog>
@@ -50,6 +50,10 @@ export default {
   },
   props: {
     users: {
+      type: Array,
+      required: true
+    },
+    tags: {
       type: Array,
       required: true
     },

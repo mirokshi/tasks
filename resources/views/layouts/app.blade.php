@@ -41,12 +41,13 @@
         <snackbar></snackbar>
         <service-worker></service-worker>
         <navigation v-model="drawer"></navigation>
+        {{--<navigation-right v-model="drawerRight"></navigation-right>--}}
         <v-navigation-drawer
-                v-model="drawerRight"
-                fixed
-                right
-                clipped
-                app
+            v-model="drawerRight"
+            fixed
+            right
+            clipped
+            app
         >
             <v-card>
                 <v-card-title class="grey darken-3 white--text"><h4>Perfil</h4></v-card-title>
@@ -84,7 +85,7 @@
                     </v-flex>
                 </v-layout>
             </v-card>
-                    <tema></tema>
+            <tema></tema>
 
             <v-form action="/logout" method="POST">
                 @csrf

@@ -56,8 +56,7 @@ export default {
   },
   props: {
     task: {
-      type: Object,
-      required: true
+      type: Object
     },
     tags: {
       type: Array,
