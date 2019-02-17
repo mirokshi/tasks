@@ -34,7 +34,7 @@
                         </ul>
                     </v-flex>
                     <v-flex lg4 class="pr-2">
-                        <user-select v-model="user" :users="dataUsers"></user-select>
+                        <user-select @cleared="selectedUser = null" v-model="selectedUser" :users="dataUsers"  label="Filtrar por usuario" class="pr-4"></user-select>
                     </v-flex>
                     <v-flex lg5>
                          <v-text-field
@@ -47,7 +47,7 @@
             </v-card-title>
             <v-data-table
                 :headers="headers"
-                :items="dataTasks"
+                :items="filteredTasks && filteredUsers"
                 :search="search"
                 no-results-text="No se ha encontrado ningún registro"
                 no-data-text="No hay datos disponibles"
@@ -91,7 +91,7 @@
                 </template>
             </v-data-table>
             <v-data-iterator class="hidden-lg-and-up"
-                             :items="dataTasks"
+                             :items="filteredTasks && filteredUsers"
                              :search="search"
                              no-results-text="No se ha encontrado ninguna coincidencia"
                              no-data-text="No hay datos disponibles"
@@ -133,7 +133,7 @@
               <img class="elevation-6" v-if="task.user_gravatar" :src="task.user_gravatar" alt="avatar">
                                 <img class="elevation-6" v-else src="https://www.gravatar.com/avatar/" alt="avatar">
         </v-list-tile-avatar>
-
+            <tasks-tags :task="task" :task-tags="task.tags" :tags="tags" @change="refresh(false)"></tasks-tags>
         <v-layout
             align-center
             justify-end
@@ -173,7 +173,6 @@ var filters = {
     })
   }
 }
-
 export default {
   name: 'TasksList',
   components: {
@@ -187,7 +186,7 @@ export default {
   data () {
     return {
       filter: 'all',
-      user: null,
+      selectedUser: null,
       loading: false,
       dataTasks: this.tasks,
       dataUsers: this.users,
@@ -230,6 +229,23 @@ export default {
       this.dataTasks = newTasks
     }
   },
+  computed: {
+    total () {
+      return this.dataTasks.length
+    },
+    filteredTasks () {
+      return filters[this.filter](this.dataTasks)
+    },
+    filteredUsers () {
+      let tasks = this.dataTasks
+      if (this.selectedUser !== null) {
+        tasks = tasks.filter((task) => {
+          return task.user_id === this.selectedUser.id
+        })
+      }
+      return tasks
+    }
+  },
   methods: {
     setFilter (newFilter) {
       this.filter = newFilter
@@ -250,14 +266,6 @@ export default {
         console.log(error)
         this.loading = false
       })
-    }
-  },
-  computed: {
-    total () {
-      return this.dataTasks.length
-    },
-    filteredTasks () {
-      return filters[this.filter](this.dataTasks)
     }
   }
 }

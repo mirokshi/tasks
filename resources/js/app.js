@@ -29,8 +29,9 @@ import Tema from './components/Tema.vue'
 import Profile from './components/Profile'
 import Changelog from './components/changelog/ChangelogComponent.vue'
 import Navigation from './components/Navigation'
+import NavigationRight from './components/NavigationRight.vue'
 import ServiceWorker from './components/ServiceWorker.vue'
-import NotificationsWidget from './components/NotificationsWidget'
+import NotificationsWidget from './components/notifications/NotificationsWidget'
 import Notifications from './components/notifications/Notifications'
 import ShareFab from './components/ui/ShareFab.vue'
 
@@ -168,6 +169,8 @@ window.Vue.component('profile', Profile)
 // Changelog
 window.Vue.component('changelog', Changelog)
 window.Vue.component('navigation', Navigation)
+window.Vue.component('navigation-right', NavigationRight)
+
 window.Vue.component('service-worker', ServiceWorker)
 window.Vue.component('notifications-widget', NotificationsWidget)
 window.Vue.component('notifications', Notifications)

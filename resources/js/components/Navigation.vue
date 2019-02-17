@@ -1,3 +1,4 @@
+
 <template>
     <v-navigation-drawer
         v-model="dataDrawer"
@@ -43,10 +44,10 @@
                         :style="selectedStyle(child)"
                     >
                         <v-list-tile-action v-if="child.icon">
-                            <v-icon>{{ child.icon }}</v-icon>
+                            <v-icon color="primary lighten-1">{{ child.icon }}</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-content>
-                            <v-list-tile-title>
+                            <v-list-tile-title class="grey--text text--darken-4">
                                 {{ child.text }}
                             </v-list-tile-title>
                         </v-list-tile-content>
@@ -56,10 +57,10 @@
                              :style="selectedStyle(item)"
                              >
                     <v-list-tile-action>
-                        <v-icon>{{ item.icon }}</v-icon>
+                        <v-icon color="primary lighten-1">{{ item.icon }}</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                        <v-list-tile-title>
+                        <v-list-tile-title class="grey--text text--darken-4">
                             {{ item.text }}
                         </v-list-tile-title>
                     </v-list-tile-content>
@@ -75,6 +76,17 @@ export default {
   data () {
     return {
       dataDrawer: this.drawer,
+      icons: [
+        { nombre: 'home', color: 'red', value: 'home' },
+        { nombre: 'tasks', color: 'red', value: 'build' },
+        { nombre: 'tasks_vue', color: 'red', value: 'build' },
+        { nombre: 'tasques', color: 'red', value: 'build' },
+        { nombre: 'tags', color: 'red', value: 'build' },
+        { nombre: 'contact', color: 'red', value: 'build' },
+        { nombre: 'about', color: 'red', value: 'build' },
+        { nombre: 'cahngelog', color: 'red', value: 'build' },
+        { nombre: 'notifications', color: 'red', value: 'build' }
+      ],
       items: [
         { icon: 'home', text: 'Home', url: '/' },
         {
@@ -91,7 +103,8 @@ export default {
         },
         { icon: 'help', text: 'Contact', url: '/contact' },
         { icon: 'public', text: 'About', url: '/about' },
-        { icon: 'assessment', text: 'Changelog', url: '/changelog' }
+        { icon: 'assessment', text: 'Changelog', url: '/changelog' },
+        { icon: 'notifications', text: 'Notifications', url: '/notifications' }
       ]
     }
   },
