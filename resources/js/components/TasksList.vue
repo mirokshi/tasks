@@ -1,6 +1,6 @@
 <template>
     <span>
-        <v-toolbar color="secondary">
+        <v-toolbar color="primary lighten-2">
             <v-menu>
                 <v-btn slot="activator" icon dark>
                     <v-icon>more_vert</v-icon>

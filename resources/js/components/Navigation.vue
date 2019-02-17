@@ -44,7 +44,7 @@
                         :style="selectedStyle(child)"
                     >
                         <v-list-tile-action v-if="child.icon">
-                            <v-icon color="primary lighten-1">{{ child.icon }}</v-icon>
+                            <v-icon color="primary lighten-3">{{ child.icon }}</v-icon>
                         </v-list-tile-action>
                         <v-list-tile-content>
                             <v-list-tile-title class="grey--text text--darken-4">
@@ -57,7 +57,7 @@
                              :style="selectedStyle(item)"
                              >
                     <v-list-tile-action>
-                        <v-icon color="primary lighten-1">{{ item.icon }}</v-icon>
+                        <v-icon color="primary lighten-3">{{ item.icon }}</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
                         <v-list-tile-title class="grey--text text--darken-4">

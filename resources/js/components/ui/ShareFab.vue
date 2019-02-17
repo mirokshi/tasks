@@ -10,6 +10,8 @@
         right
         large
         @click="share"
+        :disabled="loading"
+        :loading="loading"
     >
         <v-icon>share</v-icon>
     </v-btn>
@@ -20,7 +22,8 @@ export default {
   name: 'ShareFab',
   data () {
     return {
-      fab: false
+      fab: false,
+      loading: false
     }
   },
   methods: {
@@ -30,6 +33,7 @@ export default {
     },
     share () {
       if (!('share' in navigator)) {
+        this.loading = true
         return
       }
       navigator.share({
@@ -37,8 +41,14 @@ export default {
         text: 'Aplicacion de gestion de tareas',
         url: 'https://tasks.mirokshi.scool.cat'
       })
-        .then(() => console.log('Successful share'))
-        .catch(error => console.log('Error sharing:', error))
+        .then(response => {
+          console.log('Successful share')
+          console.log(response)
+          this.loading = false
+        }).catch(error => {
+          console.log('Error sharing:', error)
+          this.loading = false
+        })
     }
   }
 }

@@ -87733,7 +87733,7 @@ var render = function() {
     [
       _c(
         "v-toolbar",
-        { attrs: { color: "secondary" } },
+        { attrs: { color: "primary lighten-2" } },
         [
           _c(
             "v-menu",
@@ -95059,7 +95059,7 @@ var render = function() {
                                       _c(
                                         "v-icon",
                                         {
-                                          attrs: { color: "primary lighten-1" }
+                                          attrs: { color: "primary lighten-3" }
                                         },
                                         [_vm._v(_vm._s(child.icon))]
                                       )
@@ -95107,7 +95107,7 @@ var render = function() {
                           [
                             _c(
                               "v-icon",
-                              { attrs: { color: "primary lighten-1" } },
+                              { attrs: { color: "primary lighten-3" } },
                               [_vm._v(_vm._s(item.icon))]
                             )
                           ],
@@ -99005,12 +99005,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ShareFab',
   data: function data() {
     return {
-      fab: false
+      fab: false,
+      loading: false
     };
   },
 
@@ -99020,17 +99023,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return false;
     },
     share: function share() {
+      var _this = this;
+
       if (!('share' in navigator)) {
+        this.loading = true;
         return;
       }
       navigator.share({
         title: 'Aplicación de tareas',
         text: 'Aplicacion de gestion de tareas',
         url: 'https://tasks.mirokshi.scool.cat'
-      }).then(function () {
-        return console.log('Successful share');
+      }).then(function (response) {
+        console.log('Successful share');
+        console.log(response);
+        _this.loading = false;
       }).catch(function (error) {
-        return console.log('Error sharing:', error);
+        console.log('Error sharing:', error);
+        _this.loading = false;
       });
     }
   }
@@ -99055,7 +99064,9 @@ var render = function() {
             fixed: "",
             bottom: "",
             right: "",
-            large: ""
+            large: "",
+            disabled: _vm.loading,
+            loading: _vm.loading
           },
           on: { click: _vm.share },
           model: {
