@@ -64,8 +64,8 @@ Route::get('/v1/regular_users', 'Api\RegularUsersController@index');
 //Git
 Route::get('/v1/git/info','\\' . GitController::class . '@index');
 
-//Changelog
-    Route::get('/v1/changelog','\\' . ChangelogController::class . '@index');
+////Changelog
+//    Route::get('/v1/changelog','\\' . ChangelogController::class . '@index');
     //    Route::get('/v1/changelog/module/{module}','Tenant\Api\Changelog\ChangelogModuleController@index');
 //    Route::get('/v1/changelog/user/{user}','Tenant\Api\Changelog\ChangelogUserController@index');
 //    Route::get('/v1/changelog/loggable/{loggable}/{loggableId}','Tenant\Api\Changelog\ChangelogLoggableController@index');
@@ -90,3 +90,6 @@ Route::get('/v1/git/info','\\' . GitController::class . '@index');
     // Simple notifications
     Route::post('/v1/simple_notifications/','\\' . SimpleNotificationsController::class . '@store');
 });
+
+//Changelog
+Route::get('/v1/changelog','\\' . ChangelogController::class . '@index');
