@@ -90,3 +90,5 @@ Route::get('/v1/git/info','\\' . GitController::class . '@index');
     // Simple notifications
     Route::post('/v1/simple_notifications/','\\' . SimpleNotificationsController::class . '@store');
 });
+
+
