@@ -329,6 +329,7 @@ if (!function_exists('initialize_roles')) {
             'Tasks',
             'TagsManager',
             'Tags',
+            'ChangelogManager',
             'NotificationsManager',
         ];
         foreach ($roles as $role) {
