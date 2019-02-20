@@ -1,6 +1,6 @@
 <template>
     <v-card>
-        <v-card-title class="grey darken-3 white--text"><h4>Tema</h4></v-card-title>
+        <v-card-title class="primary darken-3"><h4>Tema</h4></v-card-title>
            <swatches v-model="colorPrincipal" inline></swatches>
         <v-btn @click="principalDefault">DEFAULT</v-btn>
     </v-card>

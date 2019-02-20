@@ -25,7 +25,7 @@ class AddRolesToRegisterUser
      */
     public function handle($event)
     {
+        $event->user->assignRole('TasksManager');
         $event->user->assignRole('Tasks');
-        $event->user->assignRole('Tags');
     }
 }

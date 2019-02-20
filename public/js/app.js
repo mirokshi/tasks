@@ -88301,8 +88301,8 @@ var render = function() {
                           {
                             staticClass: "grey lighten-3",
                             staticStyle: {
-                              width: "340px",
-                              height: "340px",
+                              width: "240px",
+                              height: "240px",
                               padding: "60px",
                               "border-radius": "50%",
                               display: "inline-flex"
@@ -88313,8 +88313,8 @@ var render = function() {
                               "svg",
                               {
                                 style:
-                                  "width:220px;height:220px;fill: " +
-                                  this.$vuetify.theme.primary.base +
+                                  "width:120px;height:120px;fill: " +
+                                  this.$vuetify.theme.primary +
                                   ";",
                                 attrs: {
                                   xmlns: "http://www.w3.org/2000/svg",
@@ -88356,7 +88356,7 @@ var render = function() {
                           {
                             staticClass: "display-1 grey--text text--darken-2"
                           },
-                          [_vm._v("No hay niguna tarea")]
+                          [_vm._v("🍔No hay niguna tarea🍔")]
                         ),
                         _vm._v(" "),
                         _c("tasks-create", {
@@ -91433,7 +91433,7 @@ var render = function() {
   return _c(
     "v-card",
     [
-      _c("v-card-title", { staticClass: "grey darken-3 white--text" }, [
+      _c("v-card-title", { staticClass: "primary darken-3" }, [
         _c("h4", [_vm._v("Tema")])
       ]),
       _vm._v(" "),
