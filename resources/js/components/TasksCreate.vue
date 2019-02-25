@@ -1,19 +1,19 @@
 <template>
     <span>
         <v-dialog v-model="dialog"  @keydown.esc.stop.prevent="dialog=false">
-            <v-toolbar color="grey darken-3" class="white--text">
+            <v-toolbar color="primary darken-3" class="white--text">
             <v-btn flat icon class="white--text" @click="dialog=false">
                 <v-icon>close</v-icon>
             </v-btn>
-            <v-toolbar-title class="white--text">Crear Tasca</v-toolbar-title>
+            <v-toolbar-title class="white--text">Crear Tarea</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn flat class="white--text" @click="dialog=false">
                 <v-icon class="mr-1">exit_to_app</v-icon>
-                Sortir
+                Salir
             </v-btn>
             <v-btn flat class="white--text">
                 <v-icon class="mr-1">save</v-icon>
-                Afegir
+                Añadir
             </v-btn>
         </v-toolbar>
             <v-card>
@@ -23,6 +23,7 @@
             </v-card>
         </v-dialog>
         <v-btn
+            v-can="'tasks.store'"
             @click="dialog = true"
             fab
             bottom
