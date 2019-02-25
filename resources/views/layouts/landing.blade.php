@@ -18,6 +18,7 @@
     <meta property="og:type" content="website"/>
     <meta property="og:description" content="Descriptin tasks">
     <meta property="og:url" content="https://tasks.mirokshi.scool.cat/">
+    <script defer src="{{ mix('js/app.js') }}"></script>
     <title>Homepage Tasks</title>
     <style>
         [v-cloak] > * { display:none; }
@@ -35,6 +36,9 @@
 </head>
 <body>
 <div id="app" v-cloak>
+    <noscript>
+        <strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
     <v-app light  class="blue-grey lighten-5 white--text">
         <service-worker></service-worker>
         <share-fab></share-fab>
@@ -56,7 +60,7 @@
         </v-toolbar>
         <v-content>
             <section>
-                <v-parallax src="img/background.jpg" height="600">
+                <v-parallax src="img/background.webp" height="600">
                 </v-parallax>
                 <div class="overlay" style="
                     position:absolute;
@@ -256,7 +260,5 @@
         </v-content>
     </v-app>
 </div>
-<script src="{{mix('/js/app.js')}}"></script>
-
 </body>
 </html>

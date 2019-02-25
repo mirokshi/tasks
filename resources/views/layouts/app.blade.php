@@ -20,6 +20,7 @@
     <meta property="og:type" content="website"/>
     <meta property="og:description" content="Descriptin tasks" />
     <meta property="og:url" content="https://tasks.mirokshi.scool.cat/" />
+    <script defer src="{{ mix('js/app.js') }}"></script>
     <title>@yield('title','Put your title here')</title>
     <style>
         [v-cloak] > * { display:none; }
@@ -37,6 +38,9 @@
 </head>
 <body>
 <div id="app"  v-cloak>
+    <noscript>
+        <strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
     <v-app>
         <snackbar></snackbar>
         <service-worker></service-worker>
@@ -122,6 +126,5 @@
         </v-footer>
     </v-app>
 </div>
-<script src="{{mix('/js/app.js')}}"></script>
 </body>
 </html>

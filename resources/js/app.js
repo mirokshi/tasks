@@ -3,12 +3,13 @@ import Vuetify from 'vuetify'
 
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import 'typeface-montserrat/index.css'
+import 'typeface-roboto/index.css'
 import './bootstrap'
 import AppComponent from './components/App.vue'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { dom } from '@fortawesome/fontawesome-svg-core'
 
 import ExampleComponent from './components/ExampleComponent.vue'
@@ -41,7 +42,6 @@ import TreeView from 'vue-json-tree-view'
 // window.location.reload(true)
 
 library.add(faCoffee)
-Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 dom.watch()
 

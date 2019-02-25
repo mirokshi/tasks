@@ -201,6 +201,7 @@ class TasksControllerTest extends TestCase
         $this->assertEquals('Bla bla bla',$result->description);
         $this->assertEquals(true,$result->completed);
         $this->assertEquals($user->id,$result->user_id);
+
         $this->assertEquals('Comprar pa',$task->name);
         $this->assertEquals('Bla bla bla',$task->description);
         $this->assertEquals(true,$task->completed);
