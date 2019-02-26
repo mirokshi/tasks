@@ -11,13 +11,13 @@
             @blur="$v.name.$touch()"
         ></v-text-field>
 
-        <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
+        <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendiente'"></v-switch>
 
         <v-textarea v-model="description" label="Descripción" hint="Escribe la descripción de la tarea..."></v-textarea>
 
-        <user-select :item-value="null" v-model="user" :users="dataUsers" label="Usuari"></user-select>
+        <user-select :item-value="null" v-model="user" :users="dataUsers" label="Usuario"></user-select>
 
-        <!--<tasks-tags :task-tags="tags" :tags="tags"></tasks-tags>-->
+        <tasks-tags :task-tags="tags" :tags="tags"></tasks-tags>
 
         <div class="text-xs-center">
             <v-btn @click="$emit('close')">
@@ -70,7 +70,7 @@ export default {
     },
     uri: {
       type: String,
-      default: '/api/v1/tasks'
+      required: true
     }
   },
   computed: {
@@ -102,7 +102,7 @@ export default {
         'name': this.name,
         'description': this.description,
         'completed': this.completed,
-        'user_id': this.user.id
+        'user_id': this.selectLoggedUser()
       }
       window.axios.post(this.uri, task).then(response => {
         this.$snackbar.showMessage('Tarea creada correctamente')

@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="user" content="{{ logged_user() }}">
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="img/icon.png">
     <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -174,7 +175,7 @@
             </section>
 
             <section>
-                <v-parallax src="https://placeimg.com/1000/1000/any" height="380">
+                <v-parallax src="img/background.webp" height="380">
                     <v-layout column align-center justify-center>
                         <div class="headline white--text mb-3 text-xs-center">Web development has never been easier</div>
                         <em>Kick-start your application today</em>
