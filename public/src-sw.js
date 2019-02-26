@@ -1,6 +1,10 @@
 workbox.skipWaiting()
 workbox.clientsClaim()
 
+workbox.setConfig({
+  debug: true
+})
+
 workbox.routing.registerRoute(
   '/',
   workbox.strategies.staleWhileRevalidate({ cacheName: 'landing' })

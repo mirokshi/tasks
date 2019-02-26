@@ -3,6 +3,10 @@ importScripts("/service-worker/precache-manifest.3127699cd785e1995a60337c2e5863e
 workbox.skipWaiting()
 workbox.clientsClaim()
 
+workbox.setConfig({
+  debug: true
+})
+
 workbox.routing.registerRoute(
   '/',
   workbox.strategies.staleWhileRevalidate({ cacheName: 'landing' })
