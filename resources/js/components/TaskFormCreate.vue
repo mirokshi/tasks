@@ -7,18 +7,17 @@
             hint="El nombre de la tarea..."
             placeholder="Nombre de la tarea"
             :error-messages="nameErrors"
-            @input="$v.task.name.$touch()"
-            @blur="$v.task.name.$touch()"
-            @blur="$v.task.name.$touch()"
+            @input="$v.name.$touch()"
+            @blur="$v.name.$touch()"
         ></v-text-field>
 
-        <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
+        <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendiente'"></v-switch>
 
         <v-textarea v-model="description" label="Descripción" hint="Escribe la descripción de la tarea..."></v-textarea>
 
         <user-select :item-value="null" v-model="user" :users="dataUsers" label="Usuario"></user-select>
 
-        <tasks-tags :task-tags="task.tags" :tags="tags"></tasks-tags>
+        <tasks-tags :task-tags="tags" :tags="tags"></tasks-tags>
 
         <div class="text-xs-center">
             <v-btn @click="$emit('close')">
@@ -52,15 +51,12 @@ export default {
   },
   data () {
     return {
-
-      task: {
-        name: '',
-        completed: false,
-        description: '',
-        dataUsers: this.users,
-        loading: false,
-        user: null
-      }
+      name: '',
+      completed: false,
+      description: '',
+      dataUsers: this.users,
+      loading: false,
+      user: null
     }
   },
   props: {
@@ -80,32 +76,32 @@ export default {
   computed: {
     nameErrors () {
       const errors = []
-      if (!this.$v.task.name.$dirty) {
+      if (!this.$v.name.$dirty) {
         return errors
-      } else { !this.$v.task.name.required && errors.push('El nombre  es obligatorio.') }
+      } else { !this.$v.name.required && errors.push('El nombre  es obligatorio.') }
       return errors
     }
   },
   methods: {
     selectLoggedUser () {
       if (window.laravel_user) {
-        this.task.user = this.users.find((user) => {
+        this.user = this.users.find((user) => {
           return parseInt(user.id) === parseInt(window.laravel_user.id)
         })
       }
     },
     reset () {
-      this.task.name = ''
-      this.task.description = ''
-      this.task.completed = false
-      this.task.user = null
+      this.name = ''
+      this.description = ''
+      this.completed = false
+      this.user = null
     },
     add () {
       this.loading = true
       const task = {
-        'name': this.task.name,
-        'description': this.task.description,
-        'completed': this.task.completed,
+        'name': this.name,
+        'description': this.description,
+        'completed': this.completed,
         'user_id': this.selectLoggedUser()
       }
       window.axios.post(this.uri, task).then(response => {
