@@ -23,8 +23,13 @@ export default {
         { icon: 'help', text: 'Contact', url: '/contact' },
         { icon: 'public', text: 'About', url: '/about' },
         { icon: 'compare_arrows', text: 'Changelog', url: '/changelog' }
-      ]
+      ],
+      loginForm: false,
+      registerForm: false
     }
+  },
+  created () {
+    if (window.localStorage.getItem('PRIMARY_COLOR_KEY')) this.$vuetify.theme.primary = window.localStorage.getItem('PRIMARY_COLOR_KEY')
   }
 }
 //   methods: {
