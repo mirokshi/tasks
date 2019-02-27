@@ -103,6 +103,8 @@
                 clipped-left
                 clipped-right
                 fixed
+                style="background: #2680C2;background: -webkit-linear-gradient(to right, #2680C2, #186FAF);
+            background: linear-gradient(to right, #2680C2, #186FAF);"
         >
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Application</v-toolbar-title>
