@@ -31,8 +31,9 @@ Route::post('login_alt', 'Auth\LoginAltController@login');
 Route::post('register_alt','Auth\RegisterAltController@register');
 
 
+
 Route::get('/', function () {
-    return view('layouts/landing');
+    return view('welcome');
 });
 
 //Login with Social's Network
