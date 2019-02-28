@@ -4,7 +4,7 @@
         <share-fab></share-fab>
         <v-toolbar class="primary white--text">
             <img src="/img/icon.png" alt="Aplicacion de tareas" height="50">
-            <v-toolbar-title> Homepage Tasks</v-toolbar-title>
+            <v-toolbar-title v-if="$vuetify.breakpoint.mdAndUp">Homepage Tasks</v-toolbar-title>
             <v-spacer></v-spacer>
             @auth
                 <v-btn icon @click="" href="/profile">
@@ -14,7 +14,7 @@
                 </v-btn>
                 <v-form action="/logout" method="POST">
                     @csrf
-                    <v-btn class="secondary" type="submit">Cerrar Sesion</v-btn>
+                    <v-btn class="secondary" type="submit" v-if="$vuetify.breakpoint.mdAndUp">Cerrar Sesion</v-btn>
                 </v-form>
             @else
                 <v-btn @click="loginForm = !loginForm" class="secondary">Login</v-btn>

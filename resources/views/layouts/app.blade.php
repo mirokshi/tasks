@@ -107,12 +107,12 @@
             background: linear-gradient(to right, #2680C2, #186FAF);"
         >
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-            <v-toolbar-title>Application</v-toolbar-title>
+            <v-toolbar-title v-if="$vuetify.breakpoint.mdAndUp">Application</v-toolbar-title>
             <v-spacer></v-spacer>
 
             <notifications-widget></notifications-widget>
 
-            <span v-role="'SuperAdmin'"><git-info></git-info></span>
+            <span v-role="'SuperAdmin'" v-if="$vuetify.breakpoint.mdAndUp"><git-info></git-info></span>
             <v-btn href="/profile" icon flat>
             <v-avatar  title="{{ Auth::user()->name }} ( {{ Auth::user()->email }} )">
                 <img src="https://www.gravatar.com/avatar/{{md5(Auth::user()-> email)}}" alt="avatar">
