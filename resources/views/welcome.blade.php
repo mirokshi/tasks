@@ -3,7 +3,7 @@
     <v-app light  class="blue-grey lighten-5 white--text">
         <share-fab></share-fab>
         <v-toolbar class="primary white--text">
-            <img src="/img/icon.png" alt="Aplicacion de tareas" height="50">
+            <img src="/images/icon.webp" alt="Aplicacion de tareas" height="50">
             <v-toolbar-title v-if="$vuetify.breakpoint.mdAndUp">Homepage Tasks</v-toolbar-title>
             <v-spacer></v-spacer>
             @auth
