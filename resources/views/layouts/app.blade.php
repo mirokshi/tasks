@@ -18,9 +18,15 @@
     <meta property="og:image:height" content="659" />
     <meta property="og:title" content="Application Tasks" />
     <meta property="og:type" content="website"/>
-    <meta property="og:description" content="Descriptin tasks" />
+    <meta property="og:description" content="Description tasks" />
     <meta property="og:url" content="https://tasks.mirokshi.scool.cat/" />
-    <script defer src="{{ mix('js/app.js') }}"></script>
+    @stack('beforeScripts')
+    <script defer src="{{mix('js/manifest.js')}}" type="text/javascript"></script>
+    <script defer src="{{mix('js/vendor.js')}}" type="text/javascript"></script>
+    <script defer src="{{mix('js/app.js')}}" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    @stack('afterScripts')
+    
     <title>@yield('title','Put your title here')</title>
     <style>
         [v-cloak] > * { display:none; }
