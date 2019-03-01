@@ -1,7 +1,6 @@
 const workboxPlugin = require('workbox-webpack-plugin')
 const mix = require('laravel-mix')
 const replace = require('replace-in-file')
-const path = require('path')
 const publicDir = 'public'
 require('laravel-mix-purgecss')
 
@@ -27,6 +26,10 @@ mix.js('resources/js/app.js', 'public/js').then(() => {
   })
 })
   .sass('resources/sass/app.scss', 'public/css').purgeCss()
+
+if (mix.inProduction()) {
+  mix.version()
+}
 
 // if (mix.inProduction()) {
 mix.webpackConfig({
