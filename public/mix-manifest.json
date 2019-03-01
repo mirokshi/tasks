@@ -1,5 +1,10 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+<<<<<<< HEAD
     "/0.2975c74a4f1ad0f00100.hot-update.js": "/0.2975c74a4f1ad0f00100.hot-update.js"
+=======
+    "/js/manifest.js": "/js/manifest.js",
+    "/js/vendor.js": "/js/vendor.js"
+>>>>>>> master
 }

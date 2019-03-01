@@ -25,6 +25,8 @@ mix.js('resources/js/app.js', 'public/js').then(() => {
     to: '/'
   })
 })
+  .extract()
+  .sourceMaps(false) // .sourceMaps(false) -> Disable source maps in production
   .sass('resources/sass/app.scss', 'public/css').purgeCss()
 
 if (mix.inProduction()) {
