@@ -38,6 +38,7 @@
 <div id="app" v-cloak>
     <noscript>
         <strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+        <span>KIEROMORIR</span>
     </noscript>
     <service-worker></service-worker>
     @yield('content')
