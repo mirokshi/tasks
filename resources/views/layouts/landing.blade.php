@@ -16,7 +16,7 @@
     <meta property="og:image:height" content="659">
     <meta property="og:title" content="Application Tasks">
     <meta property="og:type" content="website"/>
-    <meta property="og:description" content="Descriptin tasks">
+    <meta property="og:description" content="Description tasks">
     <meta property="og:url" content="https://tasks.mirokshi.scool.cat/">
     <script defer src="{{ mix('js/app.js') }}"></script>
     <title>Homepage Tasks</title>
