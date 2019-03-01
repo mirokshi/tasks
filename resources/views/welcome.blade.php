@@ -99,7 +99,7 @@
                                 <v-flex xs12 md4>
                                     <v-card class="elevation-0 transparent">
                                         <v-card-text class="text-xs-center ">
-                                            <v-icon x-large class="blue--text text--lighten-2">color_lens</v-icon>
+                                            <v-icon x-large class="blue--text text--lighten-2" aria-label="Color">color_lens</v-icon>
                                         </v-card-text>
                                         <v-card-title primary-title class="layout justify-center">
                                             <div class="headline text-xs-center">Material Design</div>
@@ -114,7 +114,7 @@
                                 <v-flex xs12 md4>
                                     <v-card class="elevation-0 transparent">
                                         <v-card-text class="text-xs-center">
-                                            <v-icon x-large class="blue--text text--lighten-2">flash_on</v-icon>
+                                            <v-icon x-large class="blue--text text--lighten-2" aria-label="Flash">flash_on</v-icon>
                                         </v-card-text>
                                         <v-card-title primary-title class="layout justify-center">
                                             <div class="headline">Fast development</div>
@@ -129,7 +129,7 @@
                                 <v-flex xs12 md4>
                                     <v-card class="elevation-0 transparent">
                                         <v-card-text class="text-xs-center">
-                                            <v-icon x-large class="blue--text text--lighten-2">build</v-icon>
+                                            <v-icon x-large class="blue--text text--lighten-2" aria-label="Build">build</v-icon>
                                         </v-card-text>
                                         <v-card-title primary-title class="layout justify-center">
                                             <div class="headline text-xs-center">Completely Open Sourced</div>
