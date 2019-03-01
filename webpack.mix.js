@@ -2,6 +2,7 @@ const workboxPlugin = require('workbox-webpack-plugin')
 const mix = require('laravel-mix')
 const replace = require('replace-in-file')
 const publicDir = 'public'
+let DashboardPlugin = require('webpack-dashboard/plugin')
 require('laravel-mix-purgecss')
 
 /*
@@ -41,6 +42,7 @@ mix.webpackConfig({
       swSrc: 'public/src-sw.js', // more control over the caching
       swDest: 'sw.js', // the service-worker file name
       importsDirectory: 'service-worker' // have a dedicated folder for sw files
-    })
+    }),
+    new DashboardPlugin()
   ]
 })
