@@ -24,9 +24,8 @@
     <script defer src="{{mix('js/manifest.js')}}" type="text/javascript"></script>
     <script defer src="{{mix('js/vendor.js')}}" type="text/javascript"></script>
     <script defer src="{{mix('js/app.js')}}" type="text/javascript"></script>
-    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
     @stack('afterScripts')
-    
+
     <title>@yield('title','Put your title here')</title>
     <style>
         [v-cloak] > * { display:none; }
