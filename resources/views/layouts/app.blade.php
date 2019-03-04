@@ -20,12 +20,7 @@
     <meta property="og:type" content="website"/>
     <meta property="og:description" content="Description tasks" />
     <meta property="og:url" content="https://tasks.mirokshi.scool.cat/" />
-    @stack('beforeScripts')
-    <script defer src="{{mix('js/manifest.js')}}" type="text/javascript"></script>
-    <script defer src="{{mix('js/vendor.js')}}" type="text/javascript"></script>
-    <script defer src="{{mix('js/app.js')}}" type="text/javascript"></script>
-    @stack('afterScripts')
-
+    <script defer src="{{ mix('js/app.js') }}"></script>
     <title>@yield('title','Put your title here')</title>
     <style>
         [v-cloak] > * { display:none; }
