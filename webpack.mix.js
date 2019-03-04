@@ -1,10 +1,8 @@
 const workboxPlugin = require('workbox-webpack-plugin')
 const mix = require('laravel-mix')
 const replace = require('replace-in-file')
+const path = require('path')
 const publicDir = 'public'
-let DashboardPlugin = require('webpack-dashboard/plugin')
-require('laravel-mix-purgecss')
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -27,14 +25,12 @@ mix.js('resources/js/app.js', 'public/js').then(() => {
   })
 })
   .extract()
-  .sourceMaps(false) // .sourceMaps(false) -> Disable source maps in production
-  .sass('resources/sass/app.scss', 'public/css').purgeCss()
-
+  .sourceMaps(false)
+  .sass('resources/sass/app.scss', 'public/css')// .sourceMaps(false) -> Disable source maps in production
 if (mix.inProduction()) {
   mix.version()
 }
 
-// if (mix.inProduction()) {
 mix.webpackConfig({
   plugins: [
     // Options: https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin
@@ -42,7 +38,6 @@ mix.webpackConfig({
       swSrc: 'public/src-sw.js', // more control over the caching
       swDest: 'sw.js', // the service-worker file name
       importsDirectory: 'service-worker' // have a dedicated folder for sw files
-    }),
-    new DashboardPlugin()
+    })
   ]
 })
