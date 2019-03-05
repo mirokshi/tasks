@@ -74,6 +74,10 @@ Route::middleware(['auth'])->group(function() {
     });
 //ABOUT
 
+    Route::get('/mobile', function (){
+        return view('mobile');
+    });
+
     //Vue
     Route::get('/tasks_vue','TasksVueController@index');
 
@@ -126,9 +130,6 @@ Route::get('/omplir', function () {
     for ($i =1; $i <=50; $i++){
         factory(App\Task::class)->create();
     }
-});
-Route::get('/mobile', function (){
-    return view('mobile');
 });
 
 
