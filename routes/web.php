@@ -72,7 +72,10 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/about', function (){
         return view('about');
     });
-
+//ABOUT
+    Route::get('/mobile', function (){
+        return view('mobile');
+    });
 
     //Vue
     Route::get('/tasks_vue','TasksVueController@index');
