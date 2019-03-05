@@ -1,14 +1,18 @@
 <template>
     <span>
-        <geolocation></geolocation>
+        <!--<geolocation></geolocation>-->
+        <device-position></device-position>
     </span>
 </template>
 
 <script>
-import Geolocation from './others/Geolocation'
+
+import DevicePostion from './others/DevicePosition'
 export default {
   name: 'mobile',
-  components: { 'geolocation': Geolocation }
+  components: {
+    'device-position': DevicePostion
+  }
 }
 </script>
 
