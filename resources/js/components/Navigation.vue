@@ -5,7 +5,7 @@
         fixed
         app
         clipped
-        v-touch="{ left: () => dataDrawer =true, right: () => dialog = false}"
+        v-touch="{ left: () => dataDrawer =true, right: () => dataDrawer = false}"
     >
         <v-list dense>
             <template v-for="item in items">
