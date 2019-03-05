@@ -6,16 +6,16 @@
             label="Nombre"
             hint="El nombre de la tarea..."
             placeholder="Nombre de la tarea"
-            :readOnly="true"
+            readonly
         ></v-text-field>
 
-        <v-switch :readOnly="true" v-model="completed" :label="completed ? 'Completada' : 'Pendiente'"></v-switch>
+        <v-switch readonly v-model="completed" :label="completed ? 'Completada' : 'Pendiente'"></v-switch>
 
         <v-textarea
             v-model="description"
             label="Descripción"
-            hint="Escribe la descripcion de la tarea..."
-            :readOnly="true"
+            hint="Descripcion de la tarea..."
+            readonly
         ></v-textarea>
 
         <user-select :readOnly="true" :users="dataUsers" label="Usuario"></user-select>
