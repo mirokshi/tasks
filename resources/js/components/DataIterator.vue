@@ -23,6 +23,7 @@
                     class="pb-2"
                 >
                 <v-card
+
                     class="mx-auto"
                     color="primary lighten-5"
                     dark
