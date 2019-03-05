@@ -116,6 +116,7 @@
                     class="mx-auto"
                     color="primary lighten-5"
                     dark
+                    v-touch="{ left: () => dialog = true, right: () => dialog = true}"
                 >
     <v-card-title>
       <v-icon
