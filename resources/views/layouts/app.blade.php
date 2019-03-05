@@ -57,6 +57,7 @@
             right
             clipped
             app
+            v-touch="{ left: () => drawerRight =false, right: () => drawerRight = true}"
         >
             <v-card>
                 <v-card-title class="primary darken-3"><h4>Perfil</h4></v-card-title>
