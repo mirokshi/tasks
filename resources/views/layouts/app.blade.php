@@ -8,8 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="user" content="{{ logged_user() }}">
     <meta name="git" content="{{ git() }}">
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="img/icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icon-16x16.png">
     <meta name="theme-color" content="#317EFB"/>
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -20,7 +20,12 @@
     <meta property="og:type" content="website"/>
     <meta property="og:description" content="Description tasks" />
     <meta property="og:url" content="https://tasks.mirokshi.scool.cat/" />
-    <script defer src="{{ mix('js/app.js') }}"></script>
+    @stack('beforeScripts')
+    <script defer src="{{ url (mix('/js/manifest.js')) }}" type="text/javascript"></script>
+    <script defer src="{{ url (mix('/js/vendor.js')) }}" type="text/javascript"></script>
+    <script defer src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
+    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    @stack('afterScripts')
     <title>@yield('title','Put your title here')</title>
     <style>
         [v-cloak] > * { display:none; }
