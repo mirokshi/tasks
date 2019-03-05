@@ -1,49 +1,28 @@
-<template>
+<tempate>
     <span>
-        <span>Gamma <p id="doTiltLR"></p></span>
-        <span>Beta <p id="doTiltFB"></p></span>
-        <span>Alpha <p id="doDirection"></p></span>
-<div class="container" id="logoContainer">
-  <img src="img/geo.png" id="imgLogo">
-</div>
-    </span>
-</template>
-
+    <button class="btn btn-default" id="askButton">Ask for location</button>
+    <div id="target"></div>
+</span>
+</tempate>
 <script>
-if ('DeviceOrientationEvent' in window) {
-  window.addEventListener('deviceorientation', deviceOrientationHandler, false)
-} else {
-  document.getElementById('logoContainer').innerText = 'Device Orientation API not supported.'
+var target = document.getElementById('target')
+var watchId
+
+function appendLocation (location, verb) {
+  verb = verb || 'updated'
+  var newLocation = document.createElement('p')
+  newLocation.innerHTML = 'Location ' + verb + ': <a href="https://maps.google.com/maps?&z=15&q=' + location.coords.latitude + '+' + location.coords.longitude + '&ll=' + location.coords.latitude + '+' + location.coords.longitude + '" target="_blank">' + location.coords.latitude + ', ' + location.coords.longitude + '</a>'
+  target.appendChild(newLocation)
 }
-
-function deviceOrientationHandler (eventData) {
-  var tiltLR = eventData.gamma
-  var tiltFB = eventData.beta
-  var dir = eventData.alpha
-
-  document.getElementById('doTiltLR').innerHTML = Math.round(tiltLR)
-  document.getElementById('doTiltFB').innerHTML = Math.round(tiltFB)
-  document.getElementById('doDirection').innerHTML = Math.round(dir)
-
-  var logo = document.getElementById('imgLogo')
-  logo.style.webkitTransform = 'rotate(' + tiltLR + 'deg) rotate3d(1,0,0, ' + (tiltFB * -1) + 'deg)'
-  logo.style.MozTransform = 'rotate(' + tiltLR + 'deg)'
-  logo.style.transform = 'rotate(' + tiltLR + 'deg) rotate3d(1,0,0, ' + (tiltFB * -1) + 'deg)'
+var el = document.getElementById('askButton')
+if ('geolocation' in navigator) {
+  el.addEventListener('click', function () {
+    navigator.geolocation.getCurrentPosition(function (location) {
+      appendLocation(location, 'fetched')
+    })
+    watchId = navigator.geolocation.watchPosition(appendLocation)
+  })
+} else {
+  target.innerText = 'Geolocation API not supported.'
 }
 </script>
-
-<style scoped>
-    .container {
-        perspective: 300;
-        -webkit-perspective: 300;
-    }
-
-    #imgLogo {
-        width: 275px;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-        padding: 15px;
-    }
-
-</style>
