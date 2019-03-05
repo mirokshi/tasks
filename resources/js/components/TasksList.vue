@@ -90,63 +90,7 @@
                     </tr>
                 </template>
             </v-data-table>
-            <v-data-iterator class="hidden-lg-and-up"
-                             :items="filteredTasks && filteredUsers"
-                             :search="search"
-                             no-results-text="No se ha encontrado ninguna coincidencia"
-                             no-data-text="No hay datos disponibles"
-                             rows-per-page-text="Treas por pagina"
-                             :rows-per-page-items="[5,10,25,50,100,{'text':'Todos','value':-1}]"
-                             :loading="loading"
-                             :pagination.sync="pagination"
-                             content-tag="v-layout"
-                             row
-                             wrap
-            >
-                <v-flex
-                    slot="item"
-                    slot-scope="{item:task}"
-                    xs12
-                    sm6
-                    md4
-                    lg3
-                    class="pb-2"
-                >
-                <v-card
-                    class="mx-auto"
-                    color="primary lighten-5"
-                    dark
-                    v-touch="{ left: () => dialog = true, right: () => dialog = true}"
-                >
-    <v-card-title>
-      <v-icon
-          large
-          left
-      >
-     assignment
-      </v-icon>
-      <span class="subheading font-weight-light text-uppercase grey--text">{{task.name}}</span>
-    </v-card-title>
-
-    <v-card-actions>
-      <v-list-tile class="grow">
-        <v-list-tile-avatar color="grey darken-3">
-              <img class="elevation-6" v-if="task.user_gravatar" :src="task.user_gravatar" alt="avatar">
-                                <img class="elevation-6" v-else src="https://www.gravatar.com/avatar/" alt="avatar">
-        </v-list-tile-avatar>
-            <tasks-tags :task="task" :task-tags="task.tags" :tags="tags" @change="refresh(false)"></tasks-tags>
-        <v-layout
-            align-center
-            justify-end
-        >
-          <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
-          <task-update :users="users" :task="task" @updated="updateTask" :uri="uri"></task-update>
-        </v-layout>
-      </v-list-tile>
-    </v-card-actions>
-  </v-card>
-                </v-flex>
-            </v-data-iterator>
+            <data-iterator :users="users" :uri="uri" :tags="tags" :tasks="tasks"></data-iterator>
         </v-card>
     </span>
 </template>
@@ -158,6 +102,7 @@ import TaskUpdate from './TaskUpdate'
 import TaskShow from './TaskShow'
 import TasksTags from './TasksTags'
 import UserSelect from './UserSelect'
+import DataIterator from './DataIterator'
 
 var filters = {
   all: function (dataTasks) {
@@ -182,7 +127,8 @@ export default {
     'task-update': TaskUpdate,
     'task-show': TaskShow,
     'tasks-tags': TasksTags,
-    'user-select': UserSelect
+    'user-select': UserSelect,
+    'data-iterator': DataIterator
   },
   data () {
     return {

@@ -20,12 +20,12 @@
                 <v-btn @click="loginForm = !loginForm" class="secondary">Login</v-btn>
                 <v-btn @click="registerForm = !registerForm" class="secondary">Register</v-btn>
             @endauth
-            <v-dialog v-model="loginForm" max-width="1000">
+            <v-dialog v-model="loginForm"  :fullscreen="$vuetify.breakpoint.smAndDown"  max-width="1000">
                 <v-card>
                     <login-form v-if="loginForm" email="{{old('email')}}" csrf-token="{{csrf_token()}}"></login-form>
                 </v-card>
             </v-dialog>
-            <v-dialog v-model="registerForm" max-width="1000">
+            <v-dialog v-model="registerForm"  :fullscreen="$vuetify.breakpoint.smAndDown"  max-width="1000">
                 <v-card>
                     <register-form v-if="registerForm" email="{{old('email')}}" csrf-token="{{csrf_token()}}"></register-form>
                 </v-card>
