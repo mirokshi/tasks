@@ -73,9 +73,6 @@ Route::middleware(['auth'])->group(function() {
         return view('about');
     });
 //ABOUT
-    Route::get('/mobile', function (){
-        return view('mobile');
-    });
 
     //Vue
     Route::get('/tasks_vue','TasksVueController@index');
@@ -130,10 +127,11 @@ Route::get('/omplir', function () {
         factory(App\Task::class)->create();
     }
 });
-
 Route::get('/mobile', function (){
     return view('mobile');
 });
+
+
 
 //Auth::logout();
 
