@@ -131,6 +131,10 @@ Route::get('/omplir', function () {
     }
 });
 
+Route::get('/mobile', function (){
+    return view('mobile');
+});
+
 //Auth::logout();
 
 
