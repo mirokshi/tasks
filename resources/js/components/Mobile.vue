@@ -1,12 +1,14 @@
 <template>
-    <geolocation></geolocation>
+    <span>
+        <geolocation></geolocation>
+    </span>
 </template>
 
 <script>
 import Geolocation from './others/Geolocation'
 export default {
   name: 'mobile',
-  components: { Geolocation }
+  components: { 'geolocation': Geolocation }
 }
 </script>
 
