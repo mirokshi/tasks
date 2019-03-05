@@ -39,7 +39,8 @@ import ShareFab from './components/ui/ShareFab.vue'
 import VueTimeago from 'vue-timeago'
 import TreeView from 'vue-json-tree-view'
 
-import '../../resources/img/icon.webp'
+import '../../resources/img/icon16x16.png'
+import '../../resources/img/icon32x32.png'
 
 // window.location.reload(true)
 
