@@ -1,25 +1,11 @@
 <template>
     <span>
-    <table class="table table-striped table-bordered">
-  <tr>
-    <td>Tilt Left/Right [gamma]</td>
-    <td id="doTiltLR"></td>
-  </tr>
-  <tr>
-    <td>Tilt Front/Back [beta]</td>
-    <td id="doTiltFB"></td>
-  </tr>
-  <tr>
-    <td>Direction [alpha]</td>
-    <td id="doDirection"></td>
-  </tr>
-</table>
-
+        <span>Gamma <p id="doTiltLR"></p></span>
+        <span>Beta <p id="doTiltFB"></p></span>
+        <span>Alpha <p id="doDirection"></p></span>
 <div class="container" id="logoContainer">
-  <img src="https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png" id="imgLogo">
+  <img src="img/geo.png" id="imgLogo">
 </div>
-
-<p><small>Demo from <a href="https://www.html5rocks.com/en/tutorials/device/orientation/" target="_blank">HTML5 Rocks</a> article.</small></p>>
     </span>
 </template>
 
