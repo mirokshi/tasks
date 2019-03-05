@@ -10,7 +10,11 @@
 </template>
 
 <script>
-if ('DeviceOrientationEvent' in window) {
+export default {
+  name: 'DevicePostion'
+}
+if ('DeviceOrientationEvent' in window
+) {
   window.addEventListener('deviceorientation', deviceOrientationHandler, false)
 } else {
   document.getElementById('logoContainer').innerText = 'Device Orientation API not supported.'
@@ -30,6 +34,7 @@ function deviceOrientationHandler (eventData) {
   logo.style.MozTransform = 'rotate(' + tiltLR + 'deg)'
   logo.style.transform = 'rotate(' + tiltLR + 'deg) rotate3d(1,0,0, ' + (tiltFB * -1) + 'deg)'
 }
+
 </script>
 
 <style scoped>
