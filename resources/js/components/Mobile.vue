@@ -1,7 +1,7 @@
 <template>
     <span>
         <!--<geolocation></geolocation>-->
-        <device-position></device-position>
+        <!--<device-position></device-position>-->
     </span>
 </template>
 

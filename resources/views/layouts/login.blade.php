@@ -41,77 +41,9 @@
     </style>
 </head>
 <body>
-<div id="app"  v-cloak>
-    <noscript>
-        <strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <v-app>
-        <snackbar></snackbar>
-        <service-worker></service-worker>
-        <navigation v-model="drawer"></navigation>
-        {{--<navigation-right :drawer="drawerRight"></navigation-right>--}}
-        <v-navigation-drawer
-            v-model="drawerRight"
-            fixed
-            right
-            clipped
-            app
-            v-touch="{ left: () => drawerRight =false, right: () => drawerRight = true}"
-        >
-            <v-card>
-                <v-card-title class="primary darken-3"><h4>Perfil</h4></v-card-title>
-                <v-layout row wrap>
-                    <v-flex xs12>
-                        <ul>
-                            <li>Nombre : {{ Auth::user()->name }}</li>
-                            <li>Email : {{ Auth::user()->email }}</li>
-                            <li>Admin : {{ Auth::user()->admin ? 'SI' : 'NO' }}</li>
-                            <li>Roles : {{ implode(',',Auth::user()->map()['roles']) }}</li>
-                            <li>Permissions : {{ implode(', ',Auth::user()->map()['permissions']) }}</li>
-                        </ul>
-                    </v-flex>
-                </v-layout>
-            </v-card>
-            <v-card>
-                <v-card-title class="primary darken-3"><h4>Opciones de administrador</h4></v-card-title>
-
-                <v-layout row wrap>
-                    @impersonating
-                    <v-flex xs12>
-                        <v-avatar title="{{ Auth::user()->impersonatedBy()->name }} ( {{ Auth::user()->email }} )">
-                            <img src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->impersonatedBy()->email) }}" alt="avatar">
-                        </v-avatar>
-                    </v-flex>
-                    @endImpersonating
-                    <v-flex xs12>
-                        @canImpersonate
-                        <impersonate label="Entrar como..." url="/api/v1/regular_users"></impersonate>
-                        @endCanImpersonate
-                        @impersonating
-                        {{ Auth::user()->impersonatedBy()->name }} està suplantant {{ Auth::user()->name }}
-                        <a href="/impersonate/leave">Abandonar la suplantació</a>
-                        @endImpersonating
-                    </v-flex>
-                </v-layout>
-            </v-card>
-            <tema></tema>
-
-            <v-form action="/logout" method="POST">
-                @csrf
-                <v-btn color="primary lighten-2" class="text-md-center" type="submit" ><v-icon>exit_to_app</v-icon>CERRAR SESION</v-btn>
-            </v-form>
-        </v-navigation-drawer>
-        <toolbar
-                 :title="{{ config('app.name', 'Application') }}"
-                 @toggleRight="drawerRight=!drawerRight"
-                 @toggleLeft="drawer=!drawer"
-        ></toolbar>
-        <v-content>
-            @yield('content')
-        </v-content>
-        <v-footer color="primary" app>
-            <span class="white--text pl-3" >&copy; {{date('Y')}} Rojas Diaz Mirokshi</span>
-        </v-footer>
+<div id="app" v-cloak>
+    <v-app id="inspire">
+        @yield('content')
     </v-app>
 </div>
 </body>

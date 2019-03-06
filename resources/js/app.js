@@ -31,6 +31,7 @@ import Profile from './components/Profile'
 import Changelog from './components/changelog/ChangelogComponent.vue'
 import Navigation from './components/Navigation'
 import NavigationRight from './components/NavigationRight.vue'
+import Toolbar from './components/Toolbar.vue'
 import ServiceWorker from './components/ServiceWorker.vue'
 import NotificationsWidget from './components/notifications/NotificationsWidget'
 import Notifications from './components/notifications/Notifications'
@@ -41,6 +42,7 @@ import TreeView from 'vue-json-tree-view'
 
 import '../../resources/img/icon16x16.png'
 import '../../resources/img/icon32x32.png'
+
 
 // window.location.reload(true)
 
@@ -173,6 +175,7 @@ window.Vue.component('profile', Profile)
 window.Vue.component('changelog', Changelog)
 window.Vue.component('navigation', Navigation)
 window.Vue.component('navigation-right', NavigationRight)
+window.Vue.component('toolbar', Toolbar)
 
 window.Vue.component('service-worker', ServiceWorker)
 window.Vue.component('notifications-widget', NotificationsWidget)

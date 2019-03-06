@@ -1,7 +1,7 @@
 <template>
     <span>
         <v-navigation-drawer
-            v-model="dataDrawerRight"
+            v-model="drawer"
             fixed
             right
             clipped
@@ -12,41 +12,41 @@
                 <v-layout row wrap>
                     <v-flex xs12>
                         <ul>
-                            <li>Nombre : {{dataUser.name}}</li>
-                            <li>Email : {{dataUser.email}}</li>
-                            <li>Admin : {{ dataUser.admin ? 'SI' : 'NO' }}</li>
-                            <li>Roles : {{ implode(',',dataUser.map()['roles']) }}</li>
-                            <li>Permissions : {{ implode(', ',dataUser.map()['permissions']) }}</li>
+                            <li>Nombre : <span :title="user.name"></span></li>
+                            <li>Email : <span :title="user.email"></span></li>
+                            <li>Admin : <span :title="user.admin"></span></li>
+                            <li>Roles : <span :title="user.roles"></span></li>
+                            <li>Permissions : <span :title="user.permissions"></span></li>
                         </ul>
                     </v-flex>
                 </v-layout>
             </v-card>
-            <!--<v-card>-->
-                <!--<v-card-title class="grey darken-3 white&#45;&#45;text"><h4>Opciones de administrador</h4></v-card-title>-->
+            <v-card>
+                <v-card-title class="grey darken-3 white--text"><h4>Opciones de administrador</h4></v-card-title>
 
-                <!--<v-layout row wrap>-->
-                    <!--@impersonating-->
-                    <!--<v-flex xs12>-->
-                        <!--<v-avatar title="{{ dataUser.impersonatedBy().name }} ( {{ dataUser.email }} )">-->
-                            <!--<img src="https://www.gravatar.com/avatar/{{ md5(dataUser.impersonatedBy().email) }}" alt="avatar">-->
-                        <!--</v-avatar>-->
-                    <!--</v-flex>-->
-                    <!--@endImpersonating-->
-                    <!--<v-flex xs12>-->
-                        <!--@canImpersonate-->
-                        <!--<impersonate label="Entrar como..." url="/api/v1/regular_users"></impersonate>-->
-                        <!--@endCanImpersonate-->
-                        <!--@impersonating-->
-                        <!--{{ dataUser().impersonatedBy.name }} està suplantant {{ dataUser.name }}-->
-                        <!--<a href="/impersonate/leave">Abandonar la suplantación</a>-->
-                        <!--@endImpersonating-->
-                    <!--</v-flex>-->
-                <!--</v-layout>-->
-            <!--</v-card>-->
-            <!--<tema></tema>-->
-            <!--<v-form action="/logout" method="POST">-->
-                <!--<v-btn color="indigo lighten-2" class="text-md-center" type="submit" ><v-icon>exit_to_app</v-icon>CERRAR SESION</v-btn>-->
-            <!--</v-form>-->
+                <v-layout row wrap>
+                    @impersonating
+                    <v-flex xs12>
+                        <v-avatar title="{{ dataUser.impersonatedBy().name }} ( {{ dataUser.email }} )">
+                            <img src="https://www.gravatar.com/avatar/{{ md5(dataUser.impersonatedBy().email) }}" alt="avatar">
+                        </v-avatar>
+                    </v-flex>
+                    @endImpersonating
+                    <v-flex xs12>
+                        @canImpersonate
+                        <impersonate label="Entrar como..." url="/api/v1/regular_users"></impersonate>
+                        @endCanImpersonate
+                        @impersonating
+                        {{ dataUser().impersonatedBy.name }} està suplantant {{ dataUser.name }}
+                        <a href="/impersonate/leave">Abandonar la suplantación</a>
+                        @endImpersonating
+                    </v-flex>
+                </v-layout>
+            </v-card>
+            <tema></tema>
+            <v-form action="/logout" method="POST">
+                <v-btn color="indigo lighten-2" class="text-md-center" type="submit" ><v-icon>exit_to_app</v-icon>CERRAR SESION</v-btn>
+            </v-form>
         </v-navigation-drawer>
     </span>
 </template>
@@ -68,14 +68,13 @@ export default {
     'tema': Tema
   },
   props: {
-    user: {
-      type: Object,
-      required: true
-    },
-    drawerRight: {
+    drawer: {
       Type: Boolean,
       default: false
     }
+  },
+  created () {
+    this.user = window.laravel_user
   }
 }
 </script>
