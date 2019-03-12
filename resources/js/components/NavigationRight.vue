@@ -54,10 +54,10 @@
         </v-card>
         <v-card>
             <v-flex class="subheading">
-                <v-card-title class="primary white--text"><h4>Opcions administrador</h4>
+                <v-card-title class="primary white--text"><h4>Opciones administrador</h4>
 
                     <v-flex v-if="isImpersonating">
-                        <v-btn  title="Abandonar suplantació" href="impersonate/leave" flat class="white--text" icon><v-icon>exit_to_app</v-icon></v-btn>
+                        <v-btn  title="Abandonar suplantación" href="impersonate/leave" flat class="white--text" icon><v-icon>exit_to_app</v-icon></v-btn>
                     </v-flex>
                 </v-card-title>
 
@@ -87,6 +87,11 @@
             <v-card-title class="primary white--text"><h4>Colors del tema</h4></v-card-title>
             <tema></tema>
         </v-card>
+        <v-divider></v-divider>
+        <v-form action="logout" method="POST">
+            <input type="hidden" name="_token" :value="csrfToken">
+            <v-btn type="submit">Cerrar sesion <v-icon>exit_to_app</v-icon></v-btn>
+        </v-form>
     </v-navigation-drawer>
 </template>
 

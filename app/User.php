@@ -217,13 +217,14 @@ class User extends Authenticatable
         return $this->hashedKey();
     }
 
-    public function getOnlineAttribute()
-    {
-        return $this->isOnline();
-    }
     public function isOnline()
     {
         return Cache::has(User::USERS_CACHE_KEY.'-user-is-online-'. $this->id);
+    }
+
+    public function getOnlineAttribute()
+    {
+        return $this->isOnline();
     }
 
 
