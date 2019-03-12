@@ -106,7 +106,8 @@ export default {
         { icon: 'public', text: 'About', url: '/about' },
         { icon: 'assessment', text: 'Changelog', url: '/changelog' },
         { icon: 'notifications', text: 'Notifications', url: '/notifications' },
-        { icon: 'weekend', text: 'Mobile', url: '/mobile' }
+        { icon: 'weekend', text: 'Mobile', url: '/mobile' },
+        { icon: 'public', text: 'Clock', url: '/clock' }
       ]
     }
   },

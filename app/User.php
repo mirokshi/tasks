@@ -160,7 +160,6 @@ class User extends Authenticatable
             'permissions' => $this->getAllPermissions()->pluck('name')->unique()->toArray(),
             'hash_id' => $this->hash_id,
             'online' => $this->online,
-            //'impersonatedBy' => $this->
         ];
     }
 

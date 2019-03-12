@@ -1,50 +1,44 @@
 <template>
-    <span>
-        <v-toolbar
-            color="primary"
-            dark
-            app
-            clipped-left
-            clipped-right
-            fixed
-            style="background: #2680C2;background: -webkit-linear-gradient(to right, #2680C2, #186FAF);
-            background: linear-gradient(to right, #2680C2, #186FAF);"
-        >
-            <v-toolbar-side-icon @click="$emit('toggleLeft')"></v-toolbar-side-icon>
-            <v-toolbar-title v-if="$vuetify.breakpoint.mdAndUp">
-                {{title}}
-            </v-toolbar-title>
-            <v-spacer></v-spacer>
+    <v-toolbar color="primary" dark fixed app clipped-right clipped-left>
+        <v-toolbar-side-icon @click.stop="$emit('toggle-left')"></v-toolbar-side-icon>
+        <v-toolbar-title>Menú</v-toolbar-title>
+        <v-spacer></v-spacer>
 
-            <notifications-widget></notifications-widget>
+        <notifications-widget></notifications-widget>
 
-            <span v-role="'SuperAdmin'" v-if="$vuetify.breakpoint.mdAndUp">
-                <git-info></git-info>
-            </span>
-            <v-btn href="/profile" icon flat>
-            <v-avatar  :title="user.name">
-                <img :src="user.gravatar" alt="avatar">
-            </v-avatar>
-            </v-btn>
-            <v-btn @click="$emit('toggleRight')" icon flat><v-icon>reorder</v-icon></v-btn>
-        </v-toolbar>
-    </span>
+        <span class="mr-4 hidden-xs-only" v-role="'SuperAdmin'"><git-info></git-info></span>
+        <span class="dotO" title="Usuario Conectado" v-if="user.online"></span>
+        <span class="dotI" title="Usuario Desconectado" v-else></span>
+
+        <v-avatar @click="$emit('toggle-right')" :title="user.name">
+            <img :src=userAvatar alt="avatar">
+        </v-avatar>
+        <v-form action="logout" method="POST">
+            <input type="hidden" name="_token" :value="csrfToken">
+            <v-btn type="submit" icon><v-icon>exit_to_app</v-icon></v-btn>
+        </v-form>
+    </v-toolbar>
 </template>
 
 <script>
-import NotificationsWidget from './notifications/NotificationsWidget'
-import GitInfoComponent from './git/GitInfoComponent'
+import NotificationsWidget from './notifications/NotificationsWidget.vue'
+import GitInfoComponent from './git/GitInfoComponent.vue'
 
 export default {
-  name: 'Toolbar',
+  name: 'MainToolbar',
   components: {
     'notifications-widget': NotificationsWidget,
     'git-info': GitInfoComponent
   },
+  data () {
+    return {
+      userAvatar: window.laravel_user.gravatar
+    }
+  },
   props: {
-    title: {
-      type: String,
-      defaul: 'Titulo'
+    csrfToken: {
+      Type: String,
+      required: true
     }
   },
   created () {
@@ -52,7 +46,23 @@ export default {
   }
 }
 </script>
-
 <style scoped>
-
+    .dotO{
+        height: 15px;
+        width: 15px;
+        background-color: #388a11;
+        border-radius: 50%;
+        display: inline-block;
+        margin-left: 9px;
+        margin-right: 9px;
+    }
+    .dotI{
+        height: 15px;
+        width: 15px;
+        background-color: #730500;
+        border-radius: 50%;
+        display: inline-block;
+        margin-left: 9px;
+        margin-right: 9px;
+    }
 </style>
