@@ -31,11 +31,14 @@ import Profile from './components/Profile'
 import Changelog from './components/changelog/ChangelogComponent.vue'
 import Navigation from './components/Navigation'
 import NavigationRight from './components/NavigationRight.vue'
+import Toolbar from './components/Toolbar.vue'
 import ServiceWorker from './components/ServiceWorker.vue'
 import NotificationsWidget from './components/notifications/NotificationsWidget'
 import Notifications from './components/notifications/Notifications'
 import ShareFab from './components/ui/ShareFab.vue'
 import Mobile from './components/Mobile.vue'
+import Clock from './components/others/Clock.vue'
+
 import VueTimeago from 'vue-timeago'
 import TreeView from 'vue-json-tree-view'
 
@@ -153,8 +156,6 @@ window.Vue.use(permissions)
 window.Vue.use(snackbar)
 window.Vue.use(confirm)
 
-// window.Vue.user($snackbar)
-
 // componentes
 window.Vue.component('example_component', ExampleComponent)
 window.Vue.component('tasks', Tasks)
@@ -171,13 +172,17 @@ window.Vue.component('tema', Tema)
 window.Vue.component('profile', Profile)
 // Changelog
 window.Vue.component('changelog', Changelog)
+
 window.Vue.component('navigation', Navigation)
 window.Vue.component('navigation-right', NavigationRight)
+window.Vue.component('toolbar', Toolbar)
 
 window.Vue.component('service-worker', ServiceWorker)
 window.Vue.component('notifications-widget', NotificationsWidget)
 window.Vue.component('notifications', Notifications)
 window.Vue.component('share-fab', ShareFab)
 window.Vue.component('mobile', Mobile)
+window.Vue.component('clock', Clock)
+
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)

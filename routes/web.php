@@ -15,6 +15,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ChangelogController;
+use App\Http\Controllers\ClockController;
 use App\Http\Controllers\LoggedUserPhotoController;
 use App\Http\Controllers\LoggedUserTasksController;
 use App\Http\Controllers\NotificationController;
@@ -74,6 +75,10 @@ Route::middleware(['auth'])->group(function() {
     });
 //ABOUT
 
+    Route::get('/mobile', function (){
+        return view('mobile');
+    });
+
     //Vue
     Route::get('/tasks_vue','TasksVueController@index');
 
@@ -110,6 +115,8 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/changelog','\\'. ChangelogController::class . '@index');
 
     Route::get('/notifications', '\\' . NotificationController::class . '@index');
+
+    Route::get('/clock','\\'.ClockController::class.'@index');
 });
 
 //WELCOME
@@ -126,9 +133,6 @@ Route::get('/omplir', function () {
     for ($i =1; $i <=50; $i++){
         factory(App\Task::class)->create();
     }
-});
-Route::get('/mobile', function (){
-    return view('mobile');
 });
 
 
