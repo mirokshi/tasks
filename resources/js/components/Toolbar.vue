@@ -13,10 +13,6 @@
         <v-avatar @click="$emit('toggle-right')" :title="user.name">
             <img :src=userAvatar alt="avatar">
         </v-avatar>
-        <v-form action="logout" method="POST">
-            <input type="hidden" name="_token" :value="csrfToken">
-            <v-btn type="submit" icon><v-icon>exit_to_app</v-icon></v-btn>
-        </v-form>
     </v-toolbar>
 </template>
 

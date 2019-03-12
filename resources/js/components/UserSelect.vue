@@ -26,6 +26,9 @@
                 <v-list-tile-title v-text="user.name"></v-list-tile-title>
                 <v-list-tile-sub-title v-text="user.email"></v-list-tile-sub-title>
             </v-list-tile-content>
+            <v-spacer></v-spacer>
+            <span class="dotO" title="Usuario Conectado" v-if="user.online"></span>
+            <span class="dotI" title="Usuario Desconectado" v-else></span>
         </template>
     </v-autocomplete>
 </template>
@@ -80,3 +83,23 @@ export default {
   }
 }
 </script>
+<style scoped>
+    .dotO{
+        height: 15px;
+        width: 15px;
+        background-color: #388a11;
+        border-radius: 50%;
+        display: inline-block;
+        margin-left: 9px;
+        margin-right: 9px;
+    }
+    .dotI{
+        height: 15px;
+        width: 15px;
+        background-color: #730500;
+        border-radius: 50%;
+        display: inline-block;
+        margin-left: 9px;
+        margin-right: 9px;
+    }
+</style>
