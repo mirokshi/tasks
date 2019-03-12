@@ -43,7 +43,6 @@ import TreeView from 'vue-json-tree-view'
 import '../../resources/img/icon16x16.png'
 import '../../resources/img/icon32x32.png'
 
-
 // window.location.reload(true)
 
 library.add(faCoffee)
@@ -155,7 +154,6 @@ window.Vue.use(permissions)
 window.Vue.use(snackbar)
 window.Vue.use(confirm)
 
-// window.Vue.user($snackbar)
 
 // componentes
 window.Vue.component('example_component', ExampleComponent)
@@ -182,5 +180,6 @@ window.Vue.component('notifications-widget', NotificationsWidget)
 window.Vue.component('notifications', Notifications)
 window.Vue.component('share-fab', ShareFab)
 window.Vue.component('mobile', Mobile)
+
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)
