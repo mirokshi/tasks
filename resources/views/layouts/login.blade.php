@@ -41,26 +41,9 @@
     </style>
 </head>
 <body>
-<div id="app"  v-cloak>
-    <noscript>
-        <strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <v-app>
-        <snackbar></snackbar>
-        <service-worker></service-worker>
-        <navigation v-model="drawer"></navigation>
-        <navigation-right v-model="drawerRight"></navigation-right>
-        <toolbar
-                 @toggle-right="drawerRight=!drawerRight"
-                 @toggle-left="drawer=!drawer"
-                 csrf-token="{{ csrf_token()}}"
-        ></toolbar>
-        <v-content>
-            @yield('content')
-        </v-content>
-        <v-footer color="primary" app>
-            <span class="white--text pl-3" >&copy; {{date('Y')}} Rojas Diaz Mirokshi</span>
-        </v-footer>
+<div id="app" v-cloak>
+    <v-app id="inspire">
+        @yield('content')
     </v-app>
 </div>
 </body>

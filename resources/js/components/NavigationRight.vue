@@ -1,85 +1,154 @@
 <template>
-    <span>
-        <v-navigation-drawer
-            v-model="dataDrawerRight"
-            fixed
-            right
-            clipped
-            app
-        >
-            <v-card>
-                <v-card-title class="grey darken-3 white--text"><h4>Perfil</h4></v-card-title>
-                <v-layout row wrap>
-                    <v-flex xs12>
-                        <ul>
-                            <li>Nombre : {{dataUser.name}}</li>
-                            <li>Email : {{dataUser.email}}</li>
-                            <li>Admin : {{ dataUser.admin ? 'SI' : 'NO' }}</li>
-                            <li>Roles : {{ implode(',',dataUser.map()['roles']) }}</li>
-                            <li>Permissions : {{ implode(', ',dataUser.map()['permissions']) }}</li>
-                        </ul>
-                    </v-flex>
-                </v-layout>
-            </v-card>
-            <!--<v-card>-->
-                <!--<v-card-title class="grey darken-3 white&#45;&#45;text"><h4>Opciones de administrador</h4></v-card-title>-->
+    <v-navigation-drawer
+        v-model="dataDrawer"
+        fixed
+        right
+        clipped
+        app
+    >
+        <v-card>
+            <v-card-title class="primary white--text"><h4>Perfil</h4></v-card-title>
+            <v-list-tile class="pb-2 pt-2">
+                <v-list-tile-avatar>
+                    <v-avatar>
+                        <img :title="user.name" :src="user.gravatar">
+                    </v-avatar>
+                </v-list-tile-avatar>
+                <v-list-tile-content>
+                    <v-list-tile-title>{{user.name}}</v-list-tile-title>
+                    <v-list-tile-title>{{user.email}}</v-list-tile-title>
+                </v-list-tile-content>
+            </v-list-tile>
+            <v-divider></v-divider>
+            <v-list-tile class="pb-2 pt-2">
+                <v-list-tile-content>
+                    <v-list-tile-title>Administrador? {{ user.admin ? 'Si' : 'No' }}</v-list-tile-title>
+                </v-list-tile-content>
+            </v-list-tile>
+            <v-divider></v-divider>
+            <v-list>
+                <v-list-group v-ripple no-action>
+                    <v-list-tile slot="activator">
+                        <v-list-tile-content>Rols</v-list-tile-content>
+                    </v-list-tile>
 
-                <!--<v-layout row wrap>-->
-                    <!--@impersonating-->
-                    <!--<v-flex xs12>-->
-                        <!--<v-avatar title="{{ dataUser.impersonatedBy().name }} ( {{ dataUser.email }} )">-->
-                            <!--<img src="https://www.gravatar.com/avatar/{{ md5(dataUser.impersonatedBy().email) }}" alt="avatar">-->
-                        <!--</v-avatar>-->
-                    <!--</v-flex>-->
-                    <!--@endImpersonating-->
-                    <!--<v-flex xs12>-->
-                        <!--@canImpersonate-->
-                        <!--<impersonate label="Entrar como..." url="/api/v1/regular_users"></impersonate>-->
-                        <!--@endCanImpersonate-->
-                        <!--@impersonating-->
-                        <!--{{ dataUser().impersonatedBy.name }} està suplantant {{ dataUser.name }}-->
-                        <!--<a href="/impersonate/leave">Abandonar la suplantación</a>-->
-                        <!--@endImpersonating-->
-                    <!--</v-flex>-->
-                <!--</v-layout>-->
-            <!--</v-card>-->
-            <!--<tema></tema>-->
-            <!--<v-form action="/logout" method="POST">-->
-                <!--<v-btn color="indigo lighten-2" class="text-md-center" type="submit" ><v-icon>exit_to_app</v-icon>CERRAR SESION</v-btn>-->
-            <!--</v-form>-->
-        </v-navigation-drawer>
-    </span>
+                    <v-list-tile v-for="rol in user.roles" :key="rol">
+                        <v-list-tile-content>
+                            <v-list-tile-title>{{ rol }}</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </v-list-group>
+                <v-divider></v-divider>
+                <v-list-group v-ripple no-action>
+                    <v-list-tile slot="activator">
+                        <v-list-tile-content>Permisos</v-list-tile-content>
+                    </v-list-tile>
+
+                    <v-list-tile v-for="permis in user.permissions" :key="permis">
+                        <v-list-tile-content>
+                            <v-list-tile-title>{{ permis }}</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </v-list-group>
+            </v-list>
+        </v-card>
+        <v-card>
+            <v-flex class="subheading">
+                <v-card-title class="primary white--text"><h4>Opcions administrador</h4>
+
+                    <v-flex v-if="isImpersonating">
+                        <v-btn  title="Abandonar suplantació" href="impersonate/leave" flat class="white--text" icon><v-icon>exit_to_app</v-icon></v-btn>
+                    </v-flex>
+                </v-card-title>
+
+                <v-flex xs12 v-if="canImpersonate">
+                    <impersonate label="Entrar com..." url="/api/v1/regular_users"></impersonate>
+                </v-flex>
+
+                <v-flex v-if="isImpersonating">
+                    <v-layout row wrap>
+                        <v-card-text class="text-xs-center subheading">
+                            <v-flex>
+                                <v-avatar :title="impersonatedBy.name +' '+'( '+impersonatedBy.email+' )'">
+                                    <img :src="gravatar" alt="avatar">
+                                </v-avatar>
+                            </v-flex>
+                            <v-flex class="mt-2 ml-1 mr-1">
+
+                                {{ impersonatedBy.name }} està suplantant a {{ user.name }}
+                            </v-flex>
+                        </v-card-text>
+                    </v-layout>
+                </v-flex>
+
+            </v-flex>
+        </v-card>
+        <v-card>
+            <v-card-title class="primary white--text"><h4>Colors del tema</h4></v-card-title>
+            <tema></tema>
+        </v-card>
+    </v-navigation-drawer>
 </template>
 
 <script>
-import Impersonate from './Impersonate'
 import Tema from './Tema'
+import Impersonate from './Impersonate'
 
 export default {
+  components: {
+    'tema': Tema,
+    'impersonate': Impersonate
+  },
   name: 'NavigationRight',
   data () {
     return {
-      dataDrawerRight: this.drawerRight,
-      dataUser: this.user
+      dataDrawer: this.drawerRight
     }
   },
-  components: {
-    'impersonate': Impersonate,
-    'tema': Tema
-  },
   props: {
-    user: {
-      type: Object,
-      required: true
-    },
     drawerRight: {
       Type: Boolean,
-      default: false
+      default: null
+    },
+    csrfToken: {
+      Type: String
+    }
+  },
+  watch: {
+    dataDrawer (newval) {
+      this.$emit('input', newval)
+    },
+    drawerRight (newval) {
+      this.dataDrawer = newval
+    }
+  },
+  model: {
+    prop: 'drawerRight',
+    event: 'input'
+  },
+  computed: {
+    isImpersonating: function () {
+      return !!window.impersonatedBy
+    },
+    canImpersonate: function () {
+      return window.laravel_user.admin || false
+    },
+    gravatar: function () {
+      return (
+        'https://www.gravatar.com/avatar/' +
+                    window.md5(
+                      window.impersonatedBy
+                        ? window.impersonatedBy.email
+                        : 'google@gmail.com'
+                    )
+      )
+    },
+    user: function () {
+      return window.laravel_user
+    },
+    impersonatedBy: function () {
+      return window.impersonatedBy || undefined
     }
   }
 }
 </script>
-
-<style scoped>
-
-</style>
