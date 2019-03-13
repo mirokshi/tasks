@@ -93,4 +93,12 @@ class LoginController extends Controller
             'password' => str_random()
         ]);
     }
+
+    //public function showLoginForm()
+    //{
+    //    if(!session()->has('url.intended')){
+    //        session()->put('url.intended', url()->previous());
+    //    }
+    //    return view('auth.login');
+    //}
 }

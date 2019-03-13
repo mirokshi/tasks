@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="user" content="{{ logged_user() }}">
     <meta name="git" content="{{ git() }}">
+    <meta name="impersonatedBy" content="{{ Auth::user()->impersonatedBy() }}">
     <link rel="icon" type="image/png" sizes="32x32" href="/icon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/icon-16x16.png">
     <meta name="theme-color" content="#317EFB"/>
