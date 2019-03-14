@@ -50,11 +50,13 @@
         <snackbar></snackbar>
         <service-worker></service-worker>
         <navigation v-model="drawer"></navigation>
-        <navigation-right v-model="drawerRight"></navigation-right>
+        <navigation-right
+            csrf-token="{{ csrf_token()}}"
+            v-model="drawerRight"></navigation-right>
         <toolbar
                  @toggle-right="drawerRight=!drawerRight"
                  @toggle-left="drawer=!drawer"
-                 csrf-token="{{ csrf_token()}}"
+
         ></toolbar>
         <v-content>
             @yield('content')
