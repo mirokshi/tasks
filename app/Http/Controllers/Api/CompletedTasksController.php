@@ -15,13 +15,12 @@ class CompletedTasksController extends Controller
 
     public function destroy(Request $request, Task $task)
     {
-        $task->completed=false;
+        $task->completed = false;
         $task->save();
 
         //  HOOK -> EVENT
         event(new TaskUncompleted($task));
-
-}
+    }
 
     public function store(Request $request, Task $task)
     {
@@ -30,6 +29,5 @@ class CompletedTasksController extends Controller
 
         //  HOOK -> EVENT
         event(new TaskCompleted($task));
-
-}
+    }
 }

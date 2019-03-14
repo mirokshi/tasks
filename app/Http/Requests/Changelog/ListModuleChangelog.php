@@ -9,6 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * Class ListModuleChangelog.
  *
  * @package App\Http\Requests
+ *
  */
 class ListModuleChangelog extends FormRequest
 {
