@@ -7,8 +7,6 @@ use App\Http\Requests\Notifications\UserNotificationsIndex;
 
 /**
  * Class UserNotificationsController.
- *
- * @package App\Http\Controllers\Api\Notifications
  */
 class UserNotificationsController extends Controller
 {
@@ -16,6 +14,7 @@ class UserNotificationsController extends Controller
      * Index.
      *
      * @param UserNotificationsIndex $request
+     *
      * @return mixed
      */
     public function index(UserNotificationsIndex $request)

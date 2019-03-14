@@ -7,8 +7,6 @@ use Spatie\ImageOptimizer\OptimizerChainFactory;
 
 /**
  * Class ImgOptimize.
- *
- * @package App\Console\Commands
  */
 class ImgOptimize extends Command
 {

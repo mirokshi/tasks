@@ -1,17 +1,15 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GitIndex;
 use Cache;
 
-
 /**
- * Class GitController
- * @package App\Http\Controllers\Tenant\Api\Git
- *
+ * Class GitController.
  */
-class GitController  extends Controller
+class GitController extends Controller
 {
     /**
      * Index.
@@ -19,7 +17,6 @@ class GitController  extends Controller
      * @param GitIndex $request
      *
      * @return mixed
-     *
      */
     public function index(GitIndex $request)
     {

@@ -8,7 +8,6 @@ use Illuminate\Notifications\DatabaseNotification as LaravelDatabaseNotification
 
 /**
  * Class DatabaseNotification.
- *
  */
 class DatabaseNotification extends LaravelDatabaseNotification
 {
@@ -25,7 +24,8 @@ class DatabaseNotification extends LaravelDatabaseNotification
      *
      * @return DatabaseNotification[]|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public static function notifications() {
+    public static function notifications()
+    {
         return self::with('notifiable')->get();
     }
 

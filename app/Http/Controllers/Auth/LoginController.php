@@ -72,13 +72,14 @@ class LoginController extends Controller
         Auth::login($authUser, true);
 
         return Redirect::to('home');
-
     }
 
     /**
+     *
      * Return user if exists; create and return if doesn't
      *
      * @param $user
+     *
      * @return User
      */
     private function findOrCreateUser($user)
@@ -88,9 +89,9 @@ class LoginController extends Controller
         }
 
         return User::create([
-            'name' => $user->name,
-            'email' => $user->email,
-            'password' => str_random()
+            'name'      => $user->name,
+            'email'     => $user->email,
+            'password'  => str_random()
         ]);
     }
 

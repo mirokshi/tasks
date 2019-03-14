@@ -22,7 +22,6 @@ class ChangelogModuleController extends Controller
      * @param Module $module
      *
      * @return mixed
-     *
      */
     public function index(ListModuleChangelog $request, $tenant, Module $module)
     {

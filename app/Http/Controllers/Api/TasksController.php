@@ -1,29 +1,20 @@
 <?php
 
-
 namespace App\Http\Controllers\Api;
 
-
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\TaskDestroy;
 use App\Http\Requests\TaskIndex;
 use App\Http\Requests\TaskShow;
 use App\Http\Requests\TaskStore;
 use App\Http\Requests\TaskUpdate;
 use App\Task;
-use Illuminate\Http\Request;
-
 
 class TasksController extends Controller
 {
-
     public function index(TaskIndex $request)
     {
-
-        return map_collection(Task::orderBy('created_at','desc')->get());
-
-
+        return map_collection(Task::orderBy('created_at', 'desc')->get());
     }
 
     public function show(TaskShow $request, Task $task) //Route Model Binding
@@ -43,6 +34,7 @@ class TasksController extends Controller
         $task->save();
         //  HOOK -> EVENT
         event(new \App\Events\TaskCreate($task));
+
         return $task->map();
     }
 
@@ -54,8 +46,6 @@ class TasksController extends Controller
         event(new \App\Events\TaskDestroy($task));
 
         return $task;
-
-
     }
 
     public function update(TaskUpdate $request, Task $task)
@@ -65,6 +55,7 @@ class TasksController extends Controller
         $task->description = $request->description ?? $task->description;
         $task->user_id = $request->user_id;
         $task->save();
+
         return $task->map();
     }
 
@@ -74,6 +65,4 @@ class TasksController extends Controller
 //        return view('task_edit',[ 'task' => $task]);
 //
 //    }
-
-
 }

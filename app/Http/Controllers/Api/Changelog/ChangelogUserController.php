@@ -22,7 +22,6 @@ class ChangelogUserController extends Controller
      * @param User $user
      *
      * @return mixed
-     *
      */
     public function index(ListUserChangelog $request, $tenant, User $user)
     {

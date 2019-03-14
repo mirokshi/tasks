@@ -11,8 +11,6 @@ use Newsletter;
 
 /**
  * Class NewslettersController.
- *
- * @package App\Http\Controllers\Web
  */
 class NewslettersController extends Controller
 {
