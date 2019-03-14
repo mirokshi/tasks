@@ -113,7 +113,19 @@ protected $hidden = [
             'full_search' => $this->full_search,
             'tags' => $this->tags,
 //            'file' => $this->file
+        ];
+    }
 
+    public function mapSimple()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this-> name,
+            'description' => $this->description,
+            'completed' => (boolean)$this->completed,
+            'user' => $this->user,
+            'tags' => $this->tags,
+//            'file' => $this->file
         ];
     }
     public function getFullSearchAttribute()

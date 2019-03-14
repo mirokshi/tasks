@@ -7,6 +7,7 @@ use Spatie\ImageOptimizer\OptimizerChainFactory;
 
 /**
  * Class ImgOptimize.
+ * Class ImgOptimize.
  */
 class ImgOptimize extends Command
 {

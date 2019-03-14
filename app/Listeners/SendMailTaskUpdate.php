@@ -5,11 +5,12 @@ namespace App\Listeners;
 
 
 use App\Mail\TaskDestroy;
+use App\Mail\TaskUpdate;
 use App\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
-class SendMailTaskDestroy implements ShouldQueue
+class SendMailTaskUpdate implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -29,9 +30,9 @@ class SendMailTaskDestroy implements ShouldQueue
      */
     public function handle($event)
     {
-        $user = User::find($event->task['user_id']);
-        Mail::to($user)
+        $subject = $event->task->subject();
+        Mail::to($event->task->user)
             ->cc(config('tasks.manager_email'))
-            ->send((new TaskDestroy($event->task))->subject("Tarea ". $event->task['name']. " borrada"));
+            ->send((new TaskUpdate($event->oldTask, $event->task))->subject($subject));
     }
 }

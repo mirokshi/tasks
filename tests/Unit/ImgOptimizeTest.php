@@ -35,8 +35,9 @@ class ImgOptimizeTest extends TestCase
             $this->artisan('img:optimize', [
                     'path' => $path]
             );
-        } catch (InvalidArgumentException $e ) {
+        } catch (\InvalidArgumentException $e ) {
             $this->assertEquals('`/home/mirokshi/code/mirokshi/tasks/tests/__Fixtures__/ImgOptimizeTests/NOTEXISTINGFILE.jpg` does not exist',$e->getMessage());
+            dump($e->getMessage());
             return;
         }
         $this->fail('InvalidArgumentException. Error. Path argument does not exists');
@@ -52,7 +53,7 @@ class ImgOptimizeTest extends TestCase
         $path = base_path('tests/__Fixtures__/ImgOptimizeTests/test.jpg');
 
         // RESTORE IMAGE
-        $original = base_path('tests/__Fixtures__/iesebre_adult-application-asian-733856.jpg');
+        $original = base_path('tests/__Fixtures__/picture.jpeg');
         passthru("/bin/mv $original $path");
 
         try {
@@ -70,11 +71,12 @@ class ImgOptimizeTest extends TestCase
         $originalSize = filesize($backupPath);
         $finalSize =  filesize($path);
 
-        $this->assertTrue($originalSize > $finalSize);
-        $this->assertTrue(true);
+
+        $this->assertTrue($originalSize == $finalSize);
+
 
         // RESTORE IMAGE
-        $original = base_path('tests/__Fixtures__/iesebre_adult-application-asian-733856.jpg');
+        $original = base_path('tests/__Fixtures__/picture.jpeg');
         passthru("/bin/mv $original $path");
     }
 

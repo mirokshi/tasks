@@ -56,6 +56,9 @@ class TasksController extends Controller
         $task->user_id = $request->user_id;
         $task->save();
 
+        //  HOOK -> EVENT
+        event(new \App\Events\TaskUpdate($task));
+            
         return $task->map();
     }
 

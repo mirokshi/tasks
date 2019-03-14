@@ -12,13 +12,16 @@ class TaskUpdate
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $newTask;
+    public $oldTask;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Task $task)
+    public function __construct(array $oldTask, Task $task)
     {
+        $this->oldTask = $oldTask;
         $this->task = $task;
     }
 
