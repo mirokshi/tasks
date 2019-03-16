@@ -74,7 +74,6 @@
                                 </v-avatar>
                             </v-flex>
                             <v-flex class="mt-2 ml-1 mr-1">
-
                                 {{ impersonatedBy.name }} està suplantant a {{ user.name }}
                             </v-flex>
                         </v-card-text>

@@ -1,18 +1,15 @@
 <?php
 
-
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DestroyTask;
-use App\Http\Requests\IndexTask;
-use App\Http\Requests\ShowTask;
-use App\Http\Requests\UpdateTask;
-use App\Http\Requests\StoreTask;
+use App\Http\Requests\TaskDestroy;
+use App\Http\Requests\TaskShow;
+use App\Http\Requests\TaskStore;
+use App\Http\Requests\TaskUpdate;
 use App\Task;
 use App\User;
 use Illuminate\Http\Request;
-
 
 class UsersController extends Controller
 {
@@ -21,34 +18,33 @@ class UsersController extends Controller
         return map_collection(User::all());
     }
 
-    public function show(ShowTask $request, Task $task) //Route Model Binding
+    public function show(TaskShow $request, Task $task) //Route Model Binding
     {
         return $task->map();
     }
 
-    public function destroy(DestroyTask $request, Task $task)
+    public function destroy(TaskDestroy $request, Task $task)
     {
         $task->delete();
     }
 
     //CREATE
 
-    public function store(StoreTask $request)
+    public function store(TaskStore $request)
     {
-
         $task = new Task();
         $task->name = $request->name;
         $task->completed = false;
         $task->save();
+
         return $task->map();
     }
 
-    public function update(UpdateTask $request, Task $task)
+    public function update(TaskUpdate $request, Task $task)
     {
         $task->name = $request->name;
         $task->save();
+
         return $task->map();
     }
-
-
 }

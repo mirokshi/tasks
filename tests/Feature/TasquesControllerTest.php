@@ -28,7 +28,7 @@ class TasquesControllerTest extends TestCase
     public function guest_user_cannot_index_tasks()
     {
         $response = $this->get('/tasques');
-        $response->assertRedirect('login');
+        $response->assertRedirect('login?back=tasques');
     }
 
     /**
@@ -46,6 +46,7 @@ class TasquesControllerTest extends TestCase
      */
     public function superadmin_can_index_tasks()
     {
+        $this->withoutExceptionHandling();
         create_example_tasks_with_tags();
 
         Cache::shouldReceive('remember')

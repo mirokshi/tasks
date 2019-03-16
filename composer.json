@@ -12,15 +12,16 @@
         "guzzlehttp/guzzle": "^6.3",
         "hashids/hashids": "^3.0",
         "lab404/laravel-impersonate": "^1.2",
-        "laravel/framework": "5.7.*",
-        "laravel/horizon": "^2.0",
+        "laravel/framework": "5.8.*",
+        "laravel/horizon": "^3.0",
         "laravel/passport": "^7.0",
         "laravel/socialite": "^4.0",
-        "laravel/telescope": "^1.0",
+        "laravel/telescope": "^2.0",
         "laravel/tinker": "^1.0",
         "nao-pon/flysystem-google-drive": "^1.1",
         "predis/predis": "^1.1",
         "spatie/image-optimizer": "^1.1",
+        "spatie/laravel-newsletter": "^4.3",
         "spatie/laravel-permission": "^2.25"
     },
     "require-dev": {
@@ -29,8 +30,8 @@
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^2.0",
-        "phpunit/phpunit": "^7"
+        "nunomaduro/collision": "^3.0",
+        "phpunit/phpunit": "^8"
     },
     "autoload": {
         "classmap": [

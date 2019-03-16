@@ -5,6 +5,7 @@ namespace App\Listeners;
 
 
 use App\Mail\TaskDestroy;
+use App\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
@@ -28,9 +29,9 @@ class SendMailTaskDestroy implements ShouldQueue
      */
     public function handle($event)
     {
-        $subject = $event->task->subject();
-        Mail::to($event->task->user)
+        $user = User::find($event->task['user_id']);
+        Mail::to($user)
             ->cc(config('tasks.manager_email'))
-            ->send((new TaskDestroy($event->task))->subject($subject));
+            ->send((new TaskDestroy($event->task))->subject("Tarea ". $event->task['name']. " borrada"));
     }
 }

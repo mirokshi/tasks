@@ -31,12 +31,6 @@ export default {
       userAvatar: window.laravel_user.gravatar
     }
   },
-  props: {
-    csrfToken: {
-      Type: String,
-      required: true
-    }
-  },
   created () {
     this.user = window.laravel_user
   }

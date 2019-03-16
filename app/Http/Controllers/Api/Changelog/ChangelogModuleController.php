@@ -9,8 +9,8 @@ use App\Module;
 
 /**
  * Class ChangelogModuleController.
- *
  * @package App\Http\Controllers\Tenant\Api\Changelog
+ *
  */
 class ChangelogModuleController extends Controller
 {
@@ -20,6 +20,7 @@ class ChangelogModuleController extends Controller
      * @param ListModuleChangelog $request
      * @param $tenant
      * @param Module $module
+     *
      * @return mixed
      */
     public function index(ListModuleChangelog $request, $tenant, Module $module)

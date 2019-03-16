@@ -29,17 +29,16 @@ class LogTaskDestroy
     public function handle($event)
     {
         Log::create([
-            'text' => "Se ha eliminado la tarea'".$event->task->name."'" ,
+            'text' => "Se ha eliminado la tarea'".$event->task['name'] ."'" ,
             'time' =>Carbon::now(),
             'action_type' => 'Eliminar',
             'module_type'=>'Tasques',
             'icon' => 'delete_forever',
             'color' => '#B40404',
-            'user_id' => $event->task->user_id,
-            'loggable_id' => $event-> task->id,
+            'user_id' => $event->task['user_id'],
+            'loggable_id' => $event-> task['id'],
             'loggable_type' => Task::class,
-            'old_value' => $event->task->name,
-            'new_value' => ""
+            'old_value' => json_encode($event->task),
         ]);
     }
 }
