@@ -1,21 +1,24 @@
 <template>
     <span>
         <v-layout>
-        <geolocation></geolocation>
+        <!--<geolocation></geolocation>-->
         <!--<device-position></device-position>-->
+            <network></network>
         </v-layout>
     </span>
 </template>
 
 <script>
 
-import DevicePostion from './others/DevicePosition'
-import Geolocation from './others/Geolocation'
+import DevicePostion from './mobile/DevicePosition'
+import Geolocation from './mobile/Geolocation'
+import NetWork from './mobile/NetWork'
 export default {
   name: 'mobile',
   components: {
     'device-position': DevicePostion,
-    'geolocation': Geolocation
+    'geolocation': Geolocation,
+    'network': NetWork
   }
 }
 </script>
