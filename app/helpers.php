@@ -464,7 +464,7 @@ if (!function_exists('logged_user')){
 }
 if (! function_exists('git')) {
     function git() {
-        return Cache::remember('git_info', 5, function () {
+        return Cache::remember('git_info', 300, function () {
             Carbon::setLocale(config('app.locale'));
             return collect([
                 'branch' => git_current_branch(),

@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Avatar;
 use App\Http\Requests\Photos\AvatarStore;
 
-
 class AvatarController extends Controller
 {
-
     public function store(AvatarStore $request)
     {
         $extension = $request->file('avatar')->getClientOriginalExtension();
@@ -17,17 +14,18 @@ class AvatarController extends Controller
             'avatars', $request->user()->id. '.'. $extension
         );
         $request->file('avatar')->storeAs(
-            '',$request->user()->id. '.'. $extension,'google'
+            '', $request->user()->id. '.'. $extension, 'google'
         );
-        if ($photo = Avatar::where('user_id',$request->user()->id)->first()) {
+        if ($photo = Avatar::where('user_id', $request->user()->id)->first()) {
             $photo->url = $path;
             $photo->save();
         } else {
             Avatar::create([
-                'url' => $path,
-                'user_id' => $request->user()->id
+                'url'       => $path,
+                'user_id'   => $request->user()->id
             ]);
         }
+
         return back();
     }
 
@@ -48,9 +46,9 @@ class AvatarController extends Controller
 //        $path = $request->file('avatar')->store(
 //            'avatars/'.$request->user()->id, 's3'
 //        );
-        dump($path);
+
         return Avatar::create([
-            'url' => $path
+            'url' => $path,
         ]);
     }
 }

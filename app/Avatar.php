@@ -14,8 +14,8 @@ class Avatar extends Model
     public function map()
     {
         return [
-            'id' => $this->id,
-            'url' => $this->url
+            'id'  => $this->id,
+            'url' => $this->url,
         ];
     }
 
@@ -29,6 +29,7 @@ class Avatar extends Model
     {
         $this->user_id = $user->id;
         $this->save();
+
         return $this;
     }
 }

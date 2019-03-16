@@ -7,8 +7,7 @@ use Spatie\ImageOptimizer\OptimizerChainFactory;
 
 /**
  * Class ImgOptimize.
- *
- * @package App\Console\Commands
+ * Class ImgOptimize.
  */
 class ImgOptimize extends Command
 {
@@ -48,7 +47,7 @@ class ImgOptimize extends Command
         $ext = pathinfo($path, PATHINFO_EXTENSION);
         $filename = pathinfo($path, PATHINFO_FILENAME);
         $dirname = pathinfo($path, PATHINFO_DIRNAME);
-        $backupPath = $dirname . '/' . $filename . '.backup.' . $ext;
+        $backupPath = $dirname.'/'.$filename.'.backup.'.$ext;
         passthru("/bin/cp $path $backupPath");
         $this->info('Optimizing... 🍕🍕🍕');
         $optimizerChain->optimize($path);

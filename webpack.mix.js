@@ -44,3 +44,4 @@ mix.webpackConfig({
     new DashboardPlugin()
   ]
 })
+

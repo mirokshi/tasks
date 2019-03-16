@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class LogTaskCompletedTest extends TestCase
+class ForgetTasksCacheTest extends TestCase
 {
     use RefreshDatabase;
 

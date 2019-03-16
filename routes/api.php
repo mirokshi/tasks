@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Changelog\ChangelogController;
 use App\Http\Controllers\Api\GitController;
+use App\Http\Controllers\Api\NewsletterController;
 use App\Http\Controllers\Api\Notifications\NotificationsController;
 use App\Http\Controllers\Api\Notifications\SimpleNotificationsController;
 use App\Http\Controllers\Api\Notifications\UserNotificationsController;
@@ -89,6 +90,8 @@ Route::get('/v1/git/info','\\' . GitController::class . '@index');
 
     // Simple notifications
     Route::post('/v1/simple_notifications/','\\' . SimpleNotificationsController::class . '@store');
+
 });
+Route::post('/v1/newsletter', '\\' . NewsletterController::class . '@store');
 
 
