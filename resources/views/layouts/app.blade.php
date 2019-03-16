@@ -56,7 +56,6 @@
         <toolbar
                  @toggle-right="drawerRight=!drawerRight"
                  @toggle-left="drawer=!drawer"
-
         ></toolbar>
         <v-content>
             @yield('content')

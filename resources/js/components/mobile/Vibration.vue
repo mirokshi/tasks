@@ -1,14 +1,12 @@
 <template>
-    <span>
-        <v-btn @click="vibratePattern">VIBRATION</v-btn>
-    </span>
+    <v-btn @click="party"><v-icon>vibration</v-icon></v-btn>
 </template>
 
 <script>
 export default {
   name: 'Vibration',
-  components: {
-    vibratePattern () {
+  methods: {
+    party () {
       if (navigator.vibrate) {
         navigator.vibrate([100, 200, 200, 200, 500])
       }
