@@ -1,4 +1,4 @@
-importScripts("/service-worker/precache-manifest.7411e25c1699328637d98d846bcdaf6b.js", "https://storage.googleapis.com/workbox-cdn/releases/4.1.0/workbox-sw.js");
+importScripts("/service-worker/precache-manifest.1b1cb406ca5e42226e0506b2908d173e.js", "https://storage.googleapis.com/workbox-cdn/releases/4.1.0/workbox-sw.js");
 
 workbox.setConfig({
   debug: true
