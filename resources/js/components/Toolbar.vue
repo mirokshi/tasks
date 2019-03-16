@@ -21,7 +21,7 @@ import NotificationsWidget from './notifications/NotificationsWidget.vue'
 import GitInfoComponent from './git/GitInfoComponent.vue'
 
 export default {
-  name: 'MainToolbar',
+  name: 'Toolbar',
   components: {
     'notifications-widget': NotificationsWidget,
     'git-info': GitInfoComponent
