@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Toggle from './Toggle'
+import Toggle from '../Toggle'
 export default {
   name: 'TaskFormUpdate',
   components: { Toggle },

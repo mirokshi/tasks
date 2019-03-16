@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai'
 import { mount } from '@vue/test-utils'
-import Tasks from '../../../resources/js/components/Tasks.vue'
+import Tasks from '../../../resources/js/components/tasks/Tasks.vue'
 import moxios from 'moxios'
 
 let exampleTasks = [

@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import EditableText from './EditableText.vue'
+import EditableText from '../EditableText.vue'
 
 var filters = {
   all: function (datatasks) {
