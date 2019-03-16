@@ -1,7 +1,7 @@
 <template>
     <span>
-        <button class="btn btn-default" onclick="vibrateSimple()">Vibrate for 200 ms</button>
-        <button class="btn btn-default" onclick="vibratePattern()">Vibrate with pattern</button>
+        <v-btn @click="vibrateSimple"><v-icon>vibration</v-icon></v-btn>
+        <v-btn @click="vibratePattern">VIBRATION</v-btn>
     </span>
 </template>
 

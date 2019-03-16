@@ -3,7 +3,7 @@
         <v-layout>
         <!--<geolocation></geolocation>-->
         <!--<device-position></device-position>-->
-            <network></network>
+            <!--<network></network>-->
             <vibration></vibration>
         </v-layout>
     </span>
