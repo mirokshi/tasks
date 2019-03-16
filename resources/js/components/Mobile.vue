@@ -4,7 +4,8 @@
         <!--<geolocation></geolocation>-->
         <!--<device-position></device-position>-->
             <!--<network></network>-->
-            <vibration></vibration>
+            <!--<vibration></vibration>-->
+            <battery-status></battery-status>
         </v-layout>
     </span>
 </template>
@@ -15,13 +16,15 @@ import DevicePostion from './mobile/DevicePosition'
 import Geolocation from './mobile/Geolocation'
 import NetWork from './mobile/NetWork'
 import Vibration from './mobile/Vibration'
+import BatteryStatus from './mobile/BatteryStatus'
 export default {
   name: 'mobile',
   components: {
-    'vibration': Vibration,
     'device-position': DevicePostion,
     'geolocation': Geolocation,
-    'network': NetWork
+    'network': NetWork,
+    'vibration': Vibration,
+    'battery-status': BatteryStatus
   }
 }
 </script>
