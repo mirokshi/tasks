@@ -10,10 +10,14 @@ export default {
   name: 'Vibration',
   components: {
     vibrateSimple () {
-      navigator.vibrate(200)
+      if (navigator.vibrate) {
+        navigator.vibrate(200)
+      }
     },
     vibratePattern () {
-      navigator.vibrate([100, 200, 200, 200, 500])
+      if (navigator.vibrate) {
+        navigator.vibrate([100, 200, 200, 200, 500])
+      }
     }
   }
 }
