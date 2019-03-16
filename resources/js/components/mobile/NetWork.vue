@@ -1,8 +1,10 @@
 <template>
     <span>
-        <p>Current theoretical network type is <b id="networkType">not available</b>.</p>
-        <p>Current effective network type is <b id="effectiveNetworkType">not available</b>.</p>
-        <p>Current max downlink speed is <b id="downlinkMax">not available</b></p>
+        <v-layout>
+        <p>Tipo de red efectivo: <b id="networkType">No definida</b>.</p>
+        <p>Tipo de red recurrente:  <b id="effectiveNetworkType">Not definida</b>.</p>
+        <p>Velocidad maxima <b id="downlinkMax">No definida</b></p>
+    </v-layout>
     </span>
 </template>
 

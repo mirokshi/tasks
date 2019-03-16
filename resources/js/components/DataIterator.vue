@@ -63,9 +63,9 @@
     </span>
 </template>
 <script>
-import TasksTags from './TasksTags'
-import TaskDestroy from './TaskDestroy'
-import TaskUpdate from './TaskUpdate'
+import TasksTags from './tasks/TasksTags'
+import TaskDestroy from './tasks/TaskDestroy'
+import TaskUpdate from './tasks/TaskUpdate'
 
 export default {
   name: 'DataIterator',
