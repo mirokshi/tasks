@@ -35,14 +35,14 @@ if (!function_exists('create_example_tasks')) {
     function create_example_tasks() {
         $user1= factory(User::class)->create();
         Task::create([
-            'name' => 'comprar pa',
+            'name' => 'Comprar pan',
             'completed' => false,
             'description' => 'Bla bla bla',
             'user_id' => $user1->id
         ]);
 
         Task::create([
-            'name' => 'comprar llet',
+            'name' => 'Comprar leche',
             'completed' => false,
             'description' => 'Bla bla bla',
             'user_id' => $user1->id
@@ -57,21 +57,21 @@ if (!function_exists('create_example_tasks')) {
 
         $user1= factory(User::class)->create();
         Task::create([
-            'name' => 'comprar pa',
+            'name' => 'Estudiar JAVA',
             'completed' => false,
             'description' => 'Bla bla bla',
             'user_id' => $user1->id
         ]);
 
         Task::create([
-            'name' => 'comprar llet',
+            'name' => 'Comprar azucar',
             'completed' => false,
             'description' => 'Bla bla bla',
             'user_id' => $user1->id
         ]);
 
         Task::create([
-            'name' => 'Estudiar PHP',
+            'name' => 'Estudiar Python',
             'completed' => true,
             'description' => 'JORL JORL JORL',
             'user_id' => $user1->id
@@ -101,12 +101,12 @@ if (!function_exists('create_example_tags')) {
         ]);
     }
 }
-
 if (!function_exists('create_sample_tasks')) {
-    function create_sample_tasks($user)
+    function create_sample_tasks()
     {
+        $user = User::find('1');
         $task = Task::create([
-            'name' => 'Comprar pa',
+            'name' => 'Ir a comprar',
             'description' => 'Bla bla bla',
             'completed' => false,
         ]);
@@ -128,7 +128,6 @@ if (!function_exists('create_sample_tasks')) {
         return $task;
     }
 }
-
 if (!function_exists('sample_users_and_tasks')) {
     function sample_users_and_tasks() {
         // Superadmin no cal -> soc jo mateix
@@ -194,7 +193,6 @@ if (!function_exists('sample_users_and_tasks')) {
         ]);
     }
 }
-
 if (!function_exists('create_example_tasks_with_tags')){
     function create_example_tasks_with_tags(){
         $user1= factory(User::class)->create();

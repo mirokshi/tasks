@@ -27,7 +27,7 @@
                     class="mx-auto"
                     color="primary lighten-5"
                     dark
-                    v-touch="{ left: () => removeTask(task)}"
+                    v-touch="{ left: () => removeTouchTask(task)}"
                 >
     <v-card-title>
       <v-icon
@@ -109,6 +109,26 @@ export default {
   methods: {
     removeTask (task) {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
+    },
+    async removeTouchTask (task) {
+      // ES6 async await
+      let result = await this.$confirm('Las tareas borradas ya no se podrán recuperar',
+        {
+          title: 'Esta seguro?',
+          buttonTruetext: 'Eliminar',
+          buttonFalsetext: 'Cancelar',
+          color: 'error'
+        })
+      if (result) {
+        this.removing = true
+        window.axios.delete(this.uri + task.id).then(() => {
+          this.$snackbar.showMessage('Se ha borrado correctamente la tarea')
+          this.$emit('removed', task)
+          this.removing = false
+        }).catch(() => {
+          this.removing = false
+        })
+      }
     },
     updateTask (task) {
       this.refresh()
