@@ -2,9 +2,6 @@
 
 namespace App\Listeners;
 
-
-
-use App\Mail\TaskDestroy;
 use App\Mail\TaskUpdate;
 use App\User;
 use Illuminate\Contracts\Queue\ShouldQueue;

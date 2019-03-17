@@ -28,7 +28,7 @@ import { required, email, minLength } from 'vuelidate/lib/validators'
 export default {
   mixins: [validationMixin],
   validations: {
-    dataEmail: { required, minLength: minLength(6), email },
+    dataEmail: { required, email },
     password: { required, minLength: minLength(6) }
   },
   name: 'LoginForm',
@@ -46,17 +46,15 @@ export default {
     emailErrors () {
       const errors = []
       if (!this.$v.dataEmail.$dirty) return errors
-
-      !this.$v.dataEmail.minLength && errors.push('El camp email ha de tindre una mida minima de 6 caracters')
-      !this.$v.dataEmail.required && errors.push('El camp email es obligatori')
-      !this.$v.dataEmail.email && errors.push('El camp email ha de tindre un format mail valid')
+      !this.$v.dataEmail.required && errors.push('El email es obligatorio')
+      !this.$v.dataEmail.email && errors.push('Email invalido')
       return errors
     },
     passwordErrors () {
       const errors = []
       if (!this.$v.password.$dirty) return errors
-      !this.$v.password.minLength && errors.push('El camp password ha de tindre una mida minima de 6 caracters')
-      !this.$v.password.required && errors.push('El camp password es obligatori')
+      !this.$v.password.minLength && errors.push('La longitud del password debe ser mayor de 6 caracteres')
+      !this.$v.password.required && errors.push('El password es obligatorio')
       return errors
     }
   }

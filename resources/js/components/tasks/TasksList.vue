@@ -209,8 +209,7 @@ export default {
         this.dataTasks = response.data
         this.loading = false
         if (message) this.$snackbar.showMessage('Tareas actualizadas correctamente')
-      }).catch(error => {
-        console.log(error)
+      }).catch(() => {
         this.loading = false
       })
     }

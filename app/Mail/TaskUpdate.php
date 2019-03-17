@@ -20,6 +20,7 @@ class TaskUpdate extends Mailable
      */
     public function __construct(array $oldTask,Task $task)
     {
+        $this->oldTask = $oldTask;
         $this->task =  $task;
     }
 

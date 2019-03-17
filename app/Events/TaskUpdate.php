@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Task;
+use App\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -12,17 +13,17 @@ class TaskUpdate
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $newTask;
     public $oldTask;
+    public $task;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(array $oldTask, Task $task)
+    public function __construct($oldTask, Task $task)
     {
-        $this->oldTask = $oldTask;
         $this->task = $task;
+        $this->oldTask = $oldTask;
     }
 
     /**

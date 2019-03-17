@@ -18,7 +18,7 @@ class TaskDestroy
      *
      * @return void
      */
-    public function __construct(array $task)
+    public function __construct(Task $task)
     {
         $this->task = $task;
     }

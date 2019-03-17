@@ -110,8 +110,7 @@ export default {
         this.$emit('created', response.data)
         this.loading = false
         this.$emit('close')
-      }).catch(error => {
-        this.$snackbar.showError(error.data)
+      }).catch(() => {
         this.loading = false
       })
     }

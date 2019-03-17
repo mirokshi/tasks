@@ -1,39 +1,41 @@
-workbox.setConfig({
-  debug: true
-})
+workbox.setConfig({ debug: true })
+workbox.core.skipWaiting()
+workbox.core.clientsClaim()
 
-workbox.skipWaiting()
-workbox.clientsClaim()
+workbox.precaching.cleanupOutdatedCaches()
 
-// workbox.routing.registerRoute(
-//   new RegExp('https://hacker-news.firebaseio.com'),
-//   workbox.strategies.staleWhileRevalidate()
-// );
-
-// TODO cal utilitzar PushManager al registrar el service worker
 self.addEventListener('push', (event) => {
-  const title = 'TODO CANVIAR TITOL'
+  const title = 'Tasks App - Mirokshi Rojas Diaz'
   const options = {
     body: event.data.text()
   }
   event.waitUntil(self.registration.showNotification(title, options))
 })
 
-workbox.precaching.precacheAndRoute(self.__precacheManifest)
-// workbox.precaching.precacheAndRoute([]) També funciona i workbox substitueix pel que pertoca -> placeholder
+self.addEventListener('sync', function (event) {
 
-// static
-workbox.routing.registerRoute(
-  new RegExp('.(?:ico)$'),
-  workbox.strategies.networkFirst({
-    cacheName: 'icons'
+})
+
+const showNotification = () => {
+  self.registration.showNotification('Post Sent', {
+    body: 'You are back online and your post was successfully sent!'
+    // icon: 'assets/icon/256.png',
+    // badge: 'assets/icon/32png.png'
   })
-)
+}
 
-// images
+const bgSyncPlugin = new workbox.backgroundSync.Plugin('newsletter', {
+  maxRetentionTime: 24 * 60, // Retry for max of 24 Hours
+  callbacks: {
+    queueDidReplay: showNotification
+  }
+})
+
+workbox.precaching.precacheAndRoute(self.__precacheManifest)
+
 workbox.routing.registerRoute(
-  new RegExp('.(?:jpg|jpeg|png|gif|svg|webp)$'),
-  workbox.strategies.cacheFirst({
+  new RegExp('https://tasks.*/img/*.*(?:jpg|jpeg|png|gif|svg|webp)$'),
+  new workbox.strategies.CacheFirst({
     cacheName: 'images',
     plugins: [
       new workbox.expiration.Plugin({
@@ -46,48 +48,31 @@ workbox.routing.registerRoute(
 
 workbox.routing.registerRoute(
   '/',
-  workbox.strategies.staleWhileRevalidate({ cacheName: 'landing' })
+  new workbox.strategies.NetworkFirst({ cacheName: 'landing' })
 )
 
-// NO ENS CAL PQ LES TENIM INTEGRADES EN LOCAL VIA WEBPACK i NMP IMPORTS
-// // fonts
-// workbox.routing.registerRoute(
-//   new RegExp('https://fonts.*'),
-//   workbox.strategies.cacheFirst({
-//     cacheName: 'fonts',
-//     plugins: [
-//       new workbox.cacheableResponse.Plugin({
-//         statuses: [0, 200]
-//       })
-//     ]
-//   })
-// )
-//
-// // google stuff
-// workbox.routing.registerRoute(
-//   new RegExp('.*(?:googleapis|gstatic).com.*$'),
-//   workbox.strategies.networkFirst({
-//     cacheName: 'google'
-//   })
-// )
-//
-// // static
-// workbox.routing.registerRoute(
-//   new RegExp('.(?:js|css|ico)$'),
-//   workbox.strategies.networkFirst({
-//     cacheName: 'static'
-//   }),
-// )
-//
-// // images
 workbox.routing.registerRoute(
-  new RegExp('.(?:jpg|png|gif|svg|webp)$'),
-  workbox.strategies.cacheFirst({
-    cacheName: 'images',
-    plugins: [
-      new workbox.expiration.Plugin({
-        maxEntries: 20,
-        purgeOnQuotaError: true
-      })
-    ]
-  }))
+  '/tasques',
+  new workbox.strategies.NetworkFirst({ cacheName: 'tasques' })
+)
+
+workbox.routing.registerRoute(
+  '/api/v1/tasks',
+  new workbox.strategies.NetworkFirst({ cacheName: 'api/v1/tasks' })
+)
+
+workbox.routing.registerRoute(
+  '/api/v1/tasks',
+  new workbox.strategies.NetworkOnly({ plugins: [bgSyncPlugin] }),
+  'POST'
+)
+
+workbox.routing.registerRoute(
+  '/api/v1/regular_users',
+  new workbox.strategies.NetworkFirst({ cacheName: 'api/v1/regular_users' })
+)
+
+workbox.routing.registerRoute(
+  '/api/v1/user/unread_notifications ',
+  new workbox.strategies.NetworkFirst({ cacheName: 'api/v1/user/unread_notifications' })
+)

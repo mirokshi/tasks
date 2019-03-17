@@ -15,7 +15,7 @@
                 <v-icon class="mr-1">exit_to_app</v-icon>
                 Cancelar
             </v-btn>
-            <v-btn color="success" @click="update" :disabled="working" :loading="working">
+            <v-btn color="success" @click="update" :disabled="loading" :loading="loading">
                 <v-icon class="mr-1" >save</v-icon>
                 Actualizar
             </v-btn>
@@ -35,7 +35,7 @@ export default {
       completed: this.task.completed,
       user: null,
       dataUsers: this.users,
-      working: false
+      loading: false
     }
   },
   props: {
@@ -64,7 +64,7 @@ export default {
       })
     },
     update () {
-      this.working = true
+      this.loading = true
       const newTask = {
         name: this.name,
         description: this.description,
@@ -74,10 +74,9 @@ export default {
       window.axios.put(this.uri + this.task.id, newTask).then((response) => {
         this.$emit('updated', response.data)
         this.$emit('close')
-        this.working = false
-      }).catch(error => {
-        this.$snackbar.showError(error)
-        this.working = false
+        this.loading = false
+      }).catch(() => {
+        this.loading = false
       })
     }
   },
