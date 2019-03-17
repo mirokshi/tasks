@@ -7,11 +7,6 @@ import 'typeface-montserrat/index.css'
 import 'typeface-roboto/index.css'
 import './bootstrap'
 import AppComponent from './components/App.vue'
-
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import { dom } from '@fortawesome/fontawesome-svg-core'
-
 import ExampleComponent from './components/ExampleComponent.vue'
 import Tasks from './components/tasks/Tasks.vue'
 import Tasques from './components/tasks/Tasques.vue'
@@ -49,13 +44,7 @@ import '../../resources/img/icon32x32.png'
 
 // window.location.reload(true)
 
-library.add(faCoffee)
 Vue.config.productionTip = false
-dom.watch()
-
-// instalacion vuetify
-window.Vue = Vue
-window.Vuetify = Vuetify
 
 const PRIMARY_COLOR_KEY = 'PRIMARY_COLOR_KEY'
 const SECONDARY_COLOR_KEY = 'SECONDARY_COLOR_KEY'
@@ -63,6 +52,13 @@ const SECONDARY_COLOR_KEY = 'SECONDARY_COLOR_KEY'
 const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#2680C2'
 const secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#2CB1BC'
 
+// instalacion vuetify
+window.Vue = Vue
+window.Vuetify = Vuetify
+window.Vue.use(TreeView)
+window.Vue.use(permissions)
+window.Vue.use(snackbar)
+window.Vue.use(confirm)
 window.Vue.use(VueTimeago, {
   locale: 'es', // Default locale
   locales: {
@@ -70,7 +66,139 @@ window.Vue.use(VueTimeago, {
   }
 })
 
-window.Vue.use(TreeView)
+window.axios.interceptors.response.use((response) => {
+  return response
+}, function (error) {
+  if (window.disableInterceptor) return Promise.reject(error)
+  if (error && error.response) {
+    // Refresh CSRF TOKEN
+    // dAMpDXBRrjVJ2TKewouYHgOeozZmW72EiAt5K1jY
+    console.log('PROVA ###############')
+    if (error.response.status === 419) {
+      console.log('419 error intercepted!!!!!')
+      return window.helpers.getCsrfToken().then((token) => {
+        console.log('TOKEN OBTAINED:')
+        console.log(token)
+        window.helpers.updateCsrfToken(token)
+        console.log('csrf token updated!')
+        error.config.headers['X-CSRF-TOKEN'] = token
+        console.log('resend request!!!')
+        return window.axios.request(error.config)
+      }).catch(e => {
+        console.log("NO s'ha pogut obtenir el CSRFTOKEN")
+        console.log(e)
+      })
+    }
+    console.log('1')
+    if (error.response.status === 401) {
+      window.Vue.prototype.$snackbar.showError("No heu entrat al sistema o ha caducat la sessió. Renviant-vos a l'entrada del sistema")
+      const loginUrl = location.pathname ? '/login?back=' + location.pathname : '/login'
+      console.log('Waiting to redirect to:')
+      console.log(loginUrl)
+      setTimeout(function () { window.location = loginUrl }, 3000)
+      // Break the promise chain -> https://github.com/axios/axios/issues/715
+      return new Promise(() => {})
+    }
+    if (error.response.status === 403) {
+      window.Vue.prototype.$snackbar.showSnackBar(
+        'Error 403!',
+        'error',
+        'No teniu permisos per realitzar aquesta acció.',
+        'center'
+      )
+    }
+    console.log('2')
+    if (error.response.status === 422) {
+      console.log('%%%%%%%%%%%%%%%%% ERROR DE VALIDACIó %%%%%%%%%%%%%%%')
+      console.log(error.response)
+      console.log(error.response.data)
+      console.log(error.response.data.message)
+      console.log(error.response.data.errors)
+      window.Vue.prototype.$snackbar.showSnackBar(
+        error.response.data.message,
+        'error',
+        window.helpers.printObject(error.response.data.errors),
+        'center'
+      )
+    }
+    console.log('3')
+    if (error.response.status === 404) {
+      console.log('%%%%%%%%%%%%%%%%% NOT FOUND ERROR %%%%%%%%%%%%%%%')
+      console.log(error.response)
+      console.log(error.response.data)
+      console.log(error.response.data.message)
+      console.log(error.response.data.errors)
+      window.Vue.prototype.$snackbar.showSnackBar(
+        'Error 404!',
+        'error',
+        "No s'ha pogut trobar al servidor el recurs que demaneu.",
+        'center'
+      )
+    }
+    if (error.response.status === 405) {
+      console.log('%%%%%%%%%%%%%%%%% METHOD NOT ALLOWED FOUND ERROR %%%%%%%%%%%%%%%')
+      console.log(error.response)
+      console.log(error.response.data)
+      console.log(error.response.data.message)
+      console.log(error.response.data.errors)
+      window.Vue.prototype.$snackbar.showSnackBar(
+        'Error 405!',
+        'error',
+        'Tipus de petició HTTP incorrecte.',
+        'center'
+      )
+    }
+    if (error.response.status === 500) {
+      console.log('%%%%%%%%%%%%%%%%% SERVER ERROR %%%%%%%%%%%%%%%')
+      console.log(error.response)
+      console.log(error.response.data)
+      console.log(error.response.data.message)
+      console.log(error.response.data.errors)
+      window.Vue.prototype.$snackbar.showSnackBar(
+        'Error 500!',
+        'error',
+        'Error inesperat al servidor',
+        'center'
+      )
+    }
+    return Promise.reject(error)
+  }
+  if (error && error.request) {
+    window.Vue.prototype.$snackbar.showError("Error de xarxa! No s'ha obtingut cap resposta a la vostra petició. Consulteu l'estat de la xarxa.")
+    window.Vue.prototype.$snackbar.showSnackBar('Error de xarxa!', 'error', "No s'ha obtingut cap resposta a la vostra petició. Consulteu l'estat de la xarxa.")
+    return Promise.reject(error)
+  }
+})
+
+// componentes
+window.Vue.component('example_component', ExampleComponent)
+window.Vue.component('tasks', Tasks)
+window.Vue.component('tasques', Tasques)
+window.Vue.component('tags', Tags)
+window.Vue.component('editable-text', EditableText)
+window.Vue.component('login-form', LoginForm)
+window.Vue.component('register-form', RegisterForm)
+window.Vue.component('user-list', UserList)
+window.Vue.component('user-select', UserSelect)
+window.Vue.component('impersonate', Impersonate)
+window.Vue.component('git-info', GitInfo)
+window.Vue.component('tema', Tema)
+window.Vue.component('profile', Profile)
+// Changelog
+window.Vue.component('changelog', Changelog)
+
+window.Vue.component('navigation', Navigation)
+window.Vue.component('navigation-right', NavigationRight)
+window.Vue.component('toolbar', Toolbar)
+
+window.Vue.component('service-worker', ServiceWorker)
+window.Vue.component('notifications-widget', NotificationsWidget)
+window.Vue.component('notifications', Notifications)
+window.Vue.component('share-fab', ShareFab)
+window.Vue.component('mobile', Mobile)
+window.Vue.component('clock', Clock)
+window.Vue.component('newsletter-subscription-card', NewsLetterSubscriptionCard)
+window.Vue.component('newsletters', Newsletters)
 
 // window.Vue.use(Vuetify)
 window.Vue.use(Vuetify, {
@@ -153,40 +281,6 @@ window.Vue.use(Vuetify, {
     }
   }
 })
-
-window.Vue.use(permissions)
-window.Vue.use(snackbar)
-window.Vue.use(confirm)
-
-// componentes
-window.Vue.component('example_component', ExampleComponent)
-window.Vue.component('tasks', Tasks)
-window.Vue.component('tasques', Tasques)
-window.Vue.component('tags', Tags)
-window.Vue.component('editable-text', EditableText)
-window.Vue.component('login-form', LoginForm)
-window.Vue.component('register-form', RegisterForm)
-window.Vue.component('user-list', UserList)
-window.Vue.component('user-select', UserSelect)
-window.Vue.component('impersonate', Impersonate)
-window.Vue.component('git-info', GitInfo)
-window.Vue.component('tema', Tema)
-window.Vue.component('profile', Profile)
-// Changelog
-window.Vue.component('changelog', Changelog)
-
-window.Vue.component('navigation', Navigation)
-window.Vue.component('navigation-right', NavigationRight)
-window.Vue.component('toolbar', Toolbar)
-
-window.Vue.component('service-worker', ServiceWorker)
-window.Vue.component('notifications-widget', NotificationsWidget)
-window.Vue.component('notifications', Notifications)
-window.Vue.component('share-fab', ShareFab)
-window.Vue.component('mobile', Mobile)
-window.Vue.component('clock', Clock)
-window.Vue.component('newsletter-subscription-card', NewsLetterSubscriptionCard)
-window.Vue.component('newsletters', Newsletters)
 
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)

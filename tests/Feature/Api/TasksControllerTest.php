@@ -92,7 +92,7 @@ class TasksControllerTest extends TestCase
      */
     public function tasks_manager_can_delete_task()
     {
-
+        $this->withoutExceptionHandling();
         $this->loginAsTaskManager('api');
         $task = factory(Task::class)->create();
 
@@ -361,6 +361,7 @@ class TasksControllerTest extends TestCase
      */
     public function superadmin_can_edit_task()
     {
+        $this->withoutExceptionHandling();
         $this->loginAsSuperAdmin('api');
 
         $oldTask = factory(Task::class)->create([
@@ -368,6 +369,7 @@ class TasksControllerTest extends TestCase
         ]);
 
         // 2
+        Event::fake();
         $response = $this->json('PUT','/api/v1/tasks/' . $oldTask->id, [
             'name' => 'Comprar pa'
         ]);
@@ -393,6 +395,7 @@ class TasksControllerTest extends TestCase
         ]);
 
         // 2
+        Event::fake();
         $response = $this->json('PUT','/api/v1/tasks/' . $oldTask->id, [
             'name' => 'Comprar pa'
         ]);

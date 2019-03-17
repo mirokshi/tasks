@@ -1,6 +1,9 @@
 <template>
     <span>
-        <p>Initial battery status was <b id="charging">unknown</b>, charging time <b id="chargingTime">unknown</b>, discharging time <b id="dischargingTime">unknown</b>, level <b id="level">unknown</b>.</p>
+        <p>Estado inicial de la bateria <b id="charging">desconocido</b>.</p>
+        <p>Tiempo de carga <b id="chargingTime">desconocido</b>.</p>
+        <p>Tiempo de descargar <b id="dischargingTime">desconocido</b>.</p>
+        <p>Nivel <b id="level">desconocido</b>.</p>
         <div id="target"></div>
         </span>
 </template>
@@ -17,7 +20,7 @@ export default {
       target.appendChild(newState)
     },
     onChargingChange () {
-      this.handleChange('Battery charging changed to <b>' + (this.charging ? 'charging' : 'discharging') + '</b>')
+      this.handleChange('Battery charging changed to <b>' + (this.charging ? 'cargando' : 'descargando') + '</b>')
     },
     onChargingTimeChange () {
       this.handleChange('Battery charging time changed to <b>' + this.chargingTime + ' s</b>')
@@ -38,7 +41,7 @@ export default {
         batteryPromise = Promise.resolve(navigator.battery)
       }
       batteryPromise.then(function (battery) {
-        document.getElementById('charging').innerHTML = battery.charging ? 'charging' : 'discharging'
+        document.getElementById('charging').innerHTML = battery.charging ? 'cargando' : 'descargando'
         document.getElementById('chargingTime').innerHTML = battery.chargingTime + ' s'
         document.getElementById('dischargingTime').innerHTML = battery.dischargingTime + ' s'
         document.getElementById('level').innerHTML = battery.level

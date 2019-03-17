@@ -6,7 +6,10 @@
             <img src="/images/icon.webp" alt="Aplicacion de tareas" height="50">
             <v-toolbar-title v-if="$vuetify.breakpoint.mdAndUp">Homepage Tasks</v-toolbar-title>
             <v-spacer></v-spacer>
-            @auth
+            @if(empty(Auth::user()->email))
+                <v-btn @click="loginForm = !loginForm" class="secondary">Login</v-btn>
+                <v-btn @click="registerForm = !registerForm" class="secondary">Register</v-btn>
+            @else
                 <v-btn icon @click="" href="/profile">
                     <v-avatar>
                         <img src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" alt="avatar">
@@ -16,10 +19,7 @@
                     @csrf
                     <v-btn class="secondary" type="submit" v-if="$vuetify.breakpoint.mdAndUp">Cerrar Sesion</v-btn>
                 </v-form>
-            @else
-                <v-btn @click="loginForm = !loginForm" class="secondary">Login</v-btn>
-                <v-btn @click="registerForm = !registerForm" class="secondary">Register</v-btn>
-            @endauth
+            @endif
             <v-dialog v-model="loginForm"  :fullscreen="$vuetify.breakpoint.smAndDown"  max-width="1000">
                 <v-card>
                     <login-form v-if="loginForm" email="{{old('email')}}" csrf-token="{{csrf_token()}}"></login-form>
