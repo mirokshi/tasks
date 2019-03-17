@@ -7,7 +7,6 @@
         icon
         flat
     >
-        <span v-if="menu">Comparteix</span>
         <v-icon>share</v-icon>
     </v-btn>
 </template>
@@ -27,10 +26,6 @@ export default {
     task: {
       type: Object,
       required: true
-    },
-    menu: {
-      type: Boolean,
-      default: false
     }
   },
   computed: {
@@ -41,9 +36,9 @@ export default {
   methods: {
     share () {
       navigator.share({
-        title: 'Tasca ' + this.task.name,
+        title: 'Tarea ' + this.task.name,
         text: this.task.description,
-        url: 'https://tasks.joantiscar.scool.cat/tasques/' + this.task.id
+        url: 'https://tasks.mirokshirojas.scool.cat/tasques/' + this.task.id
       })
         .then(() => console.log('Successful share'))
         .catch(error => console.log('Error sharing:', error))
