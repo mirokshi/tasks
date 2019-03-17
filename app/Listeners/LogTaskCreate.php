@@ -38,7 +38,6 @@ class LogTaskCreate
             'user_id' => $event->task->user_id,
             'loggable_id' => $event-> task->id,
             'loggable_type' => Task::class,
-            'old_value' => '',
             'new_value' => $event->task->name
         ]);
     }

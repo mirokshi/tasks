@@ -40,8 +40,7 @@ export default {
           this.$snackbar.showMessage('Se ha borrado correctamente la tarea')
           this.$emit('removed', task)
           this.removing = false
-        }).catch(error => {
-          this.$snackbar.showError(error.message)
+        }).catch(() => {
           this.removing = false
         })
       }

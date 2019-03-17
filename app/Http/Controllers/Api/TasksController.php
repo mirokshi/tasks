@@ -50,6 +50,7 @@ class TasksController extends Controller
 
     public function update(TaskUpdate $request, Task $task)
     {
+        $taskOld = $task;
         $task->name = $request->name;
         $task->completed = $request->completed;
         $task->description = $request->description ?? $task->description;
@@ -57,8 +58,9 @@ class TasksController extends Controller
         $task->save();
 
         //  HOOK -> EVENT
-        event(new \App\Events\TaskUpdate($task));
-            
+        event(new \App\Events\TaskUpdate($taskOld,$task));
+
+
         return $task->map();
     }
 

@@ -18,6 +18,7 @@ use App\Listeners\SendMailTaskCompleted;
 use App\Listeners\SendMailTaskCreate;
 use App\Listeners\SendMailTaskDestroy;
 use App\Listeners\SendMailTaskUncompleted;
+use App\Listeners\SendMailTaskUpdate;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -57,6 +58,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         TaskUpdate::class => [
             LogTaskUpdate::class,
+            SendMailTaskUpdate::class,
             ForgetTasksCache::class
         ]
 
