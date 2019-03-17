@@ -27,7 +27,7 @@
                     class="mx-auto"
                     color="primary lighten-5"
                     dark
-                    v-touch="{ left: () => call('delete', task)}"
+                    v-touch="{ left: () => removeTask(task)}"
                 >
     <v-card-title>
       <v-icon
@@ -54,7 +54,7 @@
           <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
                 </v-dialog>
           <task-update :users="users" :task="task" @updated="updateTask" :uri="uri"></task-update>
-            <share-task :task="task" :menu="true"></share-task>
+            <share-task :task="task"></share-task>
         </v-layout>
       </v-list-tile>
     </v-card-actions>
@@ -67,7 +67,6 @@
 import TasksTags from './tasks/TasksTags'
 import TaskDestroy from './tasks/TaskDestroy'
 import TaskUpdate from './tasks/TaskUpdate'
-import EventBus from './../eventBus'
 import ShareTask from './tasks/ShareTask'
 
 export default {
@@ -113,9 +112,6 @@ export default {
     },
     updateTask (task) {
       this.refresh()
-    },
-    call (action, object) {
-      EventBus.$emit('touch-' + action, object)
     }
   }
 }
