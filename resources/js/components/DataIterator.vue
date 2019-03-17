@@ -27,7 +27,7 @@
                     class="mx-auto"
                     color="primary lighten-5"
                     dark
-                    v-touch={" left: () => call('delete', task)"}
+                    v-touch="{ left: () => call('delete', task)}"
                 >
     <v-card-title>
       <v-icon
