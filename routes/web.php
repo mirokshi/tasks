@@ -85,7 +85,7 @@ Route::middleware(['auth'])->group(function() {
 
     //Tasques
     Route::get('/tasques','\\'. TasquesController::class . '@index');
-    Route::get('/tasques/{id}','\\'.TasquesController::class. '@show');
+    Route::get('/tasques/{id}','\\'.TasquesController::class.'@show');
     Route::get('/home', '\\'. TasquesController::class . '@index');
 
     //Home
