@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/tasks','\\'. TasksController::class . '@store'); //crea
     Route::delete('/tasks/{id}','\\'. TasksController::class . '@destroy'); //boora
     Route::put('/tasks/{id}','\\'. TasksController::class . '@update'); //modifica
-    Route::get('/task_edit/{id}','TasksController@edit'); //modifica
+    Route::get('/task_edit/{id}','\\'.TasksController::class.'@edit'); //modifica
 
     //Uncompleted -> ESTADOS
     Route::delete('completed_task/{task}','CompletedTasksController@destroy');
