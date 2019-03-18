@@ -49,19 +49,19 @@ export default {
     completeTask () {
       this.loading = true
       window.axios.post(this.uri + '/' + this.resource.id).then(() => {
+        this.$snackbar.showMessage('Tarea completa')
         this.loading = false
-      }).catch(error => {
+      }).catch(() => {
         this.loading = false
-        this.$snackbar.showError(error)
       })
     },
     uncompleteTask () {
       this.loading = true
       window.axios.delete(this.uri + '/' + this.resource.id).then(() => {
+        this.$snackbar.showMessage('Tarea descompletada')
         this.loading = false
-      }).catch(error => {
+      }).catch(() => {
         this.loading = false
-        this.$snackbar.showError(error)
       })
     }
   }
