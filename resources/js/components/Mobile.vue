@@ -19,6 +19,7 @@
                     <h5>Vibrate</h5>
                     <vibration></vibration>
                     <device-position></device-position>
+                    <emoji></emoji>
                 </v-card-text>
             </v-card>
         </v-flex>
@@ -28,12 +29,14 @@
 <script>
 import DevicePosition from './mobile/DevicePosition'
 import Vibration from './mobile/Vibration'
+import Emoji from "./Emoji";
 
 export default {
   name: 'Mobile',
   components: {
     'device-position': DevicePosition,
-    'vibration': Vibration
+    'vibration': Vibration,
+      'emoji':Emoji
   },
   methods: {
     async gps () {
