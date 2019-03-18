@@ -1,11 +1,8 @@
 <template>
     <span>
-        <span>Gamma <p id="doTiltLR"></p></span>
-        <span>Beta <p id="doTiltFB"></p></span>
-        <span>Alpha <p id="doDirection"></p></span>
-<div class="container" id="logoContainer">
-  <img src="img/geo.png" id="imgLogo">
-</div>
+        <div class="container" id="logoContainer">
+            <img src="img/geo.png" id="imgLogo">
+        </div>
     </span>
 </template>
 

@@ -27,7 +27,7 @@
                     class="mx-auto"
                     color="primary lighten-5"
                     dark
-                    v-touch="{ left: () => removeTouchTask(task)}"
+                    v-touch="{ left: () => removeTask(task)}"
                 >
     <v-card-title>
       <v-icon
@@ -64,10 +64,10 @@
     </span>
 </template>
 <script>
-import TasksTags from './tasks/TasksTags'
-import TaskDestroy from './tasks/TaskDestroy'
-import TaskUpdate from './tasks/TaskUpdate'
-import ShareTask from './tasks/ShareTask'
+import TasksTags from './TasksTags'
+import TaskDestroy from './TaskDestroy'
+import TaskUpdate from './TaskUpdate'
+import ShareTask from './ShareTask'
 
 export default {
   name: 'DataIterator',
@@ -110,28 +110,18 @@ export default {
     removeTask (task) {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
     },
-    async removeTouchTask (task) {
-      // ES6 async await
-      let result = await this.$confirm('Las tareas borradas ya no se podrán recuperar',
-        {
-          title: 'Esta seguro?',
-          buttonTruetext: 'Eliminar',
-          buttonFalsetext: 'Cancelar',
-          color: 'error'
-        })
-      if (result) {
-        this.removing = true
-        window.axios.delete(this.uri + task.id).then(() => {
-          this.$snackbar.showMessage('Se ha borrado correctamente la tarea')
-          this.$emit('removed', task)
-          this.removing = false
-        }).catch(() => {
-          this.removing = false
-        })
-      }
-    },
     updateTask (task) {
       this.refresh()
+    },
+    refresh (message = true) {
+      this.loading = true
+      window.axios.get(this.uri).then(response => {
+        this.dataTasks = response.data
+        this.loading = false
+        if (message) this.$snackbar.showMessage('Tareas actualizadas correctamente')
+      }).catch(() => {
+        this.loading = false
+      })
     }
   }
 }

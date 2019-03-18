@@ -1,9 +1,13 @@
 <template>
-    <span>
-        <p>Turn the network connection on/off to see the changes.</p>
-        <p>Initial connection state was <b class="status">unknown</b>.</p>
-        <div id="target">unknown</div>
-    </span>
+    <v-card color="blue-grey darken-2" class="white--text">
+        <v-card-title primary-title>
+            <div>
+                <div class="headline">Activa / desactiva la conexión de red para ver los cambios.</div>
+                <span>El estado de conexión inicial era <b id="status">desconocido</b>.</span>
+                <span id="target">desconocido</span>
+            </div>
+        </v-card-title>
+    </v-card>
 </template>
 
 <script>
@@ -17,7 +21,7 @@ export default {
       let newState = await document.createElement('p')
       var state = navigator.onLine ? 'online' : 'offline'
       if (newState) {
-        newState.innerHTML = '<span class="badge">' + timeBadge + '</span> Connection state changed to <b>' + state + '</b>.'
+        newState.innerHTML = '<span class="badge">' + timeBadge + '</span> El estado de conexión cambió a <b>' + state + '</b>.'
         target.appendChild(newState)
       }
     },
