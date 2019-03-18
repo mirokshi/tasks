@@ -2,3 +2,4 @@
 
 @section('content')
     <tasques :tasks="{{$tasks}}"></tasques>
+    @endsection
