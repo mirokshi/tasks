@@ -61,7 +61,7 @@ import TasksTags from './TasksTags'
 import Toggle from '../Toggle'
 
 export default {
-  name: 'task-show-content',
+  name: 'UnitTaskShow',
   components: {
     'tasks-tags': TasksTags,
     'toggle': Toggle
