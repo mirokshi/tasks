@@ -17,9 +17,7 @@
                     <h5>Connection Speed</h5>
                     <h6>{{ internet().downlink }} Mb/s ({{ internet().effectiveType }})</h6>
                     <h5>Vibrate</h5>
-                    <v-btn @click="vibrate" color="primary" dark>
-                        <v-icon class="mr-2">vibration</v-icon>Vibrate now
-                    </v-btn>
+                    <vibration></vibration>
                     <device-position></device-position>
                 </v-card-text>
             </v-card>
@@ -29,11 +27,13 @@
 
 <script>
 import DevicePosition from './mobile/DevicePosition'
+import Vibration from './mobile/Vibration'
 
 export default {
   name: 'Mobile',
   components: {
-    'device-position': DevicePosition
+    'device-position': DevicePosition,
+    'vibration': Vibration
   },
   methods: {
     async gps () {
