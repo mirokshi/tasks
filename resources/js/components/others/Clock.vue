@@ -33,7 +33,7 @@ export default {
       // second
       second = (second * Math.PI / 30)
       // console.log(second)
-      this.drawHand(ctx, second, radius * 0.9, radius * 0.02)
+      // this.drawHand(ctx, second, radius * 0.9, radius * 0.02)
 
       millis = (millis * Math.PI / 30000) + second
       console.log(millis)
