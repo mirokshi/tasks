@@ -1,11 +1,10 @@
 <template>
     <span>
-         <v-chip v-for="tag in taskTags" :key="tag.id" v-text="tag.name" :color="tag.color" @dblclick="removeTag"></v-chip>
+         <v-chip v-for="tag in taskTags" :key="tag.id" v-text="tag.name" :color="tag.color" @dblclick="removeTag(tag)"></v-chip>
         <v-btn icon @click="dialog = true"><v-icon>add</v-icon></v-btn>
-        <v-btn icon @click="dialog = true"><v-icon>remove</v-icon></v-btn>
         <v-dialog v-model="dialog" width="500">
             <v-card>
-                <v-card-title> Añadir etiqueta a la tarea</v-card-title>
+                <v-card-title>Añadir etiqueta a la tarea</v-card-title>
                 <v-card-text>
                     <v-combobox
                         v-model="selectedTags"
@@ -36,8 +35,8 @@
                 <v-divider></v-divider>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn flat @click="dialog = false" :loading="loading" :disabled="loading">CANCELAR</v-btn>
-                    <v-btn color="grey darken-3" flat @click="addTag">AÑADIR</v-btn>
+                    <v-btn flat @click="dialog = false">CANCELAR</v-btn>
+                    <v-btn color="grey darken-3" flat @click="addTag" :loading="loading" :disabled="loading">AÑADIR</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -82,14 +81,22 @@ export default {
         }
       }
     },
-    removeTag () {
-      // TODO ASYNC PRIMER EXECUTAR UN CONFIRM
-      console.log('TODO REMOVE TAG')
-      window.axios.delete('api/v1/tasks/' + this.task.id + '/tags/' + this.tag).then(response => {
-        this.$snackbar.showMessage('Etiqueta eliminada correctamente')
-      }).catch(error => {
-        this.$snackbar.showError(error)
-      })
+    async removeTag (tag) {
+      let result = await this.$confirm('Las etiquetas eliminadas no se pueden recuperar',
+        {
+          title: 'Esta seguro?',
+          buttonTrueText: ' Eliminar',
+          buttonFalseText: ' Cancelar',
+          color: 'blue'
+        })
+      if (result) {
+        window.axios.delete('api/v1/tasks/' + this.task.id + '/tags/' + tag.id).then(response => {
+          this.$snackbar.showMessage('Etiqueta eliminada correctamente')
+          this.$emit('change')
+        }).catch(() => {
+          console.log('ERROR')
+        })
+      }
     },
     addTag () {
       // pluck collection Laravel

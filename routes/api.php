@@ -73,6 +73,7 @@ Route::get('/v1/git/info','\\' . GitController::class . '@index');
 
 
     Route::put('/v1/tasks/{task}/tags/','\\'. TasksTagsController::class . '@update');
+    Route::delete('/v1/tasks/{task}/tags/{tag}','\\'.TasksTagsController::class.'@destroy');
 
     Route::post('/v1/user/photo', '\\' . PhotoController::class . '@store');
 

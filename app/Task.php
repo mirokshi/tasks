@@ -47,6 +47,11 @@ protected $hidden = [
         $file->save();
 
     }
+
+    public function removeTag($tag)
+    {
+        $this->tags()->detach($tag);
+    }
     public function addTags($tags)
     {
         try{
@@ -54,11 +59,11 @@ protected $hidden = [
         }catch (\Exception $e){
 
         }
+        return $this;
     }
 
     public function addTag($tag)
     {
-
         !is_int($tag) ?: $tag = Tag::find($tag);
         try {
             $this->tags()->save($tag);
@@ -128,6 +133,7 @@ protected $hidden = [
 //            'file' => $this->file
         ];
     }
+
     public function getFullSearchAttribute()
     {
         $state = $this->completed ? 'Completada' : 'Pendiente';

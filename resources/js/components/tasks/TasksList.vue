@@ -102,7 +102,7 @@ import TaskUpdate from './TaskUpdate'
 import TaskShow from './TaskShow'
 import TasksTags from './TasksTags'
 import UserSelect from '../UserSelect'
-import DataIterator from '../DataIterator'
+import DataIterator from './DataIterator'
 
 var filters = {
   all: function (dataTasks) {
