@@ -1,8 +1,5 @@
 <template>
     <span>
-        <span>Gamma <p id="doTiltLR"></p></span>
-        <span>Beta <p id="doTiltFB"></p></span>
-        <span>Alpha <p id="doDirection"></p></span>
         <div class="container" id="logoContainer">
             <img src="img/geo.png" id="imgLogo">
         </div>
@@ -17,10 +14,9 @@ export default {
       var tiltLR = eventData.gamma
       var tiltFB = eventData.beta
       var dir = eventData.alpha
-
-      document.getElementById('doTiltLR').innerHTML = Math.round(tiltLR)
-      document.getElementById('doTiltFB').innerHTML = Math.round(tiltFB)
-      document.getElementById('doDirection').innerHTML = Math.round(dir)
+      Math.round(tiltLR)
+      Math.round(tiltFB)
+      Math.round(dir)
 
       var logo = document.getElementById('imgLogo')
       logo.style.webkitTransform = 'rotate(' + tiltLR + 'deg) rotate3d(1,0,0, ' + (tiltFB * -1) + 'deg)'
