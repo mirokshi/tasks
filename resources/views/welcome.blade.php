@@ -150,16 +150,7 @@
             <section>
                 <v-parallax src="img/background.webp" height="380">
                     <v-layout column align-center justify-center>
-                        <div class="headline white--text mb-3 text-xs-center">Web development has never been easier</div>
-                        <em>Kick-start your application today</em>
-                        <v-btn
-                            class="indigo darken-4 mt-5"
-                            dark
-                            large
-                            href="/pre-made-themes"
-                        >
-                            Get Started
-                        </v-btn>
+                        <newsletter-subscription-card></newsletter-subscription-card>
                     </v-layout>
                 </v-parallax>
             </section>

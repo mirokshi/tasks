@@ -1,9 +1,8 @@
 <template>
-    <v-card>
-        <v-card-title class="primary darken-3"><h4>Tema</h4></v-card-title>
+    <span>
            <swatches v-model="colorPrincipal" inline></swatches>
         <v-btn @click="principalDefault">DEFAULT</v-btn>
-    </v-card>
+    </span>
 </template>
 
 <script>
