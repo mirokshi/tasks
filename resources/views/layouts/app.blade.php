@@ -32,8 +32,8 @@
         [v-cloak]::before {
             content: " ";
             display: block;
-            width: 40px;
-            height: 40px;
+            width: 200px;
+            height: 200px;
             position: absolute;
             top: 50%;
             left: 50%;

@@ -230,6 +230,13 @@ export default {
         this.loading = false
       })
     }
+  },
+  created () {
+    window.Echo.private('App.User.' + window.laravel_user.id)
+      .listen('TaskUncompleted', (e) => {
+        console.log(e.order.name)
+        this.refresh()
+      })
   }
 }
 </script>

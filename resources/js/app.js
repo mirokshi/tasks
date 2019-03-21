@@ -34,6 +34,7 @@ import Mobile from './components/Mobile.vue'
 import Clock from './components/others/Clock.vue'
 import Newsletters from './components/newsletters/Newsletters.vue'
 import NewsLetterSubscriptionCard from './components/newsletter/NewsLetterSubscriptionCard'
+import Chat from './components/chat/Chat.vue'
 
 import VueTimeago from 'vue-timeago'
 import TreeView from 'vue-json-tree-view'
@@ -200,6 +201,7 @@ window.Vue.component('clock', Clock)
 window.Vue.component('newsletter-subscription-card', NewsLetterSubscriptionCard)
 window.Vue.component('newsletters', Newsletters)
 window.Vue.component('show-task', ShowTask)
+window.Vue.component('chat', Chat)
 
 // window.Vue.use(Vuetify)
 window.Vue.use(Vuetify, {

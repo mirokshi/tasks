@@ -108,7 +108,8 @@ export default {
         { icon: 'notifications', text: 'Notifications', url: '/notifications' },
         { icon: 'weekend', text: 'Mobile', url: '/mobile' },
         { icon: 'contact_mail', text: 'NewsLetters', url: '/newsletters' },
-        { icon: 'public', text: 'Clock', url: '/clock' }
+        { icon: 'public', text: 'Clock', url: '/clock' },
+        { icon: 'public', text: 'Chat', url: '/chat' }
       ]
     }
   },

@@ -1,5 +1,6 @@
 <?php
 
+use App\Channel;
 use App\Log;
 use App\Notifications\SimpleNotification;
 use App\Tag;
@@ -33,7 +34,7 @@ if (!function_exists('create_primary_user')){
 }
 if (!function_exists('create_example_tasks')) {
     function create_example_tasks() {
-        $user1= factory(User::class)->create();
+        $user1 = User::find(1);
         Task::create([
             'name' => 'Comprar pan',
             'completed' => false,
@@ -55,7 +56,6 @@ if (!function_exists('create_example_tasks')) {
             'user_id' => $user1->id
         ]);
 
-        $user1= factory(User::class)->create();
         Task::create([
             'name' => 'Estudiar JAVA',
             'completed' => false,
@@ -195,7 +195,7 @@ if (!function_exists('sample_users_and_tasks')) {
 }
 if (!function_exists('create_example_tasks_with_tags')){
     function create_example_tasks_with_tags(){
-        $user1= factory(User::class)->create();
+        $user1= User::find(1);
         Task::create([
             'name' => 'comprar pa',
             'completed' => false,
@@ -435,9 +435,6 @@ if (!function_exists('pikachusorprendido')){
 
 }
 }
-//TODO:  Crear multiples usuarios con diferentes roles
-// TODO: Como gestionar el superAdmin
-
 if (!function_exists('map_collection')){
   function  map_collection($collection){
       return $collection -> map(function ($item){
@@ -445,7 +442,6 @@ if (!function_exists('map_collection')){
       });
   }
 }
-
 if (! function_exists('map_simple_collection')) {
     function map_simple_collection($collection)
     {
@@ -454,7 +450,6 @@ if (! function_exists('map_simple_collection')) {
         });
     }
 }
-
 if (!function_exists('logged_user')){
     function logged_user(){
         return json_encode(optional(Auth::user())->map());
@@ -547,13 +542,11 @@ if (! function_exists('git_remote_origin_url')) {
         return $output[0];
     }
 }
-
 if (!function_exists('create_sample_tags')){
     function create_sample_tasks_with_tags(){
 
     }
 }
-
 if (! function_exists('sample_logs')) {
     function sample_logs()
     {
@@ -660,3 +653,158 @@ if (! function_exists('sample_logs')) {
         }
     }
 }
+if (! function_exists('initialize_sample_chat_channels')) {
+    function initialize_sample_chat_channels($user = null)	{
+        $user = User::find(1);
+        Channel::create(add_random_timestamps([
+            'name' => 'Pepe Pardo Jeans',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Bla bla bla'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Pepa Parda Jeans',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Carles Puigdemont',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Sant Esteve de les Roures',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 1',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 2',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 3',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 4',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 5',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 6',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 7',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 8',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 9',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 10',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 11',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 12',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 13',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 14',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 15',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 16',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 17',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 18',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 19',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+        Channel::create(add_random_timestamps([
+            'name' => 'Channel 20',
+            'image' => 'http://i.pravatar.cc/300',
+            'last_message' => 'Hey que tal...'
+        ]))->addUser($user);
+    }
+}
+
+
+
+if (! function_exists('get_random_timestamps')) {
+    function get_random_timestamps($backwardDays = null)
+    {
+
+        if ( is_null($backwardDays) )
+        {
+            $backwardDays = -800;
+        }
+
+        $backwardCreatedDays = rand($backwardDays, 0);
+        $backwardUpdatedDays = rand($backwardCreatedDays + 1, 0);
+
+        return [
+            'created_at' => \Carbon\Carbon::now()->addDays($backwardCreatedDays)->addMinutes(rand(0,
+                60 * 23))->addSeconds(rand(0, 60)),
+            'updated_at' => \Carbon\Carbon::now()->addDays($backwardUpdatedDays)->addMinutes(rand(0,
+                60 * 23))->addSeconds(rand(0, 60))
+        ];
+    }
+}
+if (! function_exists('add_random_timestamps')) {
+    function add_random_timestamps($array)
+    {
+        return array_merge($array,get_random_timestamps());
+    }
+}
+
