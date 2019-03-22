@@ -21,7 +21,7 @@
             </v-tooltip>
         </v-toolbar>
         <v-container fluid text-xs-center class="ma-0 pa-0">
-          <v-layout row wrap>
+          <v-layout row wrap  class="mx-0">
             <v-flex xs12 style="height: 64px;">
               <v-card dark color="cyan" style="height: 64px;">
                 <v-card-text class="px-0">TODO activar notificacions d'escriptori</v-card-text>

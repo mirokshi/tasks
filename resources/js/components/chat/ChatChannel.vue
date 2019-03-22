@@ -22,7 +22,7 @@
             </v-tooltip>
         </v-toolbar>
         <v-container fluid text-xs-center class="ma-0 pa-0" >
-          <v-layout row wrap>
+          <v-layout row wrap  class="mx-0">
             <v-flex xs12 style="height: calc(100vh - 64px - 64px - 64px);" class="bg-pattern">
                 <v-list subheader style="background-color: transparent;">
                     <v-subheader>Recent messages</v-subheader>
@@ -51,7 +51,92 @@
                             label="Solo"
                             placeholder="Nou missatge"
                             solo
-                    ></v-text-field>
+                    >
+                        <template slot="prepend-inner">
+                            <v-menu
+                                top
+                                offset-y
+                                slider-color="green"
+                            >
+
+                                <template v-slot:activator="{ on }">
+                                    <v-btn v-on="on" icon flat>
+                                        <v-icon>insert_emoticon</v-icon>
+                                    </v-btn>
+                                </template>
+                                <v-tabs>
+                                    <v-tab
+                                        href="#tab1"
+                                    >
+                                        <v-icon>face</v-icon>
+                                    </v-tab>
+                                    <v-tab
+                                        href="#tab2"
+                                    >
+                                        <v-icon>home</v-icon>
+                                    </v-tab>
+                                    <v-tab
+                                        href="#tab3"
+                                    >
+                                        <v-icon>alarm</v-icon>
+                                    </v-tab>
+                                    <v-tab
+                                        href="#tab4"
+                                    >
+                                        <v-icon>build</v-icon>
+                                    </v-tab>
+                                    <v-tab
+                                        href="#tab5"
+                                    >
+                                        <v-icon>done</v-icon>
+                                    </v-tab>
+                                    <v-tab
+                                        href="#tab6"
+                                    >
+                                        <v-icon>help</v-icon>
+                                    </v-tab>
+                                    <v-tab
+                                        href="#tab7"
+                                    >
+                                        <v-icon>list</v-icon>
+                                    </v-tab>
+                                    <v-tab
+                                        href="#tab8"
+                                    >
+                                        <v-icon>lock</v-icon>
+                                    </v-tab>
+                                    <v-tab
+                                        href="#tab9"
+                                    >
+                                        <v-icon>print</v-icon>
+                                    </v-tab>
+                                </v-tabs>
+                                <v-text-field
+                                    placeholder="Buscar emoji"
+                                    solo
+                                >
+                                </v-text-field>
+                                <v-tabs>
+                                    <v-tab-item
+                                        value="tab1"
+                                    >{{text1}}
+                                    </v-tab-item>
+                                    <v-tab-item
+                                        value="tab2"
+                                    >{{text2}}
+                                    </v-tab-item>
+                                    <v-tab-item
+                                        value="tab3"
+                                    >{{text3}}
+                                    </v-tab-item>
+                                    <v-tab-item
+                                        value="tab4"
+                                    >{{text4}}
+                                    </v-tab-item>
+                                </v-tabs>
+                            </v-menu>
+                        </template>
+                    </v-text-field>
               </v-flex>
           </v-layout>
         </v-container>
@@ -59,12 +144,30 @@
 </template>
 
 <script>
+import Emoji from '../Emoji'
+
 export default {
   name: 'ChatChannel',
+  components: {
+    'emoji': Emoji
+  },
   data () {
     return {
       dataMessages: [],
-      loading: false
+      loading: false,
+      tab1: '',
+      tab2: '',
+      tab3: '',
+      tab4: '',
+      tab5: '',
+      tab6: '',
+      tab7: '',
+      tab8: '',
+      tab9: '',
+      text1: 'hola',
+      text2: 'me',
+      text3: 'estoy',
+      text4: 'muriendo'
     }
   },
   props: {
