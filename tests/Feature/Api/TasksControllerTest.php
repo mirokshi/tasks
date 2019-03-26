@@ -236,6 +236,7 @@ class TasksControllerTest extends TestCase
         $this->assertEquals('Comprar pa',$task->name);
         $this->assertEquals('Bla bla bla',$task->description);
         $this->assertEquals(1,$task->completed);
+
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 use App\Channel;
+use App\ChatMessage;
 use App\Log;
 use App\Notifications\SimpleNotification;
 use App\Tag;
@@ -329,6 +330,7 @@ if (!function_exists('initialize_roles')) {
             'Tags',
             'ChangelogManager',
             'NotificationsManager',
+            'ChatManager'
         ];
         foreach ($roles as $role) {
             create_role($role);
@@ -373,12 +375,19 @@ if (!function_exists('initialize_roles')) {
             'notifications.simple.store'
         ];
 
+        $chatManagerPermissions = [
+            'chat.index',
+            'chat.store',
+            'chat.destroy'
+        ];
+
         $permissions = array_merge(
             $taskManagerPermissions,
             $userTaskPermissions,
             $tagsManagerPermissions,
             $userTagsPermissions,
-            $notificationsManagerPermissions
+            $notificationsManagerPermissions,
+            $chatManagerPermissions
         );
 
         foreach ($permissions as $permission) {
@@ -390,6 +399,7 @@ if (!function_exists('initialize_roles')) {
             'TagsManager' => $tagsManagerPermissions,
             'Tags' => $userTagsPermissions,
             'NotificationsManager' =>$notificationsManagerPermissions,
+            'ChatManager' => $chatManagerPermissions,
         ];
         foreach ($rolePermissions as $role => $rolePermission) {
             $role = Role::findByName($role);
@@ -399,6 +409,7 @@ if (!function_exists('initialize_roles')) {
         }
     }
 }
+
 if (!function_exists('initialize_gates')){
     function initialize_gates(){
         Gate::define('tasks.manage',function ($user){
@@ -614,45 +625,49 @@ if (! function_exists('sample_logs')) {
         }
     }
 
-    if (!function_exists('is_valid_uuid')) {
-        /**
-         * Check if a given string is a valid UUID
-         *
-         * @param   string $uuid The string to check
-         * @return  boolean
-         */
-        function is_valid_uuid($uuid)
-        {
-            if (!is_string($uuid) || (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $uuid) !== 1)) {
-                return false;
-            }
-            return true;
-        }
-    }
 
-    if (! function_exists('set_sample_notifications_to_user')) {
-        function set_sample_notifications_to_user($user) {
-            $user->notify(new SimpleNotification('Notification 1'));
-            $user->notify(new SimpleNotification('Notification 2'));
-            $user->notify(new SimpleNotification('Notification 3'));
-        }
-    }
 
-    if (! function_exists('sample_notifications')) {
-        function sample_notifications() {
-            $user1 = factory(User::class)->create([
-                'name' => 'Homer Simpson',
-                'email' => 'homer@lossimpsons.com'
-            ]);
-            $user2 = factory(User::class)->create([
-                'name' => 'Bart Simpson',
-                'email' => 'bart@lossimpsons.com'
-            ]);
-            $user1->notify(new SimpleNotification('Sample Notification 1'));
-            $user2->notify(new SimpleNotification('Sample Notification 2'));
+
+
+
+}
+if (!function_exists('is_valid_uuid')) {
+    /**
+     * Check if a given string is a valid UUID
+     *
+     * @param   string $uuid The string to check
+     * @return  boolean
+     */
+    function is_valid_uuid($uuid)
+    {
+        if (!is_string($uuid) || (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $uuid) !== 1)) {
+            return false;
         }
+        return true;
     }
 }
+if (! function_exists('set_sample_notifications_to_user')) {
+    function set_sample_notifications_to_user($user) {
+        $user->notify(new SimpleNotification('Notification 1'));
+        $user->notify(new SimpleNotification('Notification 2'));
+        $user->notify(new SimpleNotification('Notification 3'));
+    }
+}
+if (! function_exists('sample_notifications')) {
+    function sample_notifications() {
+        $user1 = factory(User::class)->create([
+            'name' => 'Homer Simpson',
+            'email' => 'homer@lossimpsons.com'
+        ]);
+        $user2 = factory(User::class)->create([
+            'name' => 'Bart Simpson',
+            'email' => 'bart@lossimpsons.com'
+        ]);
+        $user1->notify(new SimpleNotification('Sample Notification 1'));
+        $user2->notify(new SimpleNotification('Sample Notification 2'));
+    }
+}
+
 if (! function_exists('initialize_sample_chat_channels')) {
     function initialize_sample_chat_channels($user = null)	{
         $user = User::find(1);
@@ -778,9 +793,50 @@ if (! function_exists('initialize_sample_chat_channels')) {
         ]))->addUser($user);
     }
 }
+if (! function_exists('create_sample_channel')) {
+    function create_sample_channel($user = null,$name = 'Pepe Pardo Jeans', $randomTimestamps = true) {
+        $user = User::find(1);
+        if ($randomTimestamps) {
+            $channelData = add_random_timestamps([
+                'name' => $name,
+                'image' => 'http://i.pravatar.cc/300',
+                'last_message' => 'Bla bla bla'
+            ]);
+        } else {
+            $channelData = [
+                'name' => $name,
+                'image' => 'http://i.pravatar.cc/300',
+                'last_message' => 'Bla bla bla'
+            ];
+        }
+
+        $channel = Channel::create($channelData)->addUser($user);
+
+        $channel->addMessage(ChatMessage::create([
+            'text' => 'Hola que tal!'
+        ]));
+        $channel->addMessage(ChatMessage::create([
+            'text' => 'Whats up?'
+        ]));
+        $channel->addMessage(ChatMessage::create([
+            'text' => 'Dude your are so cool!'
+        ]));
+        $channel->addMessage(ChatMessage::create([
+            'text' => 'WTF are you fool?'
+        ]));
+
+        return $channel;
+    }
 
 
 
+}
+if (! function_exists('add_random_timestamps')) {
+    function add_random_timestamps($array)
+    {
+        return array_merge($array,get_random_timestamps());
+    }
+}
 if (! function_exists('get_random_timestamps')) {
     function get_random_timestamps($backwardDays = null)
     {
@@ -801,10 +857,3 @@ if (! function_exists('get_random_timestamps')) {
         ];
     }
 }
-if (! function_exists('add_random_timestamps')) {
-    function add_random_timestamps($array)
-    {
-        return array_merge($array,get_random_timestamps());
-    }
-}
-
