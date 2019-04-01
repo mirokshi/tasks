@@ -26,6 +26,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\TasquesController;
+use App\Http\Controllers\UsersController;
 
 Auth::routes();
 
@@ -123,6 +124,8 @@ Route::middleware(['auth'])->group(function() {
 
     Route::get('/chat', '\\' . ChatController::class . '@index');
     Route::get('/xat', '\\' . ChatController::class . '@index');
+
+    Route::get('/users','\\'.UsersController::class.'@index');
 
 });
 
