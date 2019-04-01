@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         create_sample_tasks();
         sample_users_and_tasks();
         create_example_tasks_with_tags();
-
+        initialize_sample_chat_channels();
         //Crea usuario para profesor
         pikachusorprendido();
 

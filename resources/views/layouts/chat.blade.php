@@ -49,20 +49,9 @@
     <v-app>
         <snackbar></snackbar>
         <service-worker></service-worker>
-        <navigation v-model="drawer"></navigation>
-        <navigation-right
-            csrf-token="{{ csrf_token()}}"
-            v-model="drawerRight"></navigation-right>
-        <toolbar
-                 @toggle-right="drawerRight=!drawerRight"
-                 @toggle-left="drawer=!drawer"
-        ></toolbar>
         <v-content>
             @yield('content')
         </v-content>
-        <v-footer color="primary" app>
-            <span class="white--text pl-3" >&copy; {{date('Y')}} Rojas Diaz Mirokshi</span>
-        </v-footer>
     </v-app>
 </div>
 </body>

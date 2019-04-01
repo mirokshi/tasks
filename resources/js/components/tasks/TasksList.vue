@@ -27,14 +27,17 @@
             <v-card-title>
                 <v-layout row wrap>
                     <v-flex lg3 class="pr-2">
-                        <ul style="list-style-type:none;">
-                            <li><v-icon color="red" @click="setFilter('completed')">lock</v-icon> : Completadas</li>
-                            <li><v-icon color="blue" @click="setFilter('active')">lock_open</v-icon> : Pendientes</li>
-                            <li><v-icon color="green" @click="setFilter('all')">done_all</v-icon> : Todos</li>
-                        </ul>
+                        <v-select
+                            label="Estat"
+                            :items="filters"
+                            v-model="filter"
+                            item-text="name"
+                            outline
+                        >
+                        </v-select>
                     </v-flex>
                     <v-flex lg4 class="pr-2">
-                        <user-select @cleared="selectedUser = null" v-model="selectedUser" :users="dataUsers"  label="Filtrar por usuario" class="pr-4"></user-select>
+                        <user-select  @refresh="refresh(false)" @cleared="user=null" v-model="user" :users="dataUsers"  label="Filtrar por usuario" class="pr-4"></user-select>
                     </v-flex>
                     <v-flex lg5>
                          <v-text-field
@@ -47,7 +50,7 @@
             </v-card-title>
             <v-data-table
                 :headers="headers"
-                :items="filteredTasks && filteredUsers"
+                :items="dataTasks"
                 :search="search"
                 no-results-text="No se ha encontrado ningún registro"
                 no-data-text="No hay datos disponibles"
@@ -105,16 +108,16 @@ import UserSelect from '../UserSelect'
 import DataIterator from './DataIterator'
 
 var filters = {
-  all: function (dataTasks) {
-    return dataTasks
+  Todas: function (tasks) {
+    return tasks
   },
-  completed: function (dataTasks) {
-    return dataTasks.filter(function (task) {
+  Completadas: function (tasks) {
+    return tasks.filter(function (task) {
       return task.completed
     })
   },
-  active: function (dataTasks) {
-    return dataTasks.filter(function (task) {
+  Pendientes: function (tasks) {
+    return tasks.filter(function (task) {
       return !task.completed
     })
   }
@@ -132,12 +135,18 @@ export default {
   },
   data () {
     return {
-      filter: 'all',
+      user: null,
       selectedUser: null,
       loading: false,
       dataTasks: this.tasks,
       dataUsers: this.users,
       search: '',
+      filter: 'Todas',
+      filters: [
+        'Completadas',
+        'Pendietes',
+        'Todas'
+      ],
       pagination: {
         rowsPerPage: 25
       },
@@ -174,6 +183,9 @@ export default {
   watch: {
     tasks (newTasks) {
       this.dataTasks = newTasks
+    },
+    user (user) {
+      if (user == null) { this.user = null }
     }
   },
   computed: {
@@ -181,15 +193,20 @@ export default {
       return this.dataTasks.length
     },
     filteredTasks () {
-      return filters[this.filter](this.dataTasks)
-    },
-    filteredUsers () {
-      let tasks = this.dataTasks
-      if (this.selectedUser !== null) {
-        tasks = tasks.filter((task) => {
-          return task.user_id === this.selectedUser.id
-        })
+      if (!this.user) {
+        return filters[this.filter](this.dataTasks)
+      } else {
+        return filters[this.filter](this.filteredTasksUsers)
       }
+    },
+    filteredTasksUsers () {
+      let tasks = []
+      console.log('this. user ' + this.user)
+      this.dataTasks.map((task) => {
+        if (task.user_id === this.user.id) {
+          tasks.push(task)
+        }
+      })
       return tasks
     }
   },
@@ -212,6 +229,28 @@ export default {
       }).catch(() => {
         this.loading = false
       })
+    }
+  },
+  created () {
+    console.log('Registering laravel echo')
+    console.log('User id: ')
+    console.log(window.laravel_user.id)
+    console.log('Is admin: ')
+    console.log(window.laravel_user.admin)
+    if (window.laravel_user.admin) {
+      window.Echo.private('Tasques')
+        .listen('TaskUncompleted', (e) => {
+          console.log('TaskUncompleted Received')
+          console.log(e.task)
+          this.refresh()
+        })
+    } else {
+      window.Echo.private('App.User.' + window.laravel_user.id)
+        .listen('TaskUncompleted', (e) => {
+          console.log('TaskUncompleted Received')
+          console.log(e.task)
+          this.refresh()
+        })
     }
   }
 }
