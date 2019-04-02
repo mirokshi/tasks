@@ -42,7 +42,8 @@ import TreeView from 'vue-json-tree-view'
 import '../../resources/img/icon16x16.png'
 import '../../resources/img/icon32x32.png'
 import ShowTask from './components/tasks/ShowTask.vue'
-import Users from "./components/Users.vue";
+import Users from './components/Users.vue'
+import Game from './components/Game.vue'
 
 // window.location.reload(true)
 
@@ -204,6 +205,7 @@ window.Vue.component('newsletters', Newsletters)
 window.Vue.component('show-task', ShowTask)
 window.Vue.component('chat', Chat)
 window.Vue.component('users', Users)
+window.Vue.component('game', Game)
 
 // window.Vue.use(Vuetify)
 window.Vue.use(Vuetify, {

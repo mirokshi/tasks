@@ -62,11 +62,11 @@
                 </v-flex>
                 <v-flex xs3>
                     <v-text-field
-                            append-icon="search"
-                            label="Buscar"
-                            single-line
-                            hide-details
-                            v-model="search"
+                        append-icon="search"
+                        label="Buscar"
+                        single-line
+                        hide-details
+                        v-model="search"
                     ></v-text-field>
                 </v-flex>
             </v-layout>
@@ -75,26 +75,26 @@
             <notifications-delete-multiple :notifications="selected" @deleted="selected=[];refresh(false)"></notifications-delete-multiple>
         </div>
         <v-data-table
-                v-model="selected"
-                select-all
-                class="px-0 mb-5 hidden-sm-and-down"
-                :headers="headers"
-                :items="filteredNotifications"
-                :search="search"
-                item-key="id"
-                disable-initial-sort
-                no-results-text="No s'ha trobat cap registre coincident"
-                no-data-text="No hi han dades disponibles"
-                rows-per-page-text="Notificacions per pàgina"
-                :rows-per-page-items="[5,10,25,50,100,200,500,1000,{'text':'Tots','value':-1}]"
+            v-model="selected"
+            select-all
+            class="px-0 mb-5 hidden-sm-and-down"
+            :headers="headers"
+            :items="filteredNotifications"
+            :search="search"
+            item-key="id"
+            disable-initial-sort
+            no-results-text="No s'ha trobat cap registre coincident"
+            no-data-text="No hi han dades disponibles"
+            rows-per-page-text="Notificacions per pàgina"
+            :rows-per-page-items="[5,10,25,50,100,200,500,1000,{'text':'Tots','value':-1}]"
         >
             <template slot="items" slot-scope="props">
                 <tr>
                     <td>
                         <v-checkbox
-                                v-model="props.selected"
-                                primary
-                                hide-details
+                            v-model="props.selected"
+                            primary
+                            hide-details
                         ></v-checkbox>
                     </td>
                     <td class="text-xs-left cell">
@@ -105,10 +105,10 @@
                     </td>
                     <td class="text-xs-left cell">
                         <span v-if="props.item.notifiable_type === 'App\\Models\\User'">
-                            <user-avatar :hash-id="props.item.user_hashid"
-                                         :alt="props.item.user_name"
-                                         :user="props.item.notifiable"
-                            ></user-avatar>
+                            <user-photo :hash-id="props.item.user_hashid"
+                                        :alt="props.item.user_name"
+                                        :user="props.item.notifiable"
+                            ></user-photo>
                         </span>
                         <json-dialog-component btn-class="ma-0" icon="visibility" name="data" title="Veure les dades completes" :json="props.item.notifiable"></json-dialog-component>
                     </td>
@@ -132,16 +132,16 @@
                             <span v-else>{{ formatBoolean(props.item.read_at) }}</span>
                         </v-tooltip>
                     </td>
-                    <td class="text-xs-left cell" :title="props.item.created_at_formatted">
+                    <td class="text-xs-left cell" :title="props.item.formatted_created_at">
                         <v-tooltip bottom>
-                            <span slot="activator">{{ props.item.created_at_human }}</span>
-                            <span>{{ props.item.created_at_formatted }}</span>
+                            <span slot="activator">{{ props.item.formatted_created_at_diff }}</span>
+                            <span>{{ props.item.formatted_created_at }}</span>
                         </v-tooltip>
                     </td>
-                    <td class="text-xs-left cell" :title="props.item.updated_at_formatted">
+                    <td class="text-xs-left cell" :title="props.item.formatted_updated_at">
                         <v-tooltip bottom>
-                            <span slot="activator">{{ props.item.updated_at_human }}</span>
-                            <span>{{ props.item.updated_at_formatted }}</span>
+                            <span slot="activator">{{ props.item.formatted_updated_at_diff }}</span>
+                            <span>{{ props.item.formatted_updated_at }}</span>
                         </v-tooltip>
                     </td>
                 </tr>
@@ -152,7 +152,7 @@
 
 <script>
 import NotificationsDeleteMultiple from './NotificationsDeleteMultiple'
-import UserAvatar from '../ui/UserAvatarComponent'
+import UserPhoto from '../ui/UserAvatarComponent'
 import JsonDialogComponent from '../ui/JsonDialogComponent'
 import NotificationsFilterByType from './NotificationsFilterByType'
 import NotificationsFilterByNotifiableType from './NotificationsFilterByNotifiableType'
@@ -207,7 +207,7 @@ export default {
   name: 'NotificationsList',
   components: {
     'notifications-delete-multiple': NotificationsDeleteMultiple,
-    'user-avatar': UserAvatar,
+    'user-photo': UserPhoto,
     'json-dialog-component': JsonDialogComponent,
     'notifications-filter-by-type': NotificationsFilterByType,
     'notifications-filter-by-notifiable-type': NotificationsFilterByNotifiableType,

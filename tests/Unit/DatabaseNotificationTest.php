@@ -23,6 +23,7 @@ class DatabaseNotificationTest extends TestCase
      */
     public function mapSimple()
     {
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create([
             'name' => 'Pepe Pardo Jeans',
             'email' => 'pepepardo@jeans.com'

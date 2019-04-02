@@ -110,7 +110,8 @@ export default {
         { icon: 'contact_mail', text: 'NewsLetters', url: '/newsletters' },
         { icon: 'timer', text: 'Clock', url: '/clock' },
         { icon: 'chat', text: 'Chat', url: '/chat' },
-        { icon: 'pool', text: 'Users', url: '/users' }
+        { icon: 'pool', text: 'Users', url: '/users' },
+        { icon: 'public', text: 'Game', url: '/game' }
       ]
     }
   },

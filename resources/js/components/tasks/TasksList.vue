@@ -244,10 +244,50 @@ export default {
           console.log(e.task)
           this.refresh()
         })
+        .listen('TaskCompleted', (e) => {
+          console.log('TaskCompleted Received')
+          console.log(e.task)
+          this.refresh()
+        })
+        .listen('TaskDestroy', (e) => {
+          console.log('TaskDestroy Received')
+          console.log(e.task)
+          this.refresh()
+        })
+        .listen('TaskCreate', (e) => {
+          console.log('TaskCreate Received')
+          console.log(e.task)
+          this.refresh()
+        })
+        .listen('TaskUpdate', (e) => {
+          console.log('TaskUpdate Received')
+          console.log(e.task)
+          this.refresh()
+        })
     } else {
       window.Echo.private('App.User.' + window.laravel_user.id)
         .listen('TaskUncompleted', (e) => {
           console.log('TaskUncompleted Received')
+          console.log(e.task)
+          this.refresh()
+        })
+        .listen('TaskCompleted', (e) => {
+          console.log('TaskCompleted Received')
+          console.log(e.task)
+          this.refresh()
+        })
+        .listen('TaskDestroy', (e) => {
+          console.log('TaskDestroy Received')
+          console.log(e.task)
+          this.refresh()
+        })
+        .listen('TaskCreate', (e) => {
+          console.log('TaskCreate Received')
+          console.log(e.task)
+          this.refresh()
+        })
+        .listen('TaskUpdate', (e) => {
+          console.log('TaskUpdate Received')
           console.log(e.task)
           this.refresh()
         })
