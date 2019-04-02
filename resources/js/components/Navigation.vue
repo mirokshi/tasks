@@ -94,7 +94,7 @@ export default {
           icon: 'keyboard_arrow_up',
           'icon-alt': 'keyboard_arrow_down',
           text: 'Tasques',
-          model: true,
+          model: false,
           children: [
             { icon: 'build', text: 'Tasques amb PHP', url: '/tasks' },
             { icon: 'build', text: 'Tasques tailwind', url: '/tasks_vue' },
@@ -108,7 +108,10 @@ export default {
         { icon: 'notifications', text: 'Notifications', url: '/notifications' },
         { icon: 'weekend', text: 'Mobile', url: '/mobile' },
         { icon: 'contact_mail', text: 'NewsLetters', url: '/newsletters' },
-        { icon: 'public', text: 'Clock', url: '/clock' }
+        { icon: 'timer', text: 'Clock', url: '/clock' },
+        { icon: 'chat', text: 'Chat', url: '/chat' },
+        { icon: 'pool', text: 'Users', url: '/users' },
+        { icon: 'public', text: 'Game', url: '/game' }
       ]
     }
   },
