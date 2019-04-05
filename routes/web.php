@@ -24,6 +24,7 @@ use App\Http\Controllers\NewslettersController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PushSubscriptionController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\TasquesController;
@@ -71,6 +72,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/about', function (){
         return view('about');
     });
+    //Mobile
     Route::get('/mobile', function (){
         return view('mobile');
     });
@@ -80,8 +82,6 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/tasques','\\'. TasquesController::class . '@index');
     Route::get('/tasques/{id}','\\'.TasquesController::class.'@show');
     Route::get('/home', '\\'. TasquesController::class . '@index');
-    //Home
-//    Route::get('/home','TasksVueController@index');
     //LoggedUserTasksController
     Route::get('/user/tasks','\\'. LoggedUserTasksController::class . '@index');
     //Tags
@@ -102,6 +102,11 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/xat', '\\' . ChatController::class . '@index');
     Route::get('/users','\\'.UsersController::class.'@index');
     Route::get('/game','\\'.GameController::class.'@index');
+
+    // Push Subscriptions
+    Route::post('subscriptions', '\\'.PushSubscriptionController::class.'@update');
+    Route::post('subscriptions/delete', '\\'.PushSubscriptionController::class.'@destroy');
+
 
 });
 
