@@ -29,7 +29,7 @@ use App\Http\Controllers\TasksController;
 use App\Http\Controllers\TasquesController;
 use App\Http\Controllers\UsersController;
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 //TODO
 Route::post('login_alt', 'Auth\LoginAltController@login');
@@ -52,82 +52,55 @@ Route::get('/auth/{provider}/callback', '\\'. LoginController::class . '@handleP
 //GRUPS_ DE URLS  PARA USUARIOS AUTENTICADOS
 Route::middleware(['auth'])->group(function() {
 
-
+//impersonate
+    Route::impersonate();
     Route::get('/tasks','\\'. TasksController::class . '@index'); //lista
     Route::post('/tasks','\\'. TasksController::class . '@store'); //crea
     Route::delete('/tasks/{id}','\\'. TasksController::class . '@destroy'); //boora
     Route::put('/tasks/{id}','\\'. TasksController::class . '@update'); //modifica
     Route::get('/task_edit/{id}','\\'.TasksController::class.'@edit'); //modifica
-
     //Uncompleted -> ESTADOS
     Route::delete('completed_task/{task}','CompletedTasksController@destroy');
-
     //Complete -> ESTADOS
     Route::post('/completed_task/{task}','CompletedTasksController@store');
-
-//    Route::patch('/tasks/{id}','TasksController@completed');
-
-
-//CONTACT
+    //CONTACT
     Route::get('/contact', function (){
         return view('contact');
     });
-
-//ABOUT
+    //ABOUT
     Route::get('/about', function (){
         return view('about');
     });
-//ABOUT
-
     Route::get('/mobile', function (){
         return view('mobile');
     });
-
     //Vue
     Route::get('/tasks_vue','TasksVueController@index');
-
     //Tasques
     Route::get('/tasques','\\'. TasquesController::class . '@index');
     Route::get('/tasques/{id}','\\'.TasquesController::class.'@show');
     Route::get('/home', '\\'. TasquesController::class . '@index');
-
     //Home
 //    Route::get('/home','TasksVueController@index');
-
     //LoggedUserTasksController
     Route::get('/user/tasks','\\'. LoggedUserTasksController::class . '@index');
-
-    //impersonate
-    Route::impersonate();
-
     //Tags
     Route::get('/tags','\\'. TagsController::class . '@index');
-
     //Profile
     Route::get('/profile', '\\'. ProfileController::class . '@show');
-
     //Photo
     Route::post('/photo', '\\'. PhotoController::class . '@store');
-
     //Avatar
     Route::post('/avatar', '\\'. AvatarController::class . '@store');
-
-
     //LoggedUserPhoto
     Route::get('/user/photo', '\\'. LoggedUserPhotoController::class . '@show');
-
     //Changelog
     Route::get('/changelog','\\'. ChangelogController::class . '@index');
-
     Route::get('/notifications', '\\' . NotificationController::class . '@index');
-
     Route::get('/clock','\\'.ClockController::class.'@index');
-
     Route::get('/chat', '\\' . ChatController::class . '@index');
     Route::get('/xat', '\\' . ChatController::class . '@index');
-
     Route::get('/users','\\'.UsersController::class.'@index');
-
     Route::get('/game','\\'.GameController::class.'@index');
 
 });

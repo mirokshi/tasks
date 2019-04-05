@@ -26,7 +26,8 @@ if (!function_exists('create_primary_user')){
          $user =User::firstOrCreate ([
             'name' => 'Mirokshi Rojas',
             'email' => 'mirokshirojas@iesebre.com',
-            'password' => bcrypt(env('PRIMARY_USER_PASSWORD', 'secret'))
+            'password' => bcrypt(env('PRIMARY_USER_PASSWORD', 'secret')),
+             'mobile' => '34656445154'
         ]);
             $user->admin = true;
             $user->save();
