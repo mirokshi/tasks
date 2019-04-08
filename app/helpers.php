@@ -204,6 +204,7 @@ if (!function_exists('create_example_tasks_with_tags')){
             'description' => 'Bla bla bla',
             'user_id' => $user1->id
         ]);
+
         Task::create([
             'name' => 'comprar llet',
             'completed' => false,
