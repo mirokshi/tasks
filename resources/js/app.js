@@ -44,6 +44,7 @@ import '../../resources/img/icon32x32.png'
 import ShowTask from './components/tasks/ShowTask.vue'
 import Users from './components/Users.vue'
 import Game from './components/Game.vue'
+import UserOnlineWidget from './components/UserOnlineWidget.vue'
 
 // window.location.reload(true)
 
@@ -196,6 +197,8 @@ window.Vue.component('toolbar', Toolbar)
 
 window.Vue.component('service-worker', ServiceWorker)
 window.Vue.component('notifications-widget', NotificationsWidget)
+window.Vue.component('user-online-widget', UserOnlineWidget)
+
 window.Vue.component('notifications', Notifications)
 window.Vue.component('share-fab', ShareFab)
 window.Vue.component('mobile', Mobile)

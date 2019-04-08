@@ -53,7 +53,7 @@ Route::get('/auth/{provider}/callback', '\\'. LoginController::class . '@handleP
 //GRUPS_ DE URLS  PARA USUARIOS AUTENTICADOS
 Route::middleware(['auth'])->group(function() {
 
-//impersonate
+    //impersonate
     Route::impersonate();
     Route::get('/tasks','\\'. TasksController::class . '@index'); //lista
     Route::post('/tasks','\\'. TasksController::class . '@store'); //crea
@@ -129,11 +129,7 @@ Route::get('/omplir', function () {
     }
 });
 
-
-
 //Auth::logout();
-
-
 
 //index -> LIST
 //store -> CREATE

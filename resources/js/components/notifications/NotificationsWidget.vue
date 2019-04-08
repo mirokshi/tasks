@@ -46,7 +46,6 @@
             </v-list-tile>
         </v-list>
     </v-menu>
-
 </template>
 
 <script>
