@@ -86,7 +86,10 @@
             <v-card-title class="primary white--text"><h4>Colors del tema</h4></v-card-title>
             <tema></tema>
         </v-card>
-        <v-divider></v-divider>
+        <v-card>
+            <span>todo</span>
+            <push-notification-button></push-notification-button>
+        </v-card>
         <v-form action="logout" method="POST">
             <input type="hidden" name="_token" :value="csrfToken">
             <v-btn type="submit">Cerrar sesion <v-icon>exit_to_app</v-icon></v-btn>
@@ -97,11 +100,13 @@
 <script>
 import Tema from './Tema'
 import Impersonate from './Impersonate'
+import PushNotificationButton from './PushNotificationButton'
 
 export default {
   components: {
     'tema': Tema,
-    'impersonate': Impersonate
+    'impersonate': Impersonate,
+    'push-notification-button': PushNotificationButton
   },
   name: 'NavigationRight',
   data () {

@@ -50,7 +50,7 @@ class TasquesControllerTest extends TestCase
         $this->loginAsSuperAdmin();
         create_example_tasks_with_tags();
 
-        Cache::shouldReceive('remember')
+        Cache::shouldReceive('put')
             ->once()
             ->with(Task::TASKS_CACHE_KEY, \Closure::class)
             ->andReturn(Task::all());
