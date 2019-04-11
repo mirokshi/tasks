@@ -45,6 +45,7 @@ import ShowTask from './components/tasks/ShowTask.vue'
 import Users from './components/Users.vue'
 import Game from './components/Game.vue'
 import UserOnlineWidget from './components/UserOnlineWidget.vue'
+import ComponentVideo from './components/others/ComponentVideo.vue'
 
 // window.location.reload(true)
 
@@ -209,6 +210,7 @@ window.Vue.component('show-task', ShowTask)
 window.Vue.component('chat', Chat)
 window.Vue.component('users', Users)
 window.Vue.component('game', Game)
+window.Vue.component('component-video', ComponentVideo)
 
 // window.Vue.use(Vuetify)
 window.Vue.use(Vuetify, {

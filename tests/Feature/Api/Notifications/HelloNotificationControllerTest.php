@@ -26,7 +26,7 @@ class HelloNotificationControllerTest extends TestCase
     protected function refreshInMemoryDatabase()
     {
         $this->artisan('migrate',[
-            '--path' => 'database/migrations/tenant'
+            '--path' => 'database/migrations'
         ]);
 
         $this->app[Kernel::class]->setArtisan(null);
@@ -38,8 +38,6 @@ class HelloNotificationControllerTest extends TestCase
      */
     public function user_can_send_hello_notification_to_himself()
     {
-
-        $this->withoutExceptionHandling();
         $user = $this->loginAsSuperAdmin('api');
         Notification::fake();
         $response = $this->json('POST','/api/v1/notifications/hello');
@@ -53,7 +51,6 @@ class HelloNotificationControllerTest extends TestCase
      */
     public function guest_user_can_send_hello_notification_to_himself()
     {
-        $this->withoutExceptionHandling();
         Notification::fake();
         $response = $this->json('POST','/api/v1/notifications/hello');
         $response->assertStatus(401);

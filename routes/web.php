@@ -29,6 +29,7 @@ use App\Http\Controllers\TagsController;
 use App\Http\Controllers\TasksController;
 use App\Http\Controllers\TasquesController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\VideoController;
 
 Auth::routes(['verify' => true]);
 
@@ -102,6 +103,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/xat', '\\' . ChatController::class . '@index');
     Route::get('/users','\\'.UsersController::class.'@index');
     Route::get('/game','\\'.GameController::class.'@index');
+    Route::get('/video','\\'.VideoController::class.'@index');
 
     // Push Subscriptions
     Route::post('subscriptions', '\\'.PushSubscriptionController::class.'@update');
