@@ -1,14 +1,18 @@
 <template>
     <span>
+        <v-card class="justify-center">
+            <v-flex class="text-xs-center mt-3">
         <video id="demovideo" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" preload="auto" controls></video>
-
-<div>
-    <button onclick="document.getElementById('demovideo').play()">Reproducir video</button>
-    <button onclick="document.getElementById('demovideo').pause()">Pausar el video</button>
-    <button onclick="document.getElementById('demovideo').volume+=0.1">Aumentar el Volumen</button>
-    <button onclick="document.getElementById('demovideo').volume-=0.1">Disminuir el Volumen</button>
+            </v-flex>
+<div class="text-xs-center">
+    <v-btn onclick="document.getElementById('demovideo').play()" flat icon><v-icon>play_arrow</v-icon></v-btn>
+    <v-btn onclick="document.getElementById('demovideo').pause()" flat icon><v-icon>pause</v-icon></v-btn>
+    <v-btn onclick="document.getElementById('demovideo').volume+=0.1" flat icon><v-icon>volume_up</v-icon></v-btn>
+    <v-btn onclick="document.getElementById('demovideo').volume-=0.1" flat icon><v-icon>volume_down</v-icon></v-btn>
+    <v-btn @click="rewind('demovideo')" flat icon><v-icon>fast_rewind</v-icon></v-btn>
+    <v-btn @click="forward('demovideo')" flat icon><v-icon>fast_forward</v-icon></v-btn>
 </div>
-
+        </v-card>
 <div class="test">Back in black:</div>
 
 <audio id="demo" src="https://upload.wikimedia.org/wikipedia/en/4/45/ACDC_-_Back_In_Black-sample.ogg" preload="auto" controls></audio>
@@ -48,7 +52,17 @@
 
 <script>
 export default {
-  name: 'ComponentVideo'
+  name: 'ComponentVideo',
+    methods:{
+      rewind ($id) {
+          let video = document.getElementById($id)
+          video.currentTime += -5
+      },
+        forward ($id) {
+          let video = document.getElementById($id)
+            video.currentTime += +5
+        },
+}
 }
 </script>
 
