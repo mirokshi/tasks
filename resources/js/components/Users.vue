@@ -10,7 +10,7 @@
         <v-card>
             <v-card-title>
                 <v-layout row wrap>
-                    <v-flex lg5>
+                    <v-flex>
                         <v-text-field
                             appedn-icon="search"
                             label="Buscar"

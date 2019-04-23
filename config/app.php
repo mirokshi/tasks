@@ -170,6 +170,8 @@ return [
         Lab404\Impersonate\ImpersonateServiceProvider::class,
 
         App\Providers\GoogleDriveServiceProvider::class,
+
+        NotificationChannels\WebPush\WebPushServiceProvider::class,
     ],
 
     /*

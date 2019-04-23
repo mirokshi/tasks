@@ -4,6 +4,7 @@
         <v-toolbar-title>Menú</v-toolbar-title>
         <v-spacer></v-spacer>
 
+        <user-online-widget></user-online-widget>
         <notifications-widget></notifications-widget>
 
         <span class="mr-4 hidden-xs-only" v-role="'SuperAdmin'"><git-info></git-info></span>
@@ -19,12 +20,14 @@
 <script>
 import NotificationsWidget from './notifications/NotificationsWidget.vue'
 import GitInfoComponent from './git/GitInfoComponent.vue'
+import UserOnlineWidget from "./UserOnlineWidget";
 
 export default {
   name: 'Toolbar',
   components: {
     'notifications-widget': NotificationsWidget,
-    'git-info': GitInfoComponent
+    'git-info': GitInfoComponent,
+      'user-online-widget':UserOnlineWidget
   },
   data () {
     return {

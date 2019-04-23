@@ -63,6 +63,13 @@ if (gitHeader) if (gitHeader.content) window.git = JSON.parse(gitHeader.content)
 let impersonatedby = document.head.querySelector('meta[name="impersonatedBy"]')
 if (impersonatedby) if (impersonatedby.content) window.impersonatedBy = JSON.parse(impersonatedby.content)
 
+let vapidPublicKey = document.head.querySelector('meta[name="vapidPublicKey"]')
+if (vapidPublicKey) {
+  window.vapidPublicKey = vapidPublicKey.content
+} else {
+  console.error('VAP public key not found')
+}
+
 window.Pusher = require('pusher-js')
 
 window.Echo = new Echo({

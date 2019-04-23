@@ -32,7 +32,6 @@
                             :items="filters"
                             v-model="filter"
                             item-text="name"
-                            outline
                         >
                         </v-select>
                     </v-flex>

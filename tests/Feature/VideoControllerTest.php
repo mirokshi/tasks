@@ -1,29 +1,23 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mirokshi
- * Date: 12/03/19
- * Time: 18:55
- */
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
 class ClockControllerTest extends TestCase
 {
-    use RefreshDatabase, CanLogin;
+    use CanLogin;
 
     /**
      * @test
      */
-    public function clock()
+    public function video()
     {
+
         $this->login('web');
 
-        $response = $this->get('/clock');
+        $response = $this->get('/video');
 
         $response->assertSuccessful();
 
