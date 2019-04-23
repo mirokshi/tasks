@@ -9,18 +9,25 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Passport\HasApiTokens;
+use NotificationChannels\WebPush\HasPushSubscriptions;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements  MustVerifyEmail
 {
+
+    use
+        HasRoles,
+        Notifiable,
+        HasApiTokens,
+        Impersonate,
+        HasPushSubscriptions;
+
     const DEFAULT_PHOTO = 'default.png';
 //    const PHOTOS_PATH = 'user_photos';
+
     const DEFAULT_PHOTO_PATH = 'app/photos/' . self::DEFAULT_PHOTO;
 
-
     const USERS_CACHE_KEY= 'tasks.mirokshi.scool.cat' ;
-
-    use HasRoles,Notifiable, HasApiTokens, Impersonate;
 
     /**
      * The attributes that are mass assignable.
@@ -228,6 +235,11 @@ class User extends Authenticatable
     public function channels()
     {
         return $this->belongsToMany(Channel::class);
+    }
+
+    public function routeNotificationForNexmo($notification)
+    {
+        return $this->mobile;
     }
 
 }

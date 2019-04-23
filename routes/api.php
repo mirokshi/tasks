@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\Changelog\ChangelogController;
 use App\Http\Controllers\Api\GitController;
 use App\Http\Controllers\Api\NewsletterController;
+use App\Http\Controllers\Api\Notifications\HelloNotificationsController;
 use App\Http\Controllers\Api\Notifications\NotificationsController;
 use App\Http\Controllers\Api\Notifications\SimpleNotificationsController;
 use App\Http\Controllers\Api\Notifications\UserNotificationsController;
@@ -88,9 +89,12 @@ Route::get('/v1/git/info','\\' . GitController::class . '@index');
     Route::delete('/v1/user/unread_notifications/all','\\' . UserUnreadNotificationsController::class . '@destroyAll');
     Route::delete('/v1/user/unread_notifications/{notification}','\\' . UserUnreadNotificationsController::class . '@destroy');
 
+    Route::post('/v1/notifications/hello','\\' . HelloNotificationsController::class . '@store');
 
     // Simple notifications
     Route::post('/v1/simple_notifications/','\\' . SimpleNotificationsController::class . '@store');
+
+
 
 });
 Route::post('/v1/newsletter', '\\' . NewsletterController::class . '@store');

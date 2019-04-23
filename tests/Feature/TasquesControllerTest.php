@@ -47,14 +47,14 @@ class TasquesControllerTest extends TestCase
     public function superadmin_can_index_tasks()
     {
         $this->withoutExceptionHandling();
+        $this->loginAsSuperAdmin();
         create_example_tasks_with_tags();
 
-        Cache::shouldReceive('remember')
+        Cache::shouldReceive('put')
             ->once()
             ->with(Task::TASKS_CACHE_KEY, \Closure::class)
             ->andReturn(Task::all());
 
-        $user  = $this->loginAsSuperAdmin();
         $response = $this->get('/tasques');
         $response->assertSuccessful();
         $response->assertViewIs('tasques');

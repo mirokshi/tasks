@@ -111,7 +111,8 @@ export default {
         { icon: 'timer', text: 'Clock', url: '/clock' },
         { icon: 'chat', text: 'Chat', url: '/chat' },
         { icon: 'pool', text: 'Users', url: '/users' },
-        { icon: 'public', text: 'Game', url: '/game' }
+        { icon: 'games', text: 'Game', url: '/game' },
+        { icon: 'video_label', text: 'Video', url: '/video' },
       ]
     }
   },

@@ -188,6 +188,7 @@ class TasksControllerTest extends TestCase
      */
     public function superadmin_can_create_fulltask()
     {
+
         $this->loginAsSuperAdmin('api');
         $user = factory(User::class)->create();
         $response = $this->json('POST','/api/v1/tasks/',[
@@ -304,10 +305,10 @@ class TasksControllerTest extends TestCase
 
         $this->assertCount(6,$result);
 
-        $this->assertEquals('comprar pa', $result[0]->name);
+        $this->assertEquals('Comprar pan', $result[0]->name);
         $this->assertFalse((boolean)$result[0]->completed);
 
-        $this->assertEquals('comprar llet', $result[1]->name);
+        $this->assertEquals('Comprar leche', $result[1]->name);
         $this->assertFalse((boolean) $result[1]->completed);
 
         $this->assertEquals('Estudiar PHP', $result[2]->name);
@@ -330,10 +331,10 @@ class TasksControllerTest extends TestCase
 
         $this->assertCount(6,$result);
 
-        $this->assertEquals('comprar pa', $result[0]->name);
+        $this->assertEquals('Comprar pan', $result[0]->name);
         $this->assertFalse((boolean)$result[0]->completed);
 
-        $this->assertEquals('comprar llet', $result[1]->name);
+        $this->assertEquals('Comprar leche', $result[1]->name);
         $this->assertFalse((boolean) $result[1]->completed);
 
         $this->assertEquals('Estudiar PHP', $result[2]->name);
