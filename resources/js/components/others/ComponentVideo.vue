@@ -53,16 +53,16 @@
 <script>
 export default {
   name: 'ComponentVideo',
-    methods:{
-      rewind ($id) {
-          let video = document.getElementById($id)
-          video.currentTime += -5
-      },
-        forward ($id) {
-          let video = document.getElementById($id)
-            video.currentTime += +5
-        },
-}
+  methods: {
+    rewind ($id) {
+      let video = document.getElementById($id)
+      video.currentTime += -5
+    },
+    forward ($id) {
+      let video = document.getElementById($id)
+      video.currentTime += +5
+    }
+  }
 }
 </script>
 
