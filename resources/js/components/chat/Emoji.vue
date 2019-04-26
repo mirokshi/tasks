@@ -1,49 +1,43 @@
 <template>
     <div class="text-xs-center">
-        <v-expand-transition>
-            <div v-show="expand">
-                <v-layout row>
-                    <v-flex xs12 sm6 offset-sm3>
-                        <v-card>
-                            <v-img
-                                src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-                                height="200px"
-                            >
-                            </v-img>
-
-                            <v-card-title primary-title>
-                                <div>
-                                    <div class="headline">Top western road trips</div>
-                                    <span class="grey--text">1,000 miles of wonder</span>
-                                </div>
-                            </v-card-title>
-
-                            <v-card-actions>
-                                <v-btn flat>Share</v-btn>
-                                <v-btn flat color="purple">Explore</v-btn>
-                                <v-spacer></v-spacer>
-                                <v-btn icon @click="show = !show">
-                                    <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
-                                </v-btn>
-                            </v-card-actions>
-
-                            <v-slide-y-transition>
-                                <v-card-text v-show="show">
-                                    Lore Ipsum
-                                </v-card-text>
-                            </v-slide-y-transition>
-                        </v-card>
-                    </v-flex>
-                </v-layout>
-            </div>
-        </v-expand-transition>
-        <v-layout justify-space-around>
-            <v-btn
-                icon
-                flat
-                @click="expand = !expand"
-            ><v-icon>public</v-icon></v-btn>
-        </v-layout>
+        <v-menu
+            v-model="menu"
+            open-on-hover
+            top
+            offset-y
+            slider-color="green"
+            :close-on-content-click="false"
+        >
+            <template v-slot:activator="{ on }">
+                <v-btn
+                    icon
+                    flat
+                    v-on="on"
+                >
+                    <v-icon>insert_emoticon</v-icon>
+                </v-btn>
+            </template>
+            <v-card>
+            <v-tabs
+                v-model="tabs"
+                class="mx-3 mr-3 ml-3"
+                grow>
+                <v-tab
+                    v-for="n in 9"
+                    :key="n"
+                >
+                    <v-icon>public</v-icon>
+                </v-tab>
+            </v-tabs>
+            <v-text-field
+                placeholder="Buscar emoji"
+                class="mx-3"
+            >
+            </v-text-field>
+            <v-tabs-items v-model="tabs">
+            </v-tabs-items>
+            </v-card>
+        </v-menu>
     </div>
 </template>
 
@@ -52,8 +46,8 @@ export default {
   name: 'Emoji',
   data () {
     return {
-      dialog: false,
-      expand: false
+      menu: false,
+      tabs: ''
     }
   }
 }

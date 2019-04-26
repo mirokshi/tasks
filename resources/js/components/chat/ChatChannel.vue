@@ -46,9 +46,7 @@
                     </v-list-tile>
                   </v-list>
             </v-flex>
-              <v-flex>
                 <emoji></emoji>
-              </v-flex>
               <v-flex xs9>
                     <v-text-field
                             class="mx-5"
