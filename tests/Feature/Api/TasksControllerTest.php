@@ -366,7 +366,7 @@ class TasksControllerTest extends TestCase
      */
     public function superadmin_can_edit_task()
     {
-        $this->withoutExceptionHandling();
+
         $this->loginAsSuperAdmin('api');
 
         $oldTask = factory(Task::class)->create([

@@ -47,6 +47,7 @@ import Game from './components/Game.vue'
 import UserOnlineWidget from './components/UserOnlineWidget.vue'
 import ComponentVideo from './components/others/ComponentVideo.vue'
 
+
 // window.location.reload(true)
 
 Vue.config.productionTip = false
