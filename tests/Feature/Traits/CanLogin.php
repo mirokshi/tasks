@@ -103,8 +103,7 @@ trait CanLogin
 
     public function loginAsChatUser($guard = 'web')
     {
-
-        return $this->loginAsUsingRole($guard, ['Chat']);
+        return $this->loginAsUsingRole($guard, ['ChatManager']);
     }
 
 

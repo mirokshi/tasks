@@ -1,5 +1,5 @@
 <template>
-    <div id="dsadsasadasdasddsadsa">
+    <div>
         <v-toolbar color="primary">
             <v-avatar
                     color="grey lighten-4"
@@ -22,7 +22,7 @@
             </v-tooltip>
         </v-toolbar>
         <v-container fluid text-xs-center class="ma-0 pa-0" >
-          <v-layout row wrap  class="mx-0">
+          <v-layout row wrap>
             <v-flex xs12 style="height: calc(100vh - 64px - 64px - 64px);" class="bg-pattern">
                 <v-list subheader style="background-color: transparent;">
                     <v-subheader>Recent messages</v-subheader>
@@ -37,7 +37,7 @@
                       </v-list-tile-avatar>
 
                       <v-list-tile-content>
-                        <v-list-tile-title v-html="message.title"></v-list-tile-title>
+                        <v-list-tile-title v-html="message.text"></v-list-tile-title>
                       </v-list-tile-content>
 
                       <v-list-tile-action>
@@ -46,15 +46,8 @@
                     </v-list-tile>
                   </v-list>
             </v-flex>
-                <emoji v-model="emojiPick"></emoji>
-              <v-flex xs9>
-                    <v-text-field
-                            class="mx-5"
-                            label="Solo"
-                            placeholder="Nou missatge"
-                            solo
-                            :value="emojiPick"
-                    ></v-text-field>
+              <v-flex xs12>
+                  <chat-message-add :channel="channel" @added="add"></chat-message-add>
               </v-flex>
           </v-layout>
         </v-container>
@@ -62,19 +55,16 @@
 </template>
 
 <script>
-import Emoji from './Emoji'
-
+import ChatMessageAdd from './ChatMessageAdd'
 export default {
   name: 'ChatChannel',
   components: {
-    'emoji': Emoji
+    'chat-message-add': ChatMessageAdd
   },
   data () {
     return {
       dataMessages: [],
-      emojiPanel: false,
-      loading: false,
-      emojiPick: []
+      loading: false
     }
   },
   props: {
@@ -86,26 +76,10 @@ export default {
     }
   },
   methods: {
+    add () {
+      this.fetchMessages()
+    },
     fetchMessages () {
-      // TODO esborrar seguent línia quan estigui feta l'API
-      this.dataMessages = [
-        {
-          id: 1,
-          title: 'Hey man!'
-        },
-        {
-          id: 2,
-          title: 'How are you?'
-        },
-        {
-          id: 3,
-          title: 'bla bla bla....'
-        },
-        {
-          id: 4,
-          title: 'bla bla bla....'
-        }
-      ]
       if (this.channel) {
         this.loading = true
         window.axios('/api/v1/channel/' + this.channel.id + '/messages').then((response) => {
@@ -115,11 +89,7 @@ export default {
           this.loading = false
         })
       }
-    },
-    toggleEmojiPanel () {
-      this.emojiPanel = !this.emojiPanel
     }
-
   },
   created () {
     this.fetchMessages()

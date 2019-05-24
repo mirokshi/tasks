@@ -18,7 +18,10 @@
                     <v-icon>insert_emoticon</v-icon>
                 </v-btn>
             </template>
-            <!--yarn add v-emoji-picker-->
+            <!--yarn add v-emChat.vue
+ChatChannel.vue
+ChatChannels.vue
+ChatMessageAdd.vueoji-picker-->
             <VEmojiPicker :pack="pack" @select="selectEmoji" labelSearch="Buscar" />
         </v-menu>
     </div>

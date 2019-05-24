@@ -798,7 +798,7 @@ if (! function_exists('initialize_sample_chat_channels')) {
 if (! function_exists('create_sample_channel')) {
     function create_sample_channel($user = null,$name = 'Pepe Pardo Jeans', $randomTimestamps = true) {
         create_primary_user();
-        
+        if (!$user) $user=User::find(1);
         if ($randomTimestamps) {
             $channelData = add_random_timestamps([
                 'name' => $name,
