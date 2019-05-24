@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Tenants\Api\Curriculum\Studies;
 
-
+use App\ChatMessage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Contracts\Console\Kernel;
 use Tests\Feature\Traits\CanLogin;
@@ -37,12 +37,9 @@ class ChatMessagesControllerTest extends TestCase {
      */
     public function can_list_chat_messages()
     {
-        $this->loginAsChatUser('api');
-        dump(0);
+        $this->login('api');
         $channel = create_sample_channel();
-        dump(1);
         $response = $this->json('GET', '/api/v1/channel/' . $channel->id . '/messages');
-        dump(2);
         $response->assertSuccessful();
         $result = json_decode($response->getContent());
         $this->assertTrue(is_array($result));
@@ -51,12 +48,11 @@ class ChatMessagesControllerTest extends TestCase {
 
     /**
      * @test
-     * @group curriculum
+     * @group chat
      */
     public function superadmin_can_list_chat_messages()
     {
         $this->loginAsSuperAdmin('api');
-
         $channel = create_sample_channel();
         $response = $this->json('GET', '/api/v1/channel/' . $channel->id . '/messages');
         $response->assertSuccessful();
@@ -83,6 +79,7 @@ class ChatMessagesControllerTest extends TestCase {
      */
     public function regular_user_can_list_chat_messages_on_chat_on_participates()
     {
+
         $user = $this->login('api');
 
         $channel = create_sample_channel($user);
@@ -99,6 +96,7 @@ class ChatMessagesControllerTest extends TestCase {
      */
     public function guest_user_cannot_list_chat_messages()
     {
+        $this->withoutExceptionHandling();
         $channel = create_sample_channel();
         $response = $this->json('GET','/api/v1/channel/' . $channel->id . '/messages');
         $response->assertStatus(401);
@@ -130,6 +128,7 @@ class ChatMessagesControllerTest extends TestCase {
      */
     public function user_of_chat_can_add_message_to_channel()
     {
+        $this->withoutExceptionHandling();
         $user = $this->login('api');
 
         $channel = create_sample_channel($user);
@@ -144,9 +143,11 @@ class ChatMessagesControllerTest extends TestCase {
         $this->assertEquals('Hola que tal!', $channel->lastMessage()->text);
     }
 
+    /**
+     * @test
+     */
     public function regular_user_cannot_add_message_to_channel()
     {
-        $this->login('api');
         $channel = create_sample_channel();
         $response = $this->json('POST', '/api/v1/channel/' . $channel->id . '/messages', [
             'text' => 'Hola que tal!'
@@ -154,6 +155,9 @@ class ChatMessagesControllerTest extends TestCase {
         $response->assertStatus(401);
     }
 
+    /**
+     * @test
+     */
     public function guest_user_cannot_add_message_to_channel()
     {
         $channel = create_sample_channel();

@@ -90,7 +90,7 @@ Route::middleware(['auth'])->group(function() {
     //Profile
     Route::get('/profile', '\\'. ProfileController::class . '@show');
     //Photo
-    Route::post('/photo', '\\'. PhotoController::class . '@store');
+    Route::post('/photo', '\\'. PhotoConatroller::class . '@store');
     //Avatar
     Route::post('/avatar', '\\'. AvatarController::class . '@store');
     //LoggedUserPhoto

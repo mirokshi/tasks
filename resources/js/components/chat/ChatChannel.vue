@@ -46,14 +46,14 @@
                     </v-list-tile>
                   </v-list>
             </v-flex>
-                <emoji :emoji="emojiPick"></emoji>
+                <emoji v-model="emojiPick"></emoji>
               <v-flex xs9>
                     <v-text-field
                             class="mx-5"
                             label="Solo"
                             placeholder="Nou missatge"
                             solo
-
+                            :value="emojiPick"
                     ></v-text-field>
               </v-flex>
           </v-layout>
@@ -74,7 +74,7 @@ export default {
       dataMessages: [],
       emojiPanel: false,
       loading: false,
-        emojiPick:''
+      emojiPick: []
     }
   },
   props: {
@@ -118,10 +118,7 @@ export default {
     },
     toggleEmojiPanel () {
       this.emojiPanel = !this.emojiPanel
-    },
-
-
-
+    }
 
   },
   created () {
