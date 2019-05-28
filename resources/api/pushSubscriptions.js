@@ -64,6 +64,8 @@ export default {
             window.eventBus.$emit('disableNotifications')
             // this.pushButtonDisabled = true TODO
           } else {
+            // console.log('hola unable pusgh ', e)
+
             console.log('Unable to subscribe to push.', e)
             window.eventBus.$emit('enableNotifications')
             // this.pushButtonDisabled = false  TODO

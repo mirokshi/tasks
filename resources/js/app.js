@@ -294,5 +294,6 @@ window.Vue.use(Vuetify, {
   }
 })
 
+window.eventBus = new Vue()
 // eslint-disable-next-line no-unused-vars
 const app = new Vue(AppComponent)

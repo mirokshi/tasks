@@ -217,7 +217,7 @@ export default {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
     },
     updateTask (task) {
-      this.refresh()
+      this.refresh(false)
     },
     refresh (message = true) {
       this.loading = true

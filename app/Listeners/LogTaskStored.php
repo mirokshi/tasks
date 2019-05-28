@@ -10,7 +10,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Auth;
 
-class LogTaskCreate implements ShouldQueue
+class LogTaskStored implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -31,17 +31,19 @@ class LogTaskCreate implements ShouldQueue
     public function handle($event)
     {
         $log = Log::create([
-            'text' => "Se ha creado una nueva tarea '".$event->task->name."'" ,
-            'time' =>Carbon::now(),
-            'action_type' => 'Crear',
-            'module_type'=>'Tasques',
-            'icon' => 'fiber_new',
-            'color' => '#339966',
+            'text' => "S'ha creat la tasca '" . $event->task->name . "'",
+            'time' => Carbon::now(),
+            'action_type' => 'store',
+            'module_type' => 'Tasques',
+            'icon' => 'note_add',
+            'color' => 'success',
             'user_id' => Auth::user()->id,
-            'loggable_id' => $event-> task->id,
+            'loggable_id' => $event->task->id,
             'loggable_type' => Task::class,
-            'new_value' => $event->task->name
+            'old_value' => null,
+            'new_value' => $event->task
         ]);
-        event(new Changelog($log,Auth::user()->map()));
+
+        event(new Changelog($log, Auth::user()->map()));
     }
 }

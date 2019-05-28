@@ -2,11 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Notifications\DatabaseNotificationStored;
+use App\Notifications\DatabaseNotificationStore;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendDatabaseNotificationStoredNotification
+class SendDatabaseNotificationStore
 {
     /**
      * Create the event listener.
@@ -28,7 +28,7 @@ class SendDatabaseNotificationStoredNotification
     {
         if ($event->channel === 'database')
         {
-            $event->notifiable->notify(new DatabaseNotificationStored($event->notification));
+            $event->notifiable->notify(new DatabaseNotificationStore($event->notification));
         }
     }
 }

@@ -1,5 +1,4 @@
 import moment from 'moment'
-
 export default {
   /**
      * https://github.com/Minishlink/physbook/blob/02a0d5d7ca0d5d2cc6d308a3a9b81244c63b3f14/app/Resources/public/js/app.js#L177

@@ -20,10 +20,11 @@ class TaskUpdate
      *
      * @return void
      */
-    public function __construct($oldTask, Task $task)
+    public function __construct($oldTask, Task $task, User $user)
     {
         $this->task = $task;
         $this->oldTask = $oldTask;
+        $this->user = $user;
     }
 
     /**

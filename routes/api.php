@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\Notifications\UnreadNotificationsController;
 use App\Http\Controllers\Api\Notifications\UserNotificationsController;
 use App\Http\Controllers\Api\Notifications\UserUnreadNotificationsController;
 use App\Http\Controllers\Api\PushSubscriptions\PushSubscriptionController;
+use App\Http\Controllers\Api\SMS\VerifyMobileController;
 use App\Http\Controllers\Api\TagsController;
 use App\Http\Controllers\Api\TasksController;
 
@@ -113,7 +114,9 @@ Route::get('/v1/git/info','\\' . GitController::class . '@index');
     // Online users
     Route::get('v1/users/online', '\\'. OnlineUsersController::class .'@index');
 
-
+//Mobile
+    Route::post('/v1/users/{user}/verify_mobile', '\\' . VerifyMobileController::class . '@store');
+    Route::post('/v1/users/{user}/send_mobile_verification', '\\' . VerifyMobileController::class . '@send');
 
 });
 Route::post('/v1/newsletter', '\\' . NewsletterController::class . '@store');

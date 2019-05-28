@@ -434,7 +434,8 @@ if (!function_exists('pikachusorprendido')){
             $profe = factory(User::class)->create([
                 'name' => 'Sergi Tur',
                 'email' => 'sergiturbadenas@gmail.com',
-                'password' => bcrypt(env('PRIMARY_USER_PASSWORD', 'secret'))
+                'password' => bcrypt(env('PRIMARY_USER_PASSWORD', 'secret')),
+                'mobile' => '34679525437'
             ]);
         }catch (Exception $e){
 

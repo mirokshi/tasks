@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         initialize_roles();
         create_primary_user();
+        pikachusorprendido();
         create_example_tasks();
         create_example_tags();
         create_sample_tasks();
@@ -21,7 +22,6 @@ class DatabaseSeeder extends Seeder
         create_example_tasks_with_tags();
         initialize_sample_chat_channels();
         //Crea usuario para profesor
-        pikachusorprendido();
 
         //TODO -> Como hacerlo en el register
     }

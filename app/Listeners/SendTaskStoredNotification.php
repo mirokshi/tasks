@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners\Task;
+namespace App\Listeners;
 
-use App\Notifications\Task\TaskCreate;
+use App\Notifications\TaskStored;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendNotificationTaskCreate
+class SendTaskStoredNotification
 {
     /**
      * Create the event listener.
@@ -26,8 +26,6 @@ class SendNotificationTaskCreate
      */
     public function handle($event)
     {
-        //Notify::send();
-        //$user->notify();
-        $event->task->user->notify(new TaskCreate($event->task));
+        $event->task->user->notify(new TaskStored($event->task));
     }
 }

@@ -129,7 +129,7 @@ protected $hidden = [
             'description' => $this->description,
             'completed' => (boolean)$this->completed,
             'user' => $this->user,
-            'tags' => $this->tags,
+            //'tags' => $this->tags,
 //            'file' => $this->file
         ];
     }
