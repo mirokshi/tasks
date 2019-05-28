@@ -47,12 +47,15 @@ export default {
       this.loading1 = true
 
       window.axios.post('/api/v1/notifications/hello')
-        .catch(error => console.log(error))
+        .catch(error => {
+          console.log(error)
+          console.log('nana')
+        })
         .then(() => { this.loading1 = false })
     },
     /**
-             * Toggle push notifications subscription.
-             */
+     ** Toggle push notifications subscription.
+     **/
     togglePush (oldValue) {
       this.loading = true
       if (oldValue) {

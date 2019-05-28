@@ -1,6 +1,7 @@
 <template>
     <span>
         <v-avatar color="grey lighten-4" :size="size" v-if="hashId" :tile="tile" @click="change" @dblclick="$emit('dblclick')">
+            <!--:src="'/user/' + hashId + '/photo'"-->
             <img ref="previewImage"
                  :src="'/user/' + hashId + '/photo'"
                  :alt="alt"

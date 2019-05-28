@@ -31,6 +31,10 @@ class TaskCreate
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return[
+            new PrivateChannel('App.User.'.$this->task->user_id),
+            new PrivateChannel('Tasques'),
+            new PrivateChannel('App.Log')
+        ];
     }
 }

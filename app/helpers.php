@@ -618,20 +618,13 @@ if (! function_exists('sample_logs')) {
         ]);
         return [$log1, $log2, $log3, $log4];
     }
-
-    if (!function_exists('ellipsis')) {
-        function ellipsis($text, $max = 50)
-        {
-            $ellipted = strlen($text) > $max ? substr($text, 0, $max) . "..." : $text;
-            return $ellipted;
-        }
+}
+if (!function_exists('ellipsis')) {
+    function ellipsis($text, $max = 50)
+    {
+        $ellipted = strlen($text) > $max ? substr($text, 0, $max) . "..." : $text;
+        return $ellipted;
     }
-
-
-
-
-
-
 }
 if (!function_exists('is_valid_uuid')) {
     /**
@@ -669,7 +662,6 @@ if (! function_exists('sample_notifications')) {
         $user2->notify(new SimpleNotification('Sample Notification 2'));
     }
 }
-
 if (! function_exists('initialize_sample_chat_channels')) {
     function initialize_sample_chat_channels($user = null)	{
         $user = User::find(1);
@@ -831,10 +823,7 @@ if (! function_exists('create_sample_channel')) {
         return $channel;
     }
 
-
-
 }
-
 if (! function_exists('add_random_timestamps')) {
     function add_random_timestamps($array)
     {
