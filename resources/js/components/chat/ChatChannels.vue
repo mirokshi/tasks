@@ -1,11 +1,11 @@
 <template>
     <span>
         <v-navigation-drawer
-            v-model="prova"
-            absolute
-            temporary
-            clipped
-            width="900"
+                v-model="prova"
+                absolute
+                temporary
+                clipped
+                width="900"
         >
           <v-list class="pa-1">
             <v-list-tile avatar>
@@ -64,10 +64,19 @@
           </v-list>
         </v-navigation-drawer>
 
+
+
+
+
+
+
         <v-toolbar color="primary">
-            <v-avatar :title="user.name">
-                    <img :src="user.gravatar" :alt="user.name">
-                </v-avatar>
+            <v-avatar :title="user.name"
+                      size="52px"
+                      @click="$emit('toggleright')"
+            >
+                        <img :src="user.avatar" alt="avatar">
+            </v-avatar>
             <!--<user-avatar :user="user" size="52px" @click="$emit('toggleright')"></user-avatar>-->
             <v-toolbar-title>Channels</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -100,10 +109,10 @@
                 <v-list subheader>
                     <v-subheader>Recent channels</v-subheader>
                     <v-list-tile
-                        v-for="channel in dataChannels"
-                        :key="channel.id"
-                        avatar
-                        @click="$emit('input',channel)"
+                            v-for="channel in dataChannels"
+                            :key="channel.id"
+                            avatar
+                            @click="$emit('input',channel)"
                     >
                       <v-list-tile-avatar>
                         <img :src="channel.avatar">
@@ -125,6 +134,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'ChatChannels',
   data () {

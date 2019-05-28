@@ -1,47 +1,44 @@
-@extends('layouts.app')
+@extends('layouts.login')
+
+@section('title')
+    Email
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+    <v-container fluid fill-height>
+        <v-layout align-center justify-center>
+            <v-flex xs12 sm4>
+                <v-card class="elevation-12">
+                    <v-toolbar color="primary" dark>
+                        <v-toolbar-title>{{ __('Restablecer la contraseña') }}</v-toolbar-title>
+                        <v-spacer></v-spacer>
+                        <v-btn flat type="submit" href="/login" icon flat ><v-icon>arrow_back</v-icon></v-btn>
+                    </v-toolbar>
+                    <v-card-text class="text-xs-center">
+                        @if (session('status'))
+                            <v-alert type="success" :value="true">
+                                {{ session('status') }}
+                            </v-alert>
+                        @endif
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                        <v-form method="POST" action="{{ route('password.email') }}">
+                            @csrf
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
+                            <v-text-field id="email" type="email"
+                                          error-messages="{{ $errors->first('email') }}"
+                                          class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                          name="email"
+                                          value="{{ old('email') }}" placeholder="{{ __('Email') }}"
+                                          required>
+                            </v-text-field>
+                            <v-btn type="submit" color="primary" class="mt-5">
+                                {{ __('Enviar enlace') }}
+                            </v-btn>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                        </v-form>
+                    </v-card-text>
+                </v-card>
+            </v-flex>
+        </v-layout>
+    </v-container>
 @endsection

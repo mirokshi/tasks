@@ -1,16 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Chat;
+namespace App\Http\Requests\PushSubscriptions;
 
-use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-/**
- * Class ChatMessagesIndex.
- *
- * @package App\Http\Requests
- */
-class ChatIndex extends FormRequest
+class PushSubscriptionDestroy extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,7 +13,7 @@ class ChatIndex extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->can('chat.index',$this->channel);
+        return true;
     }
 
     /**
@@ -29,6 +23,8 @@ class ChatIndex extends FormRequest
      */
     public function rules()
     {
-        return [];
+        return [
+            'endpoint' => 'required'
+        ];
     }
 }

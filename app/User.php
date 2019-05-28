@@ -242,4 +242,12 @@ class User extends Authenticatable implements  MustVerifyEmail
         return $this->mobile;
     }
 
+    public function online()
+    {
+        $onlineUsers = User::all()->filter(function ($user) {
+            return $user['online'];
+        });
+        return map_simple_collection($onlineUsers->values());
+    }
+
 }

@@ -1,59 +1,53 @@
 <template>
     <div class="text-xs-center">
-        <v-expand-transition>
-            <div v-show="expand">
-                <v-layout row>
-                    <v-flex xs12 sm6 offset-sm3>
-                        <v-card>
-                            <v-img
-                                src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-                                height="200px"
-                            >
-                            </v-img>
-
-                            <v-card-title primary-title>
-                                <div>
-                                    <div class="headline">Top western road trips</div>
-                                    <span class="grey--text">1,000 miles of wonder</span>
-                                </div>
-                            </v-card-title>
-
-                            <v-card-actions>
-                                <v-btn flat>Share</v-btn>
-                                <v-btn flat color="purple">Explore</v-btn>
-                                <v-spacer></v-spacer>
-                                <v-btn icon @click="show = !show">
-                                    <v-icon>{{ show ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}</v-icon>
-                                </v-btn>
-                            </v-card-actions>
-
-                            <v-slide-y-transition>
-                                <v-card-text v-show="show">
-                                    Lore Ipsum
-                                </v-card-text>
-                            </v-slide-y-transition>
-                        </v-card>
-                    </v-flex>
-                </v-layout>
-            </div>
-        </v-expand-transition>
-        <v-layout justify-space-around>
-            <v-btn
-                icon
-                flat
-                @click="expand = !expand"
-            ><v-icon>public</v-icon></v-btn>
-        </v-layout>
+        <v-menu
+            v-model="menu"
+            top
+            offset-y
+            slider-color="green"
+            :close-on-content-click="false"
+            @keydown.esc="menu=false"
+        >
+            <template v-slot:activator="{ on }">
+                <v-btn
+                    icon
+                    flat
+                    color="green"
+                    v-on="on"
+                >
+                    <v-icon>insert_emoticon</v-icon>
+                </v-btn>
+            </template>
+            <!--yarn add v-emChat.vue
+ChatChannel.vue
+ChatChannels.vue
+ChatMessageAdd.vueoji-picker-->
+            <VEmojiPicker :pack="pack" @select="selectEmoji" labelSearch="Buscar" />
+        </v-menu>
     </div>
 </template>
 
 <script>
+import VEmojiPicker from 'v-emoji-picker'
+import packData from 'v-emoji-picker/data/emojis.json'
 export default {
   name: 'Emoji',
+  components: {
+    VEmojiPicker
+  },
   data () {
     return {
-      dialog: false,
-      expand: false
+      menu: false,
+      pack: packData,
+      dataEmoji: []
+    }
+  },
+  props: ['value'],
+  methods: {
+    selectEmoji (emoji) {
+      this.dataEmoji += emoji.emoji
+      console.log(this.dataEmoji)
+      this.$emit('input', this.dataEmoji)
     }
   }
 }

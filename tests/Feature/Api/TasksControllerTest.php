@@ -93,7 +93,7 @@ class TasksControllerTest extends TestCase
      */
     public function tasks_manager_can_delete_task()
     {
-        $this->withoutExceptionHandling();
+
         $this->loginAsTaskManager('api');
         $task = factory(Task::class)->create();
 
@@ -136,7 +136,6 @@ class TasksControllerTest extends TestCase
     {
         $this->login('api');
         $task = factory(Task::class)->create();
-
         $response = $this->json('DELETE','/api/v1/tasks/' . $task->id);
 
         $result = json_decode($response->getContent());
@@ -291,6 +290,7 @@ class TasksControllerTest extends TestCase
 
     /**
      * @test
+     * @group web
      */
     public function superadmin_can_index_tasks()
     {
@@ -367,7 +367,7 @@ class TasksControllerTest extends TestCase
      */
     public function superadmin_can_edit_task()
     {
-        $this->withoutExceptionHandling();
+
         $this->loginAsSuperAdmin('api');
 
         $oldTask = factory(Task::class)->create([

@@ -2,6 +2,7 @@
 
 namespace App;
 
+
 use App\Traits\ApiURI;
 use App\Traits\FormattedDates;
 use Illuminate\Database\Eloquent\Model;
