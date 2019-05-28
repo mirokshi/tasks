@@ -161,6 +161,7 @@ class User extends Authenticatable implements  MustVerifyEmail,CanResetPassword
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'mobile' => $this->mobile,
             'gravatar' => $this->gravatar,
             'admin' => (boolean)$this->admin,
             'roles' => $this->roles()->pluck('name')->unique()->toArray(),

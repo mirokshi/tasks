@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api\SMS;
 
-use App\CodeGenerator\MobileCodesGenerators;
+
+use App\CodeGenerator\MobileCodesGenerator;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\VerifyMobileStore;
+use App\Http\Requests\VerifyMobile\VerifyMobileStore;
 use App\Notifications\VerifyMobile;
 use App\User;
 use Carbon\Carbon;
@@ -30,8 +31,7 @@ class VerifyMobileController extends Controller
     public function send(Request $request, User $user)
     {
 
-        $code = MobileCodesGenerators::generate();
-
+        $code = MobileCodesGenerator::generate();
         $user->mobile_verification_code = $code;
         $user->save();
 
