@@ -290,6 +290,7 @@ class TasksControllerTest extends TestCase
 
     /**
      * @test
+     * @group web
      */
     public function superadmin_can_index_tasks()
     {

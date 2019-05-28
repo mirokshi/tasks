@@ -87,7 +87,6 @@
             <tema></tema>
         </v-card>
         <v-card>
-            <span>todo</span>
             <push-notification-button></push-notification-button>
         </v-card>
         <v-form action="logout" method="POST">

@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\TagsController;
 use App\Http\Controllers\Api\TasksController;
 
 use App\Http\Controllers\Api\TasksTagsController;
+use App\Http\Controllers\Api\Users\OnlineUsersController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\PhotoController;
 use App\Task;
@@ -90,16 +91,27 @@ Route::get('/v1/git/info','\\' . GitController::class . '@index');
     Route::delete('/v1/user/unread_notifications/all','\\' . UserUnreadNotificationsController::class . '@destroyAll');
     Route::delete('/v1/user/unread_notifications/{notification}','\\' . UserUnreadNotificationsController::class . '@destroy');
 
-    Route::post('/v1/notifications/hello','\\' . HelloNotificationsController::class . '@store');
-
     // Simple notifications
     Route::post('/v1/simple_notifications/','\\' . SimpleNotificationsController::class . '@store');
+
+    //Hello notification
+    Route::post('/v1/notifications/hello','\\' . HelloNotificationsController::class . '@store');
+
+    Route::post('/v1/unread_notifications/{notification}','\\' . UnreadNotificationsController::class . '@destroy');
+    // Push Subscriptions
+    Route::put('/v1/subscriptions', '\\' . PushSubscriptionController::class . '@update');
+    Route::post('/v1/subscriptions/delete', '\\' . PushSubscriptionController::class . '@destroy');
 
     //Chat
     //Channel messages
     Route::get('v1/channel/{channel}/messages', '\\' . ChatMessagesController::class . '@index');
     Route::post('v1/channel/{channel}/messages', '\\' . ChatMessagesController::class . '@store');
     Route::delete('v1/channel/{channel}/messages/{message}', '\\' . ChatMessagesController::class . '@destroy');
+
+    // Online users
+    Route::get('v1/users/online', '\\'. OnlineUsersController::class .'@index');
+
+
 
 });
 Route::post('/v1/newsletter', '\\' . NewsletterController::class . '@store');
