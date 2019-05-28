@@ -36,7 +36,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:api')->group(function() {
+Route::middleware(['auth:api'])->group(function() {
 
     Route::get('/v1/tasks','\\' . TasksController::class . '@index');                // BROWSE
     Route::get('/v1/tasks/{task}','\\' . TasksController::class . '@show');          // READ
