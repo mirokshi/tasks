@@ -9,6 +9,7 @@ use App\Http\Requests\TaskShow;
 use App\Http\Requests\TaskStore;
 use App\Http\Requests\TaskUpdate;
 use App\Task;
+use Auth;
 
 class TasksController extends Controller
 {
@@ -33,19 +34,19 @@ class TasksController extends Controller
         $task->user_id = $request->user_id;
         $task->save();
         //  HOOK -> EVENT
-        event(new \App\Events\TaskCreate($task));
+        event(new \App\Events\TaskStore($task, Auth::user()));
 
         return $task->map();
     }
 
     public function destroy(TaskDestroy $request, Task $task)
     {
+        $task_old = $task->mapSimple();
         $task->delete();
 
         //  HOOK -> EVENT
-        event(new \App\Events\TaskDestroy($task));
-
-        return $task;
+        event(new \App\Events\TaskDestroy($task_old, Auth::user()));
+        return $task_old;
     }
 
     public function update(TaskUpdate $request, Task $task)
@@ -58,16 +59,8 @@ class TasksController extends Controller
         $task->save();
 
         //  HOOK -> EVENT
-        event(new \App\Events\TaskUpdate($taskOld,$task));
-
+        event(new \App\Events\TaskUpdate($taskOld,$task,Auth::user()));
 
         return $task->map();
     }
-
-//    public function edit(TaskUpdate $request)
-//    {
-//        $task = Task::findOrFail($request->id);
-//        return view('task_edit',[ 'task' => $task]);
-//
-//    }
 }

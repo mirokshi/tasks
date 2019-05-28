@@ -5,7 +5,7 @@ namespace Tests\Feature\Api;
 
 
 
-use App\Events\TaskCreate;
+use App\Events\TaskStore;
 use App\Events\TaskDestroy;
 use App\Task;
 use App\User;
@@ -177,7 +177,7 @@ class TasksControllerTest extends TestCase
         $this->assertEquals('Comprar pa',$result->name);
         $this->assertEquals('Bla bla bla',$result->description);
         $this->assertFalse($result->completed);
-        Event::assertDispatched(TaskCreate::class, function ($event) use ($task) {
+        Event::assertDispatched(TaskStore::class, function ($event) use ($task) {
             return $event->task->is($task);
         });
     }

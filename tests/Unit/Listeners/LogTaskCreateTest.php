@@ -27,7 +27,7 @@ class LogTaskCreateTest extends TestCase
 //        event(new TaskUncompleted($task));
 
         $listener = new \App\Listeners\LogTaskCreate();
-        $listener->handle(new \App\Events\TaskCreate($task));
+        $listener->handle(new \App\Events\TaskStore($task));
         // 3 ASSERT
         // Test log is inserted
         $log  = Log::find(1);

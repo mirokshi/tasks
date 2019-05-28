@@ -12,13 +12,13 @@ class TaskUpdate extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $task;
+    public $task, $oldTask;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(array $oldTask,Task $task)
+    public function __construct($oldTask,Task $task)
     {
         $this->oldTask = $oldTask;
         $this->task =  $task;

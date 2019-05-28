@@ -7,8 +7,9 @@ use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Log;
 
-class DatabaseNotificationStored extends Notification
+class DatabaseNotificationStore extends Notification
 {
     use Queueable;
 
@@ -36,6 +37,8 @@ class DatabaseNotificationStored extends Notification
 
     public function toBroadcast($notifiable)
     {
+        Log::debug('Notification; ');
+        Log::debug(json_encode($this->notification));
         return new BroadcastMessage([
            'key1'=> 'value1',
            'key2' => 'value2'

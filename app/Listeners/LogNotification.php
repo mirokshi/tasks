@@ -2,7 +2,6 @@
 
 namespace App\Listeners;
 
-
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Log;
@@ -27,10 +26,11 @@ class LogNotification
      */
     public function handle($event)
     {
-        Log::debug('Nueva notificacion enviada');
-        Log::debug('Notifiable: '.json_encode($event->notifiable));
-        Log::debug('Notification: '.json_encode($event->notification));
-        Log::debug('Channel: '.json_encode($event->channel));
-        Log::debug('Response: '.json_encode($event->response));
+        Log::debug('Nova notificació enviada');
+        Log::debug('Notifiable' . json_encode($event->notifiable));
+        Log::debug('Notification' . json_encode($event->notification));
+        Log::debug('Channel' . json_encode($event->channel));
+        Log::debug('Response' . json_encode($event->response));
+
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 use NotificationChannels\WebPush\WebPushChannel;
 use NotificationChannels\WebPush\WebPushMessage;
 
-class TaskUncompleted extends Notification
+class TaskDeleted extends Notification
 {
     use Queueable;
 
@@ -19,7 +19,7 @@ class TaskUncompleted extends Notification
      * TaskUncompleted constructor.
      * @param $task
      */
-    public function __construct(Task $task)
+    public function __construct($task)
     {
         $this->task = $task;
     }
@@ -27,7 +27,7 @@ class TaskUncompleted extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -44,11 +44,11 @@ class TaskUncompleted extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'title' => "S'ha descompletat una tasca: " . $this->task->name,
-            'url' => '/tasques/' . $this->task->id,
+            'title' => "S'ha borrat una tasca: " . $this->task['name'],
+            'url' => '/tasques/' . $this->task['id'],
             'icon' => 'assignment',
             'iconColor' => 'primary',
-            'task' => $this->task->map()
+            'task' => $this->task
         ];
     }
 
@@ -62,11 +62,11 @@ class TaskUncompleted extends Notification
     public function toWebPush($notifiable, $notification)
     {
         return (new WebPushMessage)
-            ->title('Tasca descompletada!')
+            ->title('Tasca borrada!')
             ->icon('/notification-icon.png')
-            ->body('Has descompletat la tasca: ' . $this->task->name)
-            ->action('Visualitza la tasca', 'open_url')
-            ->data(['url' => env('APP_URL') . '/tasques/' . $this->task->id]);
+            ->body('Has borrat la tasca: ' . $this->task['name'])
+            ->action('View app', 'view_app')
+            ->data(['id' => $notification->id]);
     }
 
 }
