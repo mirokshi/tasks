@@ -19,7 +19,8 @@ class TasquesController extends Controller
 
         if (Auth::user()->can('tasks.manage')) {
             $tasks = Cache::rememberForever(Task::TASKS_CACHE_KEY, function () {
-                return  map_collection(Task::with('user', 'tags')->orderBy('created_at', 'desc')->get());
+                //return  map_collection(Task::with('user', 'tags')->orderBy('created_at', 'desc')->get());
+                return map_collection(Task::all());
             });
 
             $uri = 'api/v1/tasks/';

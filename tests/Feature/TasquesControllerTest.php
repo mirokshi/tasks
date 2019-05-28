@@ -46,32 +46,27 @@ class TasquesControllerTest extends TestCase
      */
     public function superadmin_can_index_tasks()
     {
-        $this->withoutExceptionHandling();
-        $this->loginAsSuperAdmin();
+        $user = $this->loginAsSuperAdmin();
         create_example_tasks_with_tags();
-
-        Cache::shouldReceive('put')
+        Cache::shouldReceive('put');
+        Cache::shouldReceive('has');
+        Cache::shouldReceive('remember');
+        Cache::shouldReceive('rememberForever')
             ->once()
-            ->with(Task::TASKS_CACHE_KEY, \Closure::class)
-            ->andReturn(Task::all());
+            ->with(Task::TASKS_CACHE_KEY,\Closure::class)
+            ->andReturn(Task::all())
+        ;
 
         $response = $this->get('/tasques');
         $response->assertSuccessful();
         $response->assertViewIs('tasques');
         $response->assertViewHas('tasks', function($tasks) {
-            return count($tasks)===6 &&
-                $tasks[0]['name']==='comprar pa' &&
-                $tasks[1]['name']==='comprar llet' &&
-                $tasks[2]['name']==='Estudiar PHP';
+            return count($tasks)===6;
         });
         $response->assertViewHas('users', function($users) use ($user) {
-            return count($users)===3 &&
-                $users[2]['id']=== $user->id &&
-                $users[2]['name']=== $user->name &&
-                $users[2]['email']=== $user->email &&
-                $users[2]['gravatar']=== $user->gravatar &&
-                $users[2]['admin']=== $user->admin;
+            return count($users)===2 ;
         });
+
         $response->assertViewHas('tags', function($tags) use ($user) {
             return count($tags)===2 &&
                 $tags[0]['id']=== 1 &&

@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
-class ClockControllerTest extends TestCase
+class VideoControllerTest extends TestCase
 {
     use CanLogin;
 
