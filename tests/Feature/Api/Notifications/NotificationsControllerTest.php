@@ -47,7 +47,6 @@ class NotificationsControllerTest extends TestCase
     {
 
         $user = $this->login('api');
-
         set_sample_notifications_to_user($user);
         $user->notifications[1]->markAsRead();
         $response = $this->json('GET','/api/v1/notifications');

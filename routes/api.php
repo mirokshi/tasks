@@ -7,8 +7,10 @@ use App\Http\Controllers\Api\NewsletterController;
 use App\Http\Controllers\Api\Notifications\HelloNotificationsController;
 use App\Http\Controllers\Api\Notifications\NotificationsController;
 use App\Http\Controllers\Api\Notifications\SimpleNotificationsController;
+use App\Http\Controllers\Api\Notifications\UnreadNotificationsController;
 use App\Http\Controllers\Api\Notifications\UserNotificationsController;
 use App\Http\Controllers\Api\Notifications\UserUnreadNotificationsController;
+use App\Http\Controllers\Api\PushSubscriptions\PushSubscriptionController;
 use App\Http\Controllers\Api\TagsController;
 use App\Http\Controllers\Api\TasksController;
 
