@@ -36,7 +36,7 @@ class LogTaskUpdated implements ShouldQueue
             'module_type' => 'Tasques',
             'icon' => 'update',
             'color' => 'secondary',
-            'user_id' => Auth::user()->id,
+            'user_id' => $event->task->user_id,
             'loggable_id' => $event->task->id,
             'loggable_type' => Task::class,
             'old_value' => $event->old_task,

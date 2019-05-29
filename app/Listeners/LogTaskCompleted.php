@@ -8,7 +8,7 @@ use App\Task;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Carbon;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class LogTaskCompleted implements ShouldQueue
 {
@@ -37,7 +37,7 @@ class LogTaskCompleted implements ShouldQueue
             'module_type' => 'Tasques',
             'icon' => 'lock_open',
             'color' => 'primary',
-            'user_id' => Auth::user()->id,
+            'user_id' => $event->task->user_id,
             'loggable_id' => $event->task->id,
             'loggable_type' => Task::class,
             'old_value' => true,
