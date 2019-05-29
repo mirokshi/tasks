@@ -13,8 +13,8 @@ import Tags from './components/Tags.vue'
 import EditableText from './components/EditableText.vue'
 import LoginForm from './components/LoginForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
-import UserList from './components/UserList.vue'
-import UserSelect from './components/UserSelect.vue'
+import UserList from './components/users/UserList.vue'
+import UserSelect from './components/users/UserSelect.vue'
 import permissions from './plugins/permissions'
 import snackbar from './plugins/snackbar'
 import confirm from './plugins/confirm'
@@ -42,9 +42,9 @@ import TreeView from 'vue-json-tree-view'
 import '../../resources/img/icon16x16.png'
 import '../../resources/img/icon32x32.png'
 import ShowTask from './components/tasks/ShowTask.vue'
-import Users from './components/Users.vue'
+import Users from './components/users/Users.vue'
 import Game from './components/Game.vue'
-import UserOnlineWidget from './components/UserOnlineWidget.vue'
+import UserOnlineWidget from './components/users/UserOnlineWidget.vue'
 import ComponentVideo from './components/others/ComponentVideo.vue'
 
 // window.location.reload(true)
@@ -105,11 +105,9 @@ window.axios.interceptors.response.use((response) => {
       return new Promise(() => {})
     }
     if (error.response.status === 403) {
-      window.Vue.prototype.$snackbar.showSnackBar(
+      window.Vue.prototype.$snackbar.showSnackbar(
         'Error 403!',
-        'error',
-        'No teniu permisos per realitzar aquesta acció.',
-        'center'
+        'No teniu permisos per realitzar aquesta acció.'
       )
     }
     console.log('2')
@@ -119,11 +117,10 @@ window.axios.interceptors.response.use((response) => {
       console.log(error.response.data)
       console.log(error.response.data.message)
       console.log(error.response.data.errors)
-      window.Vue.prototype.$snackbar.showSnackBar(
-        error.response.data.message,
-        'error',
-        window.helpers.printObject(error.response.data.errors),
-        'center'
+      window.Vue.prototype.$snackbar.showSnackbar(
+        'Error 422',
+        'Les dades introduïdes són incorrectes'
+        // window.helpers.printObject(error.response.data.errors)
       )
     }
     console.log('3')
@@ -133,11 +130,9 @@ window.axios.interceptors.response.use((response) => {
       console.log(error.response.data)
       console.log(error.response.data.message)
       console.log(error.response.data.errors)
-      window.Vue.prototype.$snackbar.showSnackBar(
+      window.Vue.prototype.$snackbar.showSnackbar(
         'Error 404!',
-        'error',
-        "No s'ha pogut trobar al servidor el recurs que demaneu.",
-        'center'
+        "No s'ha pogut trobar al servidor el recurs que demaneu."
       )
     }
     if (error.response.status === 405) {
@@ -146,11 +141,9 @@ window.axios.interceptors.response.use((response) => {
       console.log(error.response.data)
       console.log(error.response.data.message)
       console.log(error.response.data.errors)
-      window.Vue.prototype.$snackbar.showSnackBar(
+      window.Vue.prototype.$snackbar.showSnackbar(
         'Error 405!',
-        'error',
-        'Tipus de petició HTTP incorrecte.',
-        'center'
+        'Tipus de petició HTTP incorrecte.'
       )
     }
     if (error.response.status === 500) {
@@ -159,18 +152,16 @@ window.axios.interceptors.response.use((response) => {
       console.log(error.response.data)
       console.log(error.response.data.message)
       console.log(error.response.data.errors)
-      window.Vue.prototype.$snackbar.showSnackBar(
+      window.Vue.prototype.$snackbar.showSnackbar(
         'Error 500!',
-        'error',
-        'Error inesperat al servidor',
-        'center'
+        'Error inesperat al servidor'
       )
     }
     return Promise.reject(error)
   }
   if (error && error.request) {
     window.Vue.prototype.$snackbar.showError("Error de xarxa! No s'ha obtingut cap resposta a la vostra petició. Consulteu l'estat de la xarxa.")
-    window.Vue.prototype.$snackbar.showSnackBar('Error de xarxa!', 'error', "No s'ha obtingut cap resposta a la vostra petició. Consulteu l'estat de la xarxa.")
+    window.Vue.prototype.$snackbar.showSnackbar('Error de xarxa!', "No s'ha obtingut cap resposta a la vostra petició. Consulteu l'estat de la xarxa.")
     return Promise.reject(error)
   }
 })

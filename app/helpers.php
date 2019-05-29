@@ -431,7 +431,7 @@ if (!function_exists('pikachusorprendido')){
     function pikachusorprendido(){
 
         try {
-            $profe = factory(User::class)->create([
+            $profe = User::create([
                 'name' => 'Sergi Tur',
                 'email' => 'sergiturbadenas@gmail.com',
                 'password' => bcrypt(env('PRIMARY_USER_PASSWORD', 'secret')),

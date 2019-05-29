@@ -103,7 +103,7 @@ import TaskDestroy from './TaskDestroy'
 import TaskUpdate from './TaskUpdate'
 import TaskShow from './TaskShow'
 import TasksTags from './TasksTags'
-import UserSelect from '../UserSelect'
+import UserSelect from '../users/UserSelect'
 import DataIterator from './DataIterator'
 
 var filters = {

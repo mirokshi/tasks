@@ -41,13 +41,20 @@ export default {
   },
   methods: {
     confirm () {
-      window.axios.get('/email/resend')
+      this.loading = true
+      window.axios.get('/email/resend').then((response) => {
+        this.loading = false
+        this.$snackbar.showMessage('Email de confirmacion enviado')
+      }).catch(() => {
+        this.loading = false
+      })
     },
     reset () {
       this.loading = true
-      window.axios.post('/password/email', { 'email': this.user.email }).then((response) => {
+      window.axios.post('/password/' + this.user.email).then((response) => {
+        console.log(this.user.email)
         this.loading = false
-        this.$snackbar.showMessage('Email enviat correctament')
+        this.$snackbar.showMessage('Email para restaurar la contraseña enviado')
       }).catch(() => {
         this.loading = false
       })
@@ -56,7 +63,7 @@ export default {
       this.loading = true
       window.axios.post('/api/v1/users/' + this.user.id + '/send_mobile_verification').then((response) => {
         this.loading = false
-        this.$snackbar.showMessage('SMS enviat correctament')
+        this.$snackbar.showMessage('SMS enviado')
       }).catch(() => {
         this.loading = false
       })

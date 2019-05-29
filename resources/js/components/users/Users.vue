@@ -21,10 +21,12 @@
                                 <td>{{ user.id }}</td>
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.email }}</td>
-                                <td>{{ user.mobile }}</td>
                                 <td>{{ user.email_verified_at }}</td>
+                                <td>{{ user.mobile }}</td>
+                                <td>{{user.mobile_verified_at}}</td>
                                 <td>
                                     <user-emails :user="user"></user-emails>
+                                    <verify-mobile-form :user="user"></verify-mobile-form>
                                 </td>
                             </template>
                         </v-data-table>
@@ -37,11 +39,13 @@
 
 <script>
 
-import UserEmailsComponent from './users/UserEmailsComponent'
+import UserEmailsComponent from './UserEmailsComponent'
+import VerifyMobileForm from '../sms/VerifyMobileForm'
 
 export default {
   name: 'Users',
   components: {
+    'verify-mobile-form': VerifyMobileForm,
     'user-emails': UserEmailsComponent
   },
   data () {
@@ -52,9 +56,10 @@ export default {
         { text: 'Id', value: 'id' },
         { text: 'Name', value: 'name' },
         { text: 'Email', value: 'email' },
+        { text: 'Email Verified', value: 'email_verified_at' },
         { text: 'Phone', value: 'mobile' },
-        { text: 'Verified', value: 'verified_at' },
-        { text: 'Actions', value: 'id' }
+        { text: 'Phone Verified', value: 'mobile_verified_at' },
+        { text: 'Actions', sortable: false, value: 'id' }
       ]
     }
   },
