@@ -8,8 +8,6 @@
         <notifications-widget></notifications-widget>
 
         <span class="mr-4 hidden-xs-only" v-role="'SuperAdmin'"><git-info></git-info></span>
-        <span class="dotO" title="Usuario Conectado" v-if="user.online"></span>
-        <span class="dotI" title="Usuario Desconectado" v-else></span>
 
         <v-avatar @click="$emit('toggle-right')" :title="user.name">
             <img :src=userAvatar alt="avatar">
@@ -20,14 +18,14 @@
 <script>
 import NotificationsWidget from './notifications/NotificationsWidget.vue'
 import GitInfoComponent from './git/GitInfoComponent.vue'
-import UserOnlineWidget from "./UserOnlineWidget";
+import UserOnlineWidget from './users/UserOnlineWidget'
 
 export default {
   name: 'Toolbar',
   components: {
     'notifications-widget': NotificationsWidget,
     'git-info': GitInfoComponent,
-      'user-online-widget':UserOnlineWidget
+    'user-online-widget': UserOnlineWidget
   },
   data () {
     return {
@@ -40,22 +38,5 @@ export default {
 }
 </script>
 <style scoped>
-    .dotO{
-        height: 15px;
-        width: 15px;
-        background-color: #388a11;
-        border-radius: 50%;
-        display: inline-block;
-        margin-left: 9px;
-        margin-right: 9px;
-    }
-    .dotI{
-        height: 15px;
-        width: 15px;
-        background-color: #730500;
-        border-radius: 50%;
-        display: inline-block;
-        margin-left: 9px;
-        margin-right: 9px;
-    }
+
 </style>

@@ -1,5 +1,6 @@
 <template>
-    <v-snackbar :timeout="timeout" :color="color" v-model="show" top>
+    <v-snackbar :timeout="timeout" :color="color" v-model="show" top right vertical>
+        <h1>{{type}}</h1>
         {{ message }}
         <v-btn dark flat @click="show=false">CERRAR</v-btn>
     </v-snackbar>
@@ -10,23 +11,32 @@ import EventBus from '../../eventBus'
 export default {
   data () {
     return {
+      type: 'text',
       message: 'Prova',
-      timeout: 3000,
+      timeout: 4000,
       color: 'success',
       show: false
     }
   },
   methods: {
     showMessage (message) {
+      this.type = 'Notificación'
       this.message = message
       this.color = 'success'
       this.show = true
     },
     showError (error) {
+      this.type = 'Error'
       this.message = error
       this.color = 'error'
       this.show = true
       console.log(error.response)
+    },
+    showSnackbar (type, message) {
+      this.type = type
+      this.message = message
+      this.color = 'error'
+      this.show = true
     }
   },
   mounted () {
@@ -35,6 +45,9 @@ export default {
     })
     EventBus.$on('showSnackbarMessage', (message) => {
       this.showMessage(message)
+    })
+    EventBus.$on('showSnackbarPersonalized', (type, message) => {
+      this.showSnackbar(type, message)
     })
   }
 }

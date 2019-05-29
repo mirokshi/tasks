@@ -103,7 +103,7 @@ import TaskDestroy from './TaskDestroy'
 import TaskUpdate from './TaskUpdate'
 import TaskShow from './TaskShow'
 import TasksTags from './TasksTags'
-import UserSelect from '../UserSelect'
+import UserSelect from '../users/UserSelect'
 import DataIterator from './DataIterator'
 
 var filters = {
@@ -217,7 +217,7 @@ export default {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
     },
     updateTask (task) {
-      this.refresh()
+      this.refresh(false)
     },
     refresh (message = true) {
       this.loading = true

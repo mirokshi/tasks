@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import UserSelect from './UserSelect'
+import UserSelect from './users/UserSelect'
 
 export default {
   name: 'Impersonate',

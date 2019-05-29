@@ -31,9 +31,10 @@ class TaskUncompleted implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return [
-            new PrivateChannel('App.User.' . $this->task->user_id),
-            new PrivateChannel('Tasques')
+        return[
+            new PrivateChannel('App.User.'.$this->task->user_id),
+            new PrivateChannel('Tasques'),
+            new PrivateChannel('App.Log')
         ];
     }
 }

@@ -29,7 +29,7 @@ class SendMailTaskCreateTest extends TestCase
 //        event(new TaskCompleted($task));
         Mail::fake();
         $listener = new \App\Listeners\SendMailTaskCreate();
-        $listener->handle(new \App\Events\TaskCreate($task));
+        $listener->handle(new \App\Events\TaskStore($task));
         // 3 ASSERT
         Mail::assertSent(TaskCreate::class, function ($mail) use ($task, $user) {
             return $mail->task->is($task) &&

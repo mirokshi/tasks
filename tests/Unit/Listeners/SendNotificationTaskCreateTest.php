@@ -1,8 +1,8 @@
 <?php
 namespace Tests\Feature\Api;
 
-use App\Listeners\Task\SendNotificationTaskCreate;
-use App\Notifications\Task\TaskCreate;
+use App\Listeners\Task\SendTaskCreateNotification;
+use App\Notifications\Task\TaskStored;
 use App\Task;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,17 +18,17 @@ class SendNotificationTaskCreateTest extends TestCase
      */
     public function send_tasks_create_notification()
     {
-        $listener = new SendNotificationTaskCreate();
+        $listener = new SendTaskCreateNotification();
         $user = factory(User::class)->create();
         $task = factory(Task::class)->create();
         $task->assignUser($user);
-        $event = new \App\Events\TaskCreate($task);
+        $event = new \App\Events\TaskStore($task);
         Notification::fake();
         $listener->handle($event);
 
         Notification::assertSentTo(
             $user,
-            TaskCreate::class,
+            TaskStored::class,
             function ($notification, $channels) use ($task){
                 return $notification->task->id === $task->id;
             }

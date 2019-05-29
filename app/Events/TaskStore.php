@@ -3,25 +3,27 @@
 namespace App\Events;
 
 use App\Task;
+use App\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class TaskCreate
+class TaskStore
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $task;
+    public $task , $user;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Task $task)
+    public function __construct(Task $task, User $user)
     {
         $this->task = $task;
+        $this->user =  $user;
     }
 
     /**
@@ -31,6 +33,10 @@ class TaskCreate
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return[
+            new PrivateChannel('App.User.'.$this->task->user_id),
+            new PrivateChannel('Tasques'),
+            new PrivateChannel('App.Log')
+        ];
     }
 }

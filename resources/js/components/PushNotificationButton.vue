@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import pushSubscriptions from '../../api/pushSubscriptions'
+import pushSubscriptions from '../../api/pushSubscriptions.js'
 export default {
   name: 'PushNotificationButton',
   data () {
@@ -45,7 +45,6 @@ export default {
   methods: {
     sendNotification () {
       this.loading1 = true
-
       window.axios.post('/api/v1/notifications/hello')
         .catch(error => console.log(error))
         .then(() => { this.loading1 = false })

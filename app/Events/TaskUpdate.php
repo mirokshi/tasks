@@ -20,10 +20,11 @@ class TaskUpdate
      *
      * @return void
      */
-    public function __construct($oldTask, Task $task)
+    public function __construct($oldTask, Task $task, User $user)
     {
         $this->task = $task;
         $this->oldTask = $oldTask;
+        $this->user = $user;
     }
 
     /**
@@ -33,6 +34,10 @@ class TaskUpdate
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return[
+            new PrivateChannel('App.User.'.$this->task->user_id),
+            new PrivateChannel('Tasques'),
+            new PrivateChannel('App.Log')
+        ];
     }
 }

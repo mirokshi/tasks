@@ -1,5 +1,4 @@
 <template>
-    <div class="text-xs-center">
         <v-menu
             v-model="menu"
             top
@@ -14,17 +13,14 @@
                     flat
                     color="green"
                     v-on="on"
+                    class="mx-0"
                 >
                     <v-icon>insert_emoticon</v-icon>
                 </v-btn>
             </template>
-            <!--yarn add v-emChat.vue
-ChatChannel.vue
-ChatChannels.vue
-ChatMessageAdd.vueoji-picker-->
+            <!--yarn add v-emoji-picker-->
             <VEmojiPicker :pack="pack" @select="selectEmoji" labelSearch="Buscar" />
         </v-menu>
-    </div>
 </template>
 
 <script>
@@ -38,16 +34,15 @@ export default {
   data () {
     return {
       menu: false,
-      pack: packData,
-      dataEmoji: []
+      pack: packData
     }
   },
   props: ['value'],
   methods: {
     selectEmoji (emoji) {
-      this.dataEmoji += emoji.emoji
-      console.log(this.dataEmoji)
-      this.$emit('input', this.dataEmoji)
+      this.$emit('input', emoji.emoji)
+    this.emoji = ''
+
     }
   }
 }

@@ -2,13 +2,15 @@
 
 namespace App\Listeners;
 
+use App\Events\Changelog;
 use App\Log;
 use App\Task;
-use Carbon\Carbon;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Carbon;
+use Auth;
 
-class LogTaskCompleted
+class LogTaskCompleted implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -23,23 +25,26 @@ class LogTaskCompleted
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param object $event
      * @return void
      */
     public function handle($event)
     {
-        Log::create([
-            'text' => "Se ha marcado como completada '".$event->task->name."'" ,
-            'time' =>Carbon::now(),
-            'action_type' => 'Completar',
-            'module_type'=>'Tasques',
-            'icon' => 'lock',
-            'color' => 'green',
-            'user_id' => $event->task->user_id,
-            'loggable_id' => $event-> task->id,
+        $log = Log::create([
+            'text' => "S'ha marcat com a feta la tasca '" . $event->task->name . "'",
+            'time' => Carbon::now(),
+            'action_type' => 'completar',
+            'module_type' => 'Tasques',
+            'icon' => 'lock_open',
+            'color' => 'primary',
+            'user_id' => Auth::user()->id,
+            'loggable_id' => $event->task->id,
             'loggable_type' => Task::class,
-            'old_value' => false,
-            'new_value' => true
+            'old_value' => true,
+            'new_value' => false
         ]);
+
+        event(new Changelog($log, Auth::user()->map()));
+
     }
 }

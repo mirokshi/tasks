@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Events\TaskCompleted;
-use App\Events\TaskCreate;
+use App\Events\TaskStore;
 use App\Events\TaskDestroy;
 use App\Events\TaskUncompleted;
 use App\Events\TaskUpdate;
@@ -11,19 +11,22 @@ use App\Listeners\AddRolesToRegisterUser;
 use App\Listeners\ForgetTasksCache;
 use App\Listeners\LogNotification;
 use App\Listeners\LogTaskCompleted;
-use App\Listeners\LogTaskCreate;
-use App\Listeners\LogTaskDestroy;
+use App\Listeners\LogTaskDelete;
+use App\Listeners\LogTaskStored;
 use App\Listeners\LogTaskUncompleted;
-use App\Listeners\LogTaskUpdate;
-use App\Listeners\SendDatabaseNotificationStoredNotification;
+use App\Listeners\LogTaskUpdated;
+use App\Listeners\SendDatabaseNotificationStore;
 use App\Listeners\SendMailTaskCompleted;
 use App\Listeners\SendMailTaskCreate;
 use App\Listeners\SendMailTaskDestroy;
 use App\Listeners\SendMailTaskUncompleted;
 use App\Listeners\SendMailTaskUpdate;
-use App\Listeners\Task\SendNotificationTaskCreate;
+use App\Listeners\SendTaskCompletedNotification;
+use App\Listeners\SendTaskDeleteNotification;
+use App\Listeners\SendTaskStoredNotification;
+use App\Listeners\SendTaskUncompletedNotification;
+use App\Listeners\SendTaskUpdateNotification;
 use Illuminate\Notifications\Events\NotificationSent;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -38,37 +41,42 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
-            AddRolesToRegisterUser::class
+            AddRolesToRegisterUser::class,
+            ForgetTasksCache::class
         ],
         TaskUncompleted::class => [
             LogTaskUncompleted::class,
             SendMailTaskUncompleted::class,
-            ForgetTasksCache::class
+            ForgetTasksCache::class,
+            SendTaskUncompletedNotification::class
         ],
         TaskCompleted::class => [
             LogTaskCompleted::class,
             SendMailTaskCompleted::class,
-            ForgetTasksCache::class
+            ForgetTasksCache::class,
+            SendTaskCompletedNotification::class
         ],
         TaskDestroy::class => [
-            LogTaskDestroy::class,
+            LogTaskDelete::class,
             SendMailTaskDestroy::class,
-            ForgetTasksCache::class
+            //ForgetTasksCache::class,
+            //SendTaskDeleteNotification::class
         ],
-        TaskCreate::class => [
+        TaskStore::class => [
+            LogTaskStored::class,
             SendMailTaskCreate::class,
             ForgetTasksCache::class,
-            SendNotificationTaskCreate::class,
-            LogTaskCreate::class,
+            SendTaskStoredNotification::class,
         ],
         TaskUpdate::class => [
-            LogTaskUpdate::class,
+            LogTaskUpdated::class,
             SendMailTaskUpdate::class,
             ForgetTasksCache::class,
+            SendTaskUpdateNotification::class
         ],
         NotificationSent::class => [
           LogNotification::class,
-          SendDatabaseNotificationStoredNotification::class
+          SendDatabaseNotificationStore::class
         ],
     ];
 

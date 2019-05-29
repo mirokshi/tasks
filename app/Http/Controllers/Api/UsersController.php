@@ -18,33 +18,4 @@ class UsersController extends Controller
         return map_collection(User::all());
     }
 
-    public function show(TaskShow $request, Task $task) //Route Model Binding
-    {
-        return $task->map();
-    }
-
-    public function destroy(TaskDestroy $request, Task $task)
-    {
-        $task->delete();
-    }
-
-    //CREATE
-
-    public function store(TaskStore $request)
-    {
-        $task = new Task();
-        $task->name = $request->name;
-        $task->completed = false;
-        $task->save();
-
-        return $task->map();
-    }
-
-    public function update(TaskUpdate $request, Task $task)
-    {
-        $task->name = $request->name;
-        $task->save();
-
-        return $task->map();
-    }
 }

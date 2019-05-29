@@ -1,6 +1,6 @@
 <template>
     <v-menu offset-y>
-        <v-badge slot="activator" left overlap color="error" class="ml-3 mr-2">
+        <v-badge slot="activator" left overlap color="error" class="ml-2 mr-2 mt-2">
             <span slot="badge" v-text="amount"></span>
             <v-btn icon color="white" :loading="loading" :disabled="loading">
                 <v-icon :large="large" color="primary">notifications</v-icon>
@@ -46,6 +46,7 @@
             </v-list-tile>
         </v-list>
     </v-menu>
+
 </template>
 
 <script>
@@ -104,23 +105,10 @@ export default {
       })
     },
     listen () {
-      console.log('LISTENING!!!')
-      console.log('App.User.' + window.user.id)
-      window.Echo.private('App.User.' + window.user.id)
+      window.Echo.private('App.User.' + window.laravel_user.id)
         .notification((notification) => {
-          console.log('NOTIFICATION RECEIVED!!!!!')
-          console.log(notification)
-          console.log(notification.type)
           this.refresh(false)
         })
-      // ERROR 403
-      // console.log('LISTENING 222222!!!')
-      // console.log('App.Models.User.' + window.user.id)
-      // window.Echo.private('App.Models.User.' + window.user.id)
-      //   .notification((notification) => {
-      //     console.log(notification)
-      //     console.log(notification.type)
-      //   })
     }
   },
   created () {

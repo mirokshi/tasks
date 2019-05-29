@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +13,7 @@ use Laravel\Passport\HasApiTokens;
 use NotificationChannels\WebPush\HasPushSubscriptions;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements  MustVerifyEmail
+class User extends Authenticatable implements  MustVerifyEmail,CanResetPassword
 {
 
     use
@@ -160,6 +161,10 @@ class User extends Authenticatable implements  MustVerifyEmail
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'email_verified_at' => $this->email_verified_at,
+            'mobile' => $this->mobile,
+            'mobile_verified_at' => $this->mobile_verified_at,
+            'mobile_verification_code' =>$this->mobile_verification_code,
             'gravatar' => $this->gravatar,
             'admin' => (boolean)$this->admin,
             'roles' => $this->roles()->pluck('name')->unique()->toArray(),

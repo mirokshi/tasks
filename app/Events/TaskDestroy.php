@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Task;
+use App\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -13,15 +14,16 @@ class TaskDestroy implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $task;
+    public $task, $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Task $task)
+    public function __construct($task, User $user)
     {
         $this->task = $task;
+        $this->user = $user;
     }
 
     /**
@@ -31,6 +33,10 @@ class TaskDestroy implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('tasks');
+        return[
+            new PrivateChannel('App.User.'.$this->user->id),
+            new PrivateChannel('Tasques'),
+            new PrivateChannel('App.Log')
+        ];
     }
 }
