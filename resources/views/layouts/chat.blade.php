@@ -12,6 +12,7 @@
     <meta name="impersonatedBy" content="{{ Auth::user()->impersonatedBy() }}">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/icon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/icon-16x16.png">
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <meta name="theme-color" content="#317EFB"/>
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
