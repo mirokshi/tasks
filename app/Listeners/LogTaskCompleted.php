@@ -37,14 +37,14 @@ class LogTaskCompleted implements ShouldQueue
             'module_type' => 'Tasques',
             'icon' => 'lock_open',
             'color' => 'primary',
-            'user_id' => Auth::user()->id,
+            'user_id' => $event->task['user_id'],
             'loggable_id' => $event->task->id,
             'loggable_type' => Task::class,
             'old_value' => true,
             'new_value' => false
         ]);
 
-        event(new Changelog($log, Auth::user()->map()));
+        event(new Changelog($log));
 
     }
 }

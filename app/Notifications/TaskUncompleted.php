@@ -4,24 +4,27 @@ namespace App\Notifications;
 
 use App\Task;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\WebPush\WebPushChannel;
 use NotificationChannels\WebPush\WebPushMessage;
 
-class TaskUncompleted extends Notification
+class TaskUncompleted extends Notification implements ShouldQueue
 {
     use Queueable;
 
     public $task;
+    public $user;
 
     /**
      * TaskUncompleted constructor.
      * @param $task
      */
-    public function __construct(Task $task)
+    public function __construct(Task $task,$user)
     {
         $this->task = $task;
+        $this->user = $user;
     }
 
     /**
@@ -52,13 +55,7 @@ class TaskUncompleted extends Notification
         ];
     }
 
-    /**
-     * Get the web push representation of the notification.
-     *
-     * @param mixed $notifiable
-     * @param mixed $notification
-     * @return \Illuminate\Notifications\Messages\DatabaseMessage
-     */
+
     public function toWebPush($notifiable, $notification)
     {
         return (new WebPushMessage)

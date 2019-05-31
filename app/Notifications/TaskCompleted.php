@@ -20,14 +20,15 @@ class TaskCompleted extends Notification implements ShouldQueue
     use Queueable;
 
     public $task;
-
+    public $user;
     /**
      * SimpleNotification constructor.
      * @param $task
      */
-    public function __construct(Task $task)
+    public function __construct(Task $task, $user)
     {
         $this->task = $task;
+        $this->user = $user;
     }
 
     /**
