@@ -37,7 +37,8 @@ class LogTaskUncompleted implements ShouldQueue
             'loggable_id' => $event->task->id,
             'loggable_type' => Task::class,
             'old_value' => true,
-            'new_value' => false
+            'new_value' => false,
+            'user' => $event->user
         ]);
         event(new Changelog($log));
     }

@@ -20,14 +20,16 @@ class TaskStored extends Notification implements ShouldQueue
     use Queueable;
 
     public $task;
+    public $user;
 
     /**
      * SimpleNotification constructor.
      * @param $task
      */
-    public function __construct(Task $task)
+    public function __construct($task,$user)
     {
         $this->task = $task;
+        $this->user = $user;
     }
 
     /**
@@ -50,11 +52,10 @@ class TaskStored extends Notification implements ShouldQueue
     public function toDatabase($notifiable)
     {
         return [
-            'title' => "S'ha creat una nova tasca: " . $this->task->name,
-            'url' => '/tasques/' . $this->task->id,
+            'title' => "S'ha creat una nova tasca: " . $this->task['name'],
+            'url' => '/tasques/' . $this->task['id'],
             'icon' => 'assignment',
             'iconColor' => 'primary',
-            'task' => $this->task->map()
         ];
     }
 
@@ -64,9 +65,9 @@ class TaskStored extends Notification implements ShouldQueue
         return (new WebPushMessage)
             ->title('Tasca creada!')
             ->icon('/notification-icon.png')
-            ->body('Has creat la tasca: ' . $this->task->name)
+            ->body('Has creat la tasca: ' . $this->task['name'])
             ->action('Visualitza la tasca', 'open_url')
-            ->data(['url' => env('APP_URL') . '/tasques/' . $this->task->id]);
+            ->data(['url' => env('APP_URL') . '/tasques/' . $this->task['id']]);
     }
 
 }
