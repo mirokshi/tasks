@@ -20,7 +20,7 @@ class TaskDestroy implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($task, User $user)
+    public function __construct($task, $user)
     {
         $this->task = $task;
         $this->user = $user;

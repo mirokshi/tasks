@@ -16,12 +16,13 @@ class TaskUpdate implements ShouldBroadcast
 
     public $oldTask;
     public $task;
+    public $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($oldTask, Task $task, User $user)
+    public function __construct(array $oldTask, Task $task, $user)
     {
         $this->task = $task;
         $this->oldTask = $oldTask;
@@ -36,7 +37,7 @@ class TaskUpdate implements ShouldBroadcast
     public function broadcastOn()
     {
         return[
-            new PrivateChannel('App.User.'.$this->task->user_id),
+            new PrivateChannel('App.User.'.$this->user->id),
             new PrivateChannel('Tasques'),
             new PrivateChannel('App.Log')
         ];

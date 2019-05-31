@@ -24,6 +24,6 @@ class SendTaskDeleteNotification
      */
     public function handle($event)
     {
-        $event->user->notify(new TaskDeleted($event->task));
+        $event->user->notify(new TaskDeleted($event->task,$event->user));
     }
 }

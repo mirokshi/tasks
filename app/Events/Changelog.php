@@ -16,7 +16,6 @@ class Changelog implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $log;
-    public $user;
 
 
     /**
@@ -25,9 +24,8 @@ class Changelog implements ShouldBroadcast
      * @param Log $log
      * @param $user
      */
-    public function __construct(Log $log, $user)
+    public function __construct(Log $log)
     {
-        $this->user = $user;
         $this->log = $log;
     }
 

@@ -14,15 +14,16 @@ class TaskCompleted implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $task;
-
+    public $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Task $task)
+    public function __construct(Task $task,$user)
     {
         $this->task = $task;
+        $this->user = $user;
     }
 
     /**
@@ -33,7 +34,7 @@ class TaskCompleted implements ShouldBroadcast
     public function broadcastOn()
     {
         return[
-            new PrivateChannel('App.User.'.$this->task->user_id),
+            new PrivateChannel('App.User.'.$this->user->id),
             new PrivateChannel('Tasques'),
             new PrivateChannel('App.Log')
         ];
