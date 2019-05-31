@@ -2,8 +2,7 @@
 
 namespace App\Events;
 
-use App\Task;
-use App\User;
+
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -22,7 +21,7 @@ class TaskUpdate implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(array $oldTask, Task $task, $user)
+    public function __construct($oldTask, $task, $user)
     {
         $this->task = $task;
         $this->oldTask = $oldTask;

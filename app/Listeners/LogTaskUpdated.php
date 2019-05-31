@@ -6,9 +6,8 @@ use App\Events\Changelog;
 use App\Log;
 use App\Task;
 use Carbon\Carbon;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Auth;
+
 class LogTaskUpdated implements ShouldQueue
 {
     /**
@@ -36,11 +35,12 @@ class LogTaskUpdated implements ShouldQueue
             'module_type' => 'Tasques',
             'icon' => 'update',
             'color' => 'secondary',
-            'user_id' => $event->task->user_id,
-            'loggable_id' => $event->task->id,
+            'user_id' => $event->task['user_id'],
+            'loggable_id' => $event->task['id'],
             'loggable_type' => Task::class,
             'old_value' => json_encode($event->task->mapSimple()),
-            'new_value' => json_encode($event->oldTasl)
+            'new_value' => json_encode($event->oldTask),
+            'user' => $event->user
         ]);
 
         event(new Changelog($log));

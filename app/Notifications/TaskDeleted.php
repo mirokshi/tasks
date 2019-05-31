@@ -4,25 +4,29 @@ namespace App\Notifications;
 
 use App\Task;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\WebPush\WebPushChannel;
 use NotificationChannels\WebPush\WebPushMessage;
 
-class TaskDeleted extends Notification
+class TaskDeleted extends Notification implements ShouldQueue
 {
     use Queueable;
 
     public $task;
+    public $user;
 
     /**
      * TaskUncompleted constructor.
      * @param $task
      */
-    public function __construct($task)
+    public function __construct($task,$user)
     {
         $this->task = $task;
+        $this->user = $user;
     }
+
 
     /**
      * Get the notification's delivery channels.
@@ -48,7 +52,6 @@ class TaskDeleted extends Notification
             'url' => '/tasques/' . $this->task['id'],
             'icon' => 'assignment',
             'iconColor' => 'primary',
-            'task' => $this->task
         ];
     }
 
