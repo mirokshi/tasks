@@ -9,6 +9,8 @@ use App\User;
 
 /**
  * Class ChangelogLoggableController.
+ *
+ * @package App\Http\Controllers\Tenant\Api\Changelog
  */
 class ChangelogLoggableController extends Controller
 {
@@ -18,7 +20,6 @@ class ChangelogLoggableController extends Controller
      * @param ListLoggableChangelog $request
      * @param $tenant
      * @param User $user
-     *
      * @return mixed
      */
     public function index(ListLoggableChangelog $request, $tenant, $loggable)

@@ -17,7 +17,7 @@
 
         <user-select :item-value="null" v-model="user" :users="dataUsers" label="Usuario"></user-select>
 
-        <tasks-tags :task-tags="tags" :tags="tags"></tasks-tags>
+        <!--<tasks-tags :task-tags="tags" :tags="tags"></tasks-tags>-->
 
         <div class="text-xs-center">
             <v-btn @click="$emit('close')">
@@ -37,7 +37,6 @@
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 import UserSelect from '../users/UserSelect'
-import TasksTags from './TasksTags'
 
 export default {
   mixins: [validationMixin],
@@ -47,7 +46,6 @@ export default {
   name: 'TaskFormCreate',
   components: {
     'user-select': UserSelect,
-    'tasks-tags': TasksTags
   },
   data () {
     return {
@@ -61,10 +59,6 @@ export default {
   },
   props: {
     users: {
-      type: Array,
-      required: true
-    },
-    tags: {
       type: Array,
       required: true
     },

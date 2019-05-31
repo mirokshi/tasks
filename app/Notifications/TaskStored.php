@@ -58,13 +58,7 @@ class TaskStored extends Notification implements ShouldQueue
         ];
     }
 
-    /**
-     * Get the web push representation of the notification.
-     *
-     * @param mixed $notifiable
-     * @param mixed $notification
-     * @return \Illuminate\Notifications\Messages\DatabaseMessage
-     */
+
     public function toWebPush($notifiable, $notification)
     {
         return (new WebPushMessage)

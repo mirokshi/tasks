@@ -1,7 +1,7 @@
 <template><span>
         <span v-if="dataTasks.length >  0">
         <tasks-list :users="users" :uri="uri" :tasks="dataTasks" :tags="tags"></tasks-list>
-        <tasks-create :users="users" :uri="uri" :tags="tags" @created="add" ></tasks-create>
+        <tasks-create :users="users" :uri="uri" @created="add" ></tasks-create>
         </span>
         <span v-else>
             <v-container grid-list-md text-xs-center>
@@ -13,7 +13,7 @@
                   </v-flex>
                   <v-flex xs12 md4 offset-md4 class="mt-3">
                       <h1 class="display-1 grey--text text--darken-2">🍔No hay niguna tarea🍔</h1>
-                      <tasks-create  :users="users" :uri="uri" :tags="tags" @created="add" ></tasks-create>
+                      <tasks-create  :users="users" :uri="uri"  @created="add" ></tasks-create>
                   </v-flex>
                 </v-layout>
               </v-container>

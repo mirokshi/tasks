@@ -1,4 +1,3 @@
-
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -21,7 +20,8 @@ try {
   window.$ = window.jQuery = require('jquery')
 
   require('bootstrap')
-} catch (e) {}
+} catch (e) {
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -48,12 +48,20 @@ if (token) {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token')
 }
 
+let vapidPublicKey = document.head.querySelector('meta[name="vapidPublicKey"]')
+
+if (vapidPublicKey) {
+  window.vapidPublicKey = vapidPublicKey.content
+} else {
+  console.error('vapidPublicKey not found')
+}
+
 let user = document.head.querySelector('meta[name="user"]')
 
 if (user) {
   window.laravel_user = JSON.parse(user.content)
 } else {
-  console.error('CAUTION: user not found in HTML meta')
+  console.error('CAUTION!: user not found at HTML meta')
 }
 
 let gitHeader = document.head.querySelector('meta[name="git"]')
@@ -62,14 +70,6 @@ if (gitHeader) if (gitHeader.content) window.git = JSON.parse(gitHeader.content)
 
 let impersonatedby = document.head.querySelector('meta[name="impersonatedBy"]')
 if (impersonatedby) if (impersonatedby.content) window.impersonatedBy = JSON.parse(impersonatedby.content)
-
-// vapID
-let vapidPublicKey = document.head.querySelector('meta[name="vapidPublicKey"]')
-if (vapidPublicKey) {
-  window.vapidPublicKey = vapidPublicKey.content
-} else {
-  console.error('VAP public key not found')
-}
 
 window.Pusher = require('pusher-js')
 

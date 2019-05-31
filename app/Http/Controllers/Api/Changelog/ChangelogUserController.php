@@ -9,8 +9,8 @@ use App\User;
 
 /**
  * Class ChangelogUserController.
- * @package App\Http\Controllers\Tenant\Api\Changelog
  *
+ * @package App\Http\Controllers\Tenant\Api\Changelog
  */
 class ChangelogUserController extends Controller
 {
@@ -20,7 +20,6 @@ class ChangelogUserController extends Controller
      * @param ListUserChangelog $request
      * @param $tenant
      * @param User $user
-     *
      * @return mixed
      */
     public function index(ListUserChangelog $request, $tenant, User $user)
