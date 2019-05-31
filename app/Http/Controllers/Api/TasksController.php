@@ -25,7 +25,7 @@ class TasksController extends Controller
 
     //CREATE
 
-    public function store(TaskStore $request)
+    public function store(TaskStore $request, Task $task)
     {
         $task = new Task();
         $task->name = $request->name;

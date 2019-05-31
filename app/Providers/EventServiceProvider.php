@@ -59,8 +59,8 @@ class EventServiceProvider extends ServiceProvider
         TaskDestroy::class => [
             LogTaskDelete::class,
             SendMailTaskDestroy::class,
-            //ForgetTasksCache::class,
-            //SendTaskDeleteNotification::class
+            ForgetTasksCache::class,
+            SendTaskDeleteNotification::class
         ],
         TaskStore::class => [
             LogTaskStored::class,

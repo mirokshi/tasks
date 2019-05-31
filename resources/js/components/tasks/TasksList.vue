@@ -248,13 +248,13 @@ export default {
           console.log(e.task)
           this.refresh()
         })
-        .listen('TaskDestroy', (e) => {
-          console.log('TaskDestroy Received')
+        .listen('TaskDeleted', (e) => {
+          console.log('TaskDeleted Received')
           console.log(e.task)
           this.refresh()
         })
-        .listen('TaskCreate', (e) => {
-          console.log('TaskCreate Received')
+        .listen('TaskStored', (e) => {
+          console.log('TaskStored Received')
           console.log(e.task)
           this.refresh()
         })
@@ -275,13 +275,13 @@ export default {
           console.log(e.task)
           this.refresh()
         })
-        .listen('TaskDestroy', (e) => {
+        .listen('TaskDeleted', (e) => {
           console.log('TaskDestroy Received')
           console.log(e.task)
           this.refresh()
         })
-        .listen('TaskCreate', (e) => {
-          console.log('TaskCreate Received')
+        .listen('TaskStored', (e) => {
+          console.log('TaskStored Received')
           console.log(e.task)
           this.refresh()
         })

@@ -1,5 +1,5 @@
 <template>
-    <v-snackbar :timeout="timeout" :color="color" v-model="show" top right vertical>
+    <v-snackbar :timeout="timeout" :color="color" v-model="show" top vertical>
         <h1>{{type}}</h1>
         {{ message }}
         <v-btn dark flat @click="show=false">CERRAR</v-btn>

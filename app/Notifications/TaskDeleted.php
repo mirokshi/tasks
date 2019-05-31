@@ -52,13 +52,6 @@ class TaskDeleted extends Notification
         ];
     }
 
-    /**
-     * Get the web push representation of the notification.
-     *
-     * @param mixed $notifiable
-     * @param mixed $notification
-     * @return \Illuminate\Notifications\Messages\DatabaseMessage
-     */
     public function toWebPush($notifiable, $notification)
     {
         return (new WebPushMessage)
@@ -68,5 +61,6 @@ class TaskDeleted extends Notification
             ->action('View app', 'view_app')
             ->data(['id' => $notification->id]);
     }
+
 
 }
