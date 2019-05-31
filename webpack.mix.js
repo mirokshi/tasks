@@ -1,9 +1,8 @@
 const workboxPlugin = require('workbox-webpack-plugin')
 const mix = require('laravel-mix')
 const replace = require('replace-in-file')
-const DashboardPlugin = require('webpack-dashboard/plugin')
 const path = require('path')
-const publicDir = 'public'
+const publicDir = 'public/'
 
 /*
  |--------------------------------------------------------------------------
@@ -28,7 +27,8 @@ mix.js('resources/js/app.js', 'public/js').then(() => {
 })
   .extract()
   .sourceMaps(false)
-  .sass('resources/sass/app.scss', 'public/css')// .sourceMaps(false) -> Disable source maps in production
+  .sass('resources/sass/app.scss', 'public/css')
+
 if (mix.inProduction()) {
   mix.version()
 }
@@ -40,8 +40,70 @@ mix.webpackConfig({
       swSrc: 'public/src-sw.js', // more control over the caching
       swDest: 'sw.js', // the service-worker file name
       importsDirectory: 'service-worker' // have a dedicated folder for sw files
-    }),
-    new DashboardPlugin()
+    })
   ]
 })
 
+mix.webpackConfig({
+  module: {
+    rules: [
+      {
+        test: /(\.(png|jpe?g|gif|webp)$|^((?!font).)*\.svg$)/,
+        loaders: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: path => {
+                if (!/node_modules|bower_components/.test(path)) {
+                  return (
+                    Config.fileLoaderDirs.images +
+                                        '/[name].[ext]'
+                  )
+                }
+
+                return (
+                  Config.fileLoaderDirs.images +
+                                    '/vendor/' +
+                                    path
+                                      .replace(/\\/g, '/')
+                                      .replace(
+                                        /((.*(node_modules|bower_components))|images|image|img|assets)\//g,
+                                        ''
+                                      )
+                )
+              },
+              publicPath: Config.resourceRoot
+            }
+          },
+          {
+            loader: 'img-loader',
+            options: Config.imgLoaderOptions
+          }
+        ]
+      },
+      {
+        test: /(\.(woff2?|ttf|eot|otf)$|font.*\.svg$)/,
+        loader: 'file-loader',
+        options: {
+          name: path => {
+            if (!/node_modules|bower_components/.test(path)) {
+              return Config.fileLoaderDirs.fonts + '/[name].[ext]'
+            }
+
+            return (
+              Config.fileLoaderDirs.fonts +
+                            '/vendor/' +
+                            path
+                              .replace(/\\/g, '/')
+                              .replace(
+                                /((.*(node_modules|bower_components))|fonts|font|assets)\//g,
+                                ''
+                              )
+            )
+          },
+          publicPath: Config.resourceRoot
+        }
+      }
+    ]
+  }
+})

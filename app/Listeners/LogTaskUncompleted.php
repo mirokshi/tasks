@@ -33,7 +33,7 @@ class LogTaskUncompleted implements ShouldQueue
             'module_type' => 'Tasques',
             'icon' => 'lock',
             'color' => 'primary',
-            'user_id' => $event->task->user_id,
+            'user_id' => Auth::user()->id,
             'loggable_id' => $event->task->id,
             'loggable_type' => Task::class,
             'old_value' => true,

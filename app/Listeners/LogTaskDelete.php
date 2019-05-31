@@ -37,7 +37,7 @@ class LogTaskDelete implements ShouldQueue
             'module_type' => 'Tasks',
             'icon' => 'delete',
             'color' => 'error',
-            'user_id' => $event->task->user_id,
+            'user_id' => Auth::user()->id,
             'loggable_id' => $event->task->id,
             'loggable_type' => Task::class,
             'old_value' => json_encode($event->task),

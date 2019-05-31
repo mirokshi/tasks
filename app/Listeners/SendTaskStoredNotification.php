@@ -26,6 +26,7 @@ class SendTaskStoredNotification
      */
     public function handle($event)
     {
-        $event->task->user->notify(new TaskStored($event->task));
+        dump($event);
+        $event->user->notify(new TaskStored($event->task));
     }
 }
