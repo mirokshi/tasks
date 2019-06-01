@@ -31,6 +31,5 @@ class SendTaskDeleteNotification
         }
         $user->notify(new TaskDeleted($event->task));
 //        $event->task->user->notify(new TaskDestroyed($event->task));
-//        $event->user->notify(new TaskDestroyed($event->task));
     }
 }
