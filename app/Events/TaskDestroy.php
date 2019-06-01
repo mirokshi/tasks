@@ -15,13 +15,9 @@ class TaskDestroy implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $task;
     public $user;
-    /**
-     * Create a new event instance.
-     *
-     * @param Task $task
-     * @param User $user
-     */
-    public function __construct(array $task, $user)
+
+
+    public function __construct(Task $task, User $user)
     {
         $this->task = $task;
         $this->user = $user;

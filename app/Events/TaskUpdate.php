@@ -22,7 +22,7 @@ class TaskUpdate implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($oldTask, Task $task, $user)
+    public function __construct($oldTask, Task $task, User $user)
     {
         $this->task = $task;
         $this->oldTask = $oldTask;
