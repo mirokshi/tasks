@@ -9,7 +9,7 @@ use App\Http\Requests\TaskShow;
 use App\Http\Requests\TaskStore;
 use App\Http\Requests\TaskUpdate;
 use App\Task;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class TasksController extends Controller
 {
@@ -25,7 +25,7 @@ class TasksController extends Controller
 
     //CREATE
 
-    public function store(TaskStore $request, Task $task)
+    public function store(TaskStore $request)
     {
         $task = new Task();
         $task->name = $request->name;

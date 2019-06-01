@@ -7,7 +7,7 @@ use App\Events\TaskUncompleted;
 use App\Http\Controllers\Controller;
 use App\Task;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class CompletedTasksController extends Controller
 {
