@@ -40,9 +40,11 @@ class LogTaskUpdated implements ShouldQueue
             'loggable_type' => Task::class,
             'old_value' => json_encode($event->task->mapSimple()),
             'new_value' => json_encode($event->oldTask),
-            'user' => $event->user
+            //'user' => $event->user
         ]);
 
-        event(new Changelog($log));
+        //event(new Changelog($log));
+        event(new Changelog($log, $event->user->map()));
+
     }
 }

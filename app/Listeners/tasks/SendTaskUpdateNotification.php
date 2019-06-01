@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\tasks;
 
 use App\Notifications\TaskUpdated;
+use Illuminate\Support\Facades\Auth;
 
 class SendTaskUpdateNotification
 {
@@ -15,7 +16,6 @@ class SendTaskUpdateNotification
     {
         //
     }
-
     /**
      * Handle the event.
      *
@@ -24,6 +24,11 @@ class SendTaskUpdateNotification
      */
     public function handle($event)
     {
-        $event->user->notify(new TaskUpdated($event->task,$event->user));
+        if ($event->task->user){
+            $user=$event->task->user;
+        } else{
+            $user=Auth::user();
+        }
+        $user->notify(new TaskUpdated($event->task));
     }
 }

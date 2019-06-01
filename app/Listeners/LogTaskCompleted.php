@@ -42,10 +42,11 @@ class LogTaskCompleted implements ShouldQueue
             'loggable_type' => Task::class,
             'old_value' => true,
             'new_value' => false,
-            'user' => $event->user
+            //'user' => $event->user
         ]);
 
-        event(new Changelog($log));
+        //event(new Changelog($log));
+        event(new Changelog($log, $event->user->map()));
 
     }
 }
