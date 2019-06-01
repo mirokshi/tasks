@@ -40,9 +40,11 @@ class LogTaskStored implements ShouldQueue
             'loggable_type' => Task::class,
             'old_value' => null,
             'new_value' => $event->task,
-            'user' => $event->user
+            //'user' => $event->user
         ]);
 
-        event(new Changelog($log));
+        //event(new Changelog($log));
+        event(new Changelog($log, $event->user->map()));
+
     }
 }

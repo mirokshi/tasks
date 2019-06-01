@@ -18,20 +18,15 @@ use NotificationChannels\WebPush\WebPushMessage;
 class TaskStored extends Notification implements ShouldQueue
 {
     use Queueable;
-
     public $task;
-    public $user;
-
     /**
      * SimpleNotification constructor.
      * @param $task
      */
-    public function __construct($task,$user)
+    public function __construct(Task $task)
     {
         $this->task = $task;
-        $this->user = $user;
     }
-
     /**
      * Get the notification's delivery channels.
      *
@@ -42,7 +37,6 @@ class TaskStored extends Notification implements ShouldQueue
     {
         return ['database', WebPushChannel::class];
     }
-
     /**
      * Get the array representation of the notification.
      *
@@ -52,22 +46,28 @@ class TaskStored extends Notification implements ShouldQueue
     public function toDatabase($notifiable)
     {
         return [
-            'title' => "S'ha creat una nova tasca: " . $this->task['name'],
-            'url' => '/tasques/' . $this->task['id'],
+            'title' => "S'ha creat una nova tasca: " . $this->task->name,
+            'url' => '/tasques/' . $this->task->id,
             'icon' => 'assignment',
             'iconColor' => 'primary',
+            'task' => $this->task->map()
         ];
     }
-
-
+    /**
+     * Get the web push representation of the notification.
+     *
+     * @param mixed $notifiable
+     * @param mixed $notification
+     * @return \Illuminate\Notifications\Messages\DatabaseMessage
+     */
     public function toWebPush($notifiable, $notification)
     {
         return (new WebPushMessage)
             ->title('Tasca creada!')
             ->icon('/notification-icon.png')
-            ->body('Has creat la tasca: ' . $this->task['name'])
+            ->body('Has creat la tasca: ' . $this->task->name)
             ->action('Visualitza la tasca', 'open_url')
-            ->data(['url' => env('APP_URL') . '/tasques/' . $this->task['id']]);
+            ->data(['url' => env('APP_URL') . '/tasques/' . $this->task->id]);
     }
 
 }

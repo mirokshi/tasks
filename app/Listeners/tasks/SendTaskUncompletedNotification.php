@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\tasks;
 
 use App\Notifications\TaskUncompleted;
+use Illuminate\Support\Facades\Auth;
 
 class SendTaskUncompletedNotification
 {
@@ -15,7 +16,6 @@ class SendTaskUncompletedNotification
     {
         //
     }
-
     /**
      * Handle the event.
      *
@@ -24,6 +24,12 @@ class SendTaskUncompletedNotification
      */
     public function handle($event)
     {
-        $event->user->notify(new TaskUncompleted($event->task, $event->user));
+//        dd($event);
+        if ($event->task->user){
+            $user=$event->task->user;
+        } else{
+            $user=Auth::user();
+        }
+        $user->notify(new TaskUncompleted($event->task));
     }
 }
