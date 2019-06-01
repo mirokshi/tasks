@@ -20,7 +20,7 @@ class TaskStore implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(Task $task,User $user)
+    public function __construct(Task $task, $user)
     {
         $this->task = $task;
         $this->user = $user;
