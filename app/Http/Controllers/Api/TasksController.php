@@ -9,7 +9,7 @@ use App\Http\Requests\TaskShow;
 use App\Http\Requests\TaskStore;
 use App\Http\Requests\TaskUpdate;
 use App\Task;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class TasksController extends Controller
 {

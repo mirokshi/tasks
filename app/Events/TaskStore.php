@@ -13,20 +13,18 @@ use Illuminate\Queue\SerializesModels;
 class TaskStore implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
-    public $task , $user;
-
+    public $task;
+    public $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Task $task, User $user)
+    public function __construct(Task $task,User $user)
     {
         $this->task = $task;
-        $this->user =  $user;
+        $this->user = $user;
     }
-
     /**
      * Get the channels the event should broadcast on.
      *
@@ -34,10 +32,10 @@ class TaskStore implements ShouldBroadcast
      */
     public function broadcastOn()
     {
+//        return new PrivateChannel('channel-name');
         return[
-            new PrivateChannel('App.User.'.$this->task->user_id),
-            new PrivateChannel('Tasques'),
-            new PrivateChannel('App.Log')
+            new PrivateChannel('App.User.' . $this->task->user_id),
+            new PrivateChannel('Tasques')
         ];
     }
 }

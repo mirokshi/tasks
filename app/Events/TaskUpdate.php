@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+
 use App\Task;
 use App\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -13,21 +14,20 @@ use Illuminate\Queue\SerializesModels;
 class TaskUpdate implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
     public $oldTask;
     public $task;
+    public $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($oldTask, Task $task, User $user)
+    public function __construct($oldTask, Task $task,User $user)
     {
         $this->task = $task;
         $this->oldTask = $oldTask;
         $this->user = $user;
     }
-
     /**
      * Get the channels the event should broadcast on.
      *
@@ -35,10 +35,9 @@ class TaskUpdate implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return[
-            new PrivateChannel('App.User.'.$this->task->user_id),
-            new PrivateChannel('Tasques'),
-            new PrivateChannel('App.Log')
+        return [
+            new PrivateChannel('App.User.'.$this->user->id),
+            new PrivateChannel('tasks')
         ];
     }
 }

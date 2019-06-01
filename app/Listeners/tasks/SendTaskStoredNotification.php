@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Listeners\tasks;
 
 use App\Notifications\TaskStored;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Auth;
 
 class SendTaskStoredNotification
 {
@@ -17,7 +18,6 @@ class SendTaskStoredNotification
     {
         //
     }
-
     /**
      * Handle the event.
      *
@@ -26,7 +26,12 @@ class SendTaskStoredNotification
      */
     public function handle($event)
     {
-        dump($event);
-        $event->user->notify(new TaskStored($event->task));
+        if ($event->task->user){
+            $user=$event->task->user;
+        } else{
+            $user=Auth::user();
+        }
+        $user->notify(new TaskStored($event->task));
+//        $event->task->user->notify(new TaskStored($event->task));
     }
 }

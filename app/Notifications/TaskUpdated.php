@@ -4,26 +4,24 @@ namespace App\Notifications;
 
 use App\Task;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\WebPush\WebPushChannel;
 use NotificationChannels\WebPush\WebPushMessage;
 
-class TaskUpdated extends Notification
+class TaskUpdated extends Notification implements ShouldQueue
 {
     use Queueable;
-
     public $task;
-
     /**
-     * TaskUncompleted constructor.
+     * SimpleNotification constructor.
      * @param $task
      */
     public function __construct(Task $task)
     {
         $this->task = $task;
     }
-
     /**
      * Get the notification's delivery channels.
      *
@@ -34,7 +32,6 @@ class TaskUpdated extends Notification
     {
         return ['database', WebPushChannel::class];
     }
-
     /**
      * Get the array representation of the notification.
      *
@@ -44,21 +41,19 @@ class TaskUpdated extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'title' => "S'ha editat una tasca: " . $this->task->name,
+            'title' => "S'ha actualitzat una tasca: " . $this->task->name,
             'url' => '/tasques/' . $this->task->id,
             'icon' => 'assignment',
             'iconColor' => 'primary',
             'task' => $this->task->map()
         ];
     }
-
-
     public function toWebPush($notifiable, $notification)
     {
         return (new WebPushMessage)
-            ->title('Tasca editada!')
+            ->title('Tasca actualitzada!')
             ->icon('/notification-icon.png')
-            ->body('Has editat la tasca: ' . $this->task->name)
+            ->body('Has actualitzat la tasca: ' . $this->task->name)
             ->action('Visualitza la tasca', 'open_url')
             ->data(['url' => env('APP_URL') . '/tasques/' . $this->task->id]);
     }

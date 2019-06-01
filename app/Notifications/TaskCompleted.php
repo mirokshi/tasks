@@ -18,9 +18,7 @@ use NotificationChannels\WebPush\WebPushMessage;
 class TaskCompleted extends Notification implements ShouldQueue
 {
     use Queueable;
-
     public $task;
-
     /**
      * SimpleNotification constructor.
      * @param $task
@@ -29,7 +27,6 @@ class TaskCompleted extends Notification implements ShouldQueue
     {
         $this->task = $task;
     }
-
     /**
      * Get the notification's delivery channels.
      *
@@ -40,7 +37,6 @@ class TaskCompleted extends Notification implements ShouldQueue
     {
         return ['database', WebPushChannel::class];
     }
-
     /**
      * Get the array representation of the notification.
      *
@@ -57,7 +53,6 @@ class TaskCompleted extends Notification implements ShouldQueue
             'task' => $this->task->map()
         ];
     }
-
     public function toWebPush($notifiable, $notification)
     {
         return (new WebPushMessage)

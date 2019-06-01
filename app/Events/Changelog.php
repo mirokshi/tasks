@@ -14,11 +14,8 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class Changelog implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
     public $log;
     public $user;
-
-
     /**
      * Create a new event instance.
      *
@@ -30,7 +27,6 @@ class Changelog implements ShouldBroadcast
         $this->user = $user;
         $this->log = $log;
     }
-
     /**
      * Get the channels the event should broadcast on.
      *

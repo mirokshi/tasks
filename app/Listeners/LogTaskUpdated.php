@@ -6,9 +6,8 @@ use App\Events\Changelog;
 use App\Log;
 use App\Task;
 use Carbon\Carbon;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Auth;
+
 class LogTaskUpdated implements ShouldQueue
 {
     /**
@@ -30,19 +29,22 @@ class LogTaskUpdated implements ShouldQueue
     public function handle($event)
     {
         $log = Log::create([
-            'text' => "S'ha actualitzat la tasca '" . $event->task->name . "'",
+            'text' => "S'ha actualitzat la tasca '" . $event->oldTask['name'] . "'",
             'time' => Carbon::now(),
             'action_type' => 'update',
             'module_type' => 'Tasques',
             'icon' => 'update',
             'color' => 'secondary',
-            'user_id' => Auth::user()->id,
-            'loggable_id' => $event->task->id,
+            'user_id' => $event->task['user_id'],
+            'loggable_id' => $event->task['id'],
             'loggable_type' => Task::class,
-            'old_value' => $event->old_task,
-            'new_value' => $event->task
+            'old_value' => json_encode($event->task->mapSimple()),
+            'new_value' => json_encode($event->oldTask),
+            //'user' => $event->user
         ]);
 
-        event(new Changelog($log, Auth::user()->map()));
+        //event(new Changelog($log));
+        event(new Changelog($log, $event->user->map()));
+
     }
 }
