@@ -83,7 +83,6 @@
             </v-flex>
         </v-card>
         <v-card>
-            <v-card-title class="primary white--text"><h4>Colors del tema</h4></v-card-title>
             <tema></tema>
         </v-card>
         <v-card>
