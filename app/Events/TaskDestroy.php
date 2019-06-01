@@ -21,7 +21,7 @@ class TaskDestroy implements ShouldBroadcast
      * @param Task $task
      * @param User $user
      */
-    public function __construct(array $task,User $user)
+    public function __construct(array $task, $user)
     {
         $this->task = $task;
         $this->user = $user;
