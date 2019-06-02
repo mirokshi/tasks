@@ -21,13 +21,11 @@ class SendTaskDestroyedNotification
      */
     public function handle($event)
     {
-        if ($event->task->user){
-            $user=$event->task->user;
-        } else{
-            $user=Auth::user();
-        }
-        $user->notify(new TaskDeleted($event->task));
-//        $event->task->user->notify(new TaskDestroyed($event->task));
-//        $event->user->notify(new TaskDestroyed($event->task));
+        //if ($event->task->user){
+        //    $user=$event->task->user;
+        //} else{
+        //    $user=Auth::user();
+        //}
+        $event->user->notify(new TaskDeleted($event->task,$event->user));
     }
 }

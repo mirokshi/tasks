@@ -2,8 +2,8 @@
 
 namespace App\Notifications;
 use App\Task;
+use App\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\WebPush\WebPushChannel;
@@ -17,15 +17,13 @@ use NotificationChannels\WebPush\WebPushMessage;
 class TaskDeleted extends Notification implements ShouldQueue
 {
     use Queueable;
-    public $task;
+    public $task,$user;
 
-    /**
-     * SimpleNotification constructor.
-     * @param $task
-     */
-    public function __construct(Task $task)
+
+    public function __construct($task, User $user)
     {
         $this->task = $task;
+        $this->user = $user;
     }
 
     /**
@@ -48,11 +46,11 @@ class TaskDeleted extends Notification implements ShouldQueue
     public function toDatabase($notifiable)
     {
         return [
-            'title' => "S'ha esborrat una tasca: " . $this->task->name,
-            'url' => '/tasques/' . $this->task->id,
+            'title' => "S'ha esborrat una tasca: " . $this->task['name'],
+            'url' => '/tasques/' . $this->task['id'],
             'icon' => 'assignment',
             'iconColor' => 'primary',
-            'task' => $this->task->map()
+            'task' => $this->task
         ];
     }
 
@@ -62,8 +60,8 @@ class TaskDeleted extends Notification implements ShouldQueue
         return (new WebPushMessage)
             ->title('Tasca esborrada!')
             ->icon('/notification-icon.png')
-            ->body('Has completat la tasca: ' . $this->task->name)
-            ->action('Visualitza la tasca', 'open_url')
-            ->data(['url' => env('APP_URL') . '/tasques/' . $this->task->id]);
+            ->body('Has completat la tasca: ' . $this->task['name'])
+            ->action('View app', 'view_app')
+            ->data(['id' => $notification->id]);
     }
 }

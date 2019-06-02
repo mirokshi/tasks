@@ -9,6 +9,7 @@ use App\Http\Requests\VerifyMobile\VerifyMobileStore;
 use App\Notifications\VerifyMobile;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 
 /**

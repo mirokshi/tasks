@@ -7,6 +7,7 @@ use App\Log;
 use App\Task;
 use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Auth;
 
 class LogTaskDelete implements ShouldQueue
 {
@@ -35,8 +36,8 @@ class LogTaskDelete implements ShouldQueue
             'module_type' => 'Tasks',
             'icon' => 'delete',
             'color' => 'error',
-            'user_id' => $event->task->user_id,
-            'loggable_id' => $event->task->id,
+            'user_id' => $event->user->id,
+            'loggable_id' => $event->task['id'],
             'loggable_type' => Task::class,
             'old_value' => json_encode($event->task),
             'new_value' => null,

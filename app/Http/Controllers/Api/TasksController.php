@@ -41,9 +41,8 @@ class TasksController extends Controller
 
     public function destroy(TaskDestroy $request, Task $task)
     {
-        $task_old = $task;
+        $task_old = $task->mapSimple();
         $task->delete();
-
         //  HOOK -> EVENT
         event(new \App\Events\TaskDestroy($task_old, Auth::user()));
         return $task_old;

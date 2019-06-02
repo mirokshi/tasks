@@ -10,13 +10,14 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
+
 class TaskDestroy implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $task;
     public $user;
 
-    public function __construct(Task $task, User $user)
+    public function __construct($task,  User $user)
     {
         $this->task = $task;
         $this->user = $user;
@@ -28,7 +29,7 @@ class TaskDestroy implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return [
+          return [
             new PrivateChannel('App.User.'.$this->user->id),
             new PrivateChannel('Tasques'),
              new PrivateChannel('App.Log')
