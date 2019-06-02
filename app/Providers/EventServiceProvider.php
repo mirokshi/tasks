@@ -27,7 +27,8 @@ use App\Listeners\SendMailTaskUpdate;
 //use App\Listeners\tasks\SendTaskUncompletedNotification;
 //use App\Listeners\tasks\SendTaskUpdateNotification;
 use App\Listeners\tasks\SendTaskCompletedNotification;
-use App\Listeners\tasks\SendTaskDeleteNotification;
+
+use App\Listeners\tasks\SendTaskDestroyedNotification;
 use App\Listeners\tasks\SendTaskStoredNotification;
 use App\Listeners\tasks\SendTaskUncompletedNotification;
 use App\Listeners\tasks\SendTaskUpdateNotification;
@@ -65,7 +66,7 @@ class EventServiceProvider extends ServiceProvider
             LogTaskDelete::class,
             SendMailTaskDestroy::class,
             ForgetTasksCache::class,
-            SendTaskDeleteNotification::class
+            SendTaskDestroyedNotification::class
         ],
         TaskStore::class => [
             LogTaskStored::class,

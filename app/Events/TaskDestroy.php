@@ -15,19 +15,8 @@ class TaskDestroy implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public $task;
     public $user;
-<<<<<<< HEAD
-    /**
-     * Create a new event instance.
-     *
-     * @param array $task
-     * @param $user
-     */
-    public function __construct( array $task, $user)
-=======
-
 
     public function __construct(Task $task, User $user)
->>>>>>> master
     {
         $this->task = $task;
         $this->user = $user;
@@ -41,7 +30,8 @@ class TaskDestroy implements ShouldBroadcast
     {
         return [
             new PrivateChannel('App.User.'.$this->user->id),
-            new PrivateChannel('tasks')
+            new PrivateChannel('Tasques'),
+             new PrivateChannel('App.Log')
         ];
     }
 }

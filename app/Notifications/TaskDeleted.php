@@ -1,19 +1,24 @@
 <?php
 
 namespace App\Notifications;
-
 use App\Task;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\WebPush\WebPushChannel;
 use NotificationChannels\WebPush\WebPushMessage;
 
+/**
+ * Class TaskStored.
+ *
+ * @package App\Notifications
+ */
 class TaskDeleted extends Notification implements ShouldQueue
 {
     use Queueable;
     public $task;
+
     /**
      * SimpleNotification constructor.
      * @param $task
@@ -22,6 +27,7 @@ class TaskDeleted extends Notification implements ShouldQueue
     {
         $this->task = $task;
     }
+
     /**
      * Get the notification's delivery channels.
      *
@@ -32,6 +38,7 @@ class TaskDeleted extends Notification implements ShouldQueue
     {
         return ['database', WebPushChannel::class];
     }
+
     /**
      * Get the array representation of the notification.
      *
@@ -48,6 +55,8 @@ class TaskDeleted extends Notification implements ShouldQueue
             'task' => $this->task->map()
         ];
     }
+
+
     public function toWebPush($notifiable, $notification)
     {
         return (new WebPushMessage)
@@ -57,6 +66,4 @@ class TaskDeleted extends Notification implements ShouldQueue
             ->action('Visualitza la tasca', 'open_url')
             ->data(['url' => env('APP_URL') . '/tasques/' . $this->task->id]);
     }
-
-
 }
