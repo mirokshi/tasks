@@ -52,31 +52,31 @@ class EventServiceProvider extends ServiceProvider
         ],
         TaskUncompleted::class => [
             LogTaskUncompleted::class,
-            SendMailTaskUncompleted::class,
+            //SendMailTaskUncompleted::class,
             ForgetTasksCache::class,
             SendTaskUncompletedNotification::class
         ],
         TaskCompleted::class => [
             LogTaskCompleted::class,
-            SendMailTaskCompleted::class,
+            //SendMailTaskCompleted::class,
             ForgetTasksCache::class,
             SendTaskCompletedNotification::class
         ],
         TaskDestroy::class => [
             LogTaskDelete::class,
-            SendMailTaskDestroy::class,
+            //SendMailTaskDestroy::class,
             ForgetTasksCache::class,
             SendTaskDestroyedNotification::class
         ],
         TaskStore::class => [
             LogTaskStored::class,
-            SendMailTaskCreate::class,
+            //SendMailTaskCreate::class,
             ForgetTasksCache::class,
             SendTaskStoredNotification::class,
         ],
         TaskUpdate::class => [
             LogTaskUpdated::class,
-            SendMailTaskUpdate::class,
+            //SendMailTaskUpdate::class,
             ForgetTasksCache::class,
             SendTaskUpdateNotification::class
         ],
