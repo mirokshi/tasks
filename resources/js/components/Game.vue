@@ -1,14 +1,19 @@
 <template>
-    <span>
-        <h1>Press a button to activate your game controller.</h1>
-        <div id="ball"></div>
-    </span>
+<span>
+    <h1>Conecta un mando!</h1>
+    <div id="ball"></div>
+</span>
 </template>
 
 <script>
 var ball
 export default {
-  name: 'Game',
+  name: 'Gamepad',
+  data () {
+    return {
+      gamepads: []
+    }
+  },
   methods: {
     updateLoop () {
       var gp = navigator.getGamepads()[0]
@@ -23,17 +28,17 @@ export default {
       } else {
         document.body.style.backgroundColor = 'white'
       }
+
       requestAnimationFrame(this.updateLoop)
     }
   },
   mounted () {
-    window.addEventListener('gamepadconnected', function (e) {
-      console.log(e.gamepad)
+    window.addEventListener('gamepadconnected', (e) => {
       ball = document.getElementById('ball')
       ball.style.backgroundColor = 'green'
-      document.getElementsByTagName('h1')[0].innerHTML = e.gamepad.id
-      this.updateLoop
-    })
+      document.getElementsByTagName('p')[0].innerHTML = e.gamepad.id
+      this.updateLoop()
+    }, false)
   }
 }
 </script>
