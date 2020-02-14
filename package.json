@@ -58,6 +58,6 @@
         "vuetify": "^1.5.9",
         "workbox-background-sync": "^4.1.1",
         "workbox-webpack-plugin": "^4.1.1",
-        "yarn": "^1.15.2"
+        "yarn": "^1.22.0"
     }
 }
